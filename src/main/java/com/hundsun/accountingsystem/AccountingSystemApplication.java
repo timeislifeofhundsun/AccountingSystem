@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@MapperScan({"com.hundsun.accountingsystem.Global.mapper"})//扫描多个包
+@MapperScan({"com.hundsun.accountingsystem.Global.mapper","com.hundsun.accountingsystem.Yang.mapper"})//扫描多个包
 @ComponentScan(basePackages ="com.hundsun.accountingsystem")//扫描插件
 @SpringBootApplication
 public class AccountingSystemApplication {

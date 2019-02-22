@@ -4,34 +4,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
 @Controller
+@ResponseBody
 public class HomeController {
 
     //跳转到主页
     @RequestMapping("/")
     public String index(Map<String,Object> map){
+
         return "index";
     }
-
 
     //跳转到登陆
     @RequestMapping(value = "/login")
     public String login() {
         return "login";
     }
-
-
-
-
-
-
-
-
-
-
 
 
     //权限测试
