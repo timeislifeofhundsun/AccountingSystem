@@ -7,4 +7,6 @@ public interface UserDao {
 
     SysUser findByUserName(String username);
 
+    int register(SysUser sysUser);
+
 }

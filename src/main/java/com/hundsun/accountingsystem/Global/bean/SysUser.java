@@ -8,7 +8,7 @@ public class SysUser {
     private String username;
     private String password;
     private String email;
-    private String university;
+    private String compangy;
 
     public String getEmail() {
         return email;
@@ -19,11 +19,11 @@ public class SysUser {
     }
 
     public String getUniversity() {
-        return university;
+        return compangy;
     }
 
     public void setUniversity(String university) {
-        this.university = university;
+        this.compangy = compangy;
     }
 
     private List<SysRole> roles;
