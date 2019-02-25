@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 
 @Controller
-@ResponseBody
 public class HomeController {
 
     //跳转到主页
     @RequestMapping("/")
-    public String index(Map<String,Object> map){
-
-        return "index";
+    public String index(){
+        return "admin";
     }
 
     //跳转到登陆

@@ -1,0 +1,143 @@
+<div>
+     <!-- 最新爬去内容开始 -->
+     <div class="layui-row layui-col-space15">
+       <div class="layui-col-md12">
+         <div class="layui-card">
+           <div class="layui-card-header">源码地址</div>
+           <div class="layui-card-body">
+             <table id="demo" lay-filter="test"></table>
+           </div>
+         </div>
+       </div>     
+     </div>
+     <!-- 最新爬去内容结束 -->
+
+    <!-- echart开始 -->
+    <div class="layui-row layui-col-space15">
+	  <div class="layui-col-md6">
+	    <div class="layui-card">
+	      <div class="layui-card-header">最近七天爬取数据统计</div>
+	      <div class="layui-card-body">
+	        <div id="main" style="height:350px;"></div>
+	      </div>
+	     </div>
+	   </div>
+       <div class="layui-col-md6">
+         <div class="layui-card">
+           <div class="layui-card-header">ECharts</div>
+           <div class="layui-card-body">
+             <div id="main1" style="height:350px;"></div>
+           </div>
+          </div>
+       </div>
+     </div>
+     <!-- echart结束 -->
+
+     
+     
+     
+</div>
+<script>
+/* 展示最新爬取内容 */
+var table = layui.table;
+table.render({
+	elem: '#demo'
+    ,height: 312	
+    ,url: "/user?name=1" //数据接口
+    ,page: true //开启分页
+    ,cols: [[ //表头
+        {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+        ,{field: 'username', title: '用户名', width:80}
+        ,{field: 'sex', title: '性别', width:80, sort: true}
+        ,{field: 'city', title: '城市', width:80} 
+        ,{field: 'sign', title: '签名', width: 177}
+        ,{field: 'experience', title: '积分', width: 80, sort: true}
+        ,{field: 'score', title: '评分', width: 80, sort: true}
+        ,{field: 'classify', title: '职业', width: 80}
+        ,{field: 'wealth', title: '财富', width: 135, sort: true}
+      ]]
+    ,done:function(res,curr,count){
+        if(res.code==0){
+        	    var data = res.data;
+        		for(var i=0;i<data.length;i++){
+        			if(data[i].sex=="男"){
+        			   res.data[i].sex="man"
+        			   console.log(res.data[i].sex)
+        			}
+        		}
+        }
+    		console.log(res)
+    }
+});
+		
+
+
+/* 图表  */
+function ChartConfig(chartData){
+	option= {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            crossStyle: {
+                color: '#999'
+            }
+        }
+    },
+    toolbox: {
+        feature: {
+            dataView: {show: true, readOnly: false},
+            magicType: {show: true, type: ['bar','line']},
+            restore: {show: true},
+            saveAsImage: {show: true}
+        }
+    },
+	legend: {
+        data:chartData.legend
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: chartData.xdata,
+            axisPointer: {
+                type: 'shadow'
+            }
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: '个',
+            axisLabel: {
+                formatter: '{value} C'
+            }
+        }
+    ],
+    series:chartData.ydata
+};
+	
+	var myChart = echarts.init(document.getElementById('main'));
+	myChart.setOption(option);
+	return option;
+}
+
+
+
+function createChart1(){
+	var chartData = { 
+		"legend":['爬取个数'],
+		"xdata":['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+		"ydata": [
+		    {
+		        name:'爬取个数',
+		        type:'line',
+		        data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+		    }]
+		
+	};
+	ChartConfig(chartData);
+
+}
+createChart1();
+
+</script>
