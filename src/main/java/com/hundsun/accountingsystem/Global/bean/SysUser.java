@@ -18,15 +18,17 @@ public class SysUser {
         this.email = email;
     }
 
-    public String getUniversity() {
-        return compangy;
-    }
+    public String getCompangy() {
+		return compangy;
+	}
 
-    public void setUniversity(String university) {
-        this.compangy = compangy;
-    }
+	public void setCompangy(String compangy) {
+		this.compangy = compangy;
+	}
 
-    private List<SysRole> roles;
+
+
+	private List<SysRole> roles;
 
     public Integer getId() {
         return id;
