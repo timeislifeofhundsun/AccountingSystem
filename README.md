@@ -18,3 +18,5 @@ GitGUI使用流程
 SpringSecurity的作用有
 （1）认证用户
 （2）进行授权
+
+先pull在push
