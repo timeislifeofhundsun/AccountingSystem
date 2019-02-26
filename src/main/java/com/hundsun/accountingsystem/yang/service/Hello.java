@@ -8,4 +8,7 @@ package com.hundsun.accountingsystem.yang.service;
  * @Description
  **/
 public class Hello {
+
+    public int a;
+
 }
