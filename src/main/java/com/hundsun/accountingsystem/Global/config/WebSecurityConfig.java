@@ -45,10 +45,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()  //首页任意访问
-                .antMatchers("/user").permitAll()  //注册任意访问
-                .antMatchers("/druid").permitAll()  //druid任意访问
-                .antMatchers("/getuser").access("hasRole('ROLE_ADMIN')")
+                //.antMatchers("/").permitAll()  //首页任意访问
+                //.antMatchers("/druid").permitAll()  //druid任意访问
+                //.antMatchers("/getuser").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated() //任何请求,登录后可以访问
                 .and()
                 .formLogin().usernameParameter("username").passwordParameter("password")

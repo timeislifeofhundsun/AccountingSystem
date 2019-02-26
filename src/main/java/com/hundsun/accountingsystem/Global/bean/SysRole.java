@@ -1,23 +1,12 @@
 package com.hundsun.accountingsystem.Global.bean;
 
 
-public class SysRole {
+import lombok.Data;
 
-    private Integer id;
+@Data
+public  class SysRole {
+    private Integer rid;
     private String name;
-    public Integer getId() {
-        return id;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
 
 
 }

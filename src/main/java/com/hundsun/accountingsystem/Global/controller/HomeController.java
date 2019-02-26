@@ -22,8 +22,6 @@ public class HomeController {
     public String login() {
         return "login";
     }
-
-
     //权限测试
     @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     //必须有这个权限才可以使用

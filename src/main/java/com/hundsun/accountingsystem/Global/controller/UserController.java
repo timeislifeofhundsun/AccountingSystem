@@ -14,7 +14,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //用户注册跳转
+    /*//用户注册跳转
     @GetMapping("/user")
     public String User_Register(){
         return "user_register";
@@ -25,7 +25,7 @@ public class UserController {
     public String UserRegisterInfo(SysUser sysUser){
         sysUser.setPassword(MD5Util.encode(sysUser.getPassword()));
         return "login";
-    }
+    }*/
 
 
 }
