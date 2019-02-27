@@ -14,3 +14,9 @@ GitGUI使用流程
 1）Remote——fetch from——origin
 2）Merge——Local Merge
 然后再执行“一”的操作
+
+SpringSecurity的作用有
+（1）认证用户
+（2）进行授权
+
+先pull在push（注意origin和GitHub，主要选择origin，add之后要先comment在push）
