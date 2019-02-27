@@ -8,6 +8,3 @@ angular.module('app',['ngRoute'])
     .otherwise({redirectTo:'/'});
 }]);
 
-$(function(){
-
-})

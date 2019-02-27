@@ -12,6 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -56,8 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error")
                 .permitAll() //登录页面用户任意访问
                 .and()
-                .logout().permitAll()//注销行为任意访问
-        ;
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout","POST"))
+                .logoutSuccessUrl("/login?out")
+                .permitAll();
+                //.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));//注销行为任意访问
+
     }
 
     /**
@@ -67,7 +77,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // 忽略URL
         web.ignoring().antMatchers("/img/*.jpg","/**/*.js", "/lang/*.json", "/**/*.css", "/**/*.js", "/**/*.map",
-            "/**/*.html", "/**/*.png"); }
+            "/**/*.html", "/**/*.png");
+
+    }
+
 
 }
 
