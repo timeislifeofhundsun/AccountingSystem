@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -25,7 +27,11 @@
         <dl class="layui-nav-child">
           <dd><a href="">基本资料</a></dd>
           <dd><a href="">安全设置</a></dd>
-          <dd><a href="">安全退出</a></dd>
+          <dd>
+            <a href="#" onclick="document.getElementById('myform').submit();" id="agree" class="determine">安全退出</a>
+              <form id="myform" th:action="@{/logout}" method="post">
+              </form>
+          </dd>
         </dl>
       </li>
     </ul>
