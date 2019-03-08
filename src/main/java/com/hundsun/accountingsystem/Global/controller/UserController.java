@@ -5,8 +5,10 @@ import com.hundsun.accountingsystem.Global.service.UserService;
 import com.hundsun.accountingsystem.Global.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
 public class UserController {
@@ -22,10 +24,13 @@ public class UserController {
 
     //用户注册
     @PostMapping("/user")
-    public String UserRegisterInfo(SysUser sysUser){
+    public String addUserRegisterInfo(SysUser sysUser){
         sysUser.setPassword(MD5Util.encode(sysUser.getPassword()));
         return "login";
     }*/
+
+
+
 
 
 }
