@@ -4,7 +4,7 @@ package com.hundsun.accountingsystem.Global.mapper;
 import com.hundsun.accountingsystem.Global.bean.SysUser;
 import org.springframework.context.annotation.Bean;
 
-public interface UserDao {
+public interface UserMapper {
 
     SysUser findByUserName(String username);
 

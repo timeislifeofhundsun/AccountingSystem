@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @EnableWebSecurity
-@MapperScan({"com.hundsun.accountingsystem.Global.mapper","com.hundsun.accountingsystem.yang.mapper"})//扫描多个包
+@MapperScan("com.hundsun.accountingsystem.Global.mapper")//扫描多个包
 @ComponentScan(basePackages ="com.hundsun.accountingsystem")//扫描插件
 @SpringBootApplication
 public class AccountingSystemApplication {

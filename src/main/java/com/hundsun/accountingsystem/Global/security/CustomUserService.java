@@ -2,8 +2,7 @@ package com.hundsun.accountingsystem.Global.security;
 
 import com.hundsun.accountingsystem.Global.bean.SysRole;
 import com.hundsun.accountingsystem.Global.bean.SysUser;
-import com.hundsun.accountingsystem.Global.mapper.UserDao;
-import lombok.extern.slf4j.Slf4j;
+import com.hundsun.accountingsystem.Global.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,18 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Slf4j
 public class CustomUserService implements UserDetailsService { //自定义UserDetailsService 接口
 
     @Autowired
-    UserDao userDao;
+    UserMapper userMapper;
 
     @Autowired
     HttpServletRequest request;
 
     @Override
     public UserDetails loadUserByUsername(String username) { //重写loadUserByUsername 方法获得 userdetails 类型用户
-        SysUser user = userDao.findByUserName(username);
+        System.out.println(userMapper);
+        SysUser user = userMapper.findByUserName(username);
         System.out.println(user.toString());
         if(user == null){
             throw new UsernameNotFoundException("用户名不存在");
@@ -37,7 +36,7 @@ public class CustomUserService implements UserDetailsService { //自定义UserDe
         for(SysRole role:user.getRoles())
         {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
-            log.info(role.getName());
+            System.out.println(role.getName());
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
                 user.getPassword(), authorities);
