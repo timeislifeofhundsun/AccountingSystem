@@ -8,15 +8,14 @@
  */
 package com.hundsun.accountingsystem.Global.util;
 
-import org.omg.IOP.Encoding;
+import com.hundsun.accountingsystem.Global.bean.GHK;
 
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 功能说明:
@@ -25,7 +24,9 @@ import java.io.OutputStreamWriter;
  * DBF解析工具
  */
 public class FileParsing {
-  public void ReadDbf(String path)throws IOException {
+  public List<GHK> ReadDbf(String path)throws IOException {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    List<GHK> list = new ArrayList<GHK>();
     InputStream fis = null;
     int n = 0;
 
@@ -49,10 +50,21 @@ public class FileParsing {
       }
       System.out.println();
       Object[] rowValues;
+      GHK ghk = new GHK();
       while ((rowValues = reader.nextRecord()) != null) {
-        for (int i = 0; i < rowValues.length; i++) {
-          System.out.print(rowValues[i] + "|");
-        }
+        //去掉空格
+        String temp = rowValues[7].toString().substring(0,rowValues[7].toString().length()-1);
+        //去掉小数点1
+        String temp1 = rowValues[5].toString().substring(0,rowValues[5].toString().length()-2);
+        //去掉小数点2
+        String temp2 = rowValues[2].toString().substring(0,rowValues[2].toString().length()-1);
+
+       ghk.setGdcode(rowValues[0].toString());
+       ghk.setGdcode(rowValues[0].toString()).setGdname(null).setXwcode(rowValues[4].toString()).setZtcode(Integer.valueOf(temp))
+       .setCjsl(Integer.valueOf(temp1)).setCjje(Double.valueOf(rowValues[11].toString())).setCjjg(Double.valueOf(rowValues[10].toString()))
+       .setZqcode(rowValues[7].toString()).setBs(rowValues[13].toString()).setBctime(sdf.parse(temp2)).setJstime(sdf.parse(temp2))
+       .setCjtime(sdf.parse(temp2)).setJszh("111").setBfjzh("222").setSclb(0);
+        list.add(ghk);
         System.out.println();
       }
 
@@ -64,5 +76,6 @@ public class FileParsing {
       } catch (Exception e) {
       }
     }
+    return list;
   }
 }

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.GHKMapper" >
+  <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.GHK" >
+    <constructor >
+      <idArg column="ywlsid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="gdcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="gdname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="xwcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ztcode" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cjsl" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cjje" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="cjjg" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="zqcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bs" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bctime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="jstime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="cjtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="jszh" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="bfjzh" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sclb" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ywlsid, gdcode, gdname, xwcode, ztcode, cjsl, cjje, cjjg, zqcode, bs, bctime, jstime, 
+    cjtime, jszh, bfjzh, sclb
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ghk
+    where ywlsid = #{ywlsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ghk
+    where ywlsid = #{ywlsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert_list" parameterType="java.util.List">
+    insert into ghk
+    (ywlsid, gdcode, gdname,
+    xwcode, ztcode, cjsl,
+    cjje, cjjg, zqcode, bs,
+    bctime, jstime, cjtime,
+    jszh, bfjzh, sclb)
+    values
+    <foreach collection="list" item="ghk" index="index" separator=",">
+    (#{ghk.ywlsid,jdbcType=INTEGER}, #{ghk.gdcode,jdbcType=VARCHAR}, #{ghk.gdname,jdbcType=VARCHAR},
+    #{ghk.xwcode,jdbcType=VARCHAR}, #{ghk.ztcode,jdbcType=INTEGER}, #{ghk.cjsl,jdbcType=INTEGER},
+    #{ghk.cjje,jdbcType=DOUBLE}, #{ghk.cjjg,jdbcType=DOUBLE}, #{ghk.zqcode,jdbcType=VARCHAR}, #{ghk.bs,jdbcType=VARCHAR},
+    #{ghk.bctime,jdbcType=TIMESTAMP}, #{ghk.jstime,jdbcType=TIMESTAMP}, #{ghk.cjtime,jdbcType=TIMESTAMP},
+    #{ghk.jszh,jdbcType=VARCHAR}, #{ghk.bfjzh,jdbcType=VARCHAR}, #{ghk.sclb,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
+    insert into t_ghk (ywlsid, gdcode, gdname,
+      xwcode, ztcode, cjsl,
+      cjje, cjjg, zqcode, bs,
+      bctime, jstime, cjtime,
+      jszh, bfjzh, sclb)
+    values (#{ywlsid,jdbcType=INTEGER}, #{gdcode,jdbcType=VARCHAR}, #{gdname,jdbcType=VARCHAR},
+      #{xwcode,jdbcType=VARCHAR}, #{ztcode,jdbcType=INTEGER}, #{cjsl,jdbcType=INTEGER}, 
+      #{cjje,jdbcType=DOUBLE}, #{cjjg,jdbcType=DOUBLE}, #{zqcode,jdbcType=VARCHAR}, #{bs,jdbcType=VARCHAR}, 
+      #{bctime,jdbcType=TIMESTAMP}, #{jstime,jdbcType=TIMESTAMP}, #{cjtime,jdbcType=TIMESTAMP}, 
+      #{jszh,jdbcType=VARCHAR}, #{bfjzh,jdbcType=VARCHAR}, #{sclb,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
+    insert into t_ghk
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ywlsid != null" >
+        ywlsid,
+      </if>
+      <if test="gdcode != null" >
+        gdcode,
+      </if>
+      <if test="gdname != null" >
+        gdname,
+      </if>
+      <if test="xwcode != null" >
+        xwcode,
+      </if>
+      <if test="ztcode != null" >
+        ztcode,
+      </if>
+      <if test="cjsl != null" >
+        cjsl,
+      </if>
+      <if test="cjje != null" >
+        cjje,
+      </if>
+      <if test="cjjg != null" >
+        cjjg,
+      </if>
+      <if test="zqcode != null" >
+        zqcode,
+      </if>
+      <if test="bs != null" >
+        bs,
+      </if>
+      <if test="bctime != null" >
+        bctime,
+      </if>
+      <if test="jstime != null" >
+        jstime,
+      </if>
+      <if test="cjtime != null" >
+        cjtime,
+      </if>
+      <if test="jszh != null" >
+        jszh,
+      </if>
+      <if test="bfjzh != null" >
+        bfjzh,
+      </if>
+      <if test="sclb != null" >
+        sclb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ywlsid != null" >
+        #{ywlsid,jdbcType=INTEGER},
+      </if>
+      <if test="gdcode != null" >
+        #{gdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gdname != null" >
+        #{gdname,jdbcType=VARCHAR},
+      </if>
+      <if test="xwcode != null" >
+        #{xwcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ztcode != null" >
+        #{ztcode,jdbcType=INTEGER},
+      </if>
+      <if test="cjsl != null" >
+        #{cjsl,jdbcType=INTEGER},
+      </if>
+      <if test="cjje != null" >
+        #{cjje,jdbcType=DOUBLE},
+      </if>
+      <if test="cjjg != null" >
+        #{cjjg,jdbcType=DOUBLE},
+      </if>
+      <if test="zqcode != null" >
+        #{zqcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bs != null" >
+        #{bs,jdbcType=VARCHAR},
+      </if>
+      <if test="bctime != null" >
+        #{bctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jstime != null" >
+        #{jstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjtime != null" >
+        #{cjtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jszh != null" >
+        #{jszh,jdbcType=VARCHAR},
+      </if>
+      <if test="bfjzh != null" >
+        #{bfjzh,jdbcType=VARCHAR},
+      </if>
+      <if test="sclb != null" >
+        #{sclb,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
+    update t_ghk
+    <set >
+      <if test="gdcode != null" >
+        gdcode = #{gdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gdname != null" >
+        gdname = #{gdname,jdbcType=VARCHAR},
+      </if>
+      <if test="xwcode != null" >
+        xwcode = #{xwcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ztcode != null" >
+        ztcode = #{ztcode,jdbcType=INTEGER},
+      </if>
+      <if test="cjsl != null" >
+        cjsl = #{cjsl,jdbcType=INTEGER},
+      </if>
+      <if test="cjje != null" >
+        cjje = #{cjje,jdbcType=DOUBLE},
+      </if>
+      <if test="cjjg != null" >
+        cjjg = #{cjjg,jdbcType=DOUBLE},
+      </if>
+      <if test="zqcode != null" >
+        zqcode = #{zqcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bs != null" >
+        bs = #{bs,jdbcType=VARCHAR},
+      </if>
+      <if test="bctime != null" >
+        bctime = #{bctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jstime != null" >
+        jstime = #{jstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cjtime != null" >
+        cjtime = #{cjtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jszh != null" >
+        jszh = #{jszh,jdbcType=VARCHAR},
+      </if>
+      <if test="bfjzh != null" >
+        bfjzh = #{bfjzh,jdbcType=VARCHAR},
+      </if>
+      <if test="sclb != null" >
+        sclb = #{sclb,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ywlsid = #{ywlsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
+    update t_ghk
+    set gdcode = #{gdcode,jdbcType=VARCHAR},
+      gdname = #{gdname,jdbcType=VARCHAR},
+      xwcode = #{xwcode,jdbcType=VARCHAR},
+      ztcode = #{ztcode,jdbcType=INTEGER},
+      cjsl = #{cjsl,jdbcType=INTEGER},
+      cjje = #{cjje,jdbcType=DOUBLE},
+      cjjg = #{cjjg,jdbcType=DOUBLE},
+      zqcode = #{zqcode,jdbcType=VARCHAR},
+      bs = #{bs,jdbcType=VARCHAR},
+      bctime = #{bctime,jdbcType=TIMESTAMP},
+      jstime = #{jstime,jdbcType=TIMESTAMP},
+      cjtime = #{cjtime,jdbcType=TIMESTAMP},
+      jszh = #{jszh,jdbcType=VARCHAR},
+      bfjzh = #{bfjzh,jdbcType=VARCHAR},
+      sclb = #{sclb,jdbcType=INTEGER}
+    where ywlsid = #{ywlsid,jdbcType=INTEGER}
+  </update>
+</mapper>

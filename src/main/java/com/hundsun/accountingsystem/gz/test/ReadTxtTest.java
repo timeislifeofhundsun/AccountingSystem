@@ -6,13 +6,13 @@ import java.io.InputStreamReader;
 
 public class ReadTxtTest {
 	
-	public static void main(String[] args) {
-		try {
-			getBeanByTxt("/Users/gaozhen/Desktop/恒生毕设/接口文件/mktdt00.txt");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			getBeanByTxt("/Users/gaozhen/Desktop/恒生毕设/接口文件/mktdt00.txt");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public static void getBeanByTxt(String filePath) throws Exception {
 		FileInputStream fr = new FileInputStream(filePath);
