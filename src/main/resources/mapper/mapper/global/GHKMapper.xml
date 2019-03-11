@@ -52,7 +52,7 @@
     </foreach>
   </insert>
   <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
-    insert into ghk (ywlsid, gdcode, gdname,
+    insert into t_ghk (ywlsid, gdcode, gdname,
       xwcode, ztcode, cjsl,
       cjje, cjjg, zqcode, bs,
       bctime, jstime, cjtime,
@@ -64,7 +64,7 @@
       #{jszh,jdbcType=VARCHAR}, #{bfjzh,jdbcType=VARCHAR}, #{sclb,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
-    insert into ghk
+    insert into t_ghk
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ywlsid != null" >
         ywlsid,
@@ -167,7 +167,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
-    update ghk
+    update t_ghk
     <set >
       <if test="gdcode != null" >
         gdcode = #{gdcode,jdbcType=VARCHAR},
@@ -218,7 +218,7 @@
     where ywlsid = #{ywlsid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
-    update ghk
+    update t_ghk
     set gdcode = #{gdcode,jdbcType=VARCHAR},
       gdname = #{gdname,jdbcType=VARCHAR},
       xwcode = #{xwcode,jdbcType=VARCHAR},
