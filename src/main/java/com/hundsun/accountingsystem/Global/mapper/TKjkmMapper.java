@@ -8,8 +8,7 @@
  */
 package com.hundsun.accountingsystem.Global.mapper;
 
-import com.hundsun.accountingsystem.Global.bean.KJKM;
-import org.springframework.stereotype.Component;
+import com.hundsun.accountingsystem.Global.bean.TKjkm;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,10 +20,10 @@ import java.util.List;
  * 会计科目Mapper接口
  */
 @Repository
-public interface KJKMMapper {
-    int insertKJKM(KJKM kjkm);
+public interface TKjkmMapper {
+    int insertKJKM(TKjkm TKjkm);
     int deleteKJKM(String id);
-    int updateKJKM(KJKM kjkm);
-    KJKM findOneKJKM(String id);
-    List<KJKM> findAllKJKM();
+    int updateKJKM(TKjkm TKjkm);
+    TKjkm findOneKJKM(String id);
+    List<TKjkm> findAllKJKM();
 }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hundsun.accountingsystem.Global.mapper.JYFLMapper">
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TJyflMapper">
 
-    <select id="get_jyfl" parameterType="java.lang.Integer" resultType="com.hundsun.accountingsystem.Global.bean.JYFL">
-            select * from jyfl where ywcode = #{ywcode}
+    <select id="get_jyfl" parameterType="java.lang.Integer" resultType="com.hundsun.accountingsystem.Global.bean.KJyfl">
+            select * from KJyfl where ywcode = #{ywcode}
     </select>
 
     <delete id="delete_jyfl" parameterType="java.lang.Integer">
-            delete from jyfl where ywcode = #{ywcode}
+            delete from KJyfl where ywcode = #{ywcode}
     </delete>
 
-    <insert id="insert_jyfl" parameterType="com.hundsun.accountingsystem.Global.bean.JYFL">
-        INSERT INTO jyfl (ywcode,ywname,jsfl,yh,gh,zg,yj)
+    <insert id="insert_jyfl" parameterType="com.hundsun.accountingsystem.Global.bean.KJyfl">
+        INSERT INTO KJyfl (ywcode,ywname,jsfl,yh,gh,zg,yj)
         VALUE     (#{ywcode},#{ywname},#{jsfl},#{yh},#{gh},#{zg},#{yj})
     </insert>
 

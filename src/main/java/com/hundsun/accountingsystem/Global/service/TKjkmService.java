@@ -8,7 +8,7 @@
  */
 package com.hundsun.accountingsystem.Global.service;
 
-import com.hundsun.accountingsystem.Global.bean.KJKM;
+import com.hundsun.accountingsystem.Global.bean.TKjkm;
 
 import java.util.List;
 
@@ -17,10 +17,10 @@ import java.util.List;
  *
  * @author wanggk25832
  */
-public interface KJKMService {
-  public int insertKJKM(KJKM kjkm);
+public interface TKjkmService {
+  public int insertKJKM(TKjkm TKjkm);
   public int deleteKJKM(String id);
-  public int updateKJKM(KJKM kjkm);
-  public KJKM findOneKJKM(String id);
-  public List<KJKM> findAllKJKM();
+  public int updateKJKM(TKjkm TKjkm);
+  public TKjkm findOneKJKM(String id);
+  public List<TKjkm> findAllKJKM();
 }

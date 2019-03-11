@@ -16,10 +16,11 @@ import org.apache.ibatis.annotations.Mapper;
  *
  * @author wanggk25832
  * 会计科目表Bean
+ * 属性名：会计科目编号  科目父节点编号 会计科目名称 借贷方向 所属等级 是否是父节点
  */
 @Data
 @Mapper
-public class KJKM {
+public class TKjkm {
   private String id;
   private String parent_id;
   private String name;

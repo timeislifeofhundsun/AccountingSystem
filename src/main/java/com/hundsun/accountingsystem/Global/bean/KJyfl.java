@@ -7,7 +7,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * @ClassName JYFL
+ * @ClassName KJyfl
  * @Aurhor yangjf25257
  * @Date 2019/3/8 15:34
  * @Version 1.0
@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 @ToString
 @Data
 @Accessors(chain = true)
-public class JYFL {
+public class KJyfl {
     private Integer ywcode;
     private String ywname;
     private Double jsfl;

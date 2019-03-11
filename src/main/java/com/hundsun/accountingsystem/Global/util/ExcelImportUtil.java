@@ -8,7 +8,7 @@
  */
 package com.hundsun.accountingsystem.Global.util;
 
-import com.hundsun.accountingsystem.Global.bean.KJKM;
+import com.hundsun.accountingsystem.Global.bean.TKjkm;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -33,9 +33,9 @@ import static org.springframework.util.StringUtils.isEmpty;
 public class ExcelImportUtil {
 
 
-  public List<KJKM> getKJKM () throws IOException {
-    List<KJKM> kjkmList = new ArrayList<>();
-    File excelFile = new File("C:/Users/wanggk23608/Desktop/KJKM.xlsx");
+  public List<TKjkm> getKJKM () throws IOException {
+    List<TKjkm> TKjkmList = new ArrayList<>();
+    File excelFile = new File("C:/Users/wanggk23608/Desktop/TKjkm.xlsx");
     if (excelFile.exists() && excelFile.isFile()) {
       String[] split = excelFile.getName().split("\\.");
       Workbook wb;
@@ -47,7 +47,7 @@ public class ExcelImportUtil {
         wb = new XSSFWorkbook(fis);
       } else {
         System.out.println("文件有误");
-        return kjkmList;
+        return TKjkmList;
       }
       Sheet sheet = wb.getSheetAt(0);     //读取sheet 0
 
@@ -59,26 +59,26 @@ public class ExcelImportUtil {
         if (row != null) {
           int firstCellIndex = row.getFirstCellNum();
           int lastCellIndex = row.getLastCellNum();
-          KJKM kjkm = new KJKM();
+          TKjkm TKjkm = new TKjkm();
           row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
           row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
 
-          kjkm.setId(row.getCell(0).toString());
-          kjkm.setParent_id(row.getCell(1).toString());
-          kjkm.setName(row.getCell(2).toString());
+          TKjkm.setId(row.getCell(0).toString());
+          TKjkm.setParent_id(row.getCell(1).toString());
+          TKjkm.setName(row.getCell(2).toString());
           if (!isEmpty(row.getCell(3).toString())){
-            kjkm.setLending_direction((int)row.getCell(3).getNumericCellValue());
+            TKjkm.setLending_direction((int)row.getCell(3).getNumericCellValue());
           }
           if (!isEmpty(row.getCell(4).toString())){
-            kjkm.setLevel(Integer.valueOf((int)row.getCell(4).getNumericCellValue()));
+            TKjkm.setLevel(Integer.valueOf((int)row.getCell(4).getNumericCellValue()));
           }
           if (!isEmpty(row.getCell(5).toString())){
-            kjkm.setIs_parent(Integer.valueOf((int)row.getCell(5).getNumericCellValue()));
+            TKjkm.setIs_parent(Integer.valueOf((int)row.getCell(5).getNumericCellValue()));
           }
-          kjkmList.add(kjkm);
+          TKjkmList.add(TKjkm);
         }
       }
     }
-    return kjkmList;
+    return TKjkmList;
   }
 }
