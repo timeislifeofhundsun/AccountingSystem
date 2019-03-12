@@ -2,8 +2,6 @@ package com.hundsun.accountingsystem.Global.mapper;
 
 import com.hundsun.accountingsystem.Global.bean.TKjkmb;
 
-import java.util.List;
-
 public interface TKjkmbMapper {
     int deleteByPrimaryKey(String id);
 
@@ -16,6 +14,4 @@ public interface TKjkmbMapper {
     int updateByPrimaryKeySelective(TKjkmb record);
 
     int updateByPrimaryKey(TKjkmb record);
-
-    List<TKjkmb> findAllKJKM();
 }
