@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TJyflMapper" >
+  <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.TJyfl" >
+    <constructor >
+      <idArg column="ywcode" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ywname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="jsfl" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="yh" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="gh" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="zg" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="yj" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ywcode, ywname, jsfl, yh, gh, zg, yj
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jyfl
+    where ywcode = #{ywcode,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jyfl
+    where ywcode = #{ywcode,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.TJyfl" >
+    insert into t_jyfl (ywcode, ywname, jsfl, 
+      yh, gh, zg, yj
+      )
+    values (#{ywcode,jdbcType=INTEGER}, #{ywname,jdbcType=VARCHAR}, #{jsfl,jdbcType=DOUBLE}, 
+      #{yh,jdbcType=DOUBLE}, #{gh,jdbcType=DOUBLE}, #{zg,jdbcType=DOUBLE}, #{yj,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.TJyfl" >
+    insert into t_jyfl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ywcode != null" >
+        ywcode,
+      </if>
+      <if test="ywname != null" >
+        ywname,
+      </if>
+      <if test="jsfl != null" >
+        jsfl,
+      </if>
+      <if test="yh != null" >
+        yh,
+      </if>
+      <if test="gh != null" >
+        gh,
+      </if>
+      <if test="zg != null" >
+        zg,
+      </if>
+      <if test="yj != null" >
+        yj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ywcode != null" >
+        #{ywcode,jdbcType=INTEGER},
+      </if>
+      <if test="ywname != null" >
+        #{ywname,jdbcType=VARCHAR},
+      </if>
+      <if test="jsfl != null" >
+        #{jsfl,jdbcType=DOUBLE},
+      </if>
+      <if test="yh != null" >
+        #{yh,jdbcType=DOUBLE},
+      </if>
+      <if test="gh != null" >
+        #{gh,jdbcType=DOUBLE},
+      </if>
+      <if test="zg != null" >
+        #{zg,jdbcType=DOUBLE},
+      </if>
+      <if test="yj != null" >
+        #{yj,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.TJyfl" >
+    update t_jyfl
+    <set >
+      <if test="ywname != null" >
+        ywname = #{ywname,jdbcType=VARCHAR},
+      </if>
+      <if test="jsfl != null" >
+        jsfl = #{jsfl,jdbcType=DOUBLE},
+      </if>
+      <if test="yh != null" >
+        yh = #{yh,jdbcType=DOUBLE},
+      </if>
+      <if test="gh != null" >
+        gh = #{gh,jdbcType=DOUBLE},
+      </if>
+      <if test="zg != null" >
+        zg = #{zg,jdbcType=DOUBLE},
+      </if>
+      <if test="yj != null" >
+        yj = #{yj,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ywcode = #{ywcode,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.TJyfl" >
+    update t_jyfl
+    set ywname = #{ywname,jdbcType=VARCHAR},
+      jsfl = #{jsfl,jdbcType=DOUBLE},
+      yh = #{yh,jdbcType=DOUBLE},
+      gh = #{gh,jdbcType=DOUBLE},
+      zg = #{zg,jdbcType=DOUBLE},
+      yj = #{yj,jdbcType=DOUBLE}
+    where ywcode = #{ywcode,jdbcType=INTEGER}
+  </update>
+</mapper>

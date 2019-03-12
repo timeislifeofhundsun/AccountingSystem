@@ -8,7 +8,7 @@
  */
 package com.hundsun.accountingsystem.Global.util;
 
-import com.hundsun.accountingsystem.Global.bean.TKjkm;
+import com.hundsun.accountingsystem.Global.bean.TKjkmb;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -33,8 +33,8 @@ import static org.springframework.util.StringUtils.isEmpty;
 public class ExcelImportUtil {
 
 
-  public List<TKjkm> getKJKM () throws IOException {
-    List<TKjkm> TKjkmList = new ArrayList<>();
+  public List<TKjkmb> getKJKM () throws IOException {
+    List<TKjkmb> TKjkmList = new ArrayList<>();
     File excelFile = new File("C:/Users/wanggk23608/Desktop/TKjkm.xlsx");
     if (excelFile.exists() && excelFile.isFile()) {
       String[] split = excelFile.getName().split("\\.");
@@ -59,21 +59,21 @@ public class ExcelImportUtil {
         if (row != null) {
           int firstCellIndex = row.getFirstCellNum();
           int lastCellIndex = row.getLastCellNum();
-          TKjkm TKjkm = new TKjkm();
+          TKjkmb TKjkm = new TKjkmb();
           row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
           row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
 
           TKjkm.setId(row.getCell(0).toString());
-          TKjkm.setParent_id(row.getCell(1).toString());
+          TKjkm.setParentId(row.getCell(1).toString());
           TKjkm.setName(row.getCell(2).toString());
           if (!isEmpty(row.getCell(3).toString())){
-            TKjkm.setLending_direction((int)row.getCell(3).getNumericCellValue());
+            TKjkm.setLendingDirection((int)row.getCell(3).getNumericCellValue());
           }
           if (!isEmpty(row.getCell(4).toString())){
             TKjkm.setLevel(Integer.valueOf((int)row.getCell(4).getNumericCellValue()));
           }
           if (!isEmpty(row.getCell(5).toString())){
-            TKjkm.setIs_parent(Integer.valueOf((int)row.getCell(5).getNumericCellValue()));
+            TKjkm.setIsParent(Integer.valueOf((int)row.getCell(5).getNumericCellValue()));
           }
           TKjkmList.add(TKjkm);
         }

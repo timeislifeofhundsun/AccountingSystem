@@ -8,8 +8,8 @@
  */
 package com.hundsun.accountingsystem.Global.service.serviceImpl;
 
-import com.hundsun.accountingsystem.Global.bean.TKjkm;
-import com.hundsun.accountingsystem.Global.mapper.TKjkmMapper;
+import com.hundsun.accountingsystem.Global.bean.TKjkmb;
+import com.hundsun.accountingsystem.Global.mapper.TKjkmbMapper;
 import com.hundsun.accountingsystem.Global.service.TKjkmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,35 +24,34 @@ import java.util.List;
 @Service
 public class TTKjkmServiceImpl implements TKjkmService {
   @Autowired
-  public TKjkmMapper TKjkmMapper;
+  public TKjkmbMapper tKjkmbMapper;
   @Override
-  public int insertKJKM(TKjkm TKjkm) {
-    System.out.println(TKjkmMapper);
-    int i= TKjkmMapper.insertKJKM(TKjkm);
+  public int insertKJKM(TKjkmb TKjkm) {
+    int i= tKjkmbMapper.insert(TKjkm);
     return i;
   }
 
   @Override
   public int deleteKJKM(String id) {
-    int i = TKjkmMapper.deleteKJKM(id);
+    int i = tKjkmbMapper.deleteByPrimaryKey(id);
     return i;
   }
 
   @Override
-  public int updateKJKM(TKjkm TKjkm) {
-    int i = TKjkmMapper.updateKJKM(TKjkm);
+  public int updateKJKM(TKjkmb TKjkm) {
+    int i = tKjkmbMapper.updateByPrimaryKey(TKjkm);
     return i;
   }
 
   @Override
-  public TKjkm findOneKJKM(String id) {
-    TKjkm TKjkm = TKjkmMapper.findOneKJKM(id);
+  public TKjkmb findOneKJKM(String id) {
+    TKjkmb TKjkm = tKjkmbMapper.selectByPrimaryKey(id);
     return TKjkm;
   }
 
   @Override
-  public List<TKjkm> findAllKJKM() {
-    List<TKjkm> list = TKjkmMapper.findAllKJKM();
+  public List<TKjkmb> findAllKJKM() {
+    List<TKjkmb> list = tKjkmbMapper.findAllKJKM();
     return list;
   }
 }

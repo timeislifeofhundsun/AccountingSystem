@@ -8,7 +8,7 @@
  */
 package com.hundsun.accountingsystem.Global.util;
 
-import com.hundsun.accountingsystem.Global.bean.GHK;
+import com.hundsun.accountingsystem.Global.bean.TGhk;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,9 +24,9 @@ import java.util.List;
  * DBF解析工具
  */
 public class FileParsing {
-  public List<GHK> ReadDbf(String path)throws IOException {
+  public List<TGhk> ReadDbf(String path)throws IOException {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-    List<GHK> list = new ArrayList<GHK>();
+    List<TGhk> list = new ArrayList<TGhk>();
     InputStream fis = null;
     int n = 0;
 
@@ -50,7 +50,7 @@ public class FileParsing {
       }
       System.out.println();
       Object[] rowValues;
-      GHK ghk = new GHK();
+      TGhk tGhk = new TGhk();
       while ((rowValues = reader.nextRecord()) != null) {
         //去掉空格
         String temp = rowValues[7].toString().substring(0,rowValues[7].toString().length()-1);
@@ -59,12 +59,12 @@ public class FileParsing {
         //去掉小数点2
         String temp2 = rowValues[2].toString().substring(0,rowValues[2].toString().length()-1);
 
-       ghk.setGdcode(rowValues[0].toString());
-       ghk.setGdcode(rowValues[0].toString()).setGdname(null).setXwcode(rowValues[4].toString()).setZtcode(Integer.valueOf(temp))
+        tGhk.setGdcode(rowValues[0].toString());
+        tGhk.setGdcode(rowValues[0].toString()).setGdname(null).setXwcode(rowValues[4].toString()).setZtcode(Integer.valueOf(temp))
        .setCjsl(Integer.valueOf(temp1)).setCjje(Double.valueOf(rowValues[11].toString())).setCjjg(Double.valueOf(rowValues[10].toString()))
        .setZqcode(rowValues[7].toString()).setBs(rowValues[13].toString()).setBctime(sdf.parse(temp2)).setJstime(sdf.parse(temp2))
        .setCjtime(sdf.parse(temp2)).setJszh("111").setBfjzh("222").setSclb(0);
-        list.add(ghk);
+        list.add(tGhk);
         System.out.println();
       }
 

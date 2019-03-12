@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hundsun.accountingsystem.Global.mapper.GHKMapper" >
-  <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.GHK" >
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TGhkMapper" >
+  <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.TGhk" >
     <constructor >
       <idArg column="ywlsid" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="gdcode" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -28,15 +28,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from ghk
+    from t_ghk
     where ywlsid = #{ywlsid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from ghk
+    delete from t_ghk
     where ywlsid = #{ywlsid,jdbcType=INTEGER}
   </delete>
   <insert id="insert_list" parameterType="java.util.List">
-    insert into ghk
+    insert into t_ghk
     (ywlsid, gdcode, gdname,
     xwcode, ztcode, cjsl,
     cjje, cjjg, zqcode, bs,
@@ -44,26 +44,26 @@
     jszh, bfjzh, sclb)
     values
     <foreach collection="list" item="ghk" index="index" separator=",">
-    (#{ghk.ywlsid,jdbcType=INTEGER}, #{ghk.gdcode,jdbcType=VARCHAR}, #{ghk.gdname,jdbcType=VARCHAR},
-    #{ghk.xwcode,jdbcType=VARCHAR}, #{ghk.ztcode,jdbcType=INTEGER}, #{ghk.cjsl,jdbcType=INTEGER},
-    #{ghk.cjje,jdbcType=DOUBLE}, #{ghk.cjjg,jdbcType=DOUBLE}, #{ghk.zqcode,jdbcType=VARCHAR}, #{ghk.bs,jdbcType=VARCHAR},
-    #{ghk.bctime,jdbcType=TIMESTAMP}, #{ghk.jstime,jdbcType=TIMESTAMP}, #{ghk.cjtime,jdbcType=TIMESTAMP},
-    #{ghk.jszh,jdbcType=VARCHAR}, #{ghk.bfjzh,jdbcType=VARCHAR}, #{ghk.sclb,jdbcType=INTEGER})
+      (#{ghk.ywlsid,jdbcType=INTEGER}, #{ghk.gdcode,jdbcType=VARCHAR}, #{ghk.gdname,jdbcType=VARCHAR},
+      #{ghk.xwcode,jdbcType=VARCHAR}, #{ghk.ztcode,jdbcType=INTEGER}, #{ghk.cjsl,jdbcType=INTEGER},
+      #{ghk.cjje,jdbcType=DOUBLE}, #{ghk.cjjg,jdbcType=DOUBLE}, #{ghk.zqcode,jdbcType=VARCHAR}, #{ghk.bs,jdbcType=VARCHAR},
+      #{ghk.bctime,jdbcType=TIMESTAMP}, #{ghk.jstime,jdbcType=TIMESTAMP}, #{ghk.cjtime,jdbcType=TIMESTAMP},
+      #{ghk.jszh,jdbcType=VARCHAR}, #{ghk.bfjzh,jdbcType=VARCHAR}, #{ghk.sclb,jdbcType=INTEGER})
     </foreach>
   </insert>
-  <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
-    insert into t_ghk (ywlsid, gdcode, gdname,
-      xwcode, ztcode, cjsl,
-      cjje, cjjg, zqcode, bs,
-      bctime, jstime, cjtime,
+  <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk" >
+    insert into t_ghk (ywlsid, gdcode, gdname, 
+      xwcode, ztcode, cjsl, 
+      cjje, cjjg, zqcode, bs, 
+      bctime, jstime, cjtime, 
       jszh, bfjzh, sclb)
-    values (#{ywlsid,jdbcType=INTEGER}, #{gdcode,jdbcType=VARCHAR}, #{gdname,jdbcType=VARCHAR},
+    values (#{ywlsid,jdbcType=INTEGER}, #{gdcode,jdbcType=VARCHAR}, #{gdname,jdbcType=VARCHAR}, 
       #{xwcode,jdbcType=VARCHAR}, #{ztcode,jdbcType=INTEGER}, #{cjsl,jdbcType=INTEGER}, 
       #{cjje,jdbcType=DOUBLE}, #{cjjg,jdbcType=DOUBLE}, #{zqcode,jdbcType=VARCHAR}, #{bs,jdbcType=VARCHAR}, 
       #{bctime,jdbcType=TIMESTAMP}, #{jstime,jdbcType=TIMESTAMP}, #{cjtime,jdbcType=TIMESTAMP}, 
       #{jszh,jdbcType=VARCHAR}, #{bfjzh,jdbcType=VARCHAR}, #{sclb,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
+  <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk" >
     insert into t_ghk
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ywlsid != null" >
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk" >
     update t_ghk
     <set >
       <if test="gdcode != null" >
@@ -217,7 +217,7 @@
     </set>
     where ywlsid = #{ywlsid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.GHK" >
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk" >
     update t_ghk
     set gdcode = #{gdcode,jdbcType=VARCHAR},
       gdname = #{gdname,jdbcType=VARCHAR},
