@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TQsbMapper" >
+  <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.TQsb" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ztbh" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="rq" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="zqcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ywlb" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="bs" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="amount" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="yhs" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="jsf" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="ghf" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="zgf" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="yj" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="lumpsum" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="extenda" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="extendb" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="extendc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="extendd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="extende" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="extendf" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="gyjzbd" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="zqqsk" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="cjsr" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="sclb" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cost" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ztbh, rq, zqcode, ywlb, bs, quantity, amount, yhs, jsf, ghf, zgf, yj, lumpsum, 
+    extenda, extendb, extendc, extendd, extende, extendf, gyjzbd, zqqsk, cjsr, sclb, 
+    cost
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_qsb
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_qsb
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb" >
+    insert into t_qsb (id, ztbh, rq, 
+      zqcode, ywlb, bs, quantity, 
+      amount, yhs, jsf, ghf, 
+      zgf, yj, lumpsum, extenda, 
+      extendb, extendc, extendd, 
+      extende, extendf, gyjzbd, 
+      zqqsk, cjsr, sclb, cost
+      )
+    values (#{id,jdbcType=INTEGER}, #{ztbh,jdbcType=INTEGER}, #{rq,jdbcType=TIMESTAMP}, 
+      #{zqcode,jdbcType=VARCHAR}, #{ywlb,jdbcType=INTEGER}, #{bs,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{amount,jdbcType=DOUBLE}, #{yhs,jdbcType=DOUBLE}, #{jsf,jdbcType=DOUBLE}, #{ghf,jdbcType=DOUBLE}, 
+      #{zgf,jdbcType=DOUBLE}, #{yj,jdbcType=DOUBLE}, #{lumpsum,jdbcType=DOUBLE}, #{extenda,jdbcType=VARCHAR}, 
+      #{extendb,jdbcType=VARCHAR}, #{extendc,jdbcType=VARCHAR}, #{extendd,jdbcType=VARCHAR}, 
+      #{extende,jdbcType=VARCHAR}, #{extendf,jdbcType=VARCHAR}, #{gyjzbd,jdbcType=DOUBLE}, 
+      #{zqqsk,jdbcType=DOUBLE}, #{cjsr,jdbcType=DOUBLE}, #{sclb,jdbcType=INTEGER}, #{cost,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb" >
+    insert into t_qsb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ztbh != null" >
+        ztbh,
+      </if>
+      <if test="rq != null" >
+        rq,
+      </if>
+      <if test="zqcode != null" >
+        zqcode,
+      </if>
+      <if test="ywlb != null" >
+        ywlb,
+      </if>
+      <if test="bs != null" >
+        bs,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="yhs != null" >
+        yhs,
+      </if>
+      <if test="jsf != null" >
+        jsf,
+      </if>
+      <if test="ghf != null" >
+        ghf,
+      </if>
+      <if test="zgf != null" >
+        zgf,
+      </if>
+      <if test="yj != null" >
+        yj,
+      </if>
+      <if test="lumpsum != null" >
+        lumpsum,
+      </if>
+      <if test="extenda != null" >
+        extenda,
+      </if>
+      <if test="extendb != null" >
+        extendb,
+      </if>
+      <if test="extendc != null" >
+        extendc,
+      </if>
+      <if test="extendd != null" >
+        extendd,
+      </if>
+      <if test="extende != null" >
+        extende,
+      </if>
+      <if test="extendf != null" >
+        extendf,
+      </if>
+      <if test="gyjzbd != null" >
+        gyjzbd,
+      </if>
+      <if test="zqqsk != null" >
+        zqqsk,
+      </if>
+      <if test="cjsr != null" >
+        cjsr,
+      </if>
+      <if test="sclb != null" >
+        sclb,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ztbh != null" >
+        #{ztbh,jdbcType=INTEGER},
+      </if>
+      <if test="rq != null" >
+        #{rq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zqcode != null" >
+        #{zqcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlb != null" >
+        #{ywlb,jdbcType=INTEGER},
+      </if>
+      <if test="bs != null" >
+        #{bs,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="yhs != null" >
+        #{yhs,jdbcType=DOUBLE},
+      </if>
+      <if test="jsf != null" >
+        #{jsf,jdbcType=DOUBLE},
+      </if>
+      <if test="ghf != null" >
+        #{ghf,jdbcType=DOUBLE},
+      </if>
+      <if test="zgf != null" >
+        #{zgf,jdbcType=DOUBLE},
+      </if>
+      <if test="yj != null" >
+        #{yj,jdbcType=DOUBLE},
+      </if>
+      <if test="lumpsum != null" >
+        #{lumpsum,jdbcType=DOUBLE},
+      </if>
+      <if test="extenda != null" >
+        #{extenda,jdbcType=VARCHAR},
+      </if>
+      <if test="extendb != null" >
+        #{extendb,jdbcType=VARCHAR},
+      </if>
+      <if test="extendc != null" >
+        #{extendc,jdbcType=VARCHAR},
+      </if>
+      <if test="extendd != null" >
+        #{extendd,jdbcType=VARCHAR},
+      </if>
+      <if test="extende != null" >
+        #{extende,jdbcType=VARCHAR},
+      </if>
+      <if test="extendf != null" >
+        #{extendf,jdbcType=VARCHAR},
+      </if>
+      <if test="gyjzbd != null" >
+        #{gyjzbd,jdbcType=DOUBLE},
+      </if>
+      <if test="zqqsk != null" >
+        #{zqqsk,jdbcType=DOUBLE},
+      </if>
+      <if test="cjsr != null" >
+        #{cjsr,jdbcType=DOUBLE},
+      </if>
+      <if test="sclb != null" >
+        #{sclb,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb" >
+    update t_qsb
+    <set >
+      <if test="ztbh != null" >
+        ztbh = #{ztbh,jdbcType=INTEGER},
+      </if>
+      <if test="rq != null" >
+        rq = #{rq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zqcode != null" >
+        zqcode = #{zqcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ywlb != null" >
+        ywlb = #{ywlb,jdbcType=INTEGER},
+      </if>
+      <if test="bs != null" >
+        bs = #{bs,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="yhs != null" >
+        yhs = #{yhs,jdbcType=DOUBLE},
+      </if>
+      <if test="jsf != null" >
+        jsf = #{jsf,jdbcType=DOUBLE},
+      </if>
+      <if test="ghf != null" >
+        ghf = #{ghf,jdbcType=DOUBLE},
+      </if>
+      <if test="zgf != null" >
+        zgf = #{zgf,jdbcType=DOUBLE},
+      </if>
+      <if test="yj != null" >
+        yj = #{yj,jdbcType=DOUBLE},
+      </if>
+      <if test="lumpsum != null" >
+        lumpsum = #{lumpsum,jdbcType=DOUBLE},
+      </if>
+      <if test="extenda != null" >
+        extenda = #{extenda,jdbcType=VARCHAR},
+      </if>
+      <if test="extendb != null" >
+        extendb = #{extendb,jdbcType=VARCHAR},
+      </if>
+      <if test="extendc != null" >
+        extendc = #{extendc,jdbcType=VARCHAR},
+      </if>
+      <if test="extendd != null" >
+        extendd = #{extendd,jdbcType=VARCHAR},
+      </if>
+      <if test="extende != null" >
+        extende = #{extende,jdbcType=VARCHAR},
+      </if>
+      <if test="extendf != null" >
+        extendf = #{extendf,jdbcType=VARCHAR},
+      </if>
+      <if test="gyjzbd != null" >
+        gyjzbd = #{gyjzbd,jdbcType=DOUBLE},
+      </if>
+      <if test="zqqsk != null" >
+        zqqsk = #{zqqsk,jdbcType=DOUBLE},
+      </if>
+      <if test="cjsr != null" >
+        cjsr = #{cjsr,jdbcType=DOUBLE},
+      </if>
+      <if test="sclb != null" >
+        sclb = #{sclb,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb" >
+    update t_qsb
+    set ztbh = #{ztbh,jdbcType=INTEGER},
+      rq = #{rq,jdbcType=TIMESTAMP},
+      zqcode = #{zqcode,jdbcType=VARCHAR},
+      ywlb = #{ywlb,jdbcType=INTEGER},
+      bs = #{bs,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
+      yhs = #{yhs,jdbcType=DOUBLE},
+      jsf = #{jsf,jdbcType=DOUBLE},
+      ghf = #{ghf,jdbcType=DOUBLE},
+      zgf = #{zgf,jdbcType=DOUBLE},
+      yj = #{yj,jdbcType=DOUBLE},
+      lumpsum = #{lumpsum,jdbcType=DOUBLE},
+      extenda = #{extenda,jdbcType=VARCHAR},
+      extendb = #{extendb,jdbcType=VARCHAR},
+      extendc = #{extendc,jdbcType=VARCHAR},
+      extendd = #{extendd,jdbcType=VARCHAR},
+      extende = #{extende,jdbcType=VARCHAR},
+      extendf = #{extendf,jdbcType=VARCHAR},
+      gyjzbd = #{gyjzbd,jdbcType=DOUBLE},
+      zqqsk = #{zqqsk,jdbcType=DOUBLE},
+      cjsr = #{cjsr,jdbcType=DOUBLE},
+      sclb = #{sclb,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
