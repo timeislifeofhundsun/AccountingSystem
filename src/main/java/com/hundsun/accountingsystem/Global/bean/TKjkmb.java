@@ -1,18 +1,5 @@
 package com.hundsun.accountingsystem.Global.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-//会计科目编号 会计科目父科目编号 会计科目名称 借贷方向 所属级别 是否为父科目
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@Accessors(chain = true)
 public class TKjkmb {
     private String id;
 
@@ -25,4 +12,65 @@ public class TKjkmb {
     private Integer level;
 
     private Integer isParent;
+
+    public TKjkmb(String id, String parentId, String name, Integer lendingDirection, Integer level, Integer isParent) {
+        this.id = id;
+        this.parentId = parentId;
+        this.name = name;
+        this.lendingDirection = lendingDirection;
+        this.level = level;
+        this.isParent = isParent;
+    }
+
+    public TKjkmb() {
+        super();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId == null ? null : parentId.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getLendingDirection() {
+        return lendingDirection;
+    }
+
+    public void setLendingDirection(Integer lendingDirection) {
+        this.lendingDirection = lendingDirection;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getIsParent() {
+        return isParent;
+    }
+
+    public void setIsParent(Integer isParent) {
+        this.isParent = isParent;
+    }
 }
