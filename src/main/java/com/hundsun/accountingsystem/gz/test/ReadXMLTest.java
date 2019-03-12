@@ -24,7 +24,8 @@ public class ReadXMLTest {
 			Element e = it.next();// 获取子元素
 			// 通过元素对象获取子元素对象
 			Element eSecurityID = e.element("SecurityID");
-			Element eSecurityType = e.element("SecurityType");
+			// 证券名称
+			Element eSymbol = e.element("Symbol");
 			//昨日收盘价
 			Element ePrevClosePx = e.element("PrevClosePx");
 			//今日开盘价
@@ -35,8 +36,8 @@ public class ReadXMLTest {
 			Element eTotalVolumeTrade = e.element("TotalVolumeTrade");
 			//成交金额
 			Element eTotalValueTrade = e.element("TotalValueTrade");
-			System.out.println("SecurityID: "+eSecurityID.getText());
-			System.out.println("SecurityType: "+eSecurityType.getText());
+			System.out.println("证券代码: "+eSecurityID.getText());
+			System.out.println("证券名称: "+eSymbol.getText());
 			System.out.println("昨日收盘价: "+ePrevClosePx.getText());
 			System.out.println("今日开盘价: "+eOpenPrice.getText());
 			System.out.println("今日收盘价: "+eclosePx.getText());
