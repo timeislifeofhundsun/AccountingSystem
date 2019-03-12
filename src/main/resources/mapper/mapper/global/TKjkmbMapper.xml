@@ -18,7 +18,7 @@
       select * from t_kjkmb;
     </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_kjkmb
     where id = #{id,jdbcType=VARCHAR}
@@ -28,10 +28,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.TKjkmb">
-    insert into t_kjkmb (id, parent_id, name, 
+    insert into t_kjkmb (id, parent_id, name,
       lending_direction, level, is_parent
       )
-    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{lendingDirection,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, #{isParent,jdbcType=INTEGER}
       )
   </insert>
