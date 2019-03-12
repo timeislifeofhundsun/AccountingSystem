@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.THqbMapper" >
+  <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.THqb" >
+    <constructor >
+      <idArg column="zqnm" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="zqdm" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hqrq" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="zqmc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="zrspj" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="jrkp" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="jrsp" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="cjsl" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cjje" jdbcType="DOUBLE" javaType="java.lang.Double" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    zqnm, zqdm, hqrq, zqmc, zrspj, jrkp, jrsp, cjsl, cjje
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_hqb
+    where zqnm = #{zqnm,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_hqb
+    where zqnm = #{zqnm,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.THqb" >
+    insert into t_hqb (zqnm, zqdm, hqrq, 
+      zqmc, zrspj, jrkp, jrsp, 
+      cjsl, cjje)
+    values (#{zqnm,jdbcType=INTEGER}, #{zqdm,jdbcType=VARCHAR}, #{hqrq,jdbcType=DATE}, 
+      #{zqmc,jdbcType=VARCHAR}, #{zrspj,jdbcType=DOUBLE}, #{jrkp,jdbcType=DOUBLE}, #{jrsp,jdbcType=DOUBLE}, 
+      #{cjsl,jdbcType=INTEGER}, #{cjje,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.THqb" >
+    insert into t_hqb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zqnm != null" >
+        zqnm,
+      </if>
+      <if test="zqdm != null" >
+        zqdm,
+      </if>
+      <if test="hqrq != null" >
+        hqrq,
+      </if>
+      <if test="zqmc != null" >
+        zqmc,
+      </if>
+      <if test="zrspj != null" >
+        zrspj,
+      </if>
+      <if test="jrkp != null" >
+        jrkp,
+      </if>
+      <if test="jrsp != null" >
+        jrsp,
+      </if>
+      <if test="cjsl != null" >
+        cjsl,
+      </if>
+      <if test="cjje != null" >
+        cjje,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zqnm != null" >
+        #{zqnm,jdbcType=INTEGER},
+      </if>
+      <if test="zqdm != null" >
+        #{zqdm,jdbcType=VARCHAR},
+      </if>
+      <if test="hqrq != null" >
+        #{hqrq,jdbcType=DATE},
+      </if>
+      <if test="zqmc != null" >
+        #{zqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zrspj != null" >
+        #{zrspj,jdbcType=DOUBLE},
+      </if>
+      <if test="jrkp != null" >
+        #{jrkp,jdbcType=DOUBLE},
+      </if>
+      <if test="jrsp != null" >
+        #{jrsp,jdbcType=DOUBLE},
+      </if>
+      <if test="cjsl != null" >
+        #{cjsl,jdbcType=INTEGER},
+      </if>
+      <if test="cjje != null" >
+        #{cjje,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.THqb" >
+    update t_hqb
+    <set >
+      <if test="zqdm != null" >
+        zqdm = #{zqdm,jdbcType=VARCHAR},
+      </if>
+      <if test="hqrq != null" >
+        hqrq = #{hqrq,jdbcType=DATE},
+      </if>
+      <if test="zqmc != null" >
+        zqmc = #{zqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zrspj != null" >
+        zrspj = #{zrspj,jdbcType=DOUBLE},
+      </if>
+      <if test="jrkp != null" >
+        jrkp = #{jrkp,jdbcType=DOUBLE},
+      </if>
+      <if test="jrsp != null" >
+        jrsp = #{jrsp,jdbcType=DOUBLE},
+      </if>
+      <if test="cjsl != null" >
+        cjsl = #{cjsl,jdbcType=INTEGER},
+      </if>
+      <if test="cjje != null" >
+        cjje = #{cjje,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where zqnm = #{zqnm,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.THqb" >
+    update t_hqb
+    set zqdm = #{zqdm,jdbcType=VARCHAR},
+      hqrq = #{hqrq,jdbcType=DATE},
+      zqmc = #{zqmc,jdbcType=VARCHAR},
+      zrspj = #{zrspj,jdbcType=DOUBLE},
+      jrkp = #{jrkp,jdbcType=DOUBLE},
+      jrsp = #{jrsp,jdbcType=DOUBLE},
+      cjsl = #{cjsl,jdbcType=INTEGER},
+      cjje = #{cjje,jdbcType=DOUBLE}
+    where zqnm = #{zqnm,jdbcType=INTEGER}
+  </update>
+</mapper>
