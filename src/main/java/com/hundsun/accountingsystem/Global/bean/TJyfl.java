@@ -1,5 +1,23 @@
 package com.hundsun.accountingsystem.Global.bean;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+
+/**
+ * @ClassName TJyfl
+ * @Aurhor yangjf25257
+ * @Date 2019/3/8 15:34
+ * @Version 1.0
+ * @Description 交易费率VO 其中的属性包括 1、业务代码（ywcode） 2、业务名字（ywname） 3、经手费（jfs） 4、印花（yh） 5、过户（gh） 6、证管（zg） 7、佣金（yj）
+ **/
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Accessors(chain = true)
 public class TJyfl {
     private Integer ywcode;
 
@@ -15,73 +33,4 @@ public class TJyfl {
 
     private Double yj;
 
-    public TJyfl(Integer ywcode, String ywname, Double jsfl, Double yh, Double gh, Double zg, Double yj) {
-        this.ywcode = ywcode;
-        this.ywname = ywname;
-        this.jsfl = jsfl;
-        this.yh = yh;
-        this.gh = gh;
-        this.zg = zg;
-        this.yj = yj;
-    }
-
-    public TJyfl() {
-        super();
-    }
-
-    public Integer getYwcode() {
-        return ywcode;
-    }
-
-    public void setYwcode(Integer ywcode) {
-        this.ywcode = ywcode;
-    }
-
-    public String getYwname() {
-        return ywname;
-    }
-
-    public void setYwname(String ywname) {
-        this.ywname = ywname == null ? null : ywname.trim();
-    }
-
-    public Double getJsfl() {
-        return jsfl;
-    }
-
-    public void setJsfl(Double jsfl) {
-        this.jsfl = jsfl;
-    }
-
-    public Double getYh() {
-        return yh;
-    }
-
-    public void setYh(Double yh) {
-        this.yh = yh;
-    }
-
-    public Double getGh() {
-        return gh;
-    }
-
-    public void setGh(Double gh) {
-        this.gh = gh;
-    }
-
-    public Double getZg() {
-        return zg;
-    }
-
-    public void setZg(Double zg) {
-        this.zg = zg;
-    }
-
-    public Double getYj() {
-        return yj;
-    }
-
-    public void setYj(Double yj) {
-        this.yj = yj;
-    }
 }
