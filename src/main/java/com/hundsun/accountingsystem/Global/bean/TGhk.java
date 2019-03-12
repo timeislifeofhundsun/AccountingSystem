@@ -9,7 +9,15 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
-//业务流水号 股东代码 股东姓名 席位代码 账套编号 成交数量 成交价格 成交金额 证券代码 买卖 保存时间 交收时间 成交时间 结算账号
+/**
+ * @ClassName TGhk
+ * @Aurhor yangjf25257
+ * @Date 2019/3/8 15:34
+ * @Version 1.0
+ * @Description 属性：业务流水号 股东代码 股东姓名 席位代码 账套编号 成交数量 成交价格 成交金额 证券代码 买卖 保存时间 交收时间 成交时间 结算账号
+ * 备付金账户 市场类别
+ **/
+
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
