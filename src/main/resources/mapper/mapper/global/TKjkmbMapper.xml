@@ -20,6 +20,9 @@
     from t_kjkmb
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="findAllKJKM" resultType="com.hundsun.accountingsystem.Global.bean.TKjkmb">
+      select * from t_kjkmb;
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_kjkmb
     where id = #{id,jdbcType=VARCHAR}
