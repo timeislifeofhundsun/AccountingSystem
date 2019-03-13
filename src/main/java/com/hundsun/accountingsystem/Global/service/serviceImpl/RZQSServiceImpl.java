@@ -3,9 +3,12 @@ package com.hundsun.accountingsystem.Global.service.serviceImpl;
 import java.util.Date;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hundsun.accountingsystem.Global.controller.RZQSwebRest;
 import com.hundsun.accountingsystem.Global.service.RZQSService;
 import com.hundsun.accountingsystem.Global.service.THqbService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
@@ -13,6 +16,8 @@ import com.hundsun.accountingsystem.Global.util.FilePathUtil;
 
 @Service
 public class RZQSServiceImpl implements RZQSService {
+	
+	private static final Logger log = LoggerFactory.getLogger(RZQSServiceImpl.class);
 
 	@Autowired
 	private THqbService tHqbService;

@@ -69,6 +69,12 @@ $("#qsBtn").click(function(){
 		var request={"ywrq":ywrq,"ztbh":1000};
 	    Smart.post("/web/rest/rzqs/rzqs", request, function(data) {
 			console.log(data);
+			if(data.res){
+				layer.msg('清算成功!'); 
+			}else{
+				console.log(data.msg)
+				layer.msg(data.msg); 
+			}
 		});
 	}else{
 		layer.msg('温馨提示:请选择业务日期!'); 

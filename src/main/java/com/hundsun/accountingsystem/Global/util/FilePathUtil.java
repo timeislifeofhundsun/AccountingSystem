@@ -22,7 +22,7 @@ public class FilePathUtil {
 		Map<String, String> res = new HashMap<>();
 		try {
 			Properties pps = new Properties();
-			pps.load(new FileInputStream("application.properties"));
+			pps.load(new FileInputStream("/application.properties"));
 			//根目录
 			String root = pps.getProperty("dataFileRoot");
 			String cash = root+ywrq+"/cashsecurityclosemd_"+ywrq.replaceAll("-", "")+".xml";
@@ -58,7 +58,6 @@ public class FilePathUtil {
 			}else {
 				res.put("SJSMX1", null);
 			}
-			System.out.println(res);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
