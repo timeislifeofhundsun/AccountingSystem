@@ -21,5 +21,5 @@ public interface RZQSService {
 	* @return boolean    返回类型
 	* @author gaozhen
 	 */
-	public boolean rzqs(int ztbh,Date ywrq);
+	public boolean rzqs(int ztbh,Date ywrq) throws Exception;
 }
