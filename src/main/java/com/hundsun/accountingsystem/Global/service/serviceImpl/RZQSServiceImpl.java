@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hundsun.accountingsystem.Global.service.RZQSService;
-import com.hundsun.accountingsystem.Global.service.TGhkService;
 import com.hundsun.accountingsystem.Global.service.THqbService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FilePathUtil;
@@ -18,8 +17,8 @@ public class RZQSServiceImpl implements RZQSService {
 	@Autowired
 	private THqbService tHqbService;
 	
-	@Autowired
-	private TGhkService tGhkService;
+//	@Autowired
+//	private TGhkService tGhkService;
 	
 	/**
 	* @Description: 日终清算
