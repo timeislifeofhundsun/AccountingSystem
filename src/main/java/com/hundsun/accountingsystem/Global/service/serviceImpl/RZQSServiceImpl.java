@@ -51,10 +51,11 @@ public class RZQSServiceImpl implements RZQSService {
 		/**
 		 * 1.读取交易数据
 		 */
-		boolean res = tGhkService.readGhDataByFile(gh,sjsmx,DateFormatUtil.getStringByDate(ywrq));
-		if(!res) {
-			throw new Exception("读取交易文件失败");
-		}
+		boolean res = false;
+//		res = tGhkService.readGhDataByFile(gh,sjsmx,DateFormatUtil.getStringByDate(ywrq));
+//		if(!res) {
+//			throw new Exception("读取交易文件失败");
+//		}
 		
 		/**
 		 * 2.读取行情数据
