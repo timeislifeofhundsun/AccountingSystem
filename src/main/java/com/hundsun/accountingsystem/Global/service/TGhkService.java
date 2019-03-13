@@ -1,6 +1,5 @@
 package com.hundsun.accountingsystem.Global.service;
 
-import java.util.Date;
 
 public interface TGhkService {
 
@@ -11,5 +10,5 @@ public interface TGhkService {
 	* @return boolean    返回类型
 	* @author gaozhen
 	 */
-	public boolean readGhDataByFile(String SHFilePath,String SZFilePath,Date date);
+	public boolean readGhDataByFile(String SHFilePath,String SZFilePath,String date);
 }
