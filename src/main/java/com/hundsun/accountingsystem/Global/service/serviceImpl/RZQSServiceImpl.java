@@ -63,7 +63,7 @@ public class RZQSServiceImpl implements RZQSService {
 		if(!res) {
 			throw new Exception("读取行情文件失败");
 		}
-		
+		returnData = true;
 		return returnData;
 	}
 
