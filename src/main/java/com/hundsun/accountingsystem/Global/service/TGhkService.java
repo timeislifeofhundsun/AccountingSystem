@@ -1,14 +1,16 @@
 package com.hundsun.accountingsystem.Global.service;
 
 
-public interface TGhkService {
+import java.text.ParseException;
 
-	/**
-	 * 
-	* @Description: 读取上海和深圳的交易文件
-	* @param  参数说明
-	* @return boolean    返回类型
-	* @author gaozhen
-	 */
-	public boolean readGhDataByFile(String SHFilePath,String SZFilePath,String date);
+public interface TGhkService{
+
+/**
+ * @Aurhor yangjf25257
+ * @MethodName readGhDataByFile
+ * @Param [SHFilePath, SZFilePath, date]
+ * @Return boolean
+ * @Description 读取上海和深圳的交易文件
+ **/
+	public boolean readGhDataByFile(String SHFilePath,String SZFilePath,String date) throws ParseException;
 }

@@ -50,9 +50,9 @@ public class FileParsing {
       }
       System.out.println();
       Object[] rowValues;
-      TGhk tGhk =null;
+      TGhk tGhk = null;
       while ((rowValues = reader.nextRecord()) != null) {
-        tGhk = new TGhk();
+        tGhk =  new TGhk();
         //去掉空格
         String temp = rowValues[7].toString().substring(0,rowValues[7].toString().length()-1);
         //去掉小数点1
@@ -66,7 +66,6 @@ public class FileParsing {
        .setZqcode(rowValues[7].toString()).setBs(rowValues[13].toString()).setBctime(sdf.parse(temp2)).setJstime(sdf.parse(temp2))
        .setCjtime(sdf.parse(temp2)).setJszh("111").setBfjzh("222").setSclb(0);
         list.add(tGhk);
-        System.out.println();
       }
 
     } catch (Exception e) {
