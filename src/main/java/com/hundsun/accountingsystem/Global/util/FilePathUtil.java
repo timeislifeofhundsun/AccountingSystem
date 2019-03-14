@@ -1,10 +1,11 @@
 package com.hundsun.accountingsystem.Global.util;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import org.springframework.core.io.ClassPathResource;
 
 /**
  * 
@@ -22,7 +23,7 @@ public class FilePathUtil {
 		Map<String, String> res = new HashMap<>();
 		try {
 			Properties pps = new Properties();
-			pps.load(new FileInputStream("/application.properties"));
+			pps.load(new ClassPathResource("application.properties").getInputStream());
 			//根目录
 			String root = pps.getProperty("dataFileRoot");
 			String cash = root+ywrq+"/cashsecurityclosemd_"+ywrq.replaceAll("-", "")+".xml";
