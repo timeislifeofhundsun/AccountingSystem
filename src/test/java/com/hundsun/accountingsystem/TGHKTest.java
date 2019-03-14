@@ -25,7 +25,7 @@ public class TGHKTest {
 
 	@Test
 	public void testInsert() throws Exception {
-		List<TGhk> tGhks = new FileParsing().ReadDbf("/Users/gaozhen/userApp/hsdatasource/2018-05-30/GH32562.dbf");
+		List<TGhk> tGhks = new FileParsing().ReadDbf("C:/Users/wanggk23608/Desktop/GH32562.dbf");
 		System.out.println(mapper.insertTGhkByBatch(tGhks));
 	}
 }

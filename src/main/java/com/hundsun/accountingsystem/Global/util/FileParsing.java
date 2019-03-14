@@ -50,8 +50,9 @@ public class FileParsing {
       }
       System.out.println();
       Object[] rowValues;
-      TGhk tGhk = new TGhk();
+      TGhk tGhk =null;
       while ((rowValues = reader.nextRecord()) != null) {
+        tGhk = new TGhk();
         //去掉空格
         String temp = rowValues[7].toString().substring(0,rowValues[7].toString().length()-1);
         //去掉小数点1
