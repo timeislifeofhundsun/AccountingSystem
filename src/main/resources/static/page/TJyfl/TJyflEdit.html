@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <title>费率编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../css/public.css" media="all"/>
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <div class="layui-col-md-offset4 layui-col-xs12 layui-col-md4 ">
+        <div class="layui-form-item ywcode">
+            <label class="layui-form-label">业务代码</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input ywcode" name="ywcode" id="ywcode" lay-verify="ywcode" placeholder="请输入业务代码"
+                       disabled>
+            </div>
+        </div>
+        <div class="layui-form-item ywname">
+            <label class="layui-form-label">业务名称</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input ywname" name="ywname" id="ywname" lay-verify="ywname" placeholder="请输入业务名称"
+                       disabled>
+            </div>
+        </div>
+        <div class="layui-form-item jsfl">
+            <label class="layui-form-label">经手费率</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input jsfl" name="jsfl" id="jsfl" lay-verify="jsfl" placeholder="请输入经手费率">
+            </div>
+        </div>
+        <div class="layui-form-item gh">
+            <label class="layui-form-label">过户费率</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input gh" name="gh" id="gh" lay-verify="gh" placeholder="请输入过户费率">
+            </div>
+        </div>
+        <div class="layui-form-item yh">
+            <label class="layui-form-label">印花税率</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input yh" name="yh" id="yh" lay-verify="yh" placeholder="请输入印花税率">
+            </div>
+        </div>
+        <div class="layui-form-item zg">
+            <label class="layui-form-label">证管费率</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input zg" name="zg" id="zg" lay-verify="zg" placeholder="请输入证管费率">
+            </div>
+        </div>
+        <div class="layui-form-item yj">
+            <label class="layui-form-label">佣金费率</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input yj" name="yj" id="yj" lay-verify="yj" placeholder="请输入佣金费率">
+            </div>
+        </div>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-filter="updateTJyfl" lay-submit lay-filter="*">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="TJyflEdit.js"></script>
+<script type="text/javascript" src="../../js/jquery.cookie.js"></script>
+<script>
+   $(function () {
+       var header = $.cookie('header');
+       var token = $.cookie('token');
+       $(document).ajaxSend(function(e, xhr, options) {
+           xhr.setRequestHeader(header, token);
+       });
+   })
+</script>
+</body>
+</html>
