@@ -2,7 +2,6 @@ package com.hundsun.accountingsystem.fzh.controller;
 
 import java.util.List;
 
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 

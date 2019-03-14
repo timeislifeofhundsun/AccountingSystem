@@ -1,5 +1,6 @@
 package com.hundsun.accountingsystem;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.Test;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TGhk;
+import com.hundsun.accountingsystem.Global.bean.Assist.WhereRequire;
 import com.hundsun.accountingsystem.Global.mapper.TGhkMapper;
 import com.hundsun.accountingsystem.Global.util.FileParsing;
 
@@ -20,7 +23,10 @@ public class TGHKTest {
 
 	@Test
 	public void testSelect() throws Exception {
-		System.out.println(mapper.selectTGhk(null));
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("gdcode", "B880580627")
+				          ,Assist.andEq("xwcode", "32562"));
+		System.out.println(mapper.selectTGhk(assist));
 	}
 
 	@Test
