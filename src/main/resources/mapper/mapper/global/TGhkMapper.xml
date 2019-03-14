@@ -21,6 +21,10 @@
       <arg column="sclb" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
+  <delete id="deleteByTime" parameterType="java.lang.String">
+    delete from t_ghk
+    where bctime = #{bctime}
+  </delete>
   <sql id="Base_Column_List" >
     ywlsid, gdcode, gdname, xwcode, ztcode, cjsl, cjje, cjjg, zqcode, bs, bctime, jstime, 
     cjtime, jszh, bfjzh, sclb
