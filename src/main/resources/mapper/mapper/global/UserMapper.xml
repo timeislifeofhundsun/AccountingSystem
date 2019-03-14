@@ -16,9 +16,9 @@
     <select id="findByUserName" parameterType="String" resultMap="userMap">
 		select u.*
 		,r.*
-		from Sys_User u,sys_role_user sru,Sys_Role r
-        where u.uid= sru.Sys_User_id
-        and sru.Sys_Role_id=r.rid
+		from sys_user u,sys_role_user sru,sys_role r
+        where u.uid= sru.sys_user_id
+        and sru.sys_role_id=r.rid
         and username= #{username}
 	</select>
 
