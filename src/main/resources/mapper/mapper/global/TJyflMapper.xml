@@ -15,6 +15,9 @@
   <sql id="Base_Column_List">
     ywcode, ywname, jsfl, yh, gh, zg, yj
   </sql>
+  <select id="findAllTJyfl" resultType="com.hundsun.accountingsystem.Global.bean.TJyfl">
+      select * from t_jyfl;
+    </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

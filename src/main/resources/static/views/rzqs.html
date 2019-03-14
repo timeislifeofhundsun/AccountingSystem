@@ -14,7 +14,7 @@
 				      <th>状态</th>
 				    </tr> 
 				  </thead>
-				  <tbody>
+				  <tbody id="fileStutasTable">
 				    <tr>
 				      <td>贤心</td>
 				      <td>2016-11-29</td>
@@ -52,7 +52,12 @@
 </div>
 <script type="text/javascript">
 /*方便计算时间默认为2018-05-30 */
-$('#showDate').html("2018-05-30")
+$('#showDate').html("2018-05-30");
+
+$(function(){
+	getFileStatus();
+})
+
 /*layui时间显示 */
 var laydate = layui.laydate;
 laydate.render({
@@ -69,10 +74,46 @@ $("#qsBtn").click(function(){
 		var request={"ywrq":ywrq,"ztbh":1000};
 	    Smart.post("/web/rest/rzqs/rzqs", request, function(data) {
 			console.log(data);
+			if(data.res){
+				layer.msg('清算成功!'); 
+			}else{
+				console.log(data.msg)
+				layer.msg(data.msg); 
+			}
 		});
 	}else{
 		layer.msg('温馨提示:请选择业务日期!'); 
 	}
 	
 })
+/* 读取接口文件状态 */
+function getFileStatus(){
+	var ywrq = $('#showDate').text();
+	if(ywrq!=""){
+		var request={"ywrq":ywrq};
+	    Smart.post("/web/rest/rzqs/getFileStatus", request, function(response) {
+			var htmlStr = "";
+			console.log(response);
+			if(response.res){
+				var data = response.data;
+				for(var i = 0;i<data.length;i++){
+					var obj = data[i];
+					console.log(obj);
+					htmlStr=htmlStr+"<tr><td>"+obj.fileName+"</td>";
+					if(obj.filePath==null){
+					   htmlStr=htmlStr+"<td></td>"
+					    +"<td><i class=\"layui-icon layui-icon-face-smile\"></i></td></tr>";
+					}else{
+						htmlStr=htmlStr+"<td>"+obj.filePath+"</td>"
+						+"<td><i class=\"layui-icon layui-icon-face-smile\"></i></td></tr>";
+					}
+				}
+				console.log(htmlStr);
+				$('#fileStutasTable').html(htmlStr); 
+			}
+		});
+	}else{
+		layer.msg('温馨提示:请选择业务日期!'); 
+	}
+}
 </script>

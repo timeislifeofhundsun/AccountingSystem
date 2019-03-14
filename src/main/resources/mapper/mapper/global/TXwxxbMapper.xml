@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TXwxxbMapper" >
+  <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.TXwxxb" >
+    <id column="xwbh" property="xwbh" jdbcType="VARCHAR" />
+    <result column="xw_name" property="xwName" jdbcType="VARCHAR" />
+    <result column="qsbh" property="qsbh" jdbcType="VARCHAR" />
+    <result column="qs_name" property="qsName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    xwbh, xw_name, qsbh, qs_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hundsun.accountingsystem.Global.bean.TXwxxbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_xwxxb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_xwxxb
+    where xwbh = #{xwbh,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_xwxxb
+    where xwbh = #{xwbh,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.accountingsystem.Global.bean.TXwxxbExample" >
+    delete from t_xwxxb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.TXwxxb" >
+    insert into t_xwxxb (xwbh, xw_name, qsbh, 
+      qs_name)
+    values (#{xwbh,jdbcType=VARCHAR}, #{xwName,jdbcType=VARCHAR}, #{qsbh,jdbcType=VARCHAR}, 
+      #{qsName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.TXwxxb" >
+    insert into t_xwxxb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="xwbh != null" >
+        xwbh,
+      </if>
+      <if test="xwName != null" >
+        xw_name,
+      </if>
+      <if test="qsbh != null" >
+        qsbh,
+      </if>
+      <if test="qsName != null" >
+        qs_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="xwbh != null" >
+        #{xwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xwName != null" >
+        #{xwName,jdbcType=VARCHAR},
+      </if>
+      <if test="qsbh != null" >
+        #{qsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qsName != null" >
+        #{qsName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.accountingsystem.Global.bean.TXwxxbExample" resultType="java.lang.Integer" >
+    select count(*) from t_xwxxb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_xwxxb
+    <set >
+      <if test="record.xwbh != null" >
+        xwbh = #{record.xwbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xwName != null" >
+        xw_name = #{record.xwName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qsbh != null" >
+        qsbh = #{record.qsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qsName != null" >
+        qs_name = #{record.qsName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_xwxxb
+    set xwbh = #{record.xwbh,jdbcType=VARCHAR},
+      xw_name = #{record.xwName,jdbcType=VARCHAR},
+      qsbh = #{record.qsbh,jdbcType=VARCHAR},
+      qs_name = #{record.qsName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.TXwxxb" >
+    update t_xwxxb
+    <set >
+      <if test="xwName != null" >
+        xw_name = #{xwName,jdbcType=VARCHAR},
+      </if>
+      <if test="qsbh != null" >
+        qsbh = #{qsbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qsName != null" >
+        qs_name = #{qsName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where xwbh = #{xwbh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.TXwxxb" >
+    update t_xwxxb
+    set xw_name = #{xwName,jdbcType=VARCHAR},
+      qsbh = #{qsbh,jdbcType=VARCHAR},
+      qs_name = #{qsName,jdbcType=VARCHAR}
+    where xwbh = #{xwbh,jdbcType=VARCHAR}
+  </update>
+</mapper>
