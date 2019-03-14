@@ -24,7 +24,7 @@ import java.util.List;
  * DBF解析工具
  */
 public class FileParsing {
-  public List<TGhk> ReadDbf(String path)throws IOException {
+  public static List<TGhk> ReadDbf(String path)throws IOException {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
     List<TGhk> list = new ArrayList<TGhk>();
     InputStream fis = null;
@@ -60,11 +60,64 @@ public class FileParsing {
         //去掉小数点2
         String temp2 = rowValues[2].toString().substring(0,rowValues[2].toString().length()-1);
 
-        tGhk.setGdcode(rowValues[0].toString());
-        tGhk.setGdcode(rowValues[0].toString()).setGdname(null).setXwcode(rowValues[4].toString()).setZtcode(Integer.valueOf(temp))
+        tGhk.setGdcode(rowValues[0].toString()).setGdname(null).setXwcode(rowValues[4].toString()).setZtcode(null)
        .setCjsl(Integer.valueOf(temp1)).setCjje(Double.valueOf(rowValues[11].toString())).setCjjg(Double.valueOf(rowValues[10].toString()))
        .setZqcode(rowValues[7].toString()).setBs(rowValues[13].toString()).setBctime(sdf.parse(temp2)).setJstime(sdf.parse(temp2))
-       .setCjtime(sdf.parse(temp2)).setJszh("111").setBfjzh("222").setSclb(0);
+       .setCjtime(sdf.parse(temp2)).setJszh(null).setBfjzh(null).setSclb(0);
+        list.add(tGhk);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        fis.close();
+      } catch (Exception e) {
+      }
+    }
+    return list;
+  }
+
+  public static List<TGhk> ReadSJSDbf(String path)throws IOException {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    List<TGhk> list = new ArrayList<TGhk>();
+    InputStream fis = null;
+    int n = 0;
+
+    try {
+      fis = new FileInputStream(path);
+      DBFReader reader = new DBFReader(fis);
+      reader.setCharactersetName("GBK");
+      DBFHeader dbfHeader = reader.header;
+      for (DBFField dbfField:dbfHeader.fieldArray) {
+        byte[] fieldName = dbfField.fieldName;
+        for (int i =0;i < fieldName.length;i++){
+          if (fieldName[i]==0){
+            n=i;
+            break;
+          }
+        }
+        byte[] dest = new byte[n];
+        System.arraycopy(fieldName, 0, dest, 0, n);
+        String s = new String(dest);
+        System.out.print(s+"|");
+      }
+      System.out.println();
+      Object[] rowValues;
+      TGhk tGhk = null;
+      while ((rowValues = reader.nextRecord()) != null) {
+        tGhk =  new TGhk();
+//        //去掉空格
+//        String temp = rowValues[7].toString().substring(0,rowValues[7].toString().length()-1);
+        //去掉小数点1
+        String temp1 = rowValues[12].toString().substring(0,rowValues[12].toString().length()-2);
+//        //去掉小数点2
+//        String temp2 = rowValues[2].toString().substring(0,rowValues[2].toString().length()-1);
+
+        tGhk.setJszh(rowValues[0].toString()).setBfjzh(rowValues[1].toString()).setZqcode(rowValues[4].toString()).setSclb(1)
+        .setCjsl(Integer.valueOf(temp1)).setCjjg(Double.valueOf(rowValues[14].toString())).setCjtime(sdf.parse(rowValues[34].toString()))
+        .setJstime(sdf.parse(rowValues[34].toString())).setBctime(sdf.parse(rowValues[34].toString())).setGdname("null").setGdcode(rowValues[1].toString())
+        .setBs("B").setCjje(Double.valueOf(rowValues[15].toString())).setXwcode(rowValues[5].toString()).setZtcode(null);
         list.add(tGhk);
       }
 
