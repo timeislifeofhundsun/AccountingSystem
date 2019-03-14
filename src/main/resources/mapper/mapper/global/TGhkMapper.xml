@@ -1,239 +1,371 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TGhkMapper" >
-  <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.TGhk" >
-    <constructor >
-      <idArg column="ywlsid" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="gdcode" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="gdname" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="xwcode" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="ztcode" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="cjsl" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="cjje" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="cjjg" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="zqcode" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="bs" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="bctime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="jstime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="cjtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="jszh" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="bfjzh" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sclb" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ywlsid, gdcode, gdname, xwcode, ztcode, cjsl, cjje, cjjg, zqcode, bs, bctime, jstime, 
-    cjtime, jszh, bfjzh, sclb
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_ghk
-    where ywlsid = #{ywlsid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_ghk
-    where ywlsid = #{ywlsid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert_list" parameterType="java.util.List">
-    insert into t_ghk
-    (ywlsid, gdcode, gdname,
-    xwcode, ztcode, cjsl,
-    cjje, cjjg, zqcode, bs,
-    bctime, jstime, cjtime,
-    jszh, bfjzh, sclb)
-    values
-    <foreach collection="list" item="ghk" index="index" separator=",">
-      (#{ghk.ywlsid,jdbcType=INTEGER}, #{ghk.gdcode,jdbcType=VARCHAR}, #{ghk.gdname,jdbcType=VARCHAR},
-      #{ghk.xwcode,jdbcType=VARCHAR}, #{ghk.ztcode,jdbcType=INTEGER}, #{ghk.cjsl,jdbcType=INTEGER},
-      #{ghk.cjje,jdbcType=DOUBLE}, #{ghk.cjjg,jdbcType=DOUBLE}, #{ghk.zqcode,jdbcType=VARCHAR}, #{ghk.bs,jdbcType=VARCHAR},
-      #{ghk.bctime,jdbcType=TIMESTAMP}, #{ghk.jstime,jdbcType=TIMESTAMP}, #{ghk.cjtime,jdbcType=TIMESTAMP},
-      #{ghk.jszh,jdbcType=VARCHAR}, #{ghk.bfjzh,jdbcType=VARCHAR}, #{ghk.sclb,jdbcType=INTEGER})
-    </foreach>
-  </insert>
-  <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk" >
-    insert into t_ghk (ywlsid, gdcode, gdname, 
-      xwcode, ztcode, cjsl, 
-      cjje, cjjg, zqcode, bs, 
-      bctime, jstime, cjtime, 
-      jszh, bfjzh, sclb)
-    values (#{ywlsid,jdbcType=INTEGER}, #{gdcode,jdbcType=VARCHAR}, #{gdname,jdbcType=VARCHAR}, 
-      #{xwcode,jdbcType=VARCHAR}, #{ztcode,jdbcType=INTEGER}, #{cjsl,jdbcType=INTEGER}, 
-      #{cjje,jdbcType=DOUBLE}, #{cjjg,jdbcType=DOUBLE}, #{zqcode,jdbcType=VARCHAR}, #{bs,jdbcType=VARCHAR}, 
-      #{bctime,jdbcType=TIMESTAMP}, #{jstime,jdbcType=TIMESTAMP}, #{cjtime,jdbcType=TIMESTAMP}, 
-      #{jszh,jdbcType=VARCHAR}, #{bfjzh,jdbcType=VARCHAR}, #{sclb,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk" >
-    insert into t_ghk
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ywlsid != null" >
-        ywlsid,
-      </if>
-      <if test="gdcode != null" >
-        gdcode,
-      </if>
-      <if test="gdname != null" >
-        gdname,
-      </if>
-      <if test="xwcode != null" >
-        xwcode,
-      </if>
-      <if test="ztcode != null" >
-        ztcode,
-      </if>
-      <if test="cjsl != null" >
-        cjsl,
-      </if>
-      <if test="cjje != null" >
-        cjje,
-      </if>
-      <if test="cjjg != null" >
-        cjjg,
-      </if>
-      <if test="zqcode != null" >
-        zqcode,
-      </if>
-      <if test="bs != null" >
-        bs,
-      </if>
-      <if test="bctime != null" >
-        bctime,
-      </if>
-      <if test="jstime != null" >
-        jstime,
-      </if>
-      <if test="cjtime != null" >
-        cjtime,
-      </if>
-      <if test="jszh != null" >
-        jszh,
-      </if>
-      <if test="bfjzh != null" >
-        bfjzh,
-      </if>
-      <if test="sclb != null" >
-        sclb,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ywlsid != null" >
-        #{ywlsid,jdbcType=INTEGER},
-      </if>
-      <if test="gdcode != null" >
-        #{gdcode,jdbcType=VARCHAR},
-      </if>
-      <if test="gdname != null" >
-        #{gdname,jdbcType=VARCHAR},
-      </if>
-      <if test="xwcode != null" >
-        #{xwcode,jdbcType=VARCHAR},
-      </if>
-      <if test="ztcode != null" >
-        #{ztcode,jdbcType=INTEGER},
-      </if>
-      <if test="cjsl != null" >
-        #{cjsl,jdbcType=INTEGER},
-      </if>
-      <if test="cjje != null" >
-        #{cjje,jdbcType=DOUBLE},
-      </if>
-      <if test="cjjg != null" >
-        #{cjjg,jdbcType=DOUBLE},
-      </if>
-      <if test="zqcode != null" >
-        #{zqcode,jdbcType=VARCHAR},
-      </if>
-      <if test="bs != null" >
-        #{bs,jdbcType=VARCHAR},
-      </if>
-      <if test="bctime != null" >
-        #{bctime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jstime != null" >
-        #{jstime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cjtime != null" >
-        #{cjtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jszh != null" >
-        #{jszh,jdbcType=VARCHAR},
-      </if>
-      <if test="bfjzh != null" >
-        #{bfjzh,jdbcType=VARCHAR},
-      </if>
-      <if test="sclb != null" >
-        #{sclb,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk" >
-    update t_ghk
-    <set >
-      <if test="gdcode != null" >
-        gdcode = #{gdcode,jdbcType=VARCHAR},
-      </if>
-      <if test="gdname != null" >
-        gdname = #{gdname,jdbcType=VARCHAR},
-      </if>
-      <if test="xwcode != null" >
-        xwcode = #{xwcode,jdbcType=VARCHAR},
-      </if>
-      <if test="ztcode != null" >
-        ztcode = #{ztcode,jdbcType=INTEGER},
-      </if>
-      <if test="cjsl != null" >
-        cjsl = #{cjsl,jdbcType=INTEGER},
-      </if>
-      <if test="cjje != null" >
-        cjje = #{cjje,jdbcType=DOUBLE},
-      </if>
-      <if test="cjjg != null" >
-        cjjg = #{cjjg,jdbcType=DOUBLE},
-      </if>
-      <if test="zqcode != null" >
-        zqcode = #{zqcode,jdbcType=VARCHAR},
-      </if>
-      <if test="bs != null" >
-        bs = #{bs,jdbcType=VARCHAR},
-      </if>
-      <if test="bctime != null" >
-        bctime = #{bctime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jstime != null" >
-        jstime = #{jstime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cjtime != null" >
-        cjtime = #{cjtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="jszh != null" >
-        jszh = #{jszh,jdbcType=VARCHAR},
-      </if>
-      <if test="bfjzh != null" >
-        bfjzh = #{bfjzh,jdbcType=VARCHAR},
-      </if>
-      <if test="sclb != null" >
-        sclb = #{sclb,jdbcType=INTEGER},
-      </if>
-    </set>
-    where ywlsid = #{ywlsid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk" >
-    update t_ghk
-    set gdcode = #{gdcode,jdbcType=VARCHAR},
-      gdname = #{gdname,jdbcType=VARCHAR},
-      xwcode = #{xwcode,jdbcType=VARCHAR},
-      ztcode = #{ztcode,jdbcType=INTEGER},
-      cjsl = #{cjsl,jdbcType=INTEGER},
-      cjje = #{cjje,jdbcType=DOUBLE},
-      cjjg = #{cjjg,jdbcType=DOUBLE},
-      zqcode = #{zqcode,jdbcType=VARCHAR},
-      bs = #{bs,jdbcType=VARCHAR},
-      bctime = #{bctime,jdbcType=TIMESTAMP},
-      jstime = #{jstime,jdbcType=TIMESTAMP},
-      cjtime = #{cjtime,jdbcType=TIMESTAMP},
-      jszh = #{jszh,jdbcType=VARCHAR},
-      bfjzh = #{bfjzh,jdbcType=VARCHAR},
-      sclb = #{sclb,jdbcType=INTEGER}
-    where ywlsid = #{ywlsid,jdbcType=INTEGER}
-  </update>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TGhkMapper">
+    <!-- TGhk的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_TGhk_Map" type="com.hundsun.accountingsystem.Global.bean.TGhk">
+        <id column="ywlsid" property="ywlsid" />
+        <result column="bfjzh" property="bfjzh" />
+        <result column="jszh" property="jszh" />
+        <result column="ztcode" property="ztcode" />
+        <result column="cjjg" property="cjjg" />
+        <result column="bctime" property="bctime" />
+        <result column="cjje" property="cjje" />
+        <result column="xwcode" property="xwcode" />
+        <result column="cjsl" property="cjsl" />
+        <result column="cjtime" property="cjtime" />
+        <result column="bs" property="bs" />
+        <result column="zqcode" property="zqcode" />
+        <result column="sclb" property="sclb" />
+        <result column="gdcode" property="gdcode" />
+        <result column="jstime" property="jstime" />
+        <result column="gdname" property="gdname" />
+    </resultMap>
+
+	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="Assist">
+        <where>
+            <foreach collection="require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+	   <!-- updateAssist用于更新数据的使用它拓展自Assist,用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="updateAssist">
+        <where>
+            <foreach collection="assist.require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+    <!-- 数据库中表名为:t_ghk的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="t_ghk_Column">
+        t_ghk.ywlsid as ywlsid
+        ,t_ghk.bfjzh as bfjzh
+        ,t_ghk.jszh as jszh
+        ,t_ghk.ztcode as ztcode
+        ,t_ghk.cjjg as cjjg
+        ,t_ghk.bctime as bctime
+        ,t_ghk.cjje as cjje
+        ,t_ghk.xwcode as xwcode
+        ,t_ghk.cjsl as cjsl
+        ,t_ghk.cjtime as cjtime
+        ,t_ghk.bs as bs
+        ,t_ghk.zqcode as zqcode
+        ,t_ghk.sclb as sclb
+        ,t_ghk.gdcode as gdcode
+        ,t_ghk.jstime as jstime
+        ,t_ghk.gdname as gdname
+    </sql>
+
+    <!--获得类名为:TGhk对应的数据库表的数据总行数 -->
+    <select id="getTGhkRowCount" parameterType="com.hundsun.accountingsystem.Global.bean.Assist" resultType="java.lang.Long">
+        select count(ywlsid) from t_ghk
+        <if test="require!=null"><include refid="Assist" /></if>
+    </select>
+    <!-- 获得类名为:TGhk对应数据库中表的数据集合 -->
+    <select id="selectTGhk" parameterType="com.hundsun.accountingsystem.Global.bean.Assist"  resultMap="result_TGhk_Map">
+        select  <if test="distinct !=null">${distinct}</if>
+        <choose>
+            <when test="resultColumn!=null">${resultColumn}</when>
+            <otherwise>
+        <include refid="t_ghk_Column" /> 
+            </otherwise>
+        </choose>
+        from t_ghk
+        <choose>
+            <when test="rowSize ==null">
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+            </when>
+            <otherwise>
+                inner join
+                (
+                SELECT ywlsid as primary_key FROM t_ghk
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+                <choose>
+                    <when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+                    <when test="rowSize !=null">LIMIT #{rowSize}</when>
+                 </choose>
+                 ) as tmp
+                 on tmp.primary_key=t_ghk.ywlsid
+            </otherwise>
+        </choose>
+    </select> 
+
+    <!-- 获得一个TGhk对象,以参数TGhk对象中不为空的属性作为条件进行查询-->
+    <select id="selectTGhkByObj" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk" resultMap="result_TGhk_Map">
+        select 
+            <include refid="t_ghk_Column" /> 
+        from t_ghk
+        <where>
+            <if test="gdname != null "> and t_ghk.gdname = #{gdname}</if>
+            <if test="jstime != null "> and t_ghk.jstime = #{jstime}</if>
+            <if test="gdcode != null "> and t_ghk.gdcode = #{gdcode}</if>
+            <if test="sclb != null "> and t_ghk.sclb = #{sclb}</if>
+            <if test="zqcode != null "> and t_ghk.zqcode = #{zqcode}</if>
+            <if test="bs != null "> and t_ghk.bs = #{bs}</if>
+            <if test="cjtime != null "> and t_ghk.cjtime = #{cjtime}</if>
+            <if test="cjsl != null "> and t_ghk.cjsl = #{cjsl}</if>
+            <if test="xwcode != null "> and t_ghk.xwcode = #{xwcode}</if>
+            <if test="cjje != null "> and t_ghk.cjje = #{cjje}</if>
+            <if test="bctime != null "> and t_ghk.bctime = #{bctime}</if>
+            <if test="cjjg != null "> and t_ghk.cjjg = #{cjjg}</if>
+            <if test="ztcode != null "> and t_ghk.ztcode = #{ztcode}</if>
+            <if test="jszh != null "> and t_ghk.jszh = #{jszh}</if>
+            <if test="bfjzh != null "> and t_ghk.bfjzh = #{bfjzh}</if>
+            <if test="ywlsid != null "> and t_ghk.ywlsid = #{ywlsid}</if>
+        </where>
+    </select> 
+
+    <!-- 通过TGhk的id获得对应数据库中表的数据对象-->
+    <select id="selectTGhkById" parameterType="java.lang.Integer" resultMap="result_TGhk_Map">
+        select 
+            <include refid="t_ghk_Column" /> 
+        from t_ghk
+        where t_ghk.ywlsid = #{id}
+    </select> 
+
+    <!-- 将TGhk插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertTGhk" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk">
+        insert into t_ghk(ywlsid,bfjzh,jszh,ztcode,cjjg,bctime,cjje,xwcode,cjsl,cjtime,bs,zqcode,sclb,gdcode,jstime,gdname) 
+        values(#{ywlsid},#{bfjzh},#{jszh},#{ztcode},#{cjjg},#{bctime},#{cjje},#{xwcode},#{cjsl},#{cjtime},#{bs},#{zqcode},#{sclb},#{gdcode},#{jstime},#{gdname})
+    </insert>
+
+    <!-- 将TGhk中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyTGhk" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk">
+        insert into t_ghk
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ywlsid != null">ywlsid,</if>
+            <if test="bfjzh != null">bfjzh,</if>
+            <if test="jszh != null">jszh,</if>
+            <if test="ztcode != null">ztcode,</if>
+            <if test="cjjg != null">cjjg,</if>
+            <if test="bctime != null">bctime,</if>
+            <if test="cjje != null">cjje,</if>
+            <if test="xwcode != null">xwcode,</if>
+            <if test="cjsl != null">cjsl,</if>
+            <if test="cjtime != null">cjtime,</if>
+            <if test="bs != null">bs,</if>
+            <if test="zqcode != null">zqcode,</if>
+            <if test="sclb != null">sclb,</if>
+            <if test="gdcode != null">gdcode,</if>
+            <if test="jstime != null">jstime,</if>
+            <if test="gdname != null">gdname,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ywlsid != null"> #{ywlsid},</if>
+            <if test="bfjzh != null"> #{bfjzh},</if>
+            <if test="jszh != null"> #{jszh},</if>
+            <if test="ztcode != null"> #{ztcode},</if>
+            <if test="cjjg != null"> #{cjjg},</if>
+            <if test="bctime != null"> #{bctime},</if>
+            <if test="cjje != null"> #{cjje},</if>
+            <if test="xwcode != null"> #{xwcode},</if>
+            <if test="cjsl != null"> #{cjsl},</if>
+            <if test="cjtime != null"> #{cjtime},</if>
+            <if test="bs != null"> #{bs},</if>
+            <if test="zqcode != null"> #{zqcode},</if>
+            <if test="sclb != null"> #{sclb},</if>
+            <if test="gdcode != null"> #{gdcode},</if>
+            <if test="jstime != null"> #{jstime},</if>
+            <if test="gdname != null"> #{gdname},</if>
+        </trim>
+    </insert>
+
+    <!-- 将TGhk批量插入到对应数据库的表中-->
+    <insert id="insertTGhkByBatch" parameterType="ArrayList">
+        insert into t_ghk(ywlsid,bfjzh,jszh,ztcode,cjjg,bctime,cjje,xwcode,cjsl,cjtime,bs,zqcode,sclb,gdcode,jstime,gdname) values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.ywlsid},#{item.bfjzh},#{item.jszh},#{item.ztcode},#{item.cjjg},#{item.bctime},#{item.cjje},#{item.xwcode},#{item.cjsl},#{item.cjtime},#{item.bs},#{item.zqcode},#{item.sclb},#{item.gdcode},#{item.jstime},#{item.gdname})
+        </foreach>
+    </insert>
+
+    <!-- 通过TGhk的id将数据库表中对应的数据删除-->
+    <delete id="deleteTGhkById" parameterType="java.lang.Integer">
+        delete from t_ghk
+        where ywlsid = #{id}
+    </delete>
+
+    <!-- 通过辅助工具Assist中的条件将TGhk对应的数据库表的数据删除-->
+    <delete id="deleteTGhk" parameterType="com.hundsun.accountingsystem.Global.bean.Assist">
+        delete from t_ghk
+        <if test="require!=null"><include refid="Assist" /></if>
+    </delete>
+
+    <!-- 通过TGhk的id将TGhk的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateTGhkById" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk">
+        update t_ghk set
+            bfjzh=#{bfjzh}
+            ,jszh=#{jszh}
+            ,ztcode=#{ztcode}
+            ,cjjg=#{cjjg}
+            ,bctime=#{bctime}
+            ,cjje=#{cjje}
+            ,xwcode=#{xwcode}
+            ,cjsl=#{cjsl}
+            ,cjtime=#{cjtime}
+            ,bs=#{bs}
+            ,zqcode=#{zqcode}
+            ,sclb=#{sclb}
+            ,gdcode=#{gdcode}
+            ,jstime=#{jstime}
+            ,gdname=#{gdname}
+        where ywlsid=#{ywlsid}
+    </update>
+
+    <!-- 通过TGhk的id将TGhk中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyTGhkById" parameterType="com.hundsun.accountingsystem.Global.bean.TGhk">
+        update t_ghk
+        <set>
+            <if test="bfjzh != null">
+                bfjzh=#{bfjzh},
+            </if>
+            <if test="jszh != null">
+                jszh=#{jszh},
+            </if>
+            <if test="ztcode != null">
+                ztcode=#{ztcode},
+            </if>
+            <if test="cjjg != null">
+                cjjg=#{cjjg},
+            </if>
+            <if test="bctime != null">
+                bctime=#{bctime},
+            </if>
+            <if test="cjje != null">
+                cjje=#{cjje},
+            </if>
+            <if test="xwcode != null">
+                xwcode=#{xwcode},
+            </if>
+            <if test="cjsl != null">
+                cjsl=#{cjsl},
+            </if>
+            <if test="cjtime != null">
+                cjtime=#{cjtime},
+            </if>
+            <if test="bs != null">
+                bs=#{bs},
+            </if>
+            <if test="zqcode != null">
+                zqcode=#{zqcode},
+            </if>
+            <if test="sclb != null">
+                sclb=#{sclb},
+            </if>
+            <if test="gdcode != null">
+                gdcode=#{gdcode},
+            </if>
+            <if test="jstime != null">
+                jstime=#{jstime},
+            </if>
+            <if test="gdname != null">
+                gdname=#{gdname},
+            </if>
+        </set>
+        where ywlsid=#{ywlsid}
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将TGhk中的数据更新到数据库对应的表中,包括值为null的数据-->
+    <update id="updateTGhk" parameterType="map">
+        update t_ghk
+        <set>
+                ywlsid=#{enti.ywlsid},
+                bfjzh=#{enti.bfjzh},
+                jszh=#{enti.jszh},
+                ztcode=#{enti.ztcode},
+                cjjg=#{enti.cjjg},
+                bctime=#{enti.bctime},
+                cjje=#{enti.cjje},
+                xwcode=#{enti.xwcode},
+                cjsl=#{enti.cjsl},
+                cjtime=#{enti.cjtime},
+                bs=#{enti.bs},
+                zqcode=#{enti.zqcode},
+                sclb=#{enti.sclb},
+                gdcode=#{enti.gdcode},
+                jstime=#{enti.jstime},
+                gdname=#{enti.gdname},
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将TGhk中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyTGhk" parameterType="map">
+        update t_ghk
+        <set>
+            <if test="enti.ywlsid != null">
+                ywlsid=#{enti.ywlsid},
+            </if>
+            <if test="enti.bfjzh != null">
+                bfjzh=#{enti.bfjzh},
+            </if>
+            <if test="enti.jszh != null">
+                jszh=#{enti.jszh},
+            </if>
+            <if test="enti.ztcode != null">
+                ztcode=#{enti.ztcode},
+            </if>
+            <if test="enti.cjjg != null">
+                cjjg=#{enti.cjjg},
+            </if>
+            <if test="enti.bctime != null">
+                bctime=#{enti.bctime},
+            </if>
+            <if test="enti.cjje != null">
+                cjje=#{enti.cjje},
+            </if>
+            <if test="enti.xwcode != null">
+                xwcode=#{enti.xwcode},
+            </if>
+            <if test="enti.cjsl != null">
+                cjsl=#{enti.cjsl},
+            </if>
+            <if test="enti.cjtime != null">
+                cjtime=#{enti.cjtime},
+            </if>
+            <if test="enti.bs != null">
+                bs=#{enti.bs},
+            </if>
+            <if test="enti.zqcode != null">
+                zqcode=#{enti.zqcode},
+            </if>
+            <if test="enti.sclb != null">
+                sclb=#{enti.sclb},
+            </if>
+            <if test="enti.gdcode != null">
+                gdcode=#{enti.gdcode},
+            </if>
+            <if test="enti.jstime != null">
+                jstime=#{enti.jstime},
+            </if>
+            <if test="enti.gdname != null">
+                gdname=#{enti.gdname},
+            </if>
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
 </mapper>
