@@ -18,9 +18,17 @@ import java.util.List;
  * @author wanggk25832
  */
 public interface TKjkmService {
-  public int insertKJKM(TKjkmb TKjkm);
-  public int deleteKJKM(String id);
-  public int updateKJKM(TKjkmb TKjkm);
-  public TKjkmb findOneKJKM(String id);
-  public List<TKjkmb> findAllKJKM();
+  int deleteByPrimaryKey(String id);
+
+  int insert(TKjkmb record);
+
+  int insertSelective(TKjkmb record);
+
+  TKjkmb selectByPrimaryKey(String id);
+
+  int updateByPrimaryKeySelective(TKjkmb record);
+
+  int updateByPrimaryKey(TKjkmb record);
+
+  List<TKjkmb> findAllKJKM();
 }

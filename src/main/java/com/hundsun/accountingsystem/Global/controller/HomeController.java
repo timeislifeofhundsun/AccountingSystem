@@ -16,7 +16,7 @@ public class HomeController {
     //跳转到主页
     @RequestMapping("/")
     public String index(){
-        return "admin";
+        return "index";
     }
 
     //跳转到登陆
