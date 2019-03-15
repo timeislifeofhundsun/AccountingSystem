@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.hundsun.accountingsystem.Global.bean.TXwxxb;
 
-public interface TxwxxbService {
+public interface TXwxxbService {
 	
 	public void insertXw(TXwxxb txwxxb) throws Exception;
 	

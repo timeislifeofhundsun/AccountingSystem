@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.hundsun.accountingsystem.Global.bean.TXwxxb;
-import com.hundsun.accountingsystem.fzh.service.TxwxxbService;
+import com.hundsun.accountingsystem.fzh.service.TXwxxbService;
 
 @Controller
-public class TxwxxbController {
+public class TXwxxbController {
 
 	@Autowired
-	TxwxxbService txwxxbServiceImpl;
+	TXwxxbService txwxxbServiceImpl;
 	
 	public void insertTest() {
 		TXwxxb txwxxb = new TXwxxb();

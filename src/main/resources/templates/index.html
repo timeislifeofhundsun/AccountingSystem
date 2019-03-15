@@ -5,7 +5,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8">
-    <title>layui后台管理模板 2.0</title>
+    <title> 证券资产估值与会计核算系统</title>
     <meta name="_csrf" th:content="${_csrf.token}" /></meta>
     <meta name="_csrf_header" th:content="${_csrf.headerName}" /></meta>
     <meta name="renderer" content="webkit">
@@ -24,7 +24,7 @@
     <!-- 顶部 -->
     <div class="layui-header header">
         <div class="layui-main mag0">
-            <a href="#" class="logo">Accounting</a>
+            <a href="#" class="logo">AS</a>
             <!-- 显示/隐藏菜单 -->
             <a href="javascript:;" class="seraph hideMenu icon-caidan"></a>
             <!-- 顶级菜单 -->
@@ -100,7 +100,7 @@
     <div class="layui-side layui-bg-black">
         <div class="user-photo">
             <a class="img" title="我的头像"><img src="images/face.jpg" class="userAvatar"></a>
-            <p>你好！<span class="userName"  sec:authentication="principal.username"></span>, 欢迎登录
+            <p><span class="userName"  sec:authentication="principal.username"></span>，您好！
             </p>
         </div>
         <!-- 搜索 -->
