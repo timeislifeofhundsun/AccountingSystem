@@ -8,15 +8,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hundsun.accountingsystem.Global.service.RZQSService;
+import com.hundsun.accountingsystem.Global.service.TRzqsService;
 import com.hundsun.accountingsystem.Global.service.THqbService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FilePathUtil;
 
 @Service
-public class RZQSServiceImpl implements RZQSService {
+public class TRzqsServiceImpl implements TRzqsService {
 	
-	private static final Logger log = LoggerFactory.getLogger(RZQSServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(TRzqsServiceImpl.class);
 
 	@Autowired
 	private THqbService tHqbService;
@@ -31,7 +31,7 @@ public class RZQSServiceImpl implements RZQSService {
 	* 3.进行合笔计算，存储到成交回报表
 	* 4.进行清算，存储到清算库
 	* 
-	* @param  参数说明
+	* @param
 	* ztbh 账套编号 ywrq 业务日期
 	* 
 	* @return boolean    返回类型

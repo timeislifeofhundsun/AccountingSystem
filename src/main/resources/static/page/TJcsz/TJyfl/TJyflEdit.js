@@ -1,3 +1,11 @@
+//获取cookie中的token
+$(function () {
+    var header = $.cookie('header');
+    var token = $.cookie('token');
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+})
 var form, $;
 
 layui.use(['form', 'layer'], function () {
@@ -41,6 +49,7 @@ layui.use(['form', 'layer'], function () {
             }
         },
     });
+    //提交更改费率
     form.on("submit(updateTJyfl)", function (data) {
         top.layer.msg(JSON.stringify(data.field));
         console.log(data);

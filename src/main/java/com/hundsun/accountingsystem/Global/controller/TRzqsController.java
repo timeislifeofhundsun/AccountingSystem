@@ -7,13 +7,14 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.hundsun.accountingsystem.Global.service.RZQSService;
+import com.hundsun.accountingsystem.Global.service.TRzqsService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FilePathUtil;
 
@@ -28,30 +29,27 @@ import com.hundsun.accountingsystem.Global.util.FilePathUtil;
 * @Version 1.1
  */
 @RestController
-@RequestMapping("/web/rest/rzqs")
-public class RZQSwebRest {
-	private static final Logger log = LoggerFactory.getLogger(RZQSwebRest.class);
+public class TRzqsController {
+	private static final Logger log = LoggerFactory.getLogger(TRzqsController.class);
 	
 	@Autowired
-	private RZQSService rzqsService;
+	private TRzqsService TRzqsService;
 	
 	/**
 	 * 
 	* @Description: 日终清算Rest方法 
-	* @param  参数说明
+	* @param
 	* @return JSONObject    返回类型
 	* @author gaozhen
 	 */
-	@RequestMapping("/rzqs")
-	public JSONObject rzqs(@RequestBody String reqstr) {
-		log.info("请求原始数据:"+reqstr);
+	@PostMapping("/Rzqs")
+	public JSONObject rzqs(@RequestParam(value = "ywrq") String ywrq,@RequestParam(value = "ztbh") Integer ztbh) {
+		log.info("请求原始数据:"+ywrq+ztbh);
 		JSONObject response = new JSONObject();
 		response.put("res", false);
 		try {
-			JSONObject resquest = JSONObject.parseObject(reqstr);
-			Integer ztbh = resquest.getInteger("ztbh");
-			Date ywrq = DateFormatUtil.getDateByString(resquest.getString("ywrq"));
-			boolean res = rzqsService.rzqs(ztbh, ywrq);
+			Date ywrqdate = DateFormatUtil.getDateByString(ywrq);
+			boolean res = TRzqsService.rzqs(ztbh, ywrqdate);
 			if(res) {
 				response.put("res", true);
 			}
@@ -64,16 +62,15 @@ public class RZQSwebRest {
 		return response;
 	}
 	
-	@RequestMapping("/getFileStatus")
-	public JSONObject getFileStatus(@RequestBody String reqstr) {
-		log.info("请求原始数据:"+reqstr);
+	@PostMapping("/FileStatus")
+	public JSONObject getFileStatus(@RequestParam(value = "ywrq") String ywrq) {
+		log.info("请求原始数据:"+ywrq);
 		JSONObject response = new JSONObject();
 		response.put("res", false);
 		try {
-			JSONObject resquest = JSONObject.parseObject(reqstr);
-			Date ywrq = DateFormatUtil.getDateByString(resquest.getString("ywrq"));
+			Date ywrqdate = DateFormatUtil.getDateByString(ywrq);
 			Map<String,String> files = FilePathUtil.
-					getFilePathByDate(DateFormatUtil.getStringByDate(ywrq));
+					getFilePathByDate(DateFormatUtil.getStringByDate(ywrqdate));
 			JSONArray array = new JSONArray();
 			for(String fileName:files.keySet()) {
 				JSONObject obj = new JSONObject();

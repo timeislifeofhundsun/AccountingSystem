@@ -228,7 +228,7 @@
     {
       "title": "日终清算",
       "icon": "icon-mokuai",
-      "href": "page/TRcyw/TRcqs/TRzqsList.html",
+      "href": "page/TRcyw/TRzqs/TRzqsList.html",
       "spread": false
     },{
       "title": "生成凭证",

@@ -1,3 +1,11 @@
+//获取cookie中的token
+$(function () {
+    var header = $.cookie('header');
+    var token = $.cookie('token');
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+})
 layui.use(['form','layer','laydate','table','laytpl'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -6,7 +14,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
 
-    //新闻列表
+    //费率设置列表渲染
     var tableIns = table.render({
         elem: '#TJyflList',
         url : '/TJyfl',
@@ -29,6 +37,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             {title: '操作', width:170, templet:'#TJyflListBar',fixed:"right",align:"center"}
         ]]
     });
+    //点击编辑操作
     function EditTJyfl(edit){
         var index = layui.layer.open({
             title : "修改费率",
@@ -47,7 +56,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                     form.render();
                 }
                 setTimeout(function(){
-                    layui.layer.tips('点击此处返回文章列表', '.layui-layer-setwin .layui-layer-close', {
+                    layui.layer.tips('点击此处返回费率列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500)
@@ -59,7 +68,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             layui.layer.full(index);
         })
     }
-    //列表操作
+    //列表中判断点击编辑操作
     table.on('tool(TJyflList)', function(obj){
         var layEvent = obj.event,
             data = obj.data;

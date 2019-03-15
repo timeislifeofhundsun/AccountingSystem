@@ -40,7 +40,7 @@ layui.use(['form','element','layer','jquery'],function(){
         parent.addTab($(this));
     })
     //系统基本参数
-    if(window.sessionStorage.getItem("systemParameter")){
+    /*if(window.sessionStorage.getItem("systemParameter")){
         var systemParameter = JSON.parse(window.sessionStorage.getItem("systemParameter"));
         fillParameter(systemParameter);
     }else{
@@ -52,7 +52,7 @@ layui.use(['form','element','layer','jquery'],function(){
                 fillParameter(data);
             }
         })
-    }
+    }*/
     //填充数据方法
     function fillParameter(data){
         //判断字段数据是否存在
@@ -72,7 +72,7 @@ layui.use(['form','element','layer','jquery'],function(){
         $(".userRights").text(nullData(data.userRights));//当前用户权限
     }
 
-    //最新文章列表
+   /* //最新文章列表
     $.get("../json/newsList.json",function(data){
         var hotNewsHtml = '';
         for(var i=0;i<5;i++){
@@ -83,12 +83,12 @@ layui.use(['form','element','layer','jquery'],function(){
         }
         $(".hot_news").html(hotNewsHtml);
         $(".userAll span").text(data.length);
-    })
+    })*/
 
-    //用户数量
+    /*//用户数量
     $.get("../json/userList.json",function(data){
         $(".userAll span").text(data.count);
-    })
+    })*/
 
     //外部图标
     $.get(iconUrl,function(data){

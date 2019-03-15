@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>交易费率设置</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    </meta>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    </meta>
+    <!--<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">-->
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/public.css" media="all"/>
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <div>
+        <div class="layui-row layui-col-space15">
+            <!-- 交易数据开始 -->
+            <div class="layui-col-md8">
+                <div class="layui-card">
+                    <div class="layui-card-header">交易数据</div>
+                    <div class="layui-card-body">
+                        <div style="height:550px;">
+                            <table class="layui-table">
+                                <thead>
+                                <tr>
+                                    <th>文件名称</th>
+                                    <th>文件路径</th>
+                                    <th>状态</th>
+                                </tr>
+                                </thead>
+                                <tbody id="fileStutasTable">
+                                <tr>
+                                    <td>贤心</td>
+                                    <td>2016-11-29</td>
+                                    <td><i class="layui-icon layui-icon-face-smile"></i></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 交易数据结束 -->
+            <!-- 功能区开始  -->
+            <div class="layui-col-md4">
+                <div class="layui-card">
+                    <!-- header开始 -->
+                    <div class="layui-card-header">
+                        业务日期：<span id="showDate"></span>
+                    </div>
+                    <!-- header结束 -->
+                    <div class="layui-card-body">
+                        <div style="height:550px;">
+                            <div id="date"></div>
+                            <div style="margin-top: 30px;">
+                                <button id="qsBtn" class="layui-btn">清算</button>
+                                <button class="layui-btn layui-btn-danger">恢复</button>
+                                <button class="layui-btn layui-btn-normal">备用</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--功能区结束  -->
+    </div>
+</form>
+<script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="TRzqsList.js"></script>
+</body>
+</html>

@@ -30,15 +30,6 @@
 <script type="text/javascript" src="../../../layui/layui.js"></script>
 <script type="text/javascript" src="TJyflList.js"></script>
 <script>
-    $(function () {
-        var header = $.cookie('header');
-        var token = $.cookie('token');
-        console.log(header);
-        console.log(token);
-        $(document).ajaxSend(function(e, xhr, options) {
-            xhr.setRequestHeader(header, token);
-        });
-    })
 </script>
 </body>
 </html>

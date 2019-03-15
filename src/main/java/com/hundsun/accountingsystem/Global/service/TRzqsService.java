@@ -12,11 +12,11 @@ import java.util.Date;
 * @date 2019年3月13日
 * @Version 1.1
  */
-public interface RZQSService {
+public interface TRzqsService {
 	
 	/**
 	* @Description: 日终清算
-	* @param  参数说明
+	* @param
 	* ztbh 账套编号 ywrq 业务日期
 	* @return boolean    返回类型
 	* @author gaozhen

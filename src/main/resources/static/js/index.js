@@ -18,27 +18,22 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	function getData(json){
 		$.getJSON(tab.tabConfig.url,function(data){
 			if(json == "jcsz"){
-				console.log(1);
 				dataStr = data.jcsz;
 				//重新渲染左侧菜单
 				tab.render();
 			}else if(json == "gpyw"){
-                console.log(2);
 				dataStr = data.gpyw;
 				//重新渲染左侧菜单
 				tab.render();
 			}else if(json == "jjyw"){
-                console.log(3);
 				dataStr = data.jjyw;
 				//重新渲染左侧菜单
 				tab.render();
 			}else if(json == "hgyw"){
-                console.log(4);
                 dataStr = data.hgyw;
                 //重新渲染左侧菜单
                 tab.render();
             }else if(json == "rcyw"){
-                console.log(5);
                 dataStr = data.rcyw;
                 //重新渲染左侧菜单
                 tab.render();
@@ -150,13 +145,3 @@ function addTab(_this){
 	tab.tabAdd(_this);
 }
 
-//图片管理弹窗
-function showImg(){
-    $.getJSON('json/images.json', function(json){
-        var res = json;
-        layer.photos({
-            photos: res,
-            anim: 5
-        });
-    });
-}
