@@ -108,7 +108,7 @@
 		{
 			"title": "基金交易",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/TJj/TJjjy/TJjjyList.html",
 			"spread": false
 		},
         {
@@ -120,15 +120,14 @@
             {
               "title": "认购申请",
               "icon": "&#xe61c;",
-              "href": "page/404.html",
+              "href": "page/TJj/TJjrg/TRgsq/TRgsqList.html",
               "spread": false
             },
             {
               "title": "认购确认",
               "icon": "&#xe609;",
-              "href": "page/login/login.html",
-              "spread": false,
-              "target": "_blank"
+              "href": "page/TJj/TJjrg/TRgqr/TRgqrList.html",
+              "spread": false
             }
           ]
         },{
@@ -140,15 +139,14 @@
           {
             "title": "申购申请",
             "icon": "&#xe61c;",
-            "href": "page/404.html",
+            "href": "page/TJj/TJjsg/TSgsq/TSgsqList.html",
             "spread": false
           },
           {
             "title": "申购确认",
             "icon": "&#xe609;",
-            "href": "page/login/login.html",
-            "spread": false,
-            "target": "_blank"
+            "href": "page/TJj/TJjsg/TSgqr/TSgqrList.html",
+            "spread": false
           }
         ]
       },{
@@ -160,15 +158,14 @@
           {
             "title": "赎回确认",
             "icon": "&#xe61c;",
-            "href": "page/404.html",
+            "href": "page/TJj/TJjsh/TShqr/TShqrList.html",
             "spread": false
           },
           {
             "title": "赎回到账",
             "icon": "&#xe609;",
-            "href": "page/login/login.html",
-            "spread": false,
-            "target": "_blank"
+            "href": "page/TJj/TJjsh/TShdz/TShdzList.html",
+            "spread": false
           }
         ]
       },{
@@ -180,44 +177,51 @@
           {
             "title": "红利到账",
             "icon": "&#xe61c;",
-            "href": "page/404.html",
+            "href": "page/TJj/TJjfh/THldz/THldzList.html",
             "spread": false
           },
           {
             "title": "红利除权",
             "icon": "&#xe609;",
-            "href": "page/login/login.html",
-            "spread": false,
-            "target": "_blank"
+            "href": "page/TJj/TJjfh/THlcq/THlcqList.html",
+            "spread": false
           }
         ]
       }
 	],
 	"hgyw": [
       {
-        "title": "回购交易",
+        "title": "银行间回购",
         "icon": "&#xe630;",
         "href": "",
         "spread": false,
         "children": [
           {
-            "title": "回购融资",
+            "title": "质押式回购",
             "icon": "&#xe61c;",
-            "href": "page/THg/THgjy/THgrz/THgrzList.html",
+            "href": "page/THg/TYhjhg/TYzyshg/TYzyshgList.html",
             "spread": false
           },
           {
-            "title": "回购融券",
+            "title": "买断式回购",
             "icon": "&#xe609;",
-            "href": "page/THg/THgjy/THgrq/THgrqList.html",
+            "href": "page/THg/TYhjhg/TYmdshg/TYmdshgList.html",
             "spread": false
           }
         ]
       },{
-			"title": "回购计息",
+			"title": "交易所间回购",
 			"icon": "icon-mokuai",
-			"href": "page/THg/THgjx/THgjxList.html",
-			"spread": false
+            "href": "",
+            "spread": false,
+            "children": [
+              {
+                "title": "质押式回购",
+                "icon": "&#xe61c;",
+                "href": "page/THg/TJyshg/TJzyshg/TJzyshgList.html",
+                "spread": false
+              }
+            ]
 		}
 	],
     "rcyw": [
