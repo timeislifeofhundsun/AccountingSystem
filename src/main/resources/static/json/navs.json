@@ -1,106 +1,247 @@
 {
-	"contentManagement": [
+	"jcsz": [
+		{
+			"title": "费率设置",
+			"icon": "icon-text",
+			"href": "page/TJcsz/TJyfl/TJyflList.html",
+			"spread": false
+		},
 		{
 			"title": "账套管理",
-			"icon": "icon-text",
-			"href": "page/news/newsList.html",
+			"icon": "&#xe634;",
+			"href": "page/TJcsz/TZtxx/TZtxxList.html",
+			"spread": false
+		},
+		{
+			"title": "证券管理",
+			"icon": "&#xe634;",
+			"href": "page/TJcsz/TZqxx/TZqxxList.html",
 			"spread": false
 		},
 		{
 			"title": "股东管理",
 			"icon": "&#xe634;",
-			"href": "page/img/images.html",
-			"spread": false
-		},
-		{
-			"title": "席位管理",
-			"icon": "&#xe634;",
-			"href": "page/img/images.html",
-			"spread": false
-		},
-		{
-			"title": "费率管理",
-			"icon": "&#xe634;",
-			"href": "page/TJyfl/TJyflList.html",
+			"href": "page/TJcsz/TGdxx/TGdxxList.html",
 			"spread": false
 		},
         {
-			"title": "其他页面",
-			"icon": "&#xe630;",
-			"href": "",
-			"spread": false,
-			"children": [
-				{
-					"title": "404页面",
-					"icon": "&#xe61c;",
-					"href": "page/404.html",
-					"spread": false
-				},
-				{
-					"title": "登录",
-					"icon": "&#xe609;",
-					"href": "page/login/login.html",
-					"spread": false,
-					"target": "_blank"
-				}
-			]
-		}
+          "title": "计息设置",
+          "icon": "&#xe634;",
+          "href": "page/TJcsz/TJx/TJxList.html",
+          "spread": false
+        },
+        {
+          "title": "结转设置",
+          "icon": "&#xe634;",
+          "href":"page/TJcsz/TJz/TJzList.html",
+          "spread": false
+        }
 	],
-	"memberCenter": [
+	"gpyw": [
 		{
-			"title": "用户中心",
+			"title": "股票交易",
 			"icon": "&#xe612;",
-			"href": "page/user/userList.html",
+			"href": "page/TGp/TGpjy/TGpjyList.html",
 			"spread": false
 		},
-		{
-			"title": "会员等级",
-			"icon": "icon-vip",
-			"href": "page/user/userGrade.html",
-			"spread": false
-		}
+        {
+          "title": "股票分红",
+          "icon": "&#xe630;",
+          "href": "",
+          "spread": false,
+          "children": [
+            {
+              "title": "送股",
+              "icon": "&#xe61c;",
+              "href": "page/TGp/TGpfh/TSg/TSgList.html",
+              "spread": false
+            },
+            {
+              "title": "红利除权",
+              "icon": "&#xe609;",
+              "href": "page/TGp/TGpfh/THlcq/THlcqList.html",
+              "spread": false
+            },
+            {
+              "title": "红利到账",
+              "icon": "&#xe609;",
+              "href": "page/TGp/TGpfh/THldz/THldzList.html",
+              "spread": false
+            }
+          ]
+        },
+        {
+          "title": "股票新股",
+          "icon": "&#xe630;",
+          "href": "",
+          "spread": false,
+          "children": [
+            {
+              "title": "新股申购",
+              "icon": "&#xe61c;",
+              "href": "page/TGp/TGpxg/TXgsg/TXgsgList.html",
+              "spread": false
+            },
+            {
+              "title": "新股中签",
+              "icon": "&#xe609;",
+              "href": "page/TGp/TGpxg/TXgzq/TXgzqList.html",
+              "spread": false
+            },
+            {
+              "title": "中签交收",
+              "icon": "&#xe609;",
+              "href": "page/TGp/TGpxg/TZqjs/TZqjsList.html",
+              "spread": false
+            },
+            {
+              "title": "新股流通",
+              "icon": "&#xe609;",
+              "href": "page/TGp/TGpxg/TXglt/TXgltList.html",
+              "spread": false
+            }
+          ]
+        }
+
 	],
-	"systemeSttings": [
+	"jjyw": [
 		{
-			"title": "系统基本参数",
+			"title": "基金交易",
 			"icon": "&#xe631;",
-			"href": "page/systemSetting/basicParameter.html",
+			"href": "page/TJj/TJjjy/TJjjyList.html",
 			"spread": false
-		},{
-			"title": "系统日志",
-			"icon": "icon-log",
-			"href": "page/systemSetting/logs.html",
-			"spread": false
-		},{
-			"title": "友情链接",
-			"icon": "&#xe64c;",
-			"href": "page/systemSetting/linkList.html",
-			"spread": false
-		},{
-			"title": "图标管理",
-			"icon": "&#xe857;",
-			"href": "page/systemSetting/icons.html",
-			"spread": false
+		},
+        {
+          "title": "基金认购",
+          "icon": "&#xe630;",
+          "href": "",
+          "spread": false,
+          "children": [
+            {
+              "title": "认购申请",
+              "icon": "&#xe61c;",
+              "href": "page/TJj/TJjrg/TRgsq/TRgsqList.html",
+              "spread": false
+            },
+            {
+              "title": "认购确认",
+              "icon": "&#xe609;",
+              "href": "page/TJj/TJjrg/TRgqr/TRgqrList.html",
+              "spread": false
+            }
+          ]
+        },{
+        "title": "基金申购",
+        "icon": "&#xe630;",
+        "href": "",
+        "spread": false,
+        "children": [
+          {
+            "title": "申购申请",
+            "icon": "&#xe61c;",
+            "href": "page/TJj/TJjsg/TSgsq/TSgsqList.html",
+            "spread": false
+          },
+          {
+            "title": "申购确认",
+            "icon": "&#xe609;",
+            "href": "page/TJj/TJjsg/TSgqr/TSgqrList.html",
+            "spread": false
+          }
+        ]
+      },{
+        "title": "基金赎回",
+        "icon": "&#xe630;",
+        "href": "",
+        "spread": false,
+        "children": [
+          {
+            "title": "赎回确认",
+            "icon": "&#xe61c;",
+            "href": "page/TJj/TJjsh/TShqr/TShqrList.html",
+            "spread": false
+          },
+          {
+            "title": "赎回到账",
+            "icon": "&#xe609;",
+            "href": "page/TJj/TJjsh/TShdz/TShdzList.html",
+            "spread": false
+          }
+        ]
+      },{
+        "title": "基金红利",
+        "icon": "&#xe630;",
+        "href": "",
+        "spread": false,
+        "children": [
+          {
+            "title": "红利到账",
+            "icon": "&#xe61c;",
+            "href": "page/TJj/TJjfh/THldz/THldzList.html",
+            "spread": false
+          },
+          {
+            "title": "红利除权",
+            "icon": "&#xe609;",
+            "href": "page/TJj/TJjfh/THlcq/THlcqList.html",
+            "spread": false
+          }
+        ]
+      }
+	],
+	"hgyw": [
+      {
+        "title": "银行间回购",
+        "icon": "&#xe630;",
+        "href": "",
+        "spread": false,
+        "children": [
+          {
+            "title": "质押式回购",
+            "icon": "&#xe61c;",
+            "href": "page/THg/TYhjhg/TYzyshg/TYzyshgList.html",
+            "spread": false
+          },
+          {
+            "title": "买断式回购",
+            "icon": "&#xe609;",
+            "href": "page/THg/TYhjhg/TYmdshg/TYmdshgList.html",
+            "spread": false
+          }
+        ]
+      },{
+			"title": "交易所间回购",
+			"icon": "icon-mokuai",
+            "href": "",
+            "spread": false,
+            "children": [
+              {
+                "title": "质押式回购",
+                "icon": "&#xe61c;",
+                "href": "page/THg/TJyshg/TJzyshg/TJzyshgList.html",
+                "spread": false
+              }
+            ]
 		}
 	],
-	"seraphApi": [
-		{
-			"title": "三级联动模块",
-			"icon": "icon-mokuai",
-			"href": "page/doc/addressDoc.html",
-			"spread": false
-		},{
-			"title": "bodyTab模块",
-			"icon": "icon-mokuai",
-			"href": "page/doc/bodyTabDoc.html",
-			"spread": false
-		},{
-			"title": "三级菜单",
-			"icon": "icon-mokuai",
-			"href": "page/doc/navDoc.html",
-			"spread": false
-		}
-	]
+    "rcyw": [
+    {
+      "title": "日终清算",
+      "icon": "icon-mokuai",
+      "href": "page/TRcyw/TRcqs/TRzqsList.html",
+      "spread": false
+    },{
+      "title": "生成凭证",
+      "icon": "icon-mokuai",
+      "href": "page/TRcyw/TScpz/TScpzList.html",
+      "spread": false
+    },{
+      "title": "估值报表",
+      "icon": "icon-mokuai",
+      "href": "page/TRcyw/TGzbb/TGzbbList.html",
+      "spread": false
+    }
+  ]
 }
 
 

@@ -3,7 +3,7 @@ package com.hundsun.accountingsystem;
 
 import com.alibaba.fastjson.JSON;
 import com.hundsun.accountingsystem.Global.bean.TJyfl;
-import com.hundsun.accountingsystem.Global.bean.TJyflVO;
+import com.hundsun.accountingsystem.Global.VO.TJyflVO;
 import com.hundsun.accountingsystem.Global.mapper.TGhkMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
 import com.hundsun.accountingsystem.Global.service.TGhkService;
