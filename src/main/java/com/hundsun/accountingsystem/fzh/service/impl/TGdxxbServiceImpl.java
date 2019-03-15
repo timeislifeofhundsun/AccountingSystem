@@ -9,10 +9,10 @@ import com.hundsun.accountingsystem.Global.bean.TGdxxb;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample.Criteria;
 import com.hundsun.accountingsystem.Global.mapper.TGdxxbMapper;
-import com.hundsun.accountingsystem.fzh.service.TgdxxbService;
+import com.hundsun.accountingsystem.fzh.service.TGdxxbService;
 
 @Service
-public class TgdxxbServiceImpl implements TgdxxbService {
+public class TGdxxbServiceImpl implements TGdxxbService {
 
 	@Autowired
 	TGdxxbMapper tgdxxbMapper;

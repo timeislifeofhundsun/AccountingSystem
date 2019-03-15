@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.hundsun.accountingsystem.Global.bean.TZtxxb;
 
-public interface TztxxbService {
+public interface TZtxxbService {
 
 	public void insertZt(TZtxxb tztxxb) throws Exception;
 	

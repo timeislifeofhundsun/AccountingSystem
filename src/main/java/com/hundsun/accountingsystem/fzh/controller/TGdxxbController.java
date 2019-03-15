@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.hundsun.accountingsystem.Global.bean.TGdxxb;
-import com.hundsun.accountingsystem.fzh.service.TgdxxbService;
+import com.hundsun.accountingsystem.fzh.service.TGdxxbService;
 
 @Controller
-public class TgdxxbController {
+public class TGdxxbController {
 	
 	@Autowired
-	TgdxxbService tgdxxbServiceImpl;
+	TGdxxbService tgdxxbServiceImpl;
 	
 	public void insertGdTest() {
 		TGdxxb tgdxxb = new TGdxxb();

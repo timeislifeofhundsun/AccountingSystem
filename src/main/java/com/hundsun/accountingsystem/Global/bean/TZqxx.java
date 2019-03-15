@@ -35,29 +35,6 @@ public class TZqxx {
 
     private Double fxjg;
 
-    public TZqxx(Integer zqnm, String zqdm, Integer zqlb, Integer sclb, String zqjg, Double zgb, Double ltgs, Double mgmz, Date fxrq, Date dqrq, Integer hgts, Double njxts, Double nll, Date qxr, Integer fxfs, Double fxjg) {
-        this.zqnm = zqnm;
-        this.zqdm = zqdm;
-        this.zqlb = zqlb;
-        this.sclb = sclb;
-        this.zqjg = zqjg;
-        this.zgb = zgb;
-        this.ltgs = ltgs;
-        this.mgmz = mgmz;
-        this.fxrq = fxrq;
-        this.dqrq = dqrq;
-        this.hgts = hgts;
-        this.njxts = njxts;
-        this.nll = nll;
-        this.qxr = qxr;
-        this.fxfs = fxfs;
-        this.fxjg = fxjg;
-    }
-
-    public TZqxx() {
-        super();
-    }
-
     public Integer getZqnm() {
         return zqnm;
     }

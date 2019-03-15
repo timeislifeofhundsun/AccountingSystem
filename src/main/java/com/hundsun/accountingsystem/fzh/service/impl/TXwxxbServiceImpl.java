@@ -9,10 +9,10 @@ import com.hundsun.accountingsystem.Global.bean.TXwxxb;
 import com.hundsun.accountingsystem.Global.bean.TXwxxbExample;
 import com.hundsun.accountingsystem.Global.bean.TXwxxbExample.Criteria;
 import com.hundsun.accountingsystem.Global.mapper.TXwxxbMapper;
-import com.hundsun.accountingsystem.fzh.service.TxwxxbService;
+import com.hundsun.accountingsystem.fzh.service.TXwxxbService;
 
 @Service
-public class TxwxxbServiceImpl implements TxwxxbService {
+public class TXwxxbServiceImpl implements TXwxxbService {
 
 	@Autowired
 	TXwxxbMapper txwxxbMapper;

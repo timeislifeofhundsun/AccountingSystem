@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.hundsun.accountingsystem.Global.bean.TGdxxb;
 
-public interface TgdxxbService {
+public interface TGdxxbService {
 	public void insertGd(TGdxxb tgdxxb) throws Exception;
 	
 	public boolean updateGd(TGdxxb tgdxxb);

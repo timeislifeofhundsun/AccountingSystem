@@ -2,29 +2,99 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hundsun.accountingsystem.Global.mapper.TZqxxMapper" >
   <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.TZqxx" >
-    <constructor >
-      <idArg column="zqnm" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="zqdm" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="zqlb" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="sclb" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="zqjg" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="zgb" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="ltgs" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="mgmz" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="fxrq" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="dqrq" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="hgts" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="njxts" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="nll" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="qxr" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="fxfs" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="fxjg" jdbcType="DOUBLE" javaType="java.lang.Double" />
-    </constructor>
+    <id column="zqnm" property="zqnm" jdbcType="INTEGER" />
+    <result column="zqdm" property="zqdm" jdbcType="VARCHAR" />
+    <result column="zqlb" property="zqlb" jdbcType="INTEGER" />
+    <result column="sclb" property="sclb" jdbcType="INTEGER" />
+    <result column="zqjg" property="zqjg" jdbcType="VARCHAR" />
+    <result column="zgb" property="zgb" jdbcType="DOUBLE" />
+    <result column="ltgs" property="ltgs" jdbcType="DOUBLE" />
+    <result column="mgmz" property="mgmz" jdbcType="DOUBLE" />
+    <result column="fxrq" property="fxrq" jdbcType="TIMESTAMP" />
+    <result column="dqrq" property="dqrq" jdbcType="TIMESTAMP" />
+    <result column="hgts" property="hgts" jdbcType="INTEGER" />
+    <result column="njxts" property="njxts" jdbcType="DOUBLE" />
+    <result column="nll" property="nll" jdbcType="DOUBLE" />
+    <result column="qxr" property="qxr" jdbcType="TIMESTAMP" />
+    <result column="fxfs" property="fxfs" jdbcType="INTEGER" />
+    <result column="fxjg" property="fxjg" jdbcType="DOUBLE" />
   </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Base_Column_List" >
     zqnm, zqdm, zqlb, sclb, zqjg, zgb, ltgs, mgmz, fxrq, dqrq, hgts, njxts, nll, qxr, 
     fxfs, fxjg
   </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hundsun.accountingsystem.Global.bean.TZqxxExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_zqxx
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -34,6 +104,12 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_zqxx
     where zqnm = #{zqnm,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.accountingsystem.Global.bean.TZqxxExample" >
+    delete from t_zqxx
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
   </delete>
   <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.TZqxx" >
     insert into t_zqxx (zqnm, zqdm, zqlb, 
@@ -150,6 +226,90 @@
       </if>
     </trim>
   </insert>
+  <select id="countByExample" parameterType="com.hundsun.accountingsystem.Global.bean.TZqxxExample" resultType="java.lang.Integer" >
+    select count(*) from t_zqxx
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_zqxx
+    <set >
+      <if test="record.zqnm != null" >
+        zqnm = #{record.zqnm,jdbcType=INTEGER},
+      </if>
+      <if test="record.zqdm != null" >
+        zqdm = #{record.zqdm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zqlb != null" >
+        zqlb = #{record.zqlb,jdbcType=INTEGER},
+      </if>
+      <if test="record.sclb != null" >
+        sclb = #{record.sclb,jdbcType=INTEGER},
+      </if>
+      <if test="record.zqjg != null" >
+        zqjg = #{record.zqjg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zgb != null" >
+        zgb = #{record.zgb,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ltgs != null" >
+        ltgs = #{record.ltgs,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mgmz != null" >
+        mgmz = #{record.mgmz,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fxrq != null" >
+        fxrq = #{record.fxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dqrq != null" >
+        dqrq = #{record.dqrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.hgts != null" >
+        hgts = #{record.hgts,jdbcType=INTEGER},
+      </if>
+      <if test="record.njxts != null" >
+        njxts = #{record.njxts,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nll != null" >
+        nll = #{record.nll,jdbcType=DOUBLE},
+      </if>
+      <if test="record.qxr != null" >
+        qxr = #{record.qxr,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fxfs != null" >
+        fxfs = #{record.fxfs,jdbcType=INTEGER},
+      </if>
+      <if test="record.fxjg != null" >
+        fxjg = #{record.fxjg,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_zqxx
+    set zqnm = #{record.zqnm,jdbcType=INTEGER},
+      zqdm = #{record.zqdm,jdbcType=VARCHAR},
+      zqlb = #{record.zqlb,jdbcType=INTEGER},
+      sclb = #{record.sclb,jdbcType=INTEGER},
+      zqjg = #{record.zqjg,jdbcType=VARCHAR},
+      zgb = #{record.zgb,jdbcType=DOUBLE},
+      ltgs = #{record.ltgs,jdbcType=DOUBLE},
+      mgmz = #{record.mgmz,jdbcType=DOUBLE},
+      fxrq = #{record.fxrq,jdbcType=TIMESTAMP},
+      dqrq = #{record.dqrq,jdbcType=TIMESTAMP},
+      hgts = #{record.hgts,jdbcType=INTEGER},
+      njxts = #{record.njxts,jdbcType=DOUBLE},
+      nll = #{record.nll,jdbcType=DOUBLE},
+      qxr = #{record.qxr,jdbcType=TIMESTAMP},
+      fxfs = #{record.fxfs,jdbcType=INTEGER},
+      fxjg = #{record.fxjg,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.TZqxx" >
     update t_zqxx
     <set >

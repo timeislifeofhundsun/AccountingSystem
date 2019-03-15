@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: AccountingSystem
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: 范振华
+Implementation-Vendor-Id: com.hundsun
+Build-Jdk: 1.8.0_144
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/accountingsystem
+Created-By: Maven Integration for Eclipse
+

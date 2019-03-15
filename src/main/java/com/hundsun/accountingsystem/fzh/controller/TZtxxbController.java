@@ -2,18 +2,19 @@ package com.hundsun.accountingsystem.fzh.controller;
 
 import java.util.List;
 
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.hundsun.accountingsystem.Global.bean.TZtxxb;
-import com.hundsun.accountingsystem.fzh.service.TztxxbService;
+import com.hundsun.accountingsystem.fzh.service.TZtxxbService;
 
 
 @Controller
-public class TestController {
+public class TZtxxbController {
 	
 	@Autowired
-	TztxxbService tztxxbServiceImpl;
+	TZtxxbService tztxxbServiceImpl;
 
 	public void InsertTest() {
 		TZtxxb tztxxb = new TZtxxb();
@@ -21,7 +22,7 @@ public class TestController {
 		tztxxb.setNumber(10000000);
 		tztxxb.setName("测试账套11");
 		tztxxb.setJjdm(654712);
-		System.out.println(tztxxbServiceImpl);
+		//System.out.println(tztxxbServiceImpl);
 		try {
 			tztxxbServiceImpl.insertZt(tztxxb);
 		} catch (Exception e) {
@@ -36,8 +37,8 @@ public class TestController {
 		TZtxxb tztxxb = new TZtxxb();
 		tztxxb.setMoney(100000000.00);
 		tztxxb.setNumber(10000000);
-		tztxxb.setZtbh(10004);
-		tztxxb.setName("测试账套11222");
+		tztxxb.setZtbh(10005);
+		tztxxb.setName("测试账套666");
 		tztxxb.setJjdm(654712);
 		tztxxbServiceImpl.updateZt(tztxxb);
 		System.out.println("update successful!!!");

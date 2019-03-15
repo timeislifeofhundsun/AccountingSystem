@@ -12,7 +12,7 @@ import java.util.Date;
 * @date 2019年3月13日
 * @Version 1.1
  */
-public interface CjhbbService {
+public interface TCjhbbService {
 
 	/**
 	 * 
