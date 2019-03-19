@@ -1,4 +1,4 @@
-package com.hundsun.accountingsystem.gz.service;
+package com.hundsun.accountingsystem.TGp.service;
 
 import java.util.Date;
 

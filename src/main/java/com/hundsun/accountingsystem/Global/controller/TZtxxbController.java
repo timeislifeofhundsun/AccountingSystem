@@ -40,22 +40,21 @@ public class TZtxxbController {
 	
 	@PutMapping("/TZtxx")
 	public String updateZtxx(@RequestParam(value = "Ztxx",required = true) String data) {
-		System.out.println(data);
 		TZtxxb tztxxb=JSON.parseObject(data,TZtxxb.class);
 		tztxxbServiceImpl.updateZt(tztxxb);
 		System.out.println("update successful!!!");
 		return String.valueOf(1);
 	}
 	@GetMapping("/TZtxx")
-	public String findList() {
-		List<TZtxxb> findZtList = tztxxbServiceImpl.findZtList();
+	public String findList(int page,int limit) {
+		System.out.println("分页"+page+"数量"+limit);
+		List<TZtxxb> findZtList = tztxxbServiceImpl.findZtList(page,limit);
 		TZtxxbVO layuiJson = new TZtxxbVO();
 		layuiJson.setCode(0);
 	    layuiJson.setCount(findZtList.size());
 	    layuiJson.setMsg("");
 	    layuiJson.setData(findZtList);
 	    String jsonString = JSON.toJSONString(layuiJson);
-	    System.out.println(jsonString);
 		return jsonString;
 	}
 	

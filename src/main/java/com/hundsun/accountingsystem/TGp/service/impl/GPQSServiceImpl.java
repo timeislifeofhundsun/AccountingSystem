@@ -1,12 +1,17 @@
-package com.hundsun.accountingsystem.gz.service.impl;
+package com.hundsun.accountingsystem.TGp.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.hundsun.accountingsystem.Global.bean.TCjhbb;
+import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
+import com.hundsun.accountingsystem.Global.bean.TCjhbbExample.Criteria;
 import com.hundsun.accountingsystem.Global.bean.TJyfl;
+import com.hundsun.accountingsystem.Global.mapper.TCjhbbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
-import com.hundsun.accountingsystem.gz.service.GPQSService;
+import com.hundsun.accountingsystem.TGp.service.GPQSService;
 
 /**
  * 
@@ -29,6 +34,8 @@ public class GPQSServiceImpl implements GPQSService{
 	@Autowired
 	TJyflMapper jyflmapper;
 	
+	@Autowired
+	TCjhbbMapper tCjhbbMapper;
 	
 	
 	/**
@@ -67,14 +74,26 @@ public class GPQSServiceImpl implements GPQSService{
 			throw new Exception("股票清算-获取交易费率");
 		}
 		/**
-		 * 2.获取需要清算的数据(账套、时间筛选)
+		 * 2.获取需要清算的数据(账套、时间、业务类别筛选)
 		 */
+		TCjhbbExample  example = new TCjhbbExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andZtbhEqualTo(ztbh);
+		criteria.andYwlbEqualTo(1);
+		criteria.andYwrqBetween(ywrq, ywrq);
+		List<TCjhbb> tCjhbbs = tCjhbbMapper.selectByExample(example);
 		
 		
 		returnData = false;
 		return returnData;
 	}
 	
-
+	private boolean gpmr(TCjhbb tCjhbb) {
+		boolean res = false;
+		
+		
+		res = true;
+		return res;
+	}
 
 }
