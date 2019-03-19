@@ -20,62 +20,59 @@
     <link rel="stylesheet" href="../../../css/public.css" media="all"/>
 </head>
 <body class="childrenBody">
-<form class="layui-form">
-    <div>
-        <div class="layui-row layui-col-space15">
-            <!-- 交易数据开始 -->
-            <div class="layui-col-md8">
-                <div class="layui-card">
-                    <div class="layui-card-header">交易数据</div>
-                    <div class="layui-card-body">
-                        <div style="height:550px;">
-                            <table class="layui-table">
-                                <thead>
-                                <tr>
-                                    <th>文件名称</th>
-                                    <th>文件路径</th>
-                                    <th>状态</th>
-                                </tr>
-                                </thead>
-                                <tbody id="fileStutasTable">
-                                <tr>
-                                    <td>贤心</td>
-                                    <td>2016-11-29</td>
-                                    <td><i class="layui-icon layui-icon-face-smile"></i></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+<div>
+    <div class="layui-row layui-col-space15">
+        <!-- 交易数据开始 -->
+        <div class="layui-col-md8">
+            <div class="layui-card">
+                <div class="layui-card-header">交易数据</div>
+                <div class="layui-card-body">
+                    <div style="height:550px;">
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th>文件名称</th>
+                                <th>文件路径</th>
+                                <th>状态</th>
+                            </tr>
+                            </thead>
+                            <tbody id="fileStutasTable">
+                            <tr>
+                                <td>贤心</td>
+                                <td>2016-11-29</td>
+                                <td><i class="layui-icon layui-icon-face-smile"></i></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <!-- 交易数据结束 -->
-            <!-- 功能区开始  -->
-            <div class="layui-col-md4">
-                <div class="layui-card">
-                    <!-- header开始 -->
-                    <div class="layui-card-header">
-                        业务日期：<span id="showDate"></span>
-                    </div>
-                    <!-- header结束 -->
-                    <div class="layui-card-body">
-                        <div style="height:550px;">
-                            <div id="date"></div>
-                            <div style="margin-top: 30px;">
-                                <button id="qsBtn" class="layui-btn">清算</button>
-                                <button class="layui-btn layui-btn-danger">恢复</button>
-                                <button class="layui-btn layui-btn-normal">备用</button>
-                            </div>
+        </div>
+        <!-- 交易数据结束 -->
+        <!-- 功能区开始  -->
+        <div class="layui-col-md4">
+            <div class="layui-card">
+                <!-- header开始 -->
+                <div class="layui-card-header">
+                    业务日期：<span id="showDate"></span>
+                </div>
+                <!-- header结束 -->
+                <div class="layui-card-body">
+                    <div style="height:550px;">
+                        <div id="date"></div>
+                        <div style="margin-top: 30px;">
+                            <button id="qsBtn" class="layui-btn">清算</button>
+                            <button class="layui-btn layui-btn-danger">恢复</button>
+                            <button class="layui-btn layui-btn-normal">备用</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--功能区结束  -->
     </div>
-</form>
+    <!--功能区结束  -->
+</div>
 <script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
-<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
 <script type="text/javascript" src="TRzqsList.js"></script>
 </body>

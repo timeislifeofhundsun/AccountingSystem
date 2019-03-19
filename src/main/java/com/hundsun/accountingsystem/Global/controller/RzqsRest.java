@@ -7,9 +7,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONArray;
@@ -29,11 +28,12 @@ import com.hundsun.accountingsystem.Global.util.FilePathUtil;
 * @Version 1.1
  */
 @RestController
-public class TRzqsController {
-	private static final Logger log = LoggerFactory.getLogger(TRzqsController.class);
+@RequestMapping("/rest/RzqsRest")
+public class RzqsRest {
+	private static final Logger log = LoggerFactory.getLogger(RzqsRest.class);
 	
 	@Autowired
-	private TRzqsService TRzqsService;
+	private TRzqsService rzqsService;
 	
 	/**
 	 * 
@@ -42,14 +42,16 @@ public class TRzqsController {
 	* @return JSONObject    返回类型
 	* @author gaozhen
 	 */
-	@PostMapping("/Rzqs")
-	public JSONObject rzqs(@RequestParam(value = "ywrq") String ywrq,@RequestParam(value = "ztbh") Integer ztbh) {
-		log.info("请求原始数据:"+ywrq+ztbh);
+	@RequestMapping("/Rzqs")
+	public JSONObject rzqs(@RequestBody String reqstr) {
+		log.info("请求原始数据:"+reqstr);
 		JSONObject response = new JSONObject();
 		response.put("res", false);
 		try {
-			Date ywrqdate = DateFormatUtil.getDateByString(ywrq);
-			boolean res = TRzqsService.rzqs(ztbh, ywrqdate);
+			JSONObject resquest = JSONObject.parseObject(reqstr);
+			Integer ztbh = resquest.getInteger("ztbh");
+			Date ywrq = DateFormatUtil.getDateByString(resquest.getString("ywrq"));
+			boolean res = rzqsService.rzqs(ztbh, ywrq);
 			if(res) {
 				response.put("res", true);
 			}
@@ -62,15 +64,16 @@ public class TRzqsController {
 		return response;
 	}
 	
-	@PostMapping("/FileStatus")
-	public JSONObject getFileStatus(@RequestParam(value = "ywrq") String ywrq) {
-		log.info("请求原始数据:"+ywrq);
+	@RequestMapping("/getFileStatus")
+	public JSONObject getFileStatus(@RequestBody String reqstr) {
+		log.info("请求原始数据:"+reqstr);
 		JSONObject response = new JSONObject();
 		response.put("res", false);
 		try {
-			Date ywrqdate = DateFormatUtil.getDateByString(ywrq);
+			JSONObject resquest = JSONObject.parseObject(reqstr);
+			Date ywrq = DateFormatUtil.getDateByString(resquest.getString("ywrq"));
 			Map<String,String> files = FilePathUtil.
-					getFilePathByDate(DateFormatUtil.getStringByDate(ywrqdate));
+					getFilePathByDate(DateFormatUtil.getStringByDate(ywrq));
 			JSONArray array = new JSONArray();
 			for(String fileName:files.keySet()) {
 				JSONObject obj = new JSONObject();
@@ -90,5 +93,6 @@ public class TRzqsController {
 		log.info("处理完成");
 		return response;
 	}
+
 
 }
