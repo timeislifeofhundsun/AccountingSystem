@@ -1,15 +1,22 @@
 package com.hundsun.accountingsystem.Global.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.hundsun.accountingsystem.Global.VO.TZtxxbVO;
 import com.hundsun.accountingsystem.Global.bean.TZtxxb;
 import com.hundsun.accountingsystem.Global.service.TZtxxbService;
 
 
-@Controller
+@RestController
 public class TZtxxbController {
 	
 	@Autowired
@@ -31,23 +38,25 @@ public class TZtxxbController {
 		System.out.println("insert successful!!!");
 	}
 	
-	
-	public void updateTest() {
-		TZtxxb tztxxb = new TZtxxb();
-		tztxxb.setMoney(100000000.00);
-		tztxxb.setNumber(10000000);
-		tztxxb.setZtbh(10005);
-		tztxxb.setName("测试账套666");
-		tztxxb.setJjdm(654712);
+	@PutMapping("/TZtxx")
+	public String updateZtxx(@RequestParam(value = "Ztxx",required = true) String data) {
+		System.out.println(data);
+		TZtxxb tztxxb=JSON.parseObject(data,TZtxxb.class);
 		tztxxbServiceImpl.updateZt(tztxxb);
 		System.out.println("update successful!!!");
+		return String.valueOf(1);
 	}
-	
-	public void findTest() {
+	@GetMapping("/TZtxx")
+	public String findList() {
 		List<TZtxxb> findZtList = tztxxbServiceImpl.findZtList();
-		for (TZtxxb tZtxxb : findZtList) {
-			System.out.println(tZtxxb.toString());
-		}
+		TZtxxbVO layuiJson = new TZtxxbVO();
+		layuiJson.setCode(0);
+	    layuiJson.setCount(findZtList.size());
+	    layuiJson.setMsg("");
+	    layuiJson.setData(findZtList);
+	    String jsonString = JSON.toJSONString(layuiJson);
+	    System.out.println(jsonString);
+		return jsonString;
 	}
 	
 	public void findByIdTest() {

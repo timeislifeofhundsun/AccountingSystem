@@ -2,11 +2,14 @@ package com.hundsun.accountingsystem.Global.bean;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class TZtxxb {
     private Integer ztbh;
 
     private String name;
-
+    
     private Date createdate;
 
     private Date enddate;
@@ -40,15 +43,15 @@ public class TZtxxb {
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
-
+    @JSONField(format = "yyyy-MM-dd")
     public Date getCreatedate() {
         return createdate;
     }
-
+    
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
     }
-
+    @JSONField(format = "yyyy-MM-dd")
     public Date getEnddate() {
         return enddate;
     }
