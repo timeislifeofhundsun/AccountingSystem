@@ -24,6 +24,12 @@
 			"href": "page/TJcsz/TGdxx/TGdxxList.html",
 			"spread": false
 		},
+		{
+			"title": "席位管理",
+			"icon": "&#xe634;",
+			"href": "page/TJcsz/TXwxx/TXwxxList.html",
+			"spread": false
+		},
         {
           "title": "计息设置",
           "icon": "&#xe634;",
