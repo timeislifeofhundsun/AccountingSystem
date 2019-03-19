@@ -3,6 +3,7 @@ package com.hundsun.accountingsystem;
 
 import com.alibaba.fastjson.JSON;
 import com.hundsun.accountingsystem.Global.bean.TJyfl;
+import com.hundsun.accountingsystem.Global.controller.TCjhbbController;
 import com.hundsun.accountingsystem.Global.VO.TJyflVO;
 import com.hundsun.accountingsystem.Global.mapper.TGhkMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
@@ -24,6 +25,9 @@ public class AccountingSystemApplicationTests {
 	@Autowired
 	TJyflMapper tJyflMapper;
 
+	@Autowired
+	TCjhbbController tcjhbbController;
+	
 	@Test
 	public void contextLoads() throws IOException {
 		List<TJyfl> allTJyfl = tJyflMapper.findAllTJyfl();
@@ -36,4 +40,8 @@ public class AccountingSystemApplicationTests {
 		System.out.println(jsonString);
 	}
 
+	@Test
+	public void test() {
+		tcjhbbController.insertTest();
+	}
 }

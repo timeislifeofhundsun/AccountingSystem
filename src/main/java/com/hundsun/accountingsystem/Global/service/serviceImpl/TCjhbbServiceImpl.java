@@ -1,5 +1,6 @@
 package com.hundsun.accountingsystem.Global.service.serviceImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,8 +10,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hundsun.accountingsystem.Global.VO.TCjhbbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TCjhbb;
+import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
 import com.hundsun.accountingsystem.Global.bean.TGdxxb;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample.Criteria;
@@ -46,6 +49,13 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 		 * 4.对合笔后的数据进行业务类别的判断（根据买卖方向以及证券代码）
 		 * 5.保存账套编号以及业务类别、市场编号等，将数据插入到cjhbb里面。
 		 * */
+		
+		//操作之前先删除今天cjhbb的数据
+		String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
+		TCjhbbParamPojo param=new TCjhbbParamPojo();
+		param.setStartDate(format);
+		param.setEndDate(format);
+		tcjhbbMapper.deleteByDate(param);
 		
 		//根据账套编号查询出股东代码和席位代码
 		TGdxxbExample example=new TGdxxbExample();

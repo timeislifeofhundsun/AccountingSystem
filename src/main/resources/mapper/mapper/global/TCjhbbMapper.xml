@@ -365,4 +365,9 @@
       extendc = #{extendc,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <delete id="deleteByDate" parameterType="com.hundsun.accountingsystem.Global.VO.TCjhbbParamPojo" >
+    delete from t_cjhbb
+    WHERE DATE(ywrq) BETWEEN #{startDate} AND #{endDate}
+  </delete>
 </mapper>

@@ -1,5 +1,6 @@
 package com.hundsun.accountingsystem.Global.controller;
 
+
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class TCjhbbController {
 	TCjhbbService tcjhbbServiceImpl;
 	
 	public void insertTest() {
+		
 		tcjhbbServiceImpl.insertCjhbbByRzqs(10004, new Date());
+		
 	}
 }

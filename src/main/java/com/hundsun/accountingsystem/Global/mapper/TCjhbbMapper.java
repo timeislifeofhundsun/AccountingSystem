@@ -1,8 +1,10 @@
 package com.hundsun.accountingsystem.Global.mapper;
 
+import com.hundsun.accountingsystem.Global.VO.TCjhbbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.TCjhbb;
 import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TCjhbbMapper {
@@ -27,4 +29,6 @@ public interface TCjhbbMapper {
     int updateByPrimaryKeySelective(TCjhbb record);
 
     int updateByPrimaryKey(TCjhbb record);
+    
+    int deleteByDate(TCjhbbParamPojo param);
 }
