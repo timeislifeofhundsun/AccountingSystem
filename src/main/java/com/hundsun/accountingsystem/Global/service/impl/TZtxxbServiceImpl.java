@@ -44,7 +44,10 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 	}
 
 	@Override
-	public List<TZtxxb> findZtList() {
+	public List<TZtxxb> findZtList(int page,int limit) {
+		TZtxxbExample example=new TZtxxbExample();
+		Criteria criteria = example.createCriteria();
+		
 		return tztxxbMapper.selectByExample(null);
 	}
 

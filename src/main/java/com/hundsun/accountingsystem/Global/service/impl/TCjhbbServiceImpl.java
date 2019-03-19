@@ -61,16 +61,18 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 		Criteria criteria = example.createCriteria();
 		criteria.andZtbhEqualTo(ztbh);
 		List<TGhk> ghkList=new ArrayList<TGhk>();
-		//根据股东代码和席位代码查询出所有的过户库数据
-		Assist assist = new Assist();		
+		//根据股东代码和席位代码查询出所有的过户库数据	
 		List<TGdxxb> gdxxbList = tgdxxbMapper.selectByExample(example);
 		if(gdxxbList.size()!=0) {
 			for(int i=0;i<gdxxbList.size();i++) {
+				System.out.println(gdxxbList.get(i).getGddm()+" "+gdxxbList.get(i).getXwbh());
+				Assist assist = new Assist();
 				assist.setRequires(Assist.andEq("gdcode", gdxxbList.get(i).getGddm())
 					      ,Assist.andEq("xwcode", gdxxbList.get(i).getXwbh()));
 				ghkList.addAll(tghkMapper.selectTGhk(assist));
 			}
 		}
+		System.out.println(ghkList.size()+"............");
 		//对过户库中同一证券代码的所有交易数据进行合笔操作
 		Map<String,Map<String,Double>> map=new HashMap<String,Map<String,Double>>();
 		//存储不同的证券代码，用于以后遍历map集合用（map的健值都存储到sb中）
@@ -79,6 +81,9 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 		//System.out.println("数据："+ghkList);
 		for(int i=0;i<ghkList.size();i++) {
 			//如果map中含有证券代码的键值对，取出map集合，对取出的map集合中的键值对进行合并操作
+			if(ghkList.get(i).getZqcode().equals("000001")) {
+				System.out.println("平安银行");
+			}
 			if(map.containsKey(ghkList.get(i).getZqcode())) {
 				Map<String, Double> map2 = map.get(ghkList.get(i).getZqcode());
 				double cjsl=map2.get("cjsl");
@@ -123,7 +128,7 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 		}
 		
 		for(int i=0;i<string.length;i++) {
-			//System.out.println(string[i]);
+			System.out.println(string[i]);
 			TCjhbb tcjhbb=new TCjhbb();
 			tcjhbb.setGddm(gdxxbList.get(0).getGddm());
 			tcjhbb.setXwbh(gdxxbList.get(0).getXwbh());
@@ -143,8 +148,9 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 			//根据证券代码查出业务类别
 			List<TZqxx> list = tzqxxServiceImpl.findByZqdm(string[i]);
 			if(list!=null&&list.size()>1) {
+				tcjhbb.setYwlb(1);
 				System.out.println("待处理！！！");
-				throw new RuntimeException("证券代码不唯一！！！");
+				//throw new RuntimeException("证券代码不唯一！！！");
 			}
 			if(list!=null&&list.size()==1){
 				tcjhbb.setYwlb(list.get(0).getZqlb());

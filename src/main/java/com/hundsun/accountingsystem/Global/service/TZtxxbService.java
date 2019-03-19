@@ -10,7 +10,7 @@ public interface TZtxxbService {
 	
 	public boolean updateZt(TZtxxb tztxxb);
 	
-	public List<TZtxxb> findZtList();
+	public List<TZtxxb> findZtList(int page,int limit);
 	
 	public TZtxxb findZtById(int ztbh);
 	
