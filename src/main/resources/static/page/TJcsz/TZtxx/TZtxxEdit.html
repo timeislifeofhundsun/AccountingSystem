@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <title>费率编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/public.css" media="all"/>
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <div class="layui-col-md-offset4 layui-col-xs12 layui-col-md4 ">
+        <div class="layui-form-item ywcode">
+            <label class="layui-form-label">账套编号</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input ztbh" name="ztbh" id="ztbh" lay-verify="ztbh" disabled>
+            </div>
+        </div>
+        <div class="layui-form-item ywname">
+            <label class="layui-form-label">账套名称</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input name" name="name" id="name" lay-verify="name" placeholder="请输入账套名称" />
+            </div>
+        </div>
+        <div class="layui-form-item jsfl">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input createdate" name="createdate" id="createdate" lay-verify="createdate" />
+            </div>
+        </div>
+        <div class="layui-form-item gh">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input enddate" name="enddate" id="enddate" lay-verify="enddate" />
+            </div>
+        </div>
+        <div class="layui-form-item yh">
+            <label class="layui-form-label">基金代码</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input jjdm" name="jjdm" id="jjdm" lay-verify="jjdm" disabled="disabled"/>
+            </div>
+        </div>
+        <div class="layui-form-item zg">
+            <label class="layui-form-label">初始金额</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input money" name="money" id="money" lay-verify="money"/>
+            </div>
+        </div>
+        <div class="layui-form-item yj">
+            <label class="layui-form-label">初始份额</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input number" name="number" id="number" lay-verify="number" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-filter="updateTZtxx" lay-submit lay-filter="*">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="TZtxxEdit.js"></script>
+<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+<script>
+
+</script>
+</body>
+</html>

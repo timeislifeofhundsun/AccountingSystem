@@ -145,7 +145,7 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 			tcjhbbMapper.insert(tcjhbb);
 			//System.out.println("insert successful!!!");
 		}
-		return false;
+		return true;
 	}
 
 }
