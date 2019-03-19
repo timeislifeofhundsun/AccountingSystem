@@ -865,6 +865,306 @@ public class TCjhbbExample {
             return (Criteria) this;
         }
 
+        public Criteria andJsfIsNull() {
+            addCriterion("jsf is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfIsNotNull() {
+            addCriterion("jsf is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfEqualTo(Double value) {
+            addCriterion("jsf =", value, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfNotEqualTo(Double value) {
+            addCriterion("jsf <>", value, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfGreaterThan(Double value) {
+            addCriterion("jsf >", value, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfGreaterThanOrEqualTo(Double value) {
+            addCriterion("jsf >=", value, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfLessThan(Double value) {
+            addCriterion("jsf <", value, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfLessThanOrEqualTo(Double value) {
+            addCriterion("jsf <=", value, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfIn(List<Double> values) {
+            addCriterion("jsf in", values, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfNotIn(List<Double> values) {
+            addCriterion("jsf not in", values, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfBetween(Double value1, Double value2) {
+            addCriterion("jsf between", value1, value2, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andJsfNotBetween(Double value1, Double value2) {
+            addCriterion("jsf not between", value1, value2, "jsf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfIsNull() {
+            addCriterion("ghf is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfIsNotNull() {
+            addCriterion("ghf is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfEqualTo(Double value) {
+            addCriterion("ghf =", value, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfNotEqualTo(Double value) {
+            addCriterion("ghf <>", value, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfGreaterThan(Double value) {
+            addCriterion("ghf >", value, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfGreaterThanOrEqualTo(Double value) {
+            addCriterion("ghf >=", value, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfLessThan(Double value) {
+            addCriterion("ghf <", value, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfLessThanOrEqualTo(Double value) {
+            addCriterion("ghf <=", value, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfIn(List<Double> values) {
+            addCriterion("ghf in", values, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfNotIn(List<Double> values) {
+            addCriterion("ghf not in", values, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfBetween(Double value1, Double value2) {
+            addCriterion("ghf between", value1, value2, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhfNotBetween(Double value1, Double value2) {
+            addCriterion("ghf not between", value1, value2, "ghf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfIsNull() {
+            addCriterion("zgf is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfIsNotNull() {
+            addCriterion("zgf is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfEqualTo(Double value) {
+            addCriterion("zgf =", value, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfNotEqualTo(Double value) {
+            addCriterion("zgf <>", value, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfGreaterThan(Double value) {
+            addCriterion("zgf >", value, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfGreaterThanOrEqualTo(Double value) {
+            addCriterion("zgf >=", value, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfLessThan(Double value) {
+            addCriterion("zgf <", value, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfLessThanOrEqualTo(Double value) {
+            addCriterion("zgf <=", value, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfIn(List<Double> values) {
+            addCriterion("zgf in", values, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfNotIn(List<Double> values) {
+            addCriterion("zgf not in", values, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfBetween(Double value1, Double value2) {
+            addCriterion("zgf between", value1, value2, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andZgfNotBetween(Double value1, Double value2) {
+            addCriterion("zgf not between", value1, value2, "zgf");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsIsNull() {
+            addCriterion("yhs is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsIsNotNull() {
+            addCriterion("yhs is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsEqualTo(Double value) {
+            addCriterion("yhs =", value, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsNotEqualTo(Double value) {
+            addCriterion("yhs <>", value, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsGreaterThan(Double value) {
+            addCriterion("yhs >", value, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsGreaterThanOrEqualTo(Double value) {
+            addCriterion("yhs >=", value, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsLessThan(Double value) {
+            addCriterion("yhs <", value, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsLessThanOrEqualTo(Double value) {
+            addCriterion("yhs <=", value, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsIn(List<Double> values) {
+            addCriterion("yhs in", values, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsNotIn(List<Double> values) {
+            addCriterion("yhs not in", values, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsBetween(Double value1, Double value2) {
+            addCriterion("yhs between", value1, value2, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andYhsNotBetween(Double value1, Double value2) {
+            addCriterion("yhs not between", value1, value2, "yhs");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyIsNull() {
+            addCriterion("jyfy is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyIsNotNull() {
+            addCriterion("jyfy is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyEqualTo(Double value) {
+            addCriterion("jyfy =", value, "jyfy");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyNotEqualTo(Double value) {
+            addCriterion("jyfy <>", value, "jyfy");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyGreaterThan(Double value) {
+            addCriterion("jyfy >", value, "jyfy");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyGreaterThanOrEqualTo(Double value) {
+            addCriterion("jyfy >=", value, "jyfy");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyLessThan(Double value) {
+            addCriterion("jyfy <", value, "jyfy");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyLessThanOrEqualTo(Double value) {
+            addCriterion("jyfy <=", value, "jyfy");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyIn(List<Double> values) {
+            addCriterion("jyfy in", values, "jyfy");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyNotIn(List<Double> values) {
+            addCriterion("jyfy not in", values, "jyfy");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyBetween(Double value1, Double value2) {
+            addCriterion("jyfy between", value1, value2, "jyfy");
+            return (Criteria) this;
+        }
+
+        public Criteria andJyfyNotBetween(Double value1, Double value2) {
+            addCriterion("jyfy not between", value1, value2, "jyfy");
+            return (Criteria) this;
+        }
+
         public Criteria andExtendaIsNull() {
             addCriterion("extenda is null");
             return (Criteria) this;
@@ -1002,76 +1302,6 @@ public class TCjhbbExample {
 
         public Criteria andExtendbNotBetween(String value1, String value2) {
             addCriterion("extendb not between", value1, value2, "extendb");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcIsNull() {
-            addCriterion("extendc is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcIsNotNull() {
-            addCriterion("extendc is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcEqualTo(String value) {
-            addCriterion("extendc =", value, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcNotEqualTo(String value) {
-            addCriterion("extendc <>", value, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcGreaterThan(String value) {
-            addCriterion("extendc >", value, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcGreaterThanOrEqualTo(String value) {
-            addCriterion("extendc >=", value, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcLessThan(String value) {
-            addCriterion("extendc <", value, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcLessThanOrEqualTo(String value) {
-            addCriterion("extendc <=", value, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcLike(String value) {
-            addCriterion("extendc like", value, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcNotLike(String value) {
-            addCriterion("extendc not like", value, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcIn(List<String> values) {
-            addCriterion("extendc in", values, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcNotIn(List<String> values) {
-            addCriterion("extendc not in", values, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcBetween(String value1, String value2) {
-            addCriterion("extendc between", value1, value2, "extendc");
-            return (Criteria) this;
-        }
-
-        public Criteria andExtendcNotBetween(String value1, String value2) {
-            addCriterion("extendc not between", value1, value2, "extendc");
             return (Criteria) this;
         }
     }

@@ -4,7 +4,6 @@ import com.hundsun.accountingsystem.Global.VO.TCjhbbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.TCjhbb;
 import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface TCjhbbMapper {

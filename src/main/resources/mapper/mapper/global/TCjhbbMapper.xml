@@ -14,9 +14,13 @@
     <result column="ztbh" property="ztbh" jdbcType="INTEGER" />
     <result column="ywrq" property="ywrq" jdbcType="TIMESTAMP" />
     <result column="ywlb" property="ywlb" jdbcType="INTEGER" />
+    <result column="jsf" property="jsf" jdbcType="DOUBLE" />
+    <result column="ghf" property="ghf" jdbcType="DOUBLE" />
+    <result column="zgf" property="zgf" jdbcType="DOUBLE" />
+    <result column="yhs" property="yhs" jdbcType="DOUBLE" />
+    <result column="jyfy" property="jyfy" jdbcType="DOUBLE" />
     <result column="extenda" property="extenda" jdbcType="VARCHAR" />
     <result column="extendb" property="extendb" jdbcType="VARCHAR" />
-    <result column="extendc" property="extendc" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,8 +81,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, gddm, xwbh, zqdm, jysc, cjsl, cjjg, cjje, mmfx, ztbh, ywrq, ywlb, extenda, extendb, 
-    extendc
+    id, gddm, xwbh, zqdm, jysc, cjsl, cjjg, cjje, mmfx, ztbh, ywrq, ywlb, jsf, ghf, zgf, 
+    yhs, jyfy, extenda, extendb
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hundsun.accountingsystem.Global.bean.TCjhbbExample" >
     select
@@ -114,13 +118,15 @@
     insert into t_cjhbb (id, gddm, xwbh, 
       zqdm, jysc, cjsl, cjjg, 
       cjje, mmfx, ztbh, ywrq, 
-      ywlb, extenda, extendb, 
-      extendc)
+      ywlb, jsf, ghf, zgf, 
+      yhs, jyfy, extenda, extendb
+      )
     values (#{id,jdbcType=INTEGER}, #{gddm,jdbcType=VARCHAR}, #{xwbh,jdbcType=VARCHAR}, 
       #{zqdm,jdbcType=VARCHAR}, #{jysc,jdbcType=INTEGER}, #{cjsl,jdbcType=INTEGER}, #{cjjg,jdbcType=DOUBLE}, 
       #{cjje,jdbcType=DOUBLE}, #{mmfx,jdbcType=VARCHAR}, #{ztbh,jdbcType=INTEGER}, #{ywrq,jdbcType=TIMESTAMP}, 
-      #{ywlb,jdbcType=INTEGER}, #{extenda,jdbcType=VARCHAR}, #{extendb,jdbcType=VARCHAR}, 
-      #{extendc,jdbcType=VARCHAR})
+      #{ywlb,jdbcType=INTEGER}, #{jsf,jdbcType=DOUBLE}, #{ghf,jdbcType=DOUBLE}, #{zgf,jdbcType=DOUBLE}, 
+      #{yhs,jdbcType=DOUBLE}, #{jyfy,jdbcType=DOUBLE}, #{extenda,jdbcType=VARCHAR}, #{extendb,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.TCjhbb" >
     insert into t_cjhbb
@@ -161,14 +167,26 @@
       <if test="ywlb != null" >
         ywlb,
       </if>
+      <if test="jsf != null" >
+        jsf,
+      </if>
+      <if test="ghf != null" >
+        ghf,
+      </if>
+      <if test="zgf != null" >
+        zgf,
+      </if>
+      <if test="yhs != null" >
+        yhs,
+      </if>
+      <if test="jyfy != null" >
+        jyfy,
+      </if>
       <if test="extenda != null" >
         extenda,
       </if>
       <if test="extendb != null" >
         extendb,
-      </if>
-      <if test="extendc != null" >
-        extendc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -208,14 +226,26 @@
       <if test="ywlb != null" >
         #{ywlb,jdbcType=INTEGER},
       </if>
+      <if test="jsf != null" >
+        #{jsf,jdbcType=DOUBLE},
+      </if>
+      <if test="ghf != null" >
+        #{ghf,jdbcType=DOUBLE},
+      </if>
+      <if test="zgf != null" >
+        #{zgf,jdbcType=DOUBLE},
+      </if>
+      <if test="yhs != null" >
+        #{yhs,jdbcType=DOUBLE},
+      </if>
+      <if test="jyfy != null" >
+        #{jyfy,jdbcType=DOUBLE},
+      </if>
       <if test="extenda != null" >
         #{extenda,jdbcType=VARCHAR},
       </if>
       <if test="extendb != null" >
         #{extendb,jdbcType=VARCHAR},
-      </if>
-      <if test="extendc != null" >
-        #{extendc,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -264,14 +294,26 @@
       <if test="record.ywlb != null" >
         ywlb = #{record.ywlb,jdbcType=INTEGER},
       </if>
+      <if test="record.jsf != null" >
+        jsf = #{record.jsf,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ghf != null" >
+        ghf = #{record.ghf,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zgf != null" >
+        zgf = #{record.zgf,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yhs != null" >
+        yhs = #{record.yhs,jdbcType=DOUBLE},
+      </if>
+      <if test="record.jyfy != null" >
+        jyfy = #{record.jyfy,jdbcType=DOUBLE},
+      </if>
       <if test="record.extenda != null" >
         extenda = #{record.extenda,jdbcType=VARCHAR},
       </if>
       <if test="record.extendb != null" >
         extendb = #{record.extendb,jdbcType=VARCHAR},
-      </if>
-      <if test="record.extendc != null" >
-        extendc = #{record.extendc,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -292,9 +334,13 @@
       ztbh = #{record.ztbh,jdbcType=INTEGER},
       ywrq = #{record.ywrq,jdbcType=TIMESTAMP},
       ywlb = #{record.ywlb,jdbcType=INTEGER},
+      jsf = #{record.jsf,jdbcType=DOUBLE},
+      ghf = #{record.ghf,jdbcType=DOUBLE},
+      zgf = #{record.zgf,jdbcType=DOUBLE},
+      yhs = #{record.yhs,jdbcType=DOUBLE},
+      jyfy = #{record.jyfy,jdbcType=DOUBLE},
       extenda = #{record.extenda,jdbcType=VARCHAR},
-      extendb = #{record.extendb,jdbcType=VARCHAR},
-      extendc = #{record.extendc,jdbcType=VARCHAR}
+      extendb = #{record.extendb,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -335,14 +381,26 @@
       <if test="ywlb != null" >
         ywlb = #{ywlb,jdbcType=INTEGER},
       </if>
+      <if test="jsf != null" >
+        jsf = #{jsf,jdbcType=DOUBLE},
+      </if>
+      <if test="ghf != null" >
+        ghf = #{ghf,jdbcType=DOUBLE},
+      </if>
+      <if test="zgf != null" >
+        zgf = #{zgf,jdbcType=DOUBLE},
+      </if>
+      <if test="yhs != null" >
+        yhs = #{yhs,jdbcType=DOUBLE},
+      </if>
+      <if test="jyfy != null" >
+        jyfy = #{jyfy,jdbcType=DOUBLE},
+      </if>
       <if test="extenda != null" >
         extenda = #{extenda,jdbcType=VARCHAR},
       </if>
       <if test="extendb != null" >
         extendb = #{extendb,jdbcType=VARCHAR},
-      </if>
-      <if test="extendc != null" >
-        extendc = #{extendc,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -360,14 +418,18 @@
       ztbh = #{ztbh,jdbcType=INTEGER},
       ywrq = #{ywrq,jdbcType=TIMESTAMP},
       ywlb = #{ywlb,jdbcType=INTEGER},
+      jsf = #{jsf,jdbcType=DOUBLE},
+      ghf = #{ghf,jdbcType=DOUBLE},
+      zgf = #{zgf,jdbcType=DOUBLE},
+      yhs = #{yhs,jdbcType=DOUBLE},
+      jyfy = #{jyfy,jdbcType=DOUBLE},
       extenda = #{extenda,jdbcType=VARCHAR},
-      extendb = #{extendb,jdbcType=VARCHAR},
-      extendc = #{extendc,jdbcType=VARCHAR}
+      extendb = #{extendb,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  
   <delete id="deleteByDate" parameterType="com.hundsun.accountingsystem.Global.VO.TCjhbbParamPojo" >
     delete from t_cjhbb
     WHERE DATE(ywrq) BETWEEN #{startDate} AND #{endDate}
   </delete>
+  
 </mapper>

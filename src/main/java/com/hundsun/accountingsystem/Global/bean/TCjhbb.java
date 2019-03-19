@@ -2,6 +2,8 @@ package com.hundsun.accountingsystem.Global.bean;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class TCjhbb {
     private Integer id;
 
@@ -27,11 +29,19 @@ public class TCjhbb {
 
     private Integer ywlb;
 
+    private Double jsf;
+
+    private Double ghf;
+
+    private Double zgf;
+
+    private Double yhs;
+
+    private Double jyfy;
+
     private String extenda;
 
     private String extendb;
-
-    private String extendc;
 
     public Integer getId() {
         return id;
@@ -112,7 +122,8 @@ public class TCjhbb {
     public void setZtbh(Integer ztbh) {
         this.ztbh = ztbh;
     }
-
+    
+    @JSONField(format = "yyyy-MM-dd")
     public Date getYwrq() {
         return ywrq;
     }
@@ -129,6 +140,46 @@ public class TCjhbb {
         this.ywlb = ywlb;
     }
 
+    public Double getJsf() {
+        return jsf;
+    }
+
+    public void setJsf(Double jsf) {
+        this.jsf = jsf;
+    }
+
+    public Double getGhf() {
+        return ghf;
+    }
+
+    public void setGhf(Double ghf) {
+        this.ghf = ghf;
+    }
+
+    public Double getZgf() {
+        return zgf;
+    }
+
+    public void setZgf(Double zgf) {
+        this.zgf = zgf;
+    }
+
+    public Double getYhs() {
+        return yhs;
+    }
+
+    public void setYhs(Double yhs) {
+        this.yhs = yhs;
+    }
+
+    public Double getJyfy() {
+        return jyfy;
+    }
+
+    public void setJyfy(Double jyfy) {
+        this.jyfy = jyfy;
+    }
+
     public String getExtenda() {
         return extenda;
     }
@@ -143,13 +194,5 @@ public class TCjhbb {
 
     public void setExtendb(String extendb) {
         this.extendb = extendb == null ? null : extendb.trim();
-    }
-
-    public String getExtendc() {
-        return extendc;
-    }
-
-    public void setExtendc(String extendc) {
-        this.extendc = extendc == null ? null : extendc.trim();
     }
 }
