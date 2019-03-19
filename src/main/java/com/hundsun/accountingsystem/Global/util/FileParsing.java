@@ -46,9 +46,7 @@ public class FileParsing {
         byte[] dest = new byte[n];
         System.arraycopy(fieldName, 0, dest, 0, n);
         String s = new String(dest);
-        System.out.print(s+"|");
       }
-      System.out.println();
       Object[] rowValues;
       TGhk tGhk = null;
       while ((rowValues = reader.nextRecord()) != null) {
@@ -59,10 +57,9 @@ public class FileParsing {
         String temp1 = rowValues[5].toString().substring(0,rowValues[5].toString().length()-2);
         //去掉小数点2
         String temp2 = rowValues[2].toString().substring(0,rowValues[2].toString().length()-1);
-
         tGhk.setGdcode(rowValues[0].toString()).setGdname(null).setXwcode(rowValues[4].toString()).setZtcode(null)
        .setCjsl(Integer.valueOf(temp1)).setCjje(Double.valueOf(rowValues[11].toString())).setCjjg(Double.valueOf(rowValues[10].toString()))
-       .setZqcode(rowValues[7].toString()).setBs(rowValues[13].toString()).setBctime(sdf.parse(temp2)).setJstime(sdf.parse(temp2))
+       .setZqcode(rowValues[7].toString()).setBs(rowValues[13].toString().trim()).setBctime(sdf.parse(temp2)).setJstime(sdf.parse(temp2))
        .setCjtime(sdf.parse(temp2)).setJszh(null).setBfjzh(null).setSclb(0);
         list.add(tGhk);
       }
@@ -100,9 +97,7 @@ public class FileParsing {
         byte[] dest = new byte[n];
         System.arraycopy(fieldName, 0, dest, 0, n);
         String s = new String(dest);
-        System.out.print(s+"|");
       }
-      System.out.println();
       Object[] rowValues;
       TGhk tGhk = null;
       while ((rowValues = reader.nextRecord()) != null) {
