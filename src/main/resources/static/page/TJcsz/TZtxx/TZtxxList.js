@@ -22,6 +22,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         cellMinWidth : 95,
         page : true,
         height : "full-125",
+        toolbar: 'default',
         limit : 10,
         limits : [10,15,20,25],
         id : "newsListTable",
