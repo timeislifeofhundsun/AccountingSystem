@@ -61,7 +61,7 @@ layui.use(['layer','laydate'],function(){
         var ywrq = $('#showDate').text();
         if(ywrq!=""){
         	layer.msg('清算中......');
-        	var request = {"ywrq":ywrq,"ztbh":1000};
+        	var request = {"ywrq":ywrq,"ztbh":10004};
             $.ajax({
             	type:"POST",
                 url:"/rest/RzqsRest/Rzqs",

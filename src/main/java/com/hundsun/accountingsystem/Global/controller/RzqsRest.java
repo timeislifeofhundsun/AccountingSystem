@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.hundsun.accountingsystem.Global.service.TRzqsService;
+import com.hundsun.accountingsystem.Global.service.RzqsService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FilePathUtil;
 
@@ -33,7 +33,7 @@ public class RzqsRest {
 	private static final Logger log = LoggerFactory.getLogger(RzqsRest.class);
 	
 	@Autowired
-	private TRzqsService rzqsService;
+	private RzqsService rzqsService;
 	
 	/**
 	 * 
@@ -59,6 +59,7 @@ public class RzqsRest {
 			log.error(e.getMessage());
 			response.put("msg","参数不规范\n"+e.getMessage());
 		} catch(Exception e){
+			e.printStackTrace();
 			response.put("msg",e.getMessage());
 		}
 		return response;
