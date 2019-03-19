@@ -6,7 +6,7 @@
  * 2019/3/8  wanggk25832  新增
  * ========    =======  ============================================
  */
-package com.hundsun.accountingsystem.Global.service.serviceImpl;
+package com.hundsun.accountingsystem.Global.service.impl;
 
 import com.hundsun.accountingsystem.Global.bean.TKjkmb;
 import com.hundsun.accountingsystem.Global.mapper.TKjkmbMapper;

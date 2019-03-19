@@ -7,7 +7,7 @@ import java.util.Date;
 * <p>
 * Description:日终清算服务方法定义
 * <p>
-* Company: SMARTLAB 
+* Company: 恒生电子
 * @author gaozhen
 * @date 2019年3月13日
 * @Version 1.1

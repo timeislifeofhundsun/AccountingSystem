@@ -1,4 +1,4 @@
-package com.hundsun.accountingsystem.Global.service.serviceImpl;
+package com.hundsun.accountingsystem.Global.service.impl;
 
 import com.hundsun.accountingsystem.Global.mapper.UserMapper;
 import com.hundsun.accountingsystem.Global.service.UserService;
