@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.hundsun.accountingsystem.Global.VO.TCjhbbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TCjhbb;
-import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
 import com.hundsun.accountingsystem.Global.bean.TGdxxb;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample.Criteria;
@@ -140,7 +139,7 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 				tcjhbb.setMmfx("S");
 			}
 			tcjhbb.setCjje(cjje);
-			tcjhbb.setYwrq(new Date());
+			tcjhbb.setYwrq(date);
 			//根据证券代码查出业务类别
 			List<TZqxx> list = tzqxxServiceImpl.findByZqdm(string[i]);
 			if(list!=null&&list.size()>1) {
