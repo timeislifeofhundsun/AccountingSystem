@@ -15,6 +15,7 @@ import com.hundsun.accountingsystem.Global.bean.TZqxx;
 import com.hundsun.accountingsystem.Global.service.TZqxxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,5 +43,13 @@ public class TZqxxController {
     layuiJson.setData(list);
     String jsonString = JSON.toJSONString(layuiJson);
     return jsonString;
+  }
+  @PostMapping("/TZqxx")
+  public String addTZqxx(@RequestParam(value = "TZqxx",required = true) String data){
+    System.out.println(data);
+    TZqxx tZqxx = JSON.parseObject(data,TZqxx.class);
+    int i = tZqxxService.insertSelective(tZqxx);
+    return String.valueOf(i);
+
   }
 }

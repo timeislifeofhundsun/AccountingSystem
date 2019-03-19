@@ -27,6 +27,12 @@ public class TZqxxServiceImpl implements TZqxxService {
 	}
 
 	@Override
+	public int insertSelective(TZqxx record) {
+		int i = tzqxxMapper.insertSelective(record);
+		return i;
+	}
+
+	@Override
 	public List<TZqxx> findAllTZqxx() {
 		return tzqxxMapper.findAllTZqxx();
 	}

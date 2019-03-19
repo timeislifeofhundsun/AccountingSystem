@@ -57,7 +57,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             {field: 'njxts', title: '年计息天数', align:'center',width:140},
             {field: 'nll', title: '年利率', align:'center'},
             {field: 'qxr', title: '起息日', align:'center',width:140},
-            {field: 'fxfs', title: '付息方式', align:'center'},
+            {field: 'fxfs', title: '付息方式', align:'center',templet:"#fxfs"},
             {field: 'fxjg', title: '债券发行价格', align:'center',width:140},
             {title: '操作', width:170, templet:'#TZqxxListBar',fixed:"right",align:"center"}
         ]]

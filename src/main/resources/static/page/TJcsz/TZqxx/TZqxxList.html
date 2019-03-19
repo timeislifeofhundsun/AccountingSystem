@@ -51,6 +51,19 @@
         <span>国内银行间</span>
         {{#  }}}
     </script>
+    <script type="text/html" id="fxfs">
+        {{#  if(d.fxfs == "1"){ }}
+        <span>到期还本付息</span>
+        {{#  } else if(d.fxfs == "2"){ }}
+        <span>一年付息</span>
+        {{#  } else if(d.fxfs == "3"){ }}
+        <span>半年付息</span>
+        {{#  } else if(d.fxfs == "4"){ }}
+        <span>3个月付息</span>
+        {{#  } else if(d.fxfs == "5"){ }}
+        <span>1个月付息</span>
+        {{#  }}}
+    </script>
     <!--操作-->
     <script type="text/html" id="TZqxxListBar">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
