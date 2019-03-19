@@ -27,4 +27,6 @@ public interface TZqxxMapper {
     int updateByPrimaryKeySelective(TZqxx record);
 
     int updateByPrimaryKey(TZqxx record);
+
+    List<TZqxx> findAllTZqxx();
 }

@@ -26,4 +26,23 @@ public class TZqxxServiceImpl implements TZqxxService {
 		return selectByExample;
 	}
 
+	@Override
+	public List<TZqxx> findAllTZqxx() {
+		return tzqxxMapper.findAllTZqxx();
+	}
+
+	@Override
+	public List<TZqxx> getTZqxxPage(int curr,int pagesize) {
+      List<TZqxx> allTZqxx = tzqxxMapper.findAllTZqxx();
+      int firstindex = (curr-1)*pagesize;
+      int lastindex =  curr*pagesize;
+      if (lastindex>allTZqxx.size()){
+        return allTZqxx.subList(firstindex,allTZqxx.size());
+      }
+      if (firstindex>allTZqxx.size()){
+        return null;
+      }
+      return allTZqxx.subList(firstindex,lastindex);
+	}
+
 }

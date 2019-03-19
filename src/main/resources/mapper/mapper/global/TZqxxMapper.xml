@@ -81,6 +81,9 @@
     zqnm, zqdm, zqlb, sclb, zqjg, zgb, ltgs, mgmz, fxrq, dqrq, hgts, njxts, nll, qxr, 
     fxfs, fxjg
   </sql>
+  <select id="findAllTZqxx" resultType="com.hundsun.accountingsystem.Global.bean.TZqxx">
+      select * from t_zqxx;
+    </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hundsun.accountingsystem.Global.bean.TZqxxExample" >
     select
     <if test="distinct" >

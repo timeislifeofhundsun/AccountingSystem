@@ -1,5 +1,7 @@
 package com.hundsun.accountingsystem.Global.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class TZqxx {
@@ -19,8 +21,9 @@ public class TZqxx {
 
     private Double mgmz;
 
+    @JSONField(format = "yyyy-MM-dd")
     private Date fxrq;
-
+    @JSONField(format = "yyyy-MM-dd")
     private Date dqrq;
 
     private Integer hgts;
@@ -29,6 +32,7 @@ public class TZqxx {
 
     private Double nll;
 
+    @JSONField(format = "yyyy-MM-dd")
     private Date qxr;
 
     private Integer fxfs;
@@ -161,5 +165,27 @@ public class TZqxx {
 
     public void setFxjg(Double fxjg) {
         this.fxjg = fxjg;
+    }
+
+    @Override
+    public String toString() {
+        return "TZqxx{" +
+            "zqnm=" + zqnm +
+            ", zqdm='" + zqdm + '\'' +
+            ", zqlb=" + zqlb +
+            ", sclb=" + sclb +
+            ", zqjg='" + zqjg + '\'' +
+            ", zgb=" + zgb +
+            ", ltgs=" + ltgs +
+            ", mgmz=" + mgmz +
+            ", fxrq=" + fxrq +
+            ", dqrq=" + dqrq +
+            ", hgts=" + hgts +
+            ", njxts=" + njxts +
+            ", nll=" + nll +
+            ", qxr=" + qxr +
+            ", fxfs=" + fxfs +
+            ", fxjg=" + fxjg +
+            '}';
     }
 }
