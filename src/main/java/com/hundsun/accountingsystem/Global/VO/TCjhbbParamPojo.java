@@ -4,6 +4,7 @@ public class TCjhbbParamPojo {
 
 	private String startDate;
 	private String endDate;
+	private int ztbh;
 	public String getStartDate() {
 		return startDate;
 	}
@@ -16,4 +17,11 @@ public class TCjhbbParamPojo {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+	public int getZtbh() {
+		return ztbh;
+	}
+	public void setZtbh(int ztbh) {
+		this.ztbh = ztbh;
+	}
+	
 }

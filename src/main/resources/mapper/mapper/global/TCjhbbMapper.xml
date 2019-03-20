@@ -429,7 +429,7 @@
   </update>
   <delete id="deleteByDate" parameterType="com.hundsun.accountingsystem.Global.VO.TCjhbbParamPojo" >
     delete from t_cjhbb
-    WHERE DATE(ywrq) BETWEEN #{startDate} AND #{endDate}
+    WHERE DATE(ywrq) BETWEEN #{startDate} AND #{endDate} AND ztbh=#{ztbh}
   </delete>
   
 </mapper>
