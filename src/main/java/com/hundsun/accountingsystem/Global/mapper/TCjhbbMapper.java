@@ -30,4 +30,6 @@ public interface TCjhbbMapper {
     int updateByPrimaryKey(TCjhbb record);
     
     int deleteByDate(TCjhbbParamPojo param);
+    
+    int insertList(List<TCjhbb> tcjhbbList);
 }
