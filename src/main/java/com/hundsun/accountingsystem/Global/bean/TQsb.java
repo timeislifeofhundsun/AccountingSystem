@@ -23,29 +23,29 @@ import java.util.Date;
 public class TQsb {
     private Integer id;
 
-    private Integer ztbh;//ok
+    private Integer ztbh;
 
     private Date rq;//新股情况代表清算日期ok
 
-    private String zqcode;//ok
+    private String zqcode;
 
-    private Integer ywlb;//ok
+    private Integer ywlb;
 
-    private String bs;//ok
+    private String bs;
 
-    private Integer quantity;//ok
+    private Integer quantity;
 
-    private Double amount;//ok
+    private Double amount;
 
-    private Double yhs;//pk
+    private Double yhs;
 
-    private Double jsf;//
+    private Double jsf;
 
-    private Double ghf;//
+    private Double ghf;
 
-    private Double zgf;//
+    private Double zgf;
 
-    private Double yj;//
+    private Double yj;
 
     private Double lumpsum;
 
