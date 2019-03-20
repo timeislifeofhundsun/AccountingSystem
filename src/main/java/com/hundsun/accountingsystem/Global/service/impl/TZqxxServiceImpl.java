@@ -51,4 +51,16 @@ public class TZqxxServiceImpl implements TZqxxService {
       return allTZqxx.subList(firstindex,lastindex);
 	}
 
+	@Override
+	public int updateByPrimaryKeySelective(TZqxx record) {
+      int i = tzqxxMapper.updateByPrimaryKeySelective(record);
+      return i;
+	}
+
+  @Override
+  public int deleteByPrimaryKey(Integer zqnm) {
+    int i = tzqxxMapper.deleteByPrimaryKey(zqnm);
+    return i;
+  }
+
 }

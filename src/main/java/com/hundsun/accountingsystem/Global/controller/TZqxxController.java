@@ -14,8 +14,10 @@ import com.hundsun.accountingsystem.Global.VO.TZqxxVO;
 import com.hundsun.accountingsystem.Global.bean.TZqxx;
 import com.hundsun.accountingsystem.Global.service.TZqxxService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,6 +52,20 @@ public class TZqxxController {
     TZqxx tZqxx = JSON.parseObject(data,TZqxx.class);
     int i = tZqxxService.insertSelective(tZqxx);
     return String.valueOf(i);
+  }
 
+  @PutMapping("/TZqxx")
+  public String updateTZqxx(@RequestParam(value = "TZqxx",required = true) String data){
+    System.out.println(data);
+    TZqxx tZqxx = JSON.parseObject(data,TZqxx.class);
+    int i = tZqxxService.updateByPrimaryKeySelective(tZqxx);
+    return String.valueOf(i);
+  }
+
+  @DeleteMapping("/TZqxx")
+  public String deleteTZqxx(@RequestParam(value = "zqnm",required = true) String data){
+    int zqnm = Integer.valueOf(data);
+    int i = tZqxxService.deleteByPrimaryKey(zqnm);
+    return String.valueOf(i);
   }
 }
