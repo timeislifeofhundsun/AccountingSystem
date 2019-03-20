@@ -14,46 +14,73 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
 
-    //账套信息列表渲染
-    var tableIns = table.render({
-        elem: '#TZtxxList',
-        url : '/TZtxx',
-        method: 'GET',
-        toolbar:'#TZtxxbar',
-        cellMinWidth : 95,
-        page : true,
-        height : "full-125",
-        limit : 10,
-        limits : [10,15,20,25],
-        id : "newsListTable",
-        cols : [[
-            {type: "checkbox", fixed:"left", width:50},
-            {field: 'ztbh', title: '账套编号',  align:"center",width:100},
-            {field: 'name', title: '账套名称', align:'center'},
-            {field: 'createdate', title: '创建时间', align:'center'},
-            {field: 'enddate', title: '结束时间',  align:'center'},
-            {field: 'jjdm', title: '基金代码', align:'center'},
-            {field: 'money', title: '初始金额', align:'center'},
-            {field: 'number', title: '初始份额', align:'center'},
-            {title: '操作', width:170, templet:'#TZtxxListBar',fixed:"right",align:"center"}
-        ]]
-    });
+    //初始化表格
+    searchZtxx("");
     
     $('.search_btn').click(function(){
-        searchZtxx();
-    })
+    	var ztbh=$("#ztbhSearch").val();  	
+    	searchZtxx(ztbh);
+    });
     
-    function searchZtxx(){
-    	var ztbh=$("#ztbhSearch").val();
-    	if(ztbh==""){
-    		layer.alert("请输入账套编号");
-    		layer.load();
-    		return;
-    	}
-    	alert(ztbh);
+    $('.addTZtxx').click(function(){
+    	addTZtxx();
+    });
+    
+    //新增账套
+    function addTZtxx(){
+        var index = layui.layer.open({
+            title : "新建账套",
+            type : 2,
+            content : "TZtxxAdd.html",
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回账套列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })
     }
     
-    
+    //查询账套
+    function searchZtxx(ztbh){
+    	var path="/findTZtxxByZtbh";
+    	if(ztbh==""){
+    		path="/TZtxx";
+    	}
+		var index=layer.load(1);
+		var tableIns = table.render({
+	        elem: '#TZtxxList',
+	        url : path,
+	        method: 'GET',
+	        where:{'ztbh':ztbh},
+	        cellMinWidth : 95,
+	        page : true,
+	        height : "full-125",
+	        limit : 10,
+	        limits : [10,15,20,25],
+	        id : "newsListTable",
+	        cols : [[
+	            {type: "checkbox", fixed:"left", width:50},
+	            {field: 'ztbh', title: '账套编号',  align:"center",width:100},
+	            {field: 'name', title: '账套名称', align:'center'},
+	            {field: 'createdate', title: '创建时间', align:'center'},
+	            {field: 'enddate', title: '结束时间',  align:'center'},
+	            {field: 'jjdm', title: '基金代码', align:'center'},
+	            {field: 'money', title: '初始金额', align:'center'},
+	            {field: 'number', title: '初始份额', align:'center'},
+	            {title: '操作', width:170, templet:'#TZtxxListBar',fixed:"right",align:"center"}
+	        ]]
+	    });
+		
+		layer.close(index);
+    }
     //点击编辑操作
     function EditZtxx(edit){
         var index = layui.layer.open({
@@ -85,40 +112,83 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             layui.layer.full(index);
         })
     }
+    
+    
+  //点击查看操作
+    function showDetail(data){
+        var index = layui.layer.open({
+            title : "查看账套信息",
+            type : 2,
+            content : "TZtxxDetail.html",
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                if(data){
+                    body.find(".ztbh").val(data.ztbh);
+                    body.find(".name").val(data.name);
+                    body.find(".createdate").val(data.createdate);
+                    body.find(".enddate").val(data.enddate);
+                    body.find(".jjdm").val(data.jjdm);
+                    body.find(".money").val(data.money);
+                    body.find(".number").val(data.number);
+                    form.render();
+                }
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回账套信息列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })
+    }
+    
+  //删除操作
+    function deleteZtxx(data){
+    	var ztbh = data.ztbh;
+    	var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
+    	$.ajax({
+            url: "/deleteTZtxx",
+            data: {ztbh:ztbh},
+            type: 'POST',
+            success:function (obj) {
+                if (obj==1) {
+                    setTimeout(function () {
+                        top.layer.close(index);
+                        top.layer.msg("账套删除成功！");
+                        searchZtxx("");
+                    }, 500);
+                }else{
+                	setTimeout(function () {
+                		top.layer.close(index);
+                        top.layer.msg("删除失败，原因："+obj);
+                    }, 500);                	
+                }
+            },
+            complete: function(XMLHttpRequest, textStatus) {
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+            },
+
+        });
+    	
+    }
+    
     //列表中判断点击编辑操作
     table.on('tool(TZtxxList)', function(obj){
         var layEvent = obj.event,
             data = obj.data;
         if(layEvent === 'edit'){ //编辑
             EditZtxx(data);
+        }else if(layEvent === 'detail'){
+        	showDetail(data);
+        }else if(layEvent === 'del'){
+        	deleteZtxx(data);
         }
     });
     
-  //监听头工具栏事件
-    table.on('toolbar(TZtxxList)', function(obj){
-      var checkStatus = table.checkStatus(obj.config.id)
-      ,data = checkStatus.data; //获取选中的数据
-      switch(obj.event){
-        case 'add':
-          layer.msg('添加');
-        break;
-        case 'update':
-          if(data.length === 0){
-            layer.msg('请选择一行');
-          } else if(data.length > 1){
-            layer.msg('只能同时编辑一个');
-          } else {
-            layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
-          }
-        break;
-        case 'delete':
-          if(data.length === 0){
-            layer.msg('请选择一行');
-          } else {
-            layer.msg('删除');
-          }
-        break;
-      };
-    });
-
+  
 })

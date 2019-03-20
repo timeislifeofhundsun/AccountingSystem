@@ -26,19 +26,19 @@
         <div class="layui-form-item ywname">
             <label class="layui-form-label">账套名称</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input name" name="name" id="name" lay-verify="name" placeholder="请输入账套名称" />
+                <input type="text" class="layui-input name" name="name" id="name" lay-verify="name" disabled="disabled" />
             </div>
         </div>
         <div class="layui-form-item jsfl">
             <label class="layui-form-label">创建时间</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input createdate" name="createdate" id="createdate" lay-verify="createdate" />
+                <input type="text" class="layui-input createdate" name="createdate" id="createdate" lay-verify="createdate" disabled="disabled"/>
             </div>
         </div>
         <div class="layui-form-item gh">
             <label class="layui-form-label">结束时间</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input enddate" name="enddate" id="enddate" lay-verify="enddate" />
+                <input type="text" class="layui-input enddate" name="enddate" id="enddate" lay-verify="enddate" disabled="disabled"/>
             </div>
         </div>
         <div class="layui-form-item yh">
@@ -50,18 +50,18 @@
         <div class="layui-form-item zg">
             <label class="layui-form-label">初始金额</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input money" name="money" id="money" lay-verify="money"/>
+                <input type="text" class="layui-input money" name="money" id="money" lay-verify="money" disabled="disabled"/>
             </div>
         </div>
         <div class="layui-form-item yj">
             <label class="layui-form-label">初始份额</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input number" name="number" id="number" lay-verify="number" />
+                <input type="text" class="layui-input number" name="number" id="number" lay-verify="number" disabled="disabled"/>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-filter="updateTZtxx" lay-submit lay-filter="*">立即提交</button>
+                <button class="layui-btn" lay-filter="closeBtn" lay-submit lay-filter="*">关闭</button>
                 <!-- <button type="reset" class="layui-btn" id="resetBtn">重置</button> -->
             </div>
         </div>
@@ -69,7 +69,7 @@
 </form>
 <script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
-<script type="text/javascript" src="TZtxxEdit.js"></script>
+<script type="text/javascript" src="TZtxxDetail.js"></script>
 <script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
 <script>
 
