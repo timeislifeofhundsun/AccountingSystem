@@ -12,4 +12,8 @@ public interface TZqxxService {
 	public List<TZqxx> findAllTZqxx();
 
 	public List<TZqxx> getTZqxxPage(int curr, int pagesize);
+
+	int updateByPrimaryKeySelective(TZqxx record);
+
+	int deleteByPrimaryKey(Integer zqnm);
 }

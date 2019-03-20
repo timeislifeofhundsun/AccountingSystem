@@ -94,6 +94,8 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             totalRow: true,
             content : "TZqxxEdit.html",
             success : function(layero, index){
+                var ZqxxFrom = layer.getChildFrame('', index);
+                var iframeWindow = layero.find('iframe')[0].contentWindow;
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
                     body.find(".zqnm").val(edit.zqnm);
@@ -112,6 +114,9 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                     body.find(".qxr").val(edit.qxr);
                     body.find(".fxfs").val(edit.fxfs);
                     body.find(".fxjg").val(edit.fxjg);
+                    layui.use(['form'], function(){
+                        iframeWindow.layui.form.render();
+                    });
                     form.render();
                 }
                 setTimeout(function(){
@@ -131,8 +136,23 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     table.on('tool(TZqxxList)', function(obj){
         var layEvent = obj.event,
             data = obj.data;
-        if(layEvent === 'edit'){ //编辑
+        if(layEvent == 'edit'){ //编辑
             EditTZqxx(data);
+        }else if (layEvent=='delete'){
+            console.log(data.zqnm);
+            layer.confirm('确定删除此证券？',{icon:3, title:'提示信息'},function(index){
+                $.ajax({
+                    url: "/TZqxx",
+                    data: {zqnm: JSON.stringify(data.zqnm),_method:"DELETE"},
+                    type: 'POST',
+                    success:function (obj) {
+                        if (obj==1) {
+                            tableIns.reload();
+                            layer.close(index);
+                        }
+                    },
+                });
+            });
         }
     });
 
