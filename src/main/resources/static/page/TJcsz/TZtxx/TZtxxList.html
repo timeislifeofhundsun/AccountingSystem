@@ -20,6 +20,21 @@
 <body class="childrenBody">
 <form class="layui-form">
     <table id="TZtxxList" lay-filter="TZtxxList"></table>
+    <!-- toolbar -->
+    <script type="text/html" id="TZtxxbar">
+        <form class="layui-form">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input ztbhSearch" id="ztbhSearch" name="ztbhSearch" placeholder="请输入账套编号" />
+                </div>
+                <a class="layui-btn search_btn" data-type="reload">搜索</a>
+            </div>
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-normal addTZtxx">添加证券</a>
+            </div>
+        </form>
+    </script>
+    
     <!--操作-->
     <script type="text/html" id="TZtxxListBar">
 		<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>

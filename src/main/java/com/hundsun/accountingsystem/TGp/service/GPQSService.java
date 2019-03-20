@@ -17,7 +17,7 @@ public interface GPQSService {
 	/**
 	 * 
 	* @Description: 股票清算(包括计算股票买入，股票卖出，股票估值增值)
-	* @param  参数说明
+	* @param  ywrq
 	* @return boolean    返回类型
 	* @author gaozhen
 	 */

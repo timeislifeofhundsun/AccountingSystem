@@ -25,7 +25,7 @@ public class TQsb {
 
     private Integer ztbh;
 
-    private Date rq;
+    private Date rq;//新股情况代表清算日期ok
 
     private String zqcode;
 
@@ -49,9 +49,9 @@ public class TQsb {
 
     private Double lumpsum;
 
-    private String extenda;
+    private String extenda;//新股情况下代表交收时期
 
-    private String extendb;
+    private String extendb;//新股情况代表交易日期
 
     private String extendc;
 
