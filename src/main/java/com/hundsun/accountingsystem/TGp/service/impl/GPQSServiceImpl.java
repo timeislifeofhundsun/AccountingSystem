@@ -1,14 +1,16 @@
 package com.hundsun.accountingsystem.TGp.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TCjhbb;
 import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
 import com.hundsun.accountingsystem.Global.bean.TCjhbbExample.Criteria;
@@ -17,6 +19,7 @@ import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCjhbbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
+import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TGp.service.GPQSService;
 
 /**
@@ -75,11 +78,11 @@ public class GPQSServiceImpl implements GPQSService{
 	@Override
 	public boolean gpqs(int ztbh, Date ywrq) throws Exception{
 		boolean returnData = false;
+		
 		/**
 		 * 1.获取交易费率
 		 */
-		boolean res = false;
-		res = this.getJyfl();
+		boolean res = this.getJyfl();
 		if(!res) {
 			throw new Exception("股票清算-获取交易费率");
 		}
@@ -106,8 +109,9 @@ public class GPQSServiceImpl implements GPQSService{
 			zqdmMap.put(zqdm,tcjs);
 		}
 		
-		for(String zqdm:zqdmMap.keySet()) {
-			this.gpmr(zqdmMap.get(zqdm));
+		res = this.gpmr(zqdmMap, ztbh, ywrq);
+		if(!res) {
+			throw new Exception("股票清算-股票买入清算失败");
 		}
 		
 		returnData = true;
@@ -116,46 +120,162 @@ public class GPQSServiceImpl implements GPQSService{
 	
 	/**
 	 * 
-	* @Description: 计算经手费、印花税 
+	* @Description: 股票买入 
 	* @param  参数说明
 	* @return boolean    返回类型
 	* @author gaozhen
 	 */
-	private boolean gpmr(List<TCjhbb> tCjhbbs) {
+	private boolean gpmr(Map<String, List<TCjhbb>> zqdmMap,int ztbh, Date ywrq) {
 		boolean res = false;
+		List<TQsb> tcjhbbList = new ArrayList<>();
+		for(String zqdm:zqdmMap.keySet()) {
+			tcjhbbList.add(this.gpmr(zqdmMap.get(zqdm)));
+		}
+		/**
+		 * 删除qsb旧数据
+		 */
+        Assist assist = new Assist();
+        assist.setRequires(Assist.andEq("ztbh",ztbh));
+        assist.setRequires(Assist.andEq("rq",DateFormatUtil.getStringByDate(ywrq)));
+        assist.setRequires(Assist.andEq("ywlb",1101));
+        tQsbMapper.deleteTQsb(assist);
+		/**
+		 * 插入新的qsb数据
+		 */
+        tQsbMapper.insertTQsbByBatch(tcjhbbList);
+        res = true;
+		return res;
+	} 
+	
+	
+	/**
+	 * 
+	* @Description: 计算经手费、印花税等
+	* @param  参数说明
+	* @return boolean    返回类型
+	* @author gaozhen
+	 */
+	private TQsb gpmr(List<TCjhbb> tCjhbbs) {
+		TQsb qsb = null;
 		//校验参数
 		if(tCjhbbs.size()>0 && tCjhbbs.get(0).getMmfx().equals("B")) {
 			double cjje = 0;
 			double jsf = 0;
 			double ghf = 0;
 			double zgf= 0;
-			double jyfy = 0;
+			double myj = 0;
 			Integer cjsl = 0;
 			for (TCjhbb tCjhbb : tCjhbbs) {
 				double tempCjje = tCjhbb.getCjjg()*tCjhbb.getCjsl();
 				cjje=cjje+tempCjje;
-				jsf=jsf+tempCjje*this.mrjyfl.getJsfl();
-				ghf=ghf+tempCjje*this.mcjyfl.getGh();
-				zgf=zgf+tempCjje*this.mcjyfl.getZg();
-				jyfy=jyfy+tempCjje*this.mrjyfl.getYj();
 				cjsl=cjsl+tCjhbb.getCjsl();
+				jsf=new BigDecimal(jsf+tempCjje*this.mrjyfl.getJsfl())
+						.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				ghf=new BigDecimal(ghf+tempCjje*this.mcjyfl.getGh())
+						.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				zgf=new BigDecimal(zgf+tempCjje*this.mcjyfl.getZg())
+						.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				
 			}
-			double cyj = jyfy-jsf-zgf;
+			myj = new BigDecimal(cjje*this.mcjyfl.getYj())
+					.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			double cyj = myj-jsf-zgf;
+			double jyfy = jsf+ghf+zgf+cyj;
 			double zqqsk = cjje+jyfy-cyj;
 			TCjhbb tempTCjhbb = tCjhbbs.get(0);
-			TQsb qsb = new TQsb(null, tempTCjhbb.getZtbh(), tempTCjhbb.getYwrq(), 
+			/**
+			 * 构建qsb对象
+			 */
+			qsb = new TQsb(null, tempTCjhbb.getZtbh(), tempTCjhbb.getYwrq(), 
 					tempTCjhbb.getZqdm(),1101, //ywlb
 					"B", cjsl, cjje, null, //印花税
-					jsf, ghf, zgf, cyj, null, //费用合计
+					jsf, ghf, zgf, cyj, jyfy, //交易费用
 					null,null, null, null, null, null,//扩展字段
 					null, //公允价值变动
 					zqqsk,null//差价收入
 					, tempTCjhbb.getJysc(), cjje);//成本
-			System.out.println(tQsbMapper.insertNonEmptyTQsb(qsb));;
 		}
-		
-		res = true;
-		return res;
+		return qsb;
 	}
+	
+	/**
+	 * 
+	* @Description: 股票买入 
+	* @param  参数说明
+	* @return boolean    返回类型
+	* @author gaozhen
+	 */
+	private boolean gpmc(Map<String, List<TCjhbb>> zqdmMap,int ztbh, Date ywrq) {
+		boolean res = false;
+		List<TQsb> tcjhbbList = new ArrayList<>();
+		for(String zqdm:zqdmMap.keySet()) {
+			tcjhbbList.add(this.gpmc(zqdmMap.get(zqdm)));
+		}
+		/**
+		 * 删除qsb旧数据
+		 */
+        Assist assist = new Assist();
+        assist.setRequires(Assist.andEq("ztbh",ztbh));
+        assist.setRequires(Assist.andEq("rq",DateFormatUtil.getStringByDate(ywrq)));
+        assist.setRequires(Assist.andEq("ywlb",1102));
+        tQsbMapper.deleteTQsb(assist);
+		/**
+		 * 插入新的qsb数据
+		 */
+        tQsbMapper.insertTQsbByBatch(tcjhbbList);
+        res = true;
+		return res;
+	} 
 
+	/**
+	 * 
+	* @Description: 计算经手费、印花税等
+	* @param  参数说明
+	* @return boolean    返回类型
+	* @author gaozhen
+	 */
+	private TQsb gpmc(List<TCjhbb> tCjhbbs) {
+		TQsb qsb = null;
+		//校验参数
+		if(tCjhbbs.size()>0 && tCjhbbs.get(0).getMmfx().equals("B")) {
+			double cjje = 0;
+			double jsf = 0;
+			double ghf = 0;
+			double zgf = 0;
+			double yhs = 0;
+			double myj = 0;
+			Integer cjsl = 0;
+			for (TCjhbb tCjhbb : tCjhbbs) {
+				double tempCjje = tCjhbb.getCjjg()*tCjhbb.getCjsl();
+				cjje=cjje+tempCjje;
+				cjsl=cjsl+tCjhbb.getCjsl();
+				jsf=new BigDecimal(jsf+tempCjje*this.mrjyfl.getJsfl())
+						.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				ghf=new BigDecimal(ghf+tempCjje*this.mcjyfl.getGh())
+						.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				zgf=new BigDecimal(zgf+tempCjje*this.mcjyfl.getZg())
+						.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				yhs=new BigDecimal(yhs+tempCjje*this.mcjyfl.getYh())
+						.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}
+			myj = new BigDecimal(cjje*this.mcjyfl.getYj())
+					.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			double cyj = myj-jsf-zgf;
+			double jyfy = jsf+ghf+zgf+yhs+cyj;
+			double zqqsk = cjje-jyfy+cyj;
+			TCjhbb tempTCjhbb = tCjhbbs.get(0);
+			/**
+			 * 构建qsb对象
+			 */
+			qsb = new TQsb(null, tempTCjhbb.getZtbh(), tempTCjhbb.getYwrq(), 
+					tempTCjhbb.getZqdm(),1102, //ywlb
+					"B", cjsl, cjje, null, //印花税
+					jsf, ghf, zgf, cyj, jyfy, //交易费用
+					null,null, null, null, null, null,//扩展字段
+					null, //公允价值变动
+					zqqsk,null//差价收入
+					, tempTCjhbb.getJysc(), cjje);//成本
+		}
+		return qsb;
+	}
 }

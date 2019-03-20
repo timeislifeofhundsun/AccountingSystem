@@ -107,8 +107,7 @@ layui.use(['form', 'layer','laydate'], function () {
         }
     });
     //提交更改费率
-    form.on("submit(updateTJyfl)", function (data) {
-        console.log(data);
+    form.on("submit(AddTZqxx)", function (data) {
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
         $.ajax({
             url: "/TZqxx",
