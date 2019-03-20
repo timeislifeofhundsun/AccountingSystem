@@ -1,5 +1,9 @@
 package com.hundsun.accountingsystem.TGp.service;
 
+import com.hundsun.accountingsystem.Global.bean.TQsb;
+
+import java.util.List;
+
 /**
  * @Aurhor yangjf25257
  * @InterfaceName XGService
@@ -15,5 +19,5 @@ public interface XGService {
      * @Return int
      * @Description
      **/
-    int add_qsk(String a);
+    int insert_xg(String path);
 }

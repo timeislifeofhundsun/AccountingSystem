@@ -177,17 +177,17 @@ public class FileParsing {
       TQsb tQsb = null;
       while ((rowValues = reader.nextRecord()) != null) {
         tQsb =  new TQsb();
-//        //去掉空格
-//        String temp = rowValues[7].toString().substring(0,rowValues[7].toString().length()-1);
-        //去掉小数点1
-        //String temp1 = rowValues[12].toString().substring(0,rowValues[12].toString().length()-2);
+
+        //去掉负号
+        String temp = rowValues[36].toString().trim().substring(1);
+        String temp1 = rowValues[45].toString().trim().substring(1);
 //        //去掉小数点2
 //        String temp2 = rowValues[2].toString().substring(0,rowValues[2].toString().length()-1);
-        tQsb.setZtbh(10000).setRq(sdf.parse(rowValues[12].toString())).setZqcode(rowValues[24].toString()).setYwlb(Integer.valueOf(rowValues[4].toString()))
-        .setBs(rowValues[29].toString()).setQuantity(Integer.valueOf(rowValues[32].toString())).setAmount(Double.valueOf(rowValues[36].toString()))
+        tQsb.setZtbh(10000).setRq(sdf.parse(rowValues[12].toString())).setZqcode(rowValues[24].toString()).setYwlb(1302)
+        .setBs(rowValues[29].toString()).setQuantity(Integer.valueOf(rowValues[31].toString().trim())).setAmount(Double.valueOf(temp))
         .setYhs(Double.valueOf(rowValues[37].toString())).setJsf(Double.valueOf(rowValues[38].toString())).setGhf(Double.valueOf(rowValues[39].toString()))
-        .setZgf(Double.valueOf(rowValues[40].toString())).setYj(Double.valueOf(rowValues[41].toString())).setCost(Double.valueOf(rowValues[45].toString()))
-        .setExtenda(rowValues[13].toString()).setExtendb(rowValues[11].toString());
+        .setZgf(Double.valueOf(rowValues[40].toString())).setYj(Double.valueOf(rowValues[41].toString())).setCost(Double.valueOf(temp1))
+        .setExtenda(rowValues[13].toString().trim()).setExtendb(rowValues[11].toString().trim());
         list.add(tQsb);
       }
 
