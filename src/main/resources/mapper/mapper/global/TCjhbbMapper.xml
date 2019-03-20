@@ -432,4 +432,23 @@
     WHERE DATE(ywrq) BETWEEN #{startDate} AND #{endDate} AND ztbh=#{ztbh}
   </delete>
   
+  <insert id="insertList" parameterType="java.util.List">
+     insert into t_cjhbb (id, gddm, xwbh, 
+      zqdm, jysc, cjsl, cjjg, 
+      cjje, mmfx, ztbh, ywrq, 
+      ywlb, jsf, ghf, zgf, 
+      yhs, jyfy, extenda, extendb
+      ) values 
+     <foreach collection="list" item="cjhbb" index="index" separator=",">
+        (
+           	#{cjhbb.id,jdbcType=INTEGER}, #{cjhbb.gddm,jdbcType=VARCHAR}, #{cjhbb.xwbh,jdbcType=VARCHAR}, 
+      		#{cjhbb.zqdm,jdbcType=VARCHAR}, #{cjhbb.jysc,jdbcType=INTEGER}, #{cjhbb.cjsl,jdbcType=INTEGER}, #{cjhbb.cjjg,jdbcType=DOUBLE}, 
+     		#{cjhbb.cjje,jdbcType=DOUBLE}, #{cjhbb.mmfx,jdbcType=VARCHAR}, #{cjhbb.ztbh,jdbcType=INTEGER}, #{cjhbb.ywrq,jdbcType=TIMESTAMP}, 
+      		#{cjhbb.ywlb,jdbcType=INTEGER}, #{cjhbb.jsf,jdbcType=DOUBLE}, #{cjhbb.ghf,jdbcType=DOUBLE}, #{cjhbb.zgf,jdbcType=DOUBLE}, 
+      		#{cjhbb.yhs,jdbcType=DOUBLE}, #{cjhbb.jyfy,jdbcType=DOUBLE}, #{cjhbb.extenda,jdbcType=VARCHAR}, #{cjhbb.extendb,jdbcType=VARCHAR}
+      	)
+     </foreach>
+  </insert>	
+  
+  
 </mapper>

@@ -42,7 +42,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         var index = layui.layer.open({
             title : "修改费率",
             type : 2,
-            content : "TJyflEdit.html",
+            content : "TZqxxEdit.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){

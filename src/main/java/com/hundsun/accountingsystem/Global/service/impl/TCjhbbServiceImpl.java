@@ -72,6 +72,7 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 				ghkList.addAll(tghkMapper.selectTGhk(assist));
 			}
 		}
+		List<TCjhbb> tcjhbbList=new ArrayList<TCjhbb>();
 		//对过户库中的所有交易数据进行判断业务操作操作
 		Map<String,Integer> map=new HashMap<String,Integer>();
 		//遍历集合中的每一条数据
@@ -101,11 +102,17 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 				if(list!=null&&list.size()==1){
 					ywlb=list.get(0).getZqlb();
 				}
+				tcjhbb.setYwlb(ywlb);
 				map.put(ghkList.get(i).getZqcode(), ywlb);
 			}
-			tcjhbbMapper.insert(tcjhbb);
+			tcjhbbList.add(tcjhbb);
 		}
-		
+		//批量插入到数据库
+		try {
+			tcjhbbMapper.insertList(tcjhbbList);
+		} catch (Exception e) {
+			return false;
+		}		
 		return true;
 	}
 }

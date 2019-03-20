@@ -1,329 +1,488 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TQsbMapper" >
-  <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.TQsb" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="ztbh" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="rq" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="zqcode" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="ywlb" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="bs" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="amount" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="yhs" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="jsf" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="ghf" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="zgf" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="yj" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="lumpsum" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="extenda" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="extendb" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="extendc" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="extendd" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="extende" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="extendf" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="gyjzbd" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="zqqsk" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="cjsr" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="sclb" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="cost" jdbcType="DOUBLE" javaType="java.lang.Double" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, ztbh, rq, zqcode, ywlb, bs, quantity, amount, yhs, jsf, ghf, zgf, yj, lumpsum, 
-    extenda, extendb, extendc, extendd, extende, extendf, gyjzbd, zqqsk, cjsr, sclb, 
-    cost
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_qsb
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_qsb
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb" >
-    insert into t_qsb (id, ztbh, rq, 
-      zqcode, ywlb, bs, quantity, 
-      amount, yhs, jsf, ghf, 
-      zgf, yj, lumpsum, extenda, 
-      extendb, extendc, extendd, 
-      extende, extendf, gyjzbd, 
-      zqqsk, cjsr, sclb, cost
-      )
-    values (#{id,jdbcType=INTEGER}, #{ztbh,jdbcType=INTEGER}, #{rq,jdbcType=TIMESTAMP}, 
-      #{zqcode,jdbcType=VARCHAR}, #{ywlb,jdbcType=INTEGER}, #{bs,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
-      #{amount,jdbcType=DOUBLE}, #{yhs,jdbcType=DOUBLE}, #{jsf,jdbcType=DOUBLE}, #{ghf,jdbcType=DOUBLE}, 
-      #{zgf,jdbcType=DOUBLE}, #{yj,jdbcType=DOUBLE}, #{lumpsum,jdbcType=DOUBLE}, #{extenda,jdbcType=VARCHAR}, 
-      #{extendb,jdbcType=VARCHAR}, #{extendc,jdbcType=VARCHAR}, #{extendd,jdbcType=VARCHAR}, 
-      #{extende,jdbcType=VARCHAR}, #{extendf,jdbcType=VARCHAR}, #{gyjzbd,jdbcType=DOUBLE}, 
-      #{zqqsk,jdbcType=DOUBLE}, #{cjsr,jdbcType=DOUBLE}, #{sclb,jdbcType=INTEGER}, #{cost,jdbcType=DOUBLE}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb" >
-    insert into t_qsb
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="ztbh != null" >
-        ztbh,
-      </if>
-      <if test="rq != null" >
-        rq,
-      </if>
-      <if test="zqcode != null" >
-        zqcode,
-      </if>
-      <if test="ywlb != null" >
-        ywlb,
-      </if>
-      <if test="bs != null" >
-        bs,
-      </if>
-      <if test="quantity != null" >
-        quantity,
-      </if>
-      <if test="amount != null" >
-        amount,
-      </if>
-      <if test="yhs != null" >
-        yhs,
-      </if>
-      <if test="jsf != null" >
-        jsf,
-      </if>
-      <if test="ghf != null" >
-        ghf,
-      </if>
-      <if test="zgf != null" >
-        zgf,
-      </if>
-      <if test="yj != null" >
-        yj,
-      </if>
-      <if test="lumpsum != null" >
-        lumpsum,
-      </if>
-      <if test="extenda != null" >
-        extenda,
-      </if>
-      <if test="extendb != null" >
-        extendb,
-      </if>
-      <if test="extendc != null" >
-        extendc,
-      </if>
-      <if test="extendd != null" >
-        extendd,
-      </if>
-      <if test="extende != null" >
-        extende,
-      </if>
-      <if test="extendf != null" >
-        extendf,
-      </if>
-      <if test="gyjzbd != null" >
-        gyjzbd,
-      </if>
-      <if test="zqqsk != null" >
-        zqqsk,
-      </if>
-      <if test="cjsr != null" >
-        cjsr,
-      </if>
-      <if test="sclb != null" >
-        sclb,
-      </if>
-      <if test="cost != null" >
-        cost,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="ztbh != null" >
-        #{ztbh,jdbcType=INTEGER},
-      </if>
-      <if test="rq != null" >
-        #{rq,jdbcType=TIMESTAMP},
-      </if>
-      <if test="zqcode != null" >
-        #{zqcode,jdbcType=VARCHAR},
-      </if>
-      <if test="ywlb != null" >
-        #{ywlb,jdbcType=INTEGER},
-      </if>
-      <if test="bs != null" >
-        #{bs,jdbcType=VARCHAR},
-      </if>
-      <if test="quantity != null" >
-        #{quantity,jdbcType=INTEGER},
-      </if>
-      <if test="amount != null" >
-        #{amount,jdbcType=DOUBLE},
-      </if>
-      <if test="yhs != null" >
-        #{yhs,jdbcType=DOUBLE},
-      </if>
-      <if test="jsf != null" >
-        #{jsf,jdbcType=DOUBLE},
-      </if>
-      <if test="ghf != null" >
-        #{ghf,jdbcType=DOUBLE},
-      </if>
-      <if test="zgf != null" >
-        #{zgf,jdbcType=DOUBLE},
-      </if>
-      <if test="yj != null" >
-        #{yj,jdbcType=DOUBLE},
-      </if>
-      <if test="lumpsum != null" >
-        #{lumpsum,jdbcType=DOUBLE},
-      </if>
-      <if test="extenda != null" >
-        #{extenda,jdbcType=VARCHAR},
-      </if>
-      <if test="extendb != null" >
-        #{extendb,jdbcType=VARCHAR},
-      </if>
-      <if test="extendc != null" >
-        #{extendc,jdbcType=VARCHAR},
-      </if>
-      <if test="extendd != null" >
-        #{extendd,jdbcType=VARCHAR},
-      </if>
-      <if test="extende != null" >
-        #{extende,jdbcType=VARCHAR},
-      </if>
-      <if test="extendf != null" >
-        #{extendf,jdbcType=VARCHAR},
-      </if>
-      <if test="gyjzbd != null" >
-        #{gyjzbd,jdbcType=DOUBLE},
-      </if>
-      <if test="zqqsk != null" >
-        #{zqqsk,jdbcType=DOUBLE},
-      </if>
-      <if test="cjsr != null" >
-        #{cjsr,jdbcType=DOUBLE},
-      </if>
-      <if test="sclb != null" >
-        #{sclb,jdbcType=INTEGER},
-      </if>
-      <if test="cost != null" >
-        #{cost,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb" >
-    update t_qsb
-    <set >
-      <if test="ztbh != null" >
-        ztbh = #{ztbh,jdbcType=INTEGER},
-      </if>
-      <if test="rq != null" >
-        rq = #{rq,jdbcType=TIMESTAMP},
-      </if>
-      <if test="zqcode != null" >
-        zqcode = #{zqcode,jdbcType=VARCHAR},
-      </if>
-      <if test="ywlb != null" >
-        ywlb = #{ywlb,jdbcType=INTEGER},
-      </if>
-      <if test="bs != null" >
-        bs = #{bs,jdbcType=VARCHAR},
-      </if>
-      <if test="quantity != null" >
-        quantity = #{quantity,jdbcType=INTEGER},
-      </if>
-      <if test="amount != null" >
-        amount = #{amount,jdbcType=DOUBLE},
-      </if>
-      <if test="yhs != null" >
-        yhs = #{yhs,jdbcType=DOUBLE},
-      </if>
-      <if test="jsf != null" >
-        jsf = #{jsf,jdbcType=DOUBLE},
-      </if>
-      <if test="ghf != null" >
-        ghf = #{ghf,jdbcType=DOUBLE},
-      </if>
-      <if test="zgf != null" >
-        zgf = #{zgf,jdbcType=DOUBLE},
-      </if>
-      <if test="yj != null" >
-        yj = #{yj,jdbcType=DOUBLE},
-      </if>
-      <if test="lumpsum != null" >
-        lumpsum = #{lumpsum,jdbcType=DOUBLE},
-      </if>
-      <if test="extenda != null" >
-        extenda = #{extenda,jdbcType=VARCHAR},
-      </if>
-      <if test="extendb != null" >
-        extendb = #{extendb,jdbcType=VARCHAR},
-      </if>
-      <if test="extendc != null" >
-        extendc = #{extendc,jdbcType=VARCHAR},
-      </if>
-      <if test="extendd != null" >
-        extendd = #{extendd,jdbcType=VARCHAR},
-      </if>
-      <if test="extende != null" >
-        extende = #{extende,jdbcType=VARCHAR},
-      </if>
-      <if test="extendf != null" >
-        extendf = #{extendf,jdbcType=VARCHAR},
-      </if>
-      <if test="gyjzbd != null" >
-        gyjzbd = #{gyjzbd,jdbcType=DOUBLE},
-      </if>
-      <if test="zqqsk != null" >
-        zqqsk = #{zqqsk,jdbcType=DOUBLE},
-      </if>
-      <if test="cjsr != null" >
-        cjsr = #{cjsr,jdbcType=DOUBLE},
-      </if>
-      <if test="sclb != null" >
-        sclb = #{sclb,jdbcType=INTEGER},
-      </if>
-      <if test="cost != null" >
-        cost = #{cost,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb" >
-    update t_qsb
-    set ztbh = #{ztbh,jdbcType=INTEGER},
-      rq = #{rq,jdbcType=TIMESTAMP},
-      zqcode = #{zqcode,jdbcType=VARCHAR},
-      ywlb = #{ywlb,jdbcType=INTEGER},
-      bs = #{bs,jdbcType=VARCHAR},
-      quantity = #{quantity,jdbcType=INTEGER},
-      amount = #{amount,jdbcType=DOUBLE},
-      yhs = #{yhs,jdbcType=DOUBLE},
-      jsf = #{jsf,jdbcType=DOUBLE},
-      ghf = #{ghf,jdbcType=DOUBLE},
-      zgf = #{zgf,jdbcType=DOUBLE},
-      yj = #{yj,jdbcType=DOUBLE},
-      lumpsum = #{lumpsum,jdbcType=DOUBLE},
-      extenda = #{extenda,jdbcType=VARCHAR},
-      extendb = #{extendb,jdbcType=VARCHAR},
-      extendc = #{extendc,jdbcType=VARCHAR},
-      extendd = #{extendd,jdbcType=VARCHAR},
-      extende = #{extende,jdbcType=VARCHAR},
-      extendf = #{extendf,jdbcType=VARCHAR},
-      gyjzbd = #{gyjzbd,jdbcType=DOUBLE},
-      zqqsk = #{zqqsk,jdbcType=DOUBLE},
-      cjsr = #{cjsr,jdbcType=DOUBLE},
-      sclb = #{sclb,jdbcType=INTEGER},
-      cost = #{cost,jdbcType=DOUBLE}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TQsbMapper">
+    <!-- TQsb的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_TQsb_Map" type="com.hundsun.accountingsystem.Global.bean.TQsb">
+        <id column="id" property="id" />
+        <result column="yhs" property="yhs" />
+        <result column="bs" property="bs" />
+        <result column="yj" property="yj" />
+        <result column="zgf" property="zgf" />
+        <result column="gyjzbd" property="gyjzbd" />
+        <result column="zqqsk" property="zqqsk" />
+        <result column="extendf" property="extendf" />
+        <result column="amount" property="amount" />
+        <result column="quantity" property="quantity" />
+        <result column="lumpsum" property="lumpsum" />
+        <result column="cost" property="cost" />
+        <result column="ghf" property="ghf" />
+        <result column="extendc" property="extendc" />
+        <result column="extendb" property="extendb" />
+        <result column="extende" property="extende" />
+        <result column="extendd" property="extendd" />
+        <result column="cjsr" property="cjsr" />
+        <result column="extenda" property="extenda" />
+        <result column="ywlb" property="ywlb" />
+        <result column="zqcode" property="zqcode" />
+        <result column="sclb" property="sclb" />
+        <result column="ztbh" property="ztbh" />
+        <result column="jsf" property="jsf" />
+        <result column="rq" property="rq" />
+    </resultMap>
+
+	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="Assist">
+        <where>
+            <foreach collection="require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+	   <!-- updateAssist用于更新数据的使用它拓展自Assist,用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="updateAssist">
+        <where>
+            <foreach collection="assist.require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+    <!-- 数据库中表名为:t_qsb的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="t_qsb_Column">
+        t_qsb.id as id
+        ,t_qsb.yhs as yhs
+        ,t_qsb.bs as bs
+        ,t_qsb.yj as yj
+        ,t_qsb.zgf as zgf
+        ,t_qsb.gyjzbd as gyjzbd
+        ,t_qsb.zqqsk as zqqsk
+        ,t_qsb.extendf as extendf
+        ,t_qsb.amount as amount
+        ,t_qsb.quantity as quantity
+        ,t_qsb.lumpsum as lumpsum
+        ,t_qsb.cost as cost
+        ,t_qsb.ghf as ghf
+        ,t_qsb.extendc as extendc
+        ,t_qsb.extendb as extendb
+        ,t_qsb.extende as extende
+        ,t_qsb.extendd as extendd
+        ,t_qsb.cjsr as cjsr
+        ,t_qsb.extenda as extenda
+        ,t_qsb.ywlb as ywlb
+        ,t_qsb.zqcode as zqcode
+        ,t_qsb.sclb as sclb
+        ,t_qsb.ztbh as ztbh
+        ,t_qsb.jsf as jsf
+        ,t_qsb.rq as rq
+    </sql>
+
+    <!--获得类名为:TQsb对应的数据库表的数据总行数 -->
+    <select id="getTQsbRowCount" parameterType="com.hundsun.accountingsystem.Global.bean.Assist" resultType="java.lang.Long">
+        select count(id) from t_qsb
+        <if test="require!=null"><include refid="Assist" /></if>
+    </select>
+    <!-- 获得类名为:TQsb对应数据库中表的数据集合 -->
+    <select id="selectTQsb" parameterType="com.hundsun.accountingsystem.Global.bean.Assist"  resultMap="result_TQsb_Map">
+        select  <if test="distinct !=null">${distinct}</if>
+        <choose>
+            <when test="resultColumn!=null">${resultColumn}</when>
+            <otherwise>
+        <include refid="t_qsb_Column" /> 
+            </otherwise>
+        </choose>
+        from t_qsb
+        <choose>
+            <when test="rowSize ==null">
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+            </when>
+            <otherwise>
+                inner join
+                (
+                SELECT id as primary_key FROM t_qsb
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+                <choose>
+                    <when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+                    <when test="rowSize !=null">LIMIT #{rowSize}</when>
+                 </choose>
+                 ) as tmp
+                 on tmp.primary_key=t_qsb.id
+            </otherwise>
+        </choose>
+    </select> 
+
+    <!-- 获得一个TQsb对象,以参数TQsb对象中不为空的属性作为条件进行查询-->
+    <select id="selectTQsbByObj" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb" resultMap="result_TQsb_Map">
+        select 
+            <include refid="t_qsb_Column" /> 
+        from t_qsb
+        <where>
+            <if test="rq != null "> and t_qsb.rq = #{rq}</if>
+            <if test="jsf != null "> and t_qsb.jsf = #{jsf}</if>
+            <if test="ztbh != null "> and t_qsb.ztbh = #{ztbh}</if>
+            <if test="sclb != null "> and t_qsb.sclb = #{sclb}</if>
+            <if test="zqcode != null "> and t_qsb.zqcode = #{zqcode}</if>
+            <if test="ywlb != null "> and t_qsb.ywlb = #{ywlb}</if>
+            <if test="extenda != null "> and t_qsb.extenda = #{extenda}</if>
+            <if test="cjsr != null "> and t_qsb.cjsr = #{cjsr}</if>
+            <if test="extendd != null "> and t_qsb.extendd = #{extendd}</if>
+            <if test="extende != null "> and t_qsb.extende = #{extende}</if>
+            <if test="extendb != null "> and t_qsb.extendb = #{extendb}</if>
+            <if test="extendc != null "> and t_qsb.extendc = #{extendc}</if>
+            <if test="ghf != null "> and t_qsb.ghf = #{ghf}</if>
+            <if test="cost != null "> and t_qsb.cost = #{cost}</if>
+            <if test="lumpsum != null "> and t_qsb.lumpsum = #{lumpsum}</if>
+            <if test="quantity != null "> and t_qsb.quantity = #{quantity}</if>
+            <if test="amount != null "> and t_qsb.amount = #{amount}</if>
+            <if test="extendf != null "> and t_qsb.extendf = #{extendf}</if>
+            <if test="zqqsk != null "> and t_qsb.zqqsk = #{zqqsk}</if>
+            <if test="gyjzbd != null "> and t_qsb.gyjzbd = #{gyjzbd}</if>
+            <if test="zgf != null "> and t_qsb.zgf = #{zgf}</if>
+            <if test="yj != null "> and t_qsb.yj = #{yj}</if>
+            <if test="bs != null "> and t_qsb.bs = #{bs}</if>
+            <if test="yhs != null "> and t_qsb.yhs = #{yhs}</if>
+            <if test="id != null "> and t_qsb.id = #{id}</if>
+        </where>
+    </select> 
+
+    <!-- 通过TQsb的id获得对应数据库中表的数据对象-->
+    <select id="selectTQsbById" parameterType="java.lang.Integer" resultMap="result_TQsb_Map">
+        select 
+            <include refid="t_qsb_Column" /> 
+        from t_qsb
+        where t_qsb.id = #{id}
+    </select> 
+
+    <!-- 将TQsb插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertTQsb" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb">
+        insert into t_qsb(id,yhs,bs,yj,zgf,gyjzbd,zqqsk,extendf,amount,quantity,lumpsum,cost,ghf,extendc,extendb,extende,extendd,cjsr,extenda,ywlb,zqcode,sclb,ztbh,jsf,rq) 
+        values(#{id},#{yhs},#{bs},#{yj},#{zgf},#{gyjzbd},#{zqqsk},#{extendf},#{amount},#{quantity},#{lumpsum},#{cost},#{ghf},#{extendc},#{extendb},#{extende},#{extendd},#{cjsr},#{extenda},#{ywlb},#{zqcode},#{sclb},#{ztbh},#{jsf},#{rq})
+    </insert>
+
+    <!-- 将TQsb中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyTQsb" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb">
+        insert into t_qsb
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="yhs != null">yhs,</if>
+            <if test="bs != null">bs,</if>
+            <if test="yj != null">yj,</if>
+            <if test="zgf != null">zgf,</if>
+            <if test="gyjzbd != null">gyjzbd,</if>
+            <if test="zqqsk != null">zqqsk,</if>
+            <if test="extendf != null">extendf,</if>
+            <if test="amount != null">amount,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="lumpsum != null">lumpsum,</if>
+            <if test="cost != null">cost,</if>
+            <if test="ghf != null">ghf,</if>
+            <if test="extendc != null">extendc,</if>
+            <if test="extendb != null">extendb,</if>
+            <if test="extende != null">extende,</if>
+            <if test="extendd != null">extendd,</if>
+            <if test="cjsr != null">cjsr,</if>
+            <if test="extenda != null">extenda,</if>
+            <if test="ywlb != null">ywlb,</if>
+            <if test="zqcode != null">zqcode,</if>
+            <if test="sclb != null">sclb,</if>
+            <if test="ztbh != null">ztbh,</if>
+            <if test="jsf != null">jsf,</if>
+            <if test="rq != null">rq,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null"> #{id},</if>
+            <if test="yhs != null"> #{yhs},</if>
+            <if test="bs != null"> #{bs},</if>
+            <if test="yj != null"> #{yj},</if>
+            <if test="zgf != null"> #{zgf},</if>
+            <if test="gyjzbd != null"> #{gyjzbd},</if>
+            <if test="zqqsk != null"> #{zqqsk},</if>
+            <if test="extendf != null"> #{extendf},</if>
+            <if test="amount != null"> #{amount},</if>
+            <if test="quantity != null"> #{quantity},</if>
+            <if test="lumpsum != null"> #{lumpsum},</if>
+            <if test="cost != null"> #{cost},</if>
+            <if test="ghf != null"> #{ghf},</if>
+            <if test="extendc != null"> #{extendc},</if>
+            <if test="extendb != null"> #{extendb},</if>
+            <if test="extende != null"> #{extende},</if>
+            <if test="extendd != null"> #{extendd},</if>
+            <if test="cjsr != null"> #{cjsr},</if>
+            <if test="extenda != null"> #{extenda},</if>
+            <if test="ywlb != null"> #{ywlb},</if>
+            <if test="zqcode != null"> #{zqcode},</if>
+            <if test="sclb != null"> #{sclb},</if>
+            <if test="ztbh != null"> #{ztbh},</if>
+            <if test="jsf != null"> #{jsf},</if>
+            <if test="rq != null"> #{rq},</if>
+        </trim>
+    </insert>
+
+    <!-- 将TQsb批量插入到对应数据库的表中-->
+    <insert id="insertTQsbByBatch" parameterType="ArrayList">
+        insert into t_qsb(id,yhs,bs,yj,zgf,gyjzbd,zqqsk,extendf,amount,quantity,lumpsum,cost,ghf,extendc,extendb,extende,extendd,cjsr,extenda,ywlb,zqcode,sclb,ztbh,jsf,rq) values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.id},#{item.yhs},#{item.bs},#{item.yj},#{item.zgf},#{item.gyjzbd},#{item.zqqsk},#{item.extendf},#{item.amount},#{item.quantity},#{item.lumpsum},#{item.cost},#{item.ghf},#{item.extendc},#{item.extendb},#{item.extende},#{item.extendd},#{item.cjsr},#{item.extenda},#{item.ywlb},#{item.zqcode},#{item.sclb},#{item.ztbh},#{item.jsf},#{item.rq})
+        </foreach>
+    </insert>
+
+    <!-- 通过TQsb的id将数据库表中对应的数据删除-->
+    <delete id="deleteTQsbById" parameterType="java.lang.Integer">
+        delete from t_qsb
+        where id = #{id}
+    </delete>
+
+    <!-- 通过辅助工具Assist中的条件将TQsb对应的数据库表的数据删除-->
+    <delete id="deleteTQsb" parameterType="com.hundsun.accountingsystem.Global.bean.Assist">
+        delete from t_qsb
+        <if test="require!=null"><include refid="Assist" /></if>
+    </delete>
+
+    <!-- 通过TQsb的id将TQsb的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateTQsbById" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb">
+        update t_qsb set
+            yhs=#{yhs}
+            ,bs=#{bs}
+            ,yj=#{yj}
+            ,zgf=#{zgf}
+            ,gyjzbd=#{gyjzbd}
+            ,zqqsk=#{zqqsk}
+            ,extendf=#{extendf}
+            ,amount=#{amount}
+            ,quantity=#{quantity}
+            ,lumpsum=#{lumpsum}
+            ,cost=#{cost}
+            ,ghf=#{ghf}
+            ,extendc=#{extendc}
+            ,extendb=#{extendb}
+            ,extende=#{extende}
+            ,extendd=#{extendd}
+            ,cjsr=#{cjsr}
+            ,extenda=#{extenda}
+            ,ywlb=#{ywlb}
+            ,zqcode=#{zqcode}
+            ,sclb=#{sclb}
+            ,ztbh=#{ztbh}
+            ,jsf=#{jsf}
+            ,rq=#{rq}
+        where id=#{id}
+    </update>
+
+    <!-- 通过TQsb的id将TQsb中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyTQsbById" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb">
+        update t_qsb
+        <set>
+            <if test="yhs != null">
+                yhs=#{yhs},
+            </if>
+            <if test="bs != null">
+                bs=#{bs},
+            </if>
+            <if test="yj != null">
+                yj=#{yj},
+            </if>
+            <if test="zgf != null">
+                zgf=#{zgf},
+            </if>
+            <if test="gyjzbd != null">
+                gyjzbd=#{gyjzbd},
+            </if>
+            <if test="zqqsk != null">
+                zqqsk=#{zqqsk},
+            </if>
+            <if test="extendf != null">
+                extendf=#{extendf},
+            </if>
+            <if test="amount != null">
+                amount=#{amount},
+            </if>
+            <if test="quantity != null">
+                quantity=#{quantity},
+            </if>
+            <if test="lumpsum != null">
+                lumpsum=#{lumpsum},
+            </if>
+            <if test="cost != null">
+                cost=#{cost},
+            </if>
+            <if test="ghf != null">
+                ghf=#{ghf},
+            </if>
+            <if test="extendc != null">
+                extendc=#{extendc},
+            </if>
+            <if test="extendb != null">
+                extendb=#{extendb},
+            </if>
+            <if test="extende != null">
+                extende=#{extende},
+            </if>
+            <if test="extendd != null">
+                extendd=#{extendd},
+            </if>
+            <if test="cjsr != null">
+                cjsr=#{cjsr},
+            </if>
+            <if test="extenda != null">
+                extenda=#{extenda},
+            </if>
+            <if test="ywlb != null">
+                ywlb=#{ywlb},
+            </if>
+            <if test="zqcode != null">
+                zqcode=#{zqcode},
+            </if>
+            <if test="sclb != null">
+                sclb=#{sclb},
+            </if>
+            <if test="ztbh != null">
+                ztbh=#{ztbh},
+            </if>
+            <if test="jsf != null">
+                jsf=#{jsf},
+            </if>
+            <if test="rq != null">
+                rq=#{rq},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将TQsb中的数据更新到数据库对应的表中,包括值为null的数据-->
+    <update id="updateTQsb" parameterType="map">
+        update t_qsb
+        <set>
+                id=#{enti.id},
+                yhs=#{enti.yhs},
+                bs=#{enti.bs},
+                yj=#{enti.yj},
+                zgf=#{enti.zgf},
+                gyjzbd=#{enti.gyjzbd},
+                zqqsk=#{enti.zqqsk},
+                extendf=#{enti.extendf},
+                amount=#{enti.amount},
+                quantity=#{enti.quantity},
+                lumpsum=#{enti.lumpsum},
+                cost=#{enti.cost},
+                ghf=#{enti.ghf},
+                extendc=#{enti.extendc},
+                extendb=#{enti.extendb},
+                extende=#{enti.extende},
+                extendd=#{enti.extendd},
+                cjsr=#{enti.cjsr},
+                extenda=#{enti.extenda},
+                ywlb=#{enti.ywlb},
+                zqcode=#{enti.zqcode},
+                sclb=#{enti.sclb},
+                ztbh=#{enti.ztbh},
+                jsf=#{enti.jsf},
+                rq=#{enti.rq},
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将TQsb中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyTQsb" parameterType="map">
+        update t_qsb
+        <set>
+            <if test="enti.id != null">
+                id=#{enti.id},
+            </if>
+            <if test="enti.yhs != null">
+                yhs=#{enti.yhs},
+            </if>
+            <if test="enti.bs != null">
+                bs=#{enti.bs},
+            </if>
+            <if test="enti.yj != null">
+                yj=#{enti.yj},
+            </if>
+            <if test="enti.zgf != null">
+                zgf=#{enti.zgf},
+            </if>
+            <if test="enti.gyjzbd != null">
+                gyjzbd=#{enti.gyjzbd},
+            </if>
+            <if test="enti.zqqsk != null">
+                zqqsk=#{enti.zqqsk},
+            </if>
+            <if test="enti.extendf != null">
+                extendf=#{enti.extendf},
+            </if>
+            <if test="enti.amount != null">
+                amount=#{enti.amount},
+            </if>
+            <if test="enti.quantity != null">
+                quantity=#{enti.quantity},
+            </if>
+            <if test="enti.lumpsum != null">
+                lumpsum=#{enti.lumpsum},
+            </if>
+            <if test="enti.cost != null">
+                cost=#{enti.cost},
+            </if>
+            <if test="enti.ghf != null">
+                ghf=#{enti.ghf},
+            </if>
+            <if test="enti.extendc != null">
+                extendc=#{enti.extendc},
+            </if>
+            <if test="enti.extendb != null">
+                extendb=#{enti.extendb},
+            </if>
+            <if test="enti.extende != null">
+                extende=#{enti.extende},
+            </if>
+            <if test="enti.extendd != null">
+                extendd=#{enti.extendd},
+            </if>
+            <if test="enti.cjsr != null">
+                cjsr=#{enti.cjsr},
+            </if>
+            <if test="enti.extenda != null">
+                extenda=#{enti.extenda},
+            </if>
+            <if test="enti.ywlb != null">
+                ywlb=#{enti.ywlb},
+            </if>
+            <if test="enti.zqcode != null">
+                zqcode=#{enti.zqcode},
+            </if>
+            <if test="enti.sclb != null">
+                sclb=#{enti.sclb},
+            </if>
+            <if test="enti.ztbh != null">
+                ztbh=#{enti.ztbh},
+            </if>
+            <if test="enti.jsf != null">
+                jsf=#{enti.jsf},
+            </if>
+            <if test="enti.rq != null">
+                rq=#{enti.rq},
+            </if>
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
 </mapper>

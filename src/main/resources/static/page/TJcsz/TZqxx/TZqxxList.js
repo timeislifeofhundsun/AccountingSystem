@@ -87,26 +87,35 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         })
     }
     //点击编辑操作
-    function EditTJyfl(edit){
+    function EditTZqxx(edit){
         var index = layui.layer.open({
             title : "修改证券信息",
             type : 2,
             totalRow: true,
-            content : "TJyflEdit.html",
+            content : "TZqxxEdit.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
-                    body.find(".ywcode").val(edit.ywcode);
-                    body.find(".ywname").val(edit.ywname);
-                    body.find(".jsfl").val(edit.jsfl);
-                    body.find(".gh").val(edit.gh);
-                    body.find(".yh").val(edit.yh);
-                    body.find(".zg").val(edit.zg);
-                    body.find(".yj").val(edit.yj);
+                    body.find(".zqnm").val(edit.zqnm);
+                    body.find(".zqdm").val(edit.zqdm);
+                    body.find(".zqlb").val(edit.zqlb);
+                    body.find(".sclb").val(edit.sclb);
+                    body.find(".zqjg").val(edit.zqjg);
+                    body.find(".zgb").val(edit.zgb);
+                    body.find(".ltgs").val(edit.ltgs);
+                    body.find(".mgmz").val(edit.mgmz);
+                    body.find(".fxrq").val(edit.fxrq);
+                    body.find(".dqrq").val(edit.dqrq);
+                    body.find(".hgts").val(edit.hgts);
+                    body.find(".njxts").val(edit.njxts);
+                    body.find(".nll").val(edit.nll);
+                    body.find(".qxr").val(edit.qxr);
+                    body.find(".fxfs").val(edit.fxfs);
+                    body.find(".fxjg").val(edit.fxjg);
                     form.render();
                 }
                 setTimeout(function(){
-                    layui.layer.tips('点击此处返回费率列表', '.layui-layer-setwin .layui-layer-close', {
+                    layui.layer.tips('点击此处返回证券列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500)
@@ -123,7 +132,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         var layEvent = obj.event,
             data = obj.data;
         if(layEvent === 'edit'){ //编辑
-            EditTJyfl(data);
+            EditTZqxx(data);
         }
     });
 
