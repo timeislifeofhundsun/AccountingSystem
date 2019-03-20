@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.accountingsystem.Global.mapper.TPzbMapper">
+    <!-- TPzb的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_TPzb_Map" type="com.hundsun.accountingsystem.Global.bean.TPzb">
+        <id column="id" property="id" />
+        <result column="extendf" property="extendf" />
+        <result column="extendc" property="extendc" />
+        <result column="extendb" property="extendb" />
+        <result column="extende" property="extende" />
+        <result column="extendd" property="extendd" />
+        <result column="extenda" property="extenda" />
+        <result column="bs" property="bs" />
+        <result column="pzid" property="pzid" />
+        <result column="kjkm" property="kjkm" />
+        <result column="ztbh" property="ztbh" />
+        <result column="kmms" property="kmms" />
+        <result column="je" property="je" />
+        <result column="zy" property="zy" />
+        <result column="rq" property="rq" />
+    </resultMap>
+
+	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="Assist">
+        <where>
+            <foreach collection="require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+	   <!-- updateAssist用于更新数据的使用它拓展自Assist,用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
+    <sql id="updateAssist">
+        <where>
+            <foreach collection="assist.require" item="req" separator=" ">
+                ${req.require} 
+                <if test="req.value != null"> #{req.value}</if> 
+                <if test="req.values != null">
+                    <foreach collection="req.values" item="val" separator=","> 
+                        #{val} 
+                    </foreach> 
+                </if> 
+                <if test="req.suffix != null"> ${req.suffix}</if> 
+            </foreach>
+        </where>
+    </sql>
+
+    <!-- 数据库中表名为:t_pzb的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="t_pzb_Column">
+        t_pzb.id as id
+        ,t_pzb.extendf as extendf
+        ,t_pzb.extendc as extendc
+        ,t_pzb.extendb as extendb
+        ,t_pzb.extende as extende
+        ,t_pzb.extendd as extendd
+        ,t_pzb.extenda as extenda
+        ,t_pzb.bs as bs
+        ,t_pzb.pzid as pzid
+        ,t_pzb.kjkm as kjkm
+        ,t_pzb.ztbh as ztbh
+        ,t_pzb.kmms as kmms
+        ,t_pzb.je as je
+        ,t_pzb.zy as zy
+        ,t_pzb.rq as rq
+    </sql>
+
+    <!--获得类名为:TPzb对应的数据库表的数据总行数 -->
+    <select id="getTPzbRowCount" parameterType="com.hundsun.accountingsystem.Global.bean.Assist" resultType="java.lang.Long">
+        select count(id) from t_pzb
+        <if test="require!=null"><include refid="Assist" /></if>
+    </select>
+    <!-- 获得类名为:TPzb对应数据库中表的数据集合 -->
+    <select id="selectTPzb" parameterType="com.hundsun.accountingsystem.Global.bean.Assist"  resultMap="result_TPzb_Map">
+        select  <if test="distinct !=null">${distinct}</if>
+        <choose>
+            <when test="resultColumn!=null">${resultColumn}</when>
+            <otherwise>
+        <include refid="t_pzb_Column" /> 
+            </otherwise>
+        </choose>
+        from t_pzb
+        <choose>
+            <when test="rowSize ==null">
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+            </when>
+            <otherwise>
+                inner join
+                (
+                SELECT id as primary_key FROM t_pzb
+                <if test="require!=null">
+                    <include refid="Assist" />
+                </if>
+                <if test="order !=null">${order}</if>
+                <choose>
+                    <when test="startRow !=null and rowSize !=null">LIMIT #{startRow},#{rowSize} </when>
+                    <when test="rowSize !=null">LIMIT #{rowSize}</when>
+                 </choose>
+                 ) as tmp
+                 on tmp.primary_key=t_pzb.id
+            </otherwise>
+        </choose>
+    </select> 
+
+    <!-- 获得一个TPzb对象,以参数TPzb对象中不为空的属性作为条件进行查询-->
+    <select id="selectTPzbByObj" parameterType="com.hundsun.accountingsystem.Global.bean.TPzb" resultMap="result_TPzb_Map">
+        select 
+            <include refid="t_pzb_Column" /> 
+        from t_pzb
+        <where>
+            <if test="rq != null "> and t_pzb.rq = #{rq}</if>
+            <if test="zy != null "> and t_pzb.zy = #{zy}</if>
+            <if test="je != null "> and t_pzb.je = #{je}</if>
+            <if test="kmms != null "> and t_pzb.kmms = #{kmms}</if>
+            <if test="ztbh != null "> and t_pzb.ztbh = #{ztbh}</if>
+            <if test="kjkm != null "> and t_pzb.kjkm = #{kjkm}</if>
+            <if test="pzid != null "> and t_pzb.pzid = #{pzid}</if>
+            <if test="bs != null "> and t_pzb.bs = #{bs}</if>
+            <if test="extenda != null "> and t_pzb.extenda = #{extenda}</if>
+            <if test="extendd != null "> and t_pzb.extendd = #{extendd}</if>
+            <if test="extende != null "> and t_pzb.extende = #{extende}</if>
+            <if test="extendb != null "> and t_pzb.extendb = #{extendb}</if>
+            <if test="extendc != null "> and t_pzb.extendc = #{extendc}</if>
+            <if test="extendf != null "> and t_pzb.extendf = #{extendf}</if>
+            <if test="id != null "> and t_pzb.id = #{id}</if>
+        </where>
+    </select> 
+
+    <!-- 通过TPzb的id获得对应数据库中表的数据对象-->
+    <select id="selectTPzbById" parameterType="java.lang.Integer" resultMap="result_TPzb_Map">
+        select 
+            <include refid="t_pzb_Column" /> 
+        from t_pzb
+        where t_pzb.id = #{id}
+    </select> 
+
+    <!-- 将TPzb插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertTPzb" parameterType="com.hundsun.accountingsystem.Global.bean.TPzb">
+        insert into t_pzb(id,extendf,extendc,extendb,extende,extendd,extenda,bs,pzid,kjkm,ztbh,kmms,je,zy,rq) 
+        values(#{id},#{extendf},#{extendc},#{extendb},#{extende},#{extendd},#{extenda},#{bs},#{pzid},#{kjkm},#{ztbh},#{kmms},#{je},#{zy},#{rq})
+    </insert>
+
+    <!-- 将TPzb中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyTPzb" parameterType="com.hundsun.accountingsystem.Global.bean.TPzb">
+        insert into t_pzb
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="extendf != null">extendf,</if>
+            <if test="extendc != null">extendc,</if>
+            <if test="extendb != null">extendb,</if>
+            <if test="extende != null">extende,</if>
+            <if test="extendd != null">extendd,</if>
+            <if test="extenda != null">extenda,</if>
+            <if test="bs != null">bs,</if>
+            <if test="pzid != null">pzid,</if>
+            <if test="kjkm != null">kjkm,</if>
+            <if test="ztbh != null">ztbh,</if>
+            <if test="kmms != null">kmms,</if>
+            <if test="je != null">je,</if>
+            <if test="zy != null">zy,</if>
+            <if test="rq != null">rq,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null"> #{id},</if>
+            <if test="extendf != null"> #{extendf},</if>
+            <if test="extendc != null"> #{extendc},</if>
+            <if test="extendb != null"> #{extendb},</if>
+            <if test="extende != null"> #{extende},</if>
+            <if test="extendd != null"> #{extendd},</if>
+            <if test="extenda != null"> #{extenda},</if>
+            <if test="bs != null"> #{bs},</if>
+            <if test="pzid != null"> #{pzid},</if>
+            <if test="kjkm != null"> #{kjkm},</if>
+            <if test="ztbh != null"> #{ztbh},</if>
+            <if test="kmms != null"> #{kmms},</if>
+            <if test="je != null"> #{je},</if>
+            <if test="zy != null"> #{zy},</if>
+            <if test="rq != null"> #{rq},</if>
+        </trim>
+    </insert>
+
+    <!-- 将TPzb批量插入到对应数据库的表中-->
+    <insert id="insertTPzbByBatch" parameterType="ArrayList">
+        insert into t_pzb(id,extendf,extendc,extendb,extende,extendd,extenda,bs,pzid,kjkm,ztbh,kmms,je,zy,rq) values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.id},#{item.extendf},#{item.extendc},#{item.extendb},#{item.extende},#{item.extendd},#{item.extenda},#{item.bs},#{item.pzid},#{item.kjkm},#{item.ztbh},#{item.kmms},#{item.je},#{item.zy},#{item.rq})
+        </foreach>
+    </insert>
+
+    <!-- 通过TPzb的id将数据库表中对应的数据删除-->
+    <delete id="deleteTPzbById" parameterType="java.lang.Integer">
+        delete from t_pzb
+        where id = #{id}
+    </delete>
+
+    <!-- 通过辅助工具Assist中的条件将TPzb对应的数据库表的数据删除-->
+    <delete id="deleteTPzb" parameterType="com.hundsun.accountingsystem.Global.bean.Assist">
+        delete from t_pzb
+        <if test="require!=null"><include refid="Assist" /></if>
+    </delete>
+
+    <!-- 通过TPzb的id将TPzb的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateTPzbById" parameterType="com.hundsun.accountingsystem.Global.bean.TPzb">
+        update t_pzb set
+            extendf=#{extendf}
+            ,extendc=#{extendc}
+            ,extendb=#{extendb}
+            ,extende=#{extende}
+            ,extendd=#{extendd}
+            ,extenda=#{extenda}
+            ,bs=#{bs}
+            ,pzid=#{pzid}
+            ,kjkm=#{kjkm}
+            ,ztbh=#{ztbh}
+            ,kmms=#{kmms}
+            ,je=#{je}
+            ,zy=#{zy}
+            ,rq=#{rq}
+        where id=#{id}
+    </update>
+
+    <!-- 通过TPzb的id将TPzb中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyTPzbById" parameterType="com.hundsun.accountingsystem.Global.bean.TPzb">
+        update t_pzb
+        <set>
+            <if test="extendf != null">
+                extendf=#{extendf},
+            </if>
+            <if test="extendc != null">
+                extendc=#{extendc},
+            </if>
+            <if test="extendb != null">
+                extendb=#{extendb},
+            </if>
+            <if test="extende != null">
+                extende=#{extende},
+            </if>
+            <if test="extendd != null">
+                extendd=#{extendd},
+            </if>
+            <if test="extenda != null">
+                extenda=#{extenda},
+            </if>
+            <if test="bs != null">
+                bs=#{bs},
+            </if>
+            <if test="pzid != null">
+                pzid=#{pzid},
+            </if>
+            <if test="kjkm != null">
+                kjkm=#{kjkm},
+            </if>
+            <if test="ztbh != null">
+                ztbh=#{ztbh},
+            </if>
+            <if test="kmms != null">
+                kmms=#{kmms},
+            </if>
+            <if test="je != null">
+                je=#{je},
+            </if>
+            <if test="zy != null">
+                zy=#{zy},
+            </if>
+            <if test="rq != null">
+                rq=#{rq},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将TPzb中的数据更新到数据库对应的表中,包括值为null的数据-->
+    <update id="updateTPzb" parameterType="map">
+        update t_pzb
+        <set>
+                id=#{enti.id},
+                extendf=#{enti.extendf},
+                extendc=#{enti.extendc},
+                extendb=#{enti.extendb},
+                extende=#{enti.extende},
+                extendd=#{enti.extendd},
+                extenda=#{enti.extenda},
+                bs=#{enti.bs},
+                pzid=#{enti.pzid},
+                kjkm=#{enti.kjkm},
+                ztbh=#{enti.ztbh},
+                kmms=#{enti.kmms},
+                je=#{enti.je},
+                zy=#{enti.zy},
+                rq=#{enti.rq},
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+    <!-- 通过辅助工具Assist中的条件将TPzb中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyTPzb" parameterType="map">
+        update t_pzb
+        <set>
+            <if test="enti.id != null">
+                id=#{enti.id},
+            </if>
+            <if test="enti.extendf != null">
+                extendf=#{enti.extendf},
+            </if>
+            <if test="enti.extendc != null">
+                extendc=#{enti.extendc},
+            </if>
+            <if test="enti.extendb != null">
+                extendb=#{enti.extendb},
+            </if>
+            <if test="enti.extende != null">
+                extende=#{enti.extende},
+            </if>
+            <if test="enti.extendd != null">
+                extendd=#{enti.extendd},
+            </if>
+            <if test="enti.extenda != null">
+                extenda=#{enti.extenda},
+            </if>
+            <if test="enti.bs != null">
+                bs=#{enti.bs},
+            </if>
+            <if test="enti.pzid != null">
+                pzid=#{enti.pzid},
+            </if>
+            <if test="enti.kjkm != null">
+                kjkm=#{enti.kjkm},
+            </if>
+            <if test="enti.ztbh != null">
+                ztbh=#{enti.ztbh},
+            </if>
+            <if test="enti.kmms != null">
+                kmms=#{enti.kmms},
+            </if>
+            <if test="enti.je != null">
+                je=#{enti.je},
+            </if>
+            <if test="enti.zy != null">
+                zy=#{enti.zy},
+            </if>
+            <if test="enti.rq != null">
+                rq=#{enti.rq},
+            </if>
+        </set>
+        <if test="assist.require!=null"><include refid="updateAssist" /></if>
+    </update>
+
+</mapper>
