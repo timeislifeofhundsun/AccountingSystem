@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hundsun.accountingsystem.Global.bean.TCjhbb;
 import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
@@ -15,6 +16,7 @@ import com.hundsun.accountingsystem.Global.bean.TJyfl;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCjhbbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
+import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.TGp.service.GPQSService;
 
 /**
@@ -27,6 +29,7 @@ import com.hundsun.accountingsystem.TGp.service.GPQSService;
 * @date 2019年3月19日
 * @Version 1.1
  */
+@Service
 public class GPQSServiceImpl implements GPQSService{
 	
 	//买入交易费率
@@ -40,6 +43,9 @@ public class GPQSServiceImpl implements GPQSService{
 	
 	@Autowired
 	TCjhbbMapper tCjhbbMapper;
+	
+	@Autowired
+	TQsbMapper tQsbMapper;
 	
 	
 	/**
@@ -100,6 +106,10 @@ public class GPQSServiceImpl implements GPQSService{
 			zqdmMap.put(zqdm,tcjs);
 		}
 		
+		for(String zqdm:zqdmMap.keySet()) {
+			this.gpmr(zqdmMap.get(zqdm));
+		}
+		
 		returnData = true;
 		return returnData;
 	}
@@ -141,7 +151,7 @@ public class GPQSServiceImpl implements GPQSService{
 					null, //公允价值变动
 					zqqsk,null//差价收入
 					, tempTCjhbb.getJysc(), cjje);//成本
-			
+			System.out.println(tQsbMapper.insertNonEmptyTQsb(qsb));;
 		}
 		
 		res = true;
