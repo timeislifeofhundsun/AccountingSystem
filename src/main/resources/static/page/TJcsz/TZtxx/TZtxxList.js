@@ -19,6 +19,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         elem: '#TZtxxList',
         url : '/TZtxx',
         method: 'GET',
+        toolbar:'#TZtxxbar',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -27,7 +28,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         id : "newsListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'ztbh', title: '账套编号',  align:"center"},
+            {field: 'ztbh', title: '账套编号',  align:"center",width:100},
             {field: 'name', title: '账套名称', align:'center'},
             {field: 'createdate', title: '创建时间', align:'center'},
             {field: 'enddate', title: '结束时间',  align:'center'},
@@ -37,6 +38,22 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             {title: '操作', width:170, templet:'#TZtxxListBar',fixed:"right",align:"center"}
         ]]
     });
+    
+    $('.search_btn').click(function(){
+        searchZtxx();
+    })
+    
+    function searchZtxx(){
+    	var ztbh=$("#ztbhSearch").val();
+    	if(ztbh==""){
+    		layer.alert("请输入账套编号");
+    		layer.load();
+    		return;
+    	}
+    	alert(ztbh);
+    }
+    
+    
     //点击编辑操作
     function EditZtxx(edit){
         var index = layui.layer.open({

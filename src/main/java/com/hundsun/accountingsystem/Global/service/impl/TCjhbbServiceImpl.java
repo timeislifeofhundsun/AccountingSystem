@@ -102,6 +102,7 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 				if(list!=null&&list.size()==1){
 					ywlb=list.get(0).getZqlb();
 				}
+				tcjhbb.setYwlb(ywlb);
 				map.put(ghkList.get(i).getZqcode(), ywlb);
 			}
 			tcjhbbList.add(tcjhbb);
