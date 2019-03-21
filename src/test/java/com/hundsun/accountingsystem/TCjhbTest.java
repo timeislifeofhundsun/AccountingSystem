@@ -26,7 +26,7 @@ public class TCjhbTest {
 	@Test
 	public void testSelect() throws IOException, ParseException {
 		int ztbh = 10004;
-		Date ywrq = DateFormatUtil.getDateByString("2018-05-30");
+		Date ywrq = DateFormatUtil.getDateByString("2018-05-31");
 		TCjhbbExample  example = new TCjhbbExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andZtbhEqualTo(ztbh);

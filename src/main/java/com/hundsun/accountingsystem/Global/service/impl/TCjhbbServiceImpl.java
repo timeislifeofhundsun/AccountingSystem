@@ -23,6 +23,7 @@ import com.hundsun.accountingsystem.Global.mapper.TGdxxbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TGhkMapper;
 import com.hundsun.accountingsystem.Global.service.TCjhbbService;
 import com.hundsun.accountingsystem.Global.service.TZqxxService;
+import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 
 @Service
 public class TCjhbbServiceImpl implements TCjhbbService {
@@ -69,6 +70,7 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 				Assist assist = new Assist();
 				assist.setRequires(Assist.andEq("gdcode", gdxxbList.get(i).getGddm())
 					      ,Assist.andEq("xwcode", gdxxbList.get(i).getXwbh()));
+				assist.setRequires(Assist.andEq("bctime",DateFormatUtil.getStringByDate(date)));
 				ghkList.addAll(tghkMapper.selectTGhk(assist));
 			}
 		}
