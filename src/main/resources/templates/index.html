@@ -66,8 +66,7 @@
             <ul class="layui-nav top_menu">
                 <li class="layui-nav-item" pc>
                     <a href="javascript:;" class="clearCache"><i class="layui-icon"
-                                                                 data-icon="&#xe640;">&#xe640;</i><cite>清除缓存</cite><span
-                            class="layui-badge-dot"></span></a>
+                                                                 data-icon="&#xe640;">&#xe640;</i><cite>清除缓存</cite></a>
                 </li>
                 <li class="layui-nav-item lockcms" pc>
                     <a href="javascript:;"><i class="seraph icon-lock"></i><cite>锁屏</cite></a>
@@ -83,14 +82,15 @@
                                                                                           data-icon="icon-xiugai"></i><cite>修改密码</cite></a>
                         </dd>
                         <dd><a href="javascript:;" class="showNotice"><i
-                                class="layui-icon">&#xe645;</i><cite>系统公告</cite><span
-                                class="layui-badge-dot"></span></a></dd>
-                        <dd pc><a href="javascript:;" class="functionSetting"><i class="layui-icon">&#xe620;</i><cite>功能设定</cite><span
-                                class="layui-badge-dot"></span></a></dd>
+                                class="layui-icon">&#xe645;</i><cite>系统公告</cite></a></dd>
+                        <dd pc><a href="javascript:;" class="functionSetting"><i class="layui-icon">&#xe620;</i><cite>功能设定</cite></a></dd>
                         <dd pc><a href="javascript:;" class="changeSkin"><i
                                 class="layui-icon">&#xe61b;</i><cite>更换皮肤</cite></a></dd>
-                        <dd><a href="page/login/login.html" class="signOut"><i
+                        <dd><a href="#" class="signOut"><i
                                 class="seraph icon-tuichu"></i><cite>退出</cite></a></dd>
+                        <form th:action="@{/logout}" method="post" id="logoutForm">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        </form>
                     </dl>
                 </li>
             </ul>
@@ -103,15 +103,6 @@
             <p><span class="userName"  sec:authentication="principal.username"></span>，您好！
             </p>
         </div>
-        <!-- 搜索 -->
-        <!--<div class="layui-form component">
-            <select name="search" id="search" lay-search lay-filter="searchPage">
-                <option value="">搜索页面或功能</option>
-                <option value="1">layer</option>
-                <option value="2">form</option>
-            </select>
-            <i class="layui-icon">&#xe615;</i>
-        </div>-->
         <div class="navBar layui-side-scroll" id="navBar">
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item layui-this">
