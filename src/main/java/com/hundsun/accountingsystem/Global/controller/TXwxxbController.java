@@ -1,64 +1,87 @@
 package com.hundsun.accountingsystem.Global.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.hundsun.accountingsystem.Global.VO.TXwxxbVO;
 import com.hundsun.accountingsystem.Global.bean.TXwxxb;
 import com.hundsun.accountingsystem.Global.service.TXwxxbService;
 
-@Controller
+@RestController
 public class TXwxxbController {
 
 	@Autowired
 	TXwxxbService txwxxbServiceImpl;
 	
-	public void insertTest() {
-		TXwxxb txwxxb = new TXwxxb();
-		txwxxb.setQsbh("10000");
-		txwxxb.setQsName("中国证券");
-		txwxxb.setXwbh("32562");
-		txwxxb.setXwName("测试席位");
+	@PostMapping("/TXwxx")
+	public String insertXwxx(String data) {
+		TXwxxb txwxxb = JSON.parseObject(data,TXwxxb.class);
+		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+		if(!pattern.matcher(txwxxb.getXwbh()).matches()) {
+			return "席位编号只能为数字类型";
+		}
+		if(txwxxb.getXwbh().length()>10) {
+			return "席位编号不能大于10位";
+		}
 		try {
 			txwxxbServiceImpl.insertXw(txwxxb);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return;
+			return e.getMessage();
 		}
-		System.out.println("insert successful!!!");
+		return String.valueOf(1);
 	}
 	
-	public void updateTest() {
-		TXwxxb txwxxb = new TXwxxb();
-		txwxxb.setQsbh("10000");
-		txwxxb.setQsName("中国证券");
-		txwxxb.setXwbh("32562");
-		txwxxb.setXwName("测试席位111");
+	@PutMapping("/TXwxx")
+	public String updateXwxx(@RequestParam(value = "Xwxx",required = true) String data) {
+		TXwxxb txwxxb = JSON.parseObject(data,TXwxxb.class);
 		txwxxbServiceImpl.updateXw(txwxxb);
-		System.out.println("update successful!!!");
+		return String.valueOf(1);
 	}
 	
-	public void deleteTest() {
+	@PostMapping("/deleteTXwxx")
+	public String deleteXwxx(String xwbh) {
 		try {
-			txwxxbServiceImpl.deleteXwById("32679");
+			txwxxbServiceImpl.deleteXwById(xwbh);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return;
+			return e.getMessage();
 		}
-		System.out.println("delete successful!!!");
+		return String.valueOf(1);
 	}
 	
-	public void findAllTest() {
-		List<TXwxxb> xwList = txwxxbServiceImpl.findXwList();
-		for (TXwxxb tXwxxb : xwList) {
-			System.out.println(tXwxxb.toString());
-		}
+	@GetMapping("/TXwxx")
+	public String findList(int page,int limit) {
+		int count = txwxxbServiceImpl.getCounts();
+		List<TXwxxb> findList = txwxxbServiceImpl.findListByPage(page,limit);
+		TXwxxbVO layuiJson = new TXwxxbVO();
+		layuiJson.setCode(0);
+	    layuiJson.setCount(count);
+	    layuiJson.setMsg("");
+	    layuiJson.setData(findList);
+	    String jsonString = JSON.toJSONString(layuiJson);
+		return jsonString;
 	}
 	
-	public void findByIdTest() {
-		TXwxxb txwxxb=txwxxbServiceImpl.findXwById("32562");
-		System.out.println(txwxxb.toString());
+	@GetMapping("/findTXwxxByXwbh")
+	public String findById(String xwbh) {
+		TXwxxb txwxxb=txwxxbServiceImpl.findXwById(xwbh);
+		List<TXwxxb> findList = new ArrayList<TXwxxb>();
+		findList.add(txwxxb);
+		TXwxxbVO layuiJson = new TXwxxbVO();
+		layuiJson.setCode(0);
+	    layuiJson.setCount(1);
+	    layuiJson.setMsg("");
+	    layuiJson.setData(findList);
+	    String jsonString = JSON.toJSONString(layuiJson);
+		return jsonString;
 		
 	}
 }
