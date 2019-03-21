@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 @EnableGlobalMethodSecurity(securedEnabled = true) //启用Security注解
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private HttpSecurity http;
+
     @Bean
     UserDetailsService customUserService(){ //注册UserDetailsService 的bean
         return new CustomUserService();
@@ -52,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //.antMatchers("/").permitAll()  //首页任意访问
-                //.antMatchers("/druid").permitAll()  //druid任意访问
+                .antMatchers("/druid").permitAll()  //druid任意访问
                 //.antMatchers("/getuser").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated() //任何请求,登录后可以访问
                 .and()
@@ -77,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // 忽略URL
         web.ignoring().antMatchers("/img/*.jpg","/**/*.js", "/lang/*.json", "/**/*.css", "/**/*.js", "/**/*.map",
-            "/**/*.html", "/**/*.png","/rest/**");
+            "/**/*.html", "/**/*.png","/rest/**","/druid/*");
 
     }
 
