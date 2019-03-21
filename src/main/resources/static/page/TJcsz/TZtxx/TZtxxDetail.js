@@ -22,8 +22,9 @@ layui.use(['form', 'layer','laydate'], function () {
         format: 'yyyy-MM-dd'
     });
     
-    //提交更改账套信息
-    form.on("submit(closeBtn)", function (data) {
-    	parent.location.reload();
+    //关闭弹出层
+    $('#closeBtn').click(function(){
+    	var index = parent.layer.getFrameIndex(window.name); 
+    	parent.layer.close(index);
     });
 })

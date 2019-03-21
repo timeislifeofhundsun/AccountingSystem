@@ -132,11 +132,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                     body.find(".number").val(data.number);
                     form.render();
                 }
-                setTimeout(function(){
+                /*setTimeout(function(){
                     layui.layer.tips('点击此处返回账套信息列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
-                },500)
+                },500)*/
             }
         })
         layui.layer.full(index);
@@ -186,7 +186,9 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         }else if(layEvent === 'detail'){
         	showDetail(data);
         }else if(layEvent === 'del'){
-        	deleteZtxx(data);
+        	layer.confirm("确认删除该账套吗？",{icon: 3, title:'提示'}, function(index){
+        		deleteZtxx(data);
+        	});
         }
     });
     
