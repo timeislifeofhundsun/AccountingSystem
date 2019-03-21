@@ -255,4 +255,10 @@
       number = #{number,jdbcType=INTEGER}
     where ztbh = #{ztbh,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByLimit" resultMap="BaseResultMap" parameterType="com.hundsun.accountingsystem.Global.VO.TZtxxbParamPojo" >
+  	select ztbh, name, createDate, endDate, creater, jjdm, money, number
+  		from t_ztxxb
+  		limit #{start},#{end}
+  </select>
 </mapper>

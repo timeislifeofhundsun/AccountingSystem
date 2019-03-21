@@ -87,14 +87,21 @@ layui.use(['form','jquery',"layer"],function() {
             layer.msg("请输入解锁密码！");
             $(this).siblings(".admin-header-lock-input").focus();
         }else{
-            if($(this).siblings(".admin-header-lock-input").val() == "123456"){
-                window.sessionStorage.setItem("lockcms",false);
-                $(this).siblings(".admin-header-lock-input").val('');
-                layer.closeAll("page");
-            }else{
-                layer.msg("密码错误，请重新输入！");
-                $(this).siblings(".admin-header-lock-input").val('').focus();
-            }
+            $.ajax({
+                url: "/unlock",
+                data: {password:$(this).siblings(".admin-header-lock-input").val()},
+                type: 'GET',
+                success:function (obj) {
+                    if (obj==1) {
+                        window.sessionStorage.setItem("lockcms",false);
+                        $(this).siblings(".admin-header-lock-input").val('');
+                        layer.closeAll("page");
+                    }else{
+                        layer.msg("密码错误，请重新输入！");
+                        $(this).siblings(".admin-header-lock-input").val('').focus();
+                    }
+                },
+            })
         }
     });
     $(document).on('keydown', function(event) {
@@ -106,9 +113,11 @@ layui.use(['form','jquery',"layer"],function() {
 
     //退出
     $(".signOut").click(function(){
-        window.sessionStorage.removeItem("menu");
+       /* window.sessionStorage.removeItem("menu");
         menu = [];
-        window.sessionStorage.removeItem("curmenu");
+        window.sessionStorage.removeItem("curmenu");*/
+       console.log(111);
+       $('#logoutForm').submit();
     })
 
     //功能设定
