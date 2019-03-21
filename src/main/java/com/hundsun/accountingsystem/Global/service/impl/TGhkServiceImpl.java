@@ -27,19 +27,22 @@ public class TGhkServiceImpl implements TGhkService {
     @Override
     public boolean readGhDataByFile(String SHFilePath, String SZFilePath, String date) throws ParseException {
     	boolean res = false;
-        if (date != null){
+        if (date != null && !date.equals("")){
+            System.out.println(date.equals(""));
+            System.out.println(!date.equals(""));
             Assist assist = new Assist();
             assist.setRequires(Assist.andEq("bctime",date));
              tGhkMapper.deleteTGhk(assist);
         }
-        if (SHFilePath != null){
+        if (SHFilePath != null && !SHFilePath.equals("")){
             try {
                 tGhkMapper.insertTGhkByBatch(FileParsing.ReadDbf(SHFilePath));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        if (SZFilePath != null){
+        if (SZFilePath != null && !SZFilePath.equals("")){
+            System.out.println(SZFilePath);
             try {
                 tGhkMapper.insertTGhkByBatch(FileParsing.ReadSJSDbf(SZFilePath));
             } catch (IOException e) {
