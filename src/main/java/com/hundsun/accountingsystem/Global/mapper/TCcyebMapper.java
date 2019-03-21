@@ -1,87 +1,87 @@
 package com.hundsun.accountingsystem.Global.mapper;
-import com.hundsun.accountingsystem.Global.bean.Ccyeb;
+import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import java.util.List;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import org.apache.ibatis.annotations.Param;
 public interface TCcyebMapper{
 	/**
-	 * 获得Ccyeb数据的总行数,可以通过辅助工具Assist进行条件查询,如果没有条件则传入null
+	 * 获得TCcyeb数据的总行数,可以通过辅助工具Assist进行条件查询,如果没有条件则传入null
 	 * @param assist
 	 * @return
 	 */
-    long getCcyebRowCount(Assist assist);
+    long getTCcyebRowCount(Assist assist);
 	/**
-	 * 获得Ccyeb数据集合,可以通过辅助工具Assist进行条件查询,如果没有条件则传入null
+	 * 获得TCcyeb数据集合,可以通过辅助工具Assist进行条件查询,如果没有条件则传入null
 	 * @param assist
 	 * @return
 	 */
-    List<Ccyeb> selectCcyeb(Assist assist);
+    List<TCcyeb> selectTCcyeb(Assist assist);
 	/**
-	 * 获得一个Ccyeb对象,以参数Ccyeb对象中不为空的属性作为条件进行查询
+	 * 获得一个TCcyeb对象,以参数TCcyeb对象中不为空的属性作为条件进行查询
 	 * @param obj
 	 * @return
 	 */
-    Ccyeb selectCcyebByObj(Ccyeb obj);
+    TCcyeb selectTCcyebByObj(TCcyeb obj);
 	/**
-	 * 通过Ccyeb的id获得Ccyeb对象
+	 * 通过TCcyeb的id获得TCcyeb对象
 	 * @param id
 	 * @return
 	 */
-    Ccyeb selectCcyebById(Integer id);
+    TCcyeb selectTCcyebById(Integer id);
 	/**
-	 * 插入Ccyeb到数据库,包括null值
+	 * 插入TCcyeb到数据库,包括null值
 	 * @param value
 	 * @return
 	 */
-    int insertCcyeb(Ccyeb value);
+    int insertTCcyeb(TCcyeb value);
 	/**
-	 * 插入Ccyeb中属性值不为null的数据到数据库
+	 * 插入TCcyeb中属性值不为null的数据到数据库
 	 * @param value
 	 * @return
 	 */
-    int insertNonEmptyCcyeb(Ccyeb value);
+    int insertNonEmptyTCcyeb(TCcyeb value);
 	/**
-	 * 批量插入Ccyeb到数据库,包括null值
+	 * 批量插入TCcyeb到数据库,包括null值
 	 * @param value
 	 * @return
 	 */
-    int insertCcyebByBatch(List<Ccyeb> value);
+    int insertTCcyebByBatch(List<TCcyeb> value);
 	/**
-	 * 通过Ccyeb的id删除Ccyeb
+	 * 通过TCcyeb的id删除TCcyeb
 	 * @param id
 	 * @return
 	 */
-    int deleteCcyebById(Integer id);
+    int deleteTCcyebById(Integer id);
 	/**
-	 * 通过辅助工具Assist的条件删除Ccyeb
+	 * 通过辅助工具Assist的条件删除TCcyeb
 	 * @param assist
 	 * @return
 	 */
-    int deleteCcyeb(Assist assist);
+    int deleteTCcyeb(Assist assist);
 	/**
-	 * 通过Ccyeb的id更新Ccyeb中的数据,包括null值
+	 * 通过TCcyeb的id更新TCcyeb中的数据,包括null值
 	 * @param enti
 	 * @return
 	 */
-    int updateCcyebById(Ccyeb enti);
+    int updateTCcyebById(TCcyeb enti);
  	/**
-	 * 通过辅助工具Assist的条件更新Ccyeb中的数据,包括null值
+	 * 通过辅助工具Assist的条件更新TCcyeb中的数据,包括null值
 	 * @param value
 	 * @param assist
 	 * @return
 	 */
-    int updateCcyeb(@Param("enti") Ccyeb value, @Param("assist") Assist assist);
+    int updateTCcyeb(@Param("enti") TCcyeb value, @Param("assist") Assist assist);
 	/**
-	 * 通过Ccyeb的id更新Ccyeb中属性不为null的数据
+	 * 通过TCcyeb的id更新TCcyeb中属性不为null的数据
 	 * @param enti
 	 * @return
 	 */
-    int updateNonEmptyCcyebById(Ccyeb enti);
+    int updateNonEmptyTCcyebById(TCcyeb enti);
  	/**
-	 * 通过辅助工具Assist的条件更新Ccyeb中属性不为null的数据
+	 * 通过辅助工具Assist的条件更新TCcyeb中属性不为null的数据
 	 * @param value
 	 * @param assist
 	 * @return
 	 */
-    int updateNonEmptyCcyeb(@Param("enti") Ccyeb value, @Param("assist") Assist assist);
+    int updateNonEmptyTCcyeb(@Param("enti") TCcyeb value, @Param("assist") Assist assist);
 }

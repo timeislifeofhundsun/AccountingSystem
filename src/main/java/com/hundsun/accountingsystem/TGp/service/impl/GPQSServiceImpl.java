@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hundsun.accountingsystem.Global.bean.Assist;
+import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import com.hundsun.accountingsystem.Global.bean.TCjhbb;
 import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
 import com.hundsun.accountingsystem.Global.bean.TCjhbbExample.Criteria;
 import com.hundsun.accountingsystem.Global.bean.TJyfl;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
+import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TCjhbbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
@@ -42,38 +44,23 @@ public class GPQSServiceImpl implements GPQSService{
 	private TJyfl mcjyfl;
 	
 	@Autowired
-	TJyflMapper jyflmapper;
+	private TJyflMapper jyflmapper;
 	
 	@Autowired
-	TCjhbbMapper tCjhbbMapper;
+	private TCjhbbMapper tCjhbbMapper;
 	
 	@Autowired
-	TQsbMapper tQsbMapper;
+	private TQsbMapper tQsbMapper;
 	
-	
-	/**
-	 * 
-	* @Description: 获取交易费率
-	* @param  参数说明
-	* @return boolean    返回类型
-	* @author gaozhen
-	 */
-	private boolean getJyfl() {
-		boolean res = false;
-		this.mrjyfl = jyflmapper.selectByPrimaryKey(1101);
-		this.mcjyfl = jyflmapper.selectByPrimaryKey(1102);
-		if(this.mrjyfl!=null && this.mcjyfl!=null) {
-			res = true;
-		}
-		return res;
-	}	
-	
+	@Autowired
+	private TCcyebMapper tCcyebMapper;
 	
 	/**
 	 * 1.获取交易费率
 	 * 2.获取需要清算的数据(账套、时间筛选)
-	 * 3.根据买卖方向不同做处理
-	 * 4.计算估值增值
+	 * 3.计算股票买入
+	 * 4.计算股票卖出
+	 * 5.计算估值增值
 	 */
 	@Override
 	public boolean gpqs(int ztbh, Date ywrq) throws Exception{
@@ -120,16 +107,34 @@ public class GPQSServiceImpl implements GPQSService{
 	
 	/**
 	 * 
+	* @Description: 获取交易费率
+	* @param  参数说明
+	* @return boolean    返回类型
+	* @author gaozhen
+	 */
+	private boolean getJyfl() {
+		boolean res = false;
+		this.mrjyfl = jyflmapper.selectByPrimaryKey(1101);
+		this.mcjyfl = jyflmapper.selectByPrimaryKey(1102);
+		if(this.mrjyfl!=null && this.mcjyfl!=null) {
+			res = true;
+		}
+		return res;
+	}	
+	
+	/**
+	 * 
 	* @Description: 股票买入 
 	* @param  参数说明
 	* @return boolean    返回类型
 	* @author gaozhen
 	 */
-	private boolean gpmr(Map<String, List<TCjhbb>> zqdmMap,int ztbh, Date ywrq) {
+	private boolean gpmr(Map<String, List<TCjhbb>> zqdmMap,
+			int ztbh, Date ywrq) throws Exception {
 		boolean res = false;
-		List<TQsb> tcjhbbList = new ArrayList<>();
+		List<TQsb> tqsbs = new ArrayList<>();
 		for(String zqdm:zqdmMap.keySet()) {
-			tcjhbbList.add(this.gpmr(zqdmMap.get(zqdm)));
+			tqsbs.add(this.gpmr(zqdmMap.get(zqdm)));
 		}
 		/**
 		 * 删除qsb旧数据
@@ -139,10 +144,58 @@ public class GPQSServiceImpl implements GPQSService{
         assist.setRequires(Assist.andEq("rq",DateFormatUtil.getStringByDate(ywrq)));
         assist.setRequires(Assist.andEq("ywlb",1101));
         tQsbMapper.deleteTQsb(assist);
+        /**
+         * 恢复持仓余额表数据
+         */
+        for (TQsb tQsb : tqsbs) {
+        	TCcyeb para = new TCcyeb();
+        	para.setZqdm(tQsb.getZqcode());
+        	para.setExtenda("1");
+			TCcyeb tCcyeb = tCcyebMapper.selectTCcyebByObj(para);
+			if(tCcyeb!=null) {
+				tCcyeb.setCysl(tCcyeb.getCysl()-tQsb.getQuantity());
+				tCcyeb.setZqcb(tCcyeb.getZqcb()-tQsb.getCost());
+				tCcyeb.setFsrq(ywrq);
+				int effect = tCcyebMapper.updateNonEmptyTCcyebById(tCcyeb);
+				if(effect!=1) {
+					throw new Exception("股票买入-恢复持仓余额表失败");
+				}
+			}
+        }
 		/**
 		 * 插入新的qsb数据
 		 */
-        tQsbMapper.insertTQsbByBatch(tcjhbbList);
+        tQsbMapper.insertTQsbByBatch(tqsbs);
+        /**
+         * 根据qsb数据插入或者修改持仓余额表
+         */
+        for (TQsb tQsb : tqsbs) {
+        	TCcyeb para = new TCcyeb();
+        	para.setZqdm(tQsb.getZqcode());
+        	para.setExtenda("1");
+			TCcyeb tCcyeb = tCcyebMapper.selectTCcyebByObj(para);
+			if(tCcyeb==null) {
+				tCcyeb = new TCcyeb();
+				tCcyeb.setCysl(tQsb.getQuantity());
+				tCcyeb.setExtenda("1");
+				tCcyeb.setZqcb(tQsb.getCost());
+				tCcyeb.setZqdm(tQsb.getZqcode());
+				tCcyeb.setZtbh(ztbh);
+				tCcyeb.setFsrq(ywrq);
+				int effect = tCcyebMapper.insertNonEmptyTCcyeb(tCcyeb);
+				if(effect!=1) {
+					throw new Exception("股票买入-插入持仓余额表失败");
+				}
+			}else {
+				tCcyeb.setCysl(tCcyeb.getCysl()+tQsb.getQuantity());
+				tCcyeb.setZqcb(tCcyeb.getZqcb()+tQsb.getCost());
+				tCcyeb.setFsrq(ywrq);
+				int effect = tCcyebMapper.updateNonEmptyTCcyebById(tCcyeb);
+				if(effect!=1) {
+					throw new Exception("股票买入-修改持仓余额表失败");
+				}
+			}
+		}
         res = true;
 		return res;
 	} 
@@ -278,4 +331,7 @@ public class GPQSServiceImpl implements GPQSService{
 		}
 		return qsb;
 	}
+
+
+
 }

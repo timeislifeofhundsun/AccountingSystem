@@ -1,12 +1,12 @@
 package com.hundsun.accountingsystem.Global.bean;
-public class Ccyeb implements java.io.Serializable {
+public class TCcyeb implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;//主键
     private Integer cysl;//持有数量
     private Double ljgz;//累计估增
     private String extendc;//扩展字段3
     private String extendb;//扩展字段2
-    private String extenda;//扩展字段1
+    private String extenda;//扩展字段1(股票存1)
     private Integer zqnm;//证券内码
     private Double zqcb;//证券成本
     private String kjkmdm;//会计科目代码
@@ -14,10 +14,10 @@ public class Ccyeb implements java.io.Serializable {
     private Integer ztbh;//账套编号
     private java.util.Date fsrq;//发生日期
     private Double ljjx;//累计计息
-    public Ccyeb() {
+    public TCcyeb() {
         super();
     }
-    public Ccyeb(Integer id,Integer cysl,Double ljgz,String extendc,String extendb,String extenda,Integer zqnm,Double zqcb,String kjkmdm,String zqdm,Integer ztbh,java.util.Date fsrq,Double ljjx) {
+    public TCcyeb(Integer id,Integer cysl,Double ljgz,String extendc,String extendb,String extenda,Integer zqnm,Double zqcb,String kjkmdm,String zqdm,Integer ztbh,java.util.Date fsrq,Double ljjx) {
         super();
         this.id = id;
         this.cysl = cysl;

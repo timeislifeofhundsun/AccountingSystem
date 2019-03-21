@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hundsun.accountingsystem.Global.mapper.TCcyebMapper">
-    <!-- Ccyeb的resultMap,column是给数据库列起的别名,它对应property类的属性-->
-    <resultMap id="result_Ccyeb_Map" type="com.hundsun.accountingsystem.Global.bean.Ccyeb">
+    <!-- TCcyeb的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_TCcyeb_Map" type="com.hundsun.accountingsystem.Global.bean.TCcyeb">
         <id column="id" property="id" />
         <result column="cysl" property="cysl" />
         <result column="ljgz" property="ljgz" />
@@ -67,13 +67,13 @@
         ,t_ccyeb.ljjx as ljjx
     </sql>
 
-    <!--获得类名为:Ccyeb对应的数据库表的数据总行数 -->
-    <select id="getCcyebRowCount" parameterType="com.hundsun.accountingsystem.Global.bean.Assist" resultType="java.lang.Long">
+    <!--获得类名为:TCcyeb对应的数据库表的数据总行数 -->
+    <select id="getTCcyebRowCount" parameterType="com.hundsun.accountingsystem.Global.bean.Assist" resultType="java.lang.Long">
         select count(id) from t_ccyeb
         <if test="require!=null"><include refid="Assist" /></if>
     </select>
-    <!-- 获得类名为:Ccyeb对应数据库中表的数据集合 -->
-    <select id="selectCcyeb" parameterType="com.hundsun.accountingsystem.Global.bean.Assist"  resultMap="result_Ccyeb_Map">
+    <!-- 获得类名为:TCcyeb对应数据库中表的数据集合 -->
+    <select id="selectTCcyeb" parameterType="com.hundsun.accountingsystem.Global.bean.Assist"  resultMap="result_TCcyeb_Map">
         select  <if test="distinct !=null">${distinct}</if>
         <choose>
             <when test="resultColumn!=null">${resultColumn}</when>
@@ -107,8 +107,8 @@
         </choose>
     </select> 
 
-    <!-- 获得一个Ccyeb对象,以参数Ccyeb对象中不为空的属性作为条件进行查询-->
-    <select id="selectCcyebByObj" parameterType="com.hundsun.accountingsystem.Global.bean.Ccyeb" resultMap="result_Ccyeb_Map">
+    <!-- 获得一个TCcyeb对象,以参数TCcyeb对象中不为空的属性作为条件进行查询-->
+    <select id="selectTCcyebByObj" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb" resultMap="result_TCcyeb_Map">
         select 
             <include refid="t_ccyeb_Column" /> 
         from t_ccyeb
@@ -129,23 +129,23 @@
         </where>
     </select> 
 
-    <!-- 通过Ccyeb的id获得对应数据库中表的数据对象-->
-    <select id="selectCcyebById" parameterType="java.lang.Integer" resultMap="result_Ccyeb_Map">
+    <!-- 通过TCcyeb的id获得对应数据库中表的数据对象-->
+    <select id="selectTCcyebById" parameterType="java.lang.Integer" resultMap="result_TCcyeb_Map">
         select 
             <include refid="t_ccyeb_Column" /> 
         from t_ccyeb
         where t_ccyeb.id = #{id}
     </select> 
 
-    <!-- 将Ccyeb插入到对应数据库的表中,包括属性值为null的数据-->
+    <!-- 将TCcyeb插入到对应数据库的表中,包括属性值为null的数据-->
 
-    <insert id="insertCcyeb" parameterType="com.hundsun.accountingsystem.Global.bean.Ccyeb">
+    <insert id="insertTCcyeb" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
         insert into t_ccyeb(id,cysl,ljgz,extendc,extendb,extenda,zqnm,zqcb,kjkmdm,zqdm,ztbh,fsrq,ljjx) 
         values(#{id},#{cysl},#{ljgz},#{extendc},#{extendb},#{extenda},#{zqnm},#{zqcb},#{kjkmdm},#{zqdm},#{ztbh},#{fsrq},#{ljjx})
     </insert>
 
-    <!-- 将Ccyeb中属性值不为null的数据,插入到对应数据库的表中-->
-    <insert id="insertNonEmptyCcyeb" parameterType="com.hundsun.accountingsystem.Global.bean.Ccyeb">
+    <!-- 将TCcyeb中属性值不为null的数据,插入到对应数据库的表中-->
+    <insert id="insertNonEmptyTCcyeb" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
         insert into t_ccyeb
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
@@ -179,28 +179,28 @@
         </trim>
     </insert>
 
-    <!-- 将Ccyeb批量插入到对应数据库的表中-->
-    <insert id="insertCcyebByBatch" parameterType="ArrayList">
+    <!-- 将TCcyeb批量插入到对应数据库的表中-->
+    <insert id="insertTCcyebByBatch" parameterType="ArrayList">
         insert into t_ccyeb(id,cysl,ljgz,extendc,extendb,extenda,zqnm,zqcb,kjkmdm,zqdm,ztbh,fsrq,ljjx) values
         <foreach collection="list" item="item" index="index" separator="," >
             (#{item.id},#{item.cysl},#{item.ljgz},#{item.extendc},#{item.extendb},#{item.extenda},#{item.zqnm},#{item.zqcb},#{item.kjkmdm},#{item.zqdm},#{item.ztbh},#{item.fsrq},#{item.ljjx})
         </foreach>
     </insert>
 
-    <!-- 通过Ccyeb的id将数据库表中对应的数据删除-->
-    <delete id="deleteCcyebById" parameterType="java.lang.Integer">
+    <!-- 通过TCcyeb的id将数据库表中对应的数据删除-->
+    <delete id="deleteTCcyebById" parameterType="java.lang.Integer">
         delete from t_ccyeb
         where id = #{id}
     </delete>
 
-    <!-- 通过辅助工具Assist中的条件将Ccyeb对应的数据库表的数据删除-->
-    <delete id="deleteCcyeb" parameterType="com.hundsun.accountingsystem.Global.bean.Assist">
+    <!-- 通过辅助工具Assist中的条件将TCcyeb对应的数据库表的数据删除-->
+    <delete id="deleteTCcyeb" parameterType="com.hundsun.accountingsystem.Global.bean.Assist">
         delete from t_ccyeb
         <if test="require!=null"><include refid="Assist" /></if>
     </delete>
 
-    <!-- 通过Ccyeb的id将Ccyeb的数据更新到数据库中对应的表,包括值null的数据-->
-    <update id="updateCcyebById" parameterType="com.hundsun.accountingsystem.Global.bean.Ccyeb">
+    <!-- 通过TCcyeb的id将TCcyeb的数据更新到数据库中对应的表,包括值null的数据-->
+    <update id="updateTCcyebById" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
         update t_ccyeb set
             cysl=#{cysl}
             ,ljgz=#{ljgz}
@@ -217,8 +217,8 @@
         where id=#{id}
     </update>
 
-    <!-- 通过Ccyeb的id将Ccyeb中属性值不为null的数据更新到数据库对应的表中-->
-    <update id="updateNonEmptyCcyebById" parameterType="com.hundsun.accountingsystem.Global.bean.Ccyeb">
+    <!-- 通过TCcyeb的id将TCcyeb中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyTCcyebById" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
         update t_ccyeb
         <set>
             <if test="cysl != null">
@@ -261,8 +261,8 @@
         where id=#{id}
     </update>
 
-    <!-- 通过辅助工具Assist中的条件将Ccyeb中的数据更新到数据库对应的表中,包括值为null的数据-->
-    <update id="updateCcyeb" parameterType="map">
+    <!-- 通过辅助工具Assist中的条件将TCcyeb中的数据更新到数据库对应的表中,包括值为null的数据-->
+    <update id="updateTCcyeb" parameterType="map">
         update t_ccyeb
         <set>
                 id=#{enti.id},
@@ -282,8 +282,8 @@
         <if test="assist.require!=null"><include refid="updateAssist" /></if>
     </update>
 
-    <!-- 通过辅助工具Assist中的条件将Ccyeb中属性值不为null的数据更新到数据库对应的表中-->
-    <update id="updateNonEmptyCcyeb" parameterType="map">
+    <!-- 通过辅助工具Assist中的条件将TCcyeb中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateNonEmptyTCcyeb" parameterType="map">
         update t_ccyeb
         <set>
             <if test="enti.id != null">
