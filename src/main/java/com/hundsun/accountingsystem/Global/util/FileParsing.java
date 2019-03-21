@@ -122,13 +122,19 @@ public class FileParsing {
 //        String temp = rowValues[7].toString().substring(0,rowValues[7].toString().length()-1);
         //去掉小数点1
         String temp1 = rowValues[12].toString().substring(0,rowValues[12].toString().length()-2);
+        String BS = null;
+        if (temp1.contains("-")){
+          BS = "S";
+        } else {
+          BS = "B";
+        }
 //        //去掉小数点2
 //        String temp2 = rowValues[2].toString().substring(0,rowValues[2].toString().length()-1);
 
         tGhk.setJszh(rowValues[0].toString()).setBfjzh(rowValues[1].toString()).setZqcode(rowValues[4].toString()).setSclb(1)
         .setCjsl(Integer.valueOf(temp1)).setCjjg(Double.valueOf(rowValues[14].toString())).setCjtime(sdf.parse(rowValues[34].toString()))
         .setJstime(sdf.parse(rowValues[34].toString())).setBctime(sdf.parse(rowValues[34].toString())).setGdname("null").setGdcode(rowValues[1].toString())
-        .setBs("B").setCjje(Double.valueOf(rowValues[15].toString())).setXwcode(rowValues[5].toString()).setZtcode(null);
+        .setBs(BS).setCjje(Double.valueOf(rowValues[15].toString())).setXwcode(rowValues[5].toString()).setZtcode(null);
         list.add(tGhk);
       }
 

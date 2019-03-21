@@ -106,5 +106,10 @@ public class THqb implements java.io.Serializable {
     public void setZqnm(Integer zqnm) {
         this.zqnm = zqnm;
     }
+	@Override
+	public String toString() {
+		return "THqb [id=" + id + ", zqmc=" + zqmc + ", jrsp=" + jrsp + ", hqrq=" + hqrq + ", zqdm=" + zqdm + ", zrspj="
+				+ zrspj + ", jrkp=" + jrkp + ", cjje=" + cjje + ", cjsl=" + cjsl + ", zqnm=" + zqnm + "]";
+	}
 
 }

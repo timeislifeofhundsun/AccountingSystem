@@ -8,6 +8,8 @@ import com.hundsun.accountingsystem.Global.VO.TJyflVO;
 import com.hundsun.accountingsystem.Global.mapper.TGhkMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
+import com.hundsun.accountingsystem.Global.service.TGhkService;
+import com.hundsun.accountingsystem.Global.service.impl.TGhkServiceImpl;
 import com.hundsun.accountingsystem.Global.util.FileParsing;
 import com.hundsun.accountingsystem.TGp.service.XGService;
 import org.junit.Test;
@@ -17,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -25,6 +28,9 @@ public class AccountingSystemApplicationTests {
 
 	@Autowired
 	TGhkMapper tGhkMapper;
+
+	@Autowired
+	TGhkService tGhkService;
 
 	@Autowired
 	XGService xgService;
@@ -48,7 +54,7 @@ public class AccountingSystemApplicationTests {
 	}
 
 	@Test
-	public void test() throws IOException {
-		System.out.println(xgService.insert_xg("F:\\HUNDSUN\\JYQS\\20180604\\JSMXjsmr1.dbf"));
+	public void test() throws IOException, ParseException {
+		tGhkService.readGhDataByFile("","F:\\HUNDSUN\\JYQS\\20180531\\SJSMX10531.dbf","");
 	}
 }

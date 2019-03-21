@@ -15,4 +15,8 @@ public interface TXwxxbService {
 	public TXwxxb findXwById(String xwbh);
 	
 	public void deleteXwById(String xwbh) throws Exception;
+
+	public int getCounts();
+
+	public List<TXwxxb> findListByPage(int page, int limit);
 }
