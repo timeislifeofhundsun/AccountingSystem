@@ -18,6 +18,14 @@
     <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="css/index.css" media="all"/>
+    <style>
+        body .aux-self{padding: 20px;}
+        body .aux-self .layui-input-block{float: left;margin-left: 0;}
+        body .aux-self .layui-form-label{width: 90px;}
+        .aux-self-word{
+            float:left;  width: 220px;color: #ff1010;
+           }
+    </style>
 </head>
 <body class="main_body">
 <div class="layui-layout layui-layout-admin">
@@ -78,7 +86,7 @@
                         <dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="seraph icon-ziliao"
                                                                                          data-icon="icon-ziliao"></i><cite>个人资料</cite></a>
                         </dd>
-                        <dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="seraph icon-xiugai"
+                        <dd><a href="#" id="mopwdbtn"><i class="seraph icon-xiugai"
                                                                                           data-icon="icon-xiugai"></i><cite>修改密码</cite></a>
                         </dd>
                         <dd><a href="javascript:;" class="showNotice"><i
@@ -95,6 +103,42 @@
                 </li>
             </ul>
         </div>
+    </div>
+    <!--修改密码-->
+    <div class="modify-pwd-layer aux-self" id="modifypwdlayer" style="display: none">
+        <form class="layui-form" th:action="@{/updatepwd}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">原密码</label>
+                <div class="layui-input-block">
+                    <input id="mopwd" type="password" name="title" required  lay-verify="required" autofocus placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div id="mopwd-aux" class="aux-self-word"></div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">新密码</label>
+                <div class="layui-input-block">
+                    <input id="newpwd1" type="password" name="title" required  lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div id="newpwd1-aux" class="aux-self-word"></div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">再次输入</label>
+                <div class="layui-input-block">
+                    <input id="newpwd2" type="password" name="title" required  lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div id="newpwd2-aux" class="aux-self-word"></div>
+            </div>
+        </form>
     </div>
     <!-- 左侧导航 -->
     <div class="layui-side layui-bg-black">
@@ -157,6 +201,9 @@
         var header = $("meta[name='_csrf_header']").attr("content");
         $.cookie('header', header);
         $.cookie('token', token);
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
     })
 </script>
 </body>

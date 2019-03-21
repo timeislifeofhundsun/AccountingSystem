@@ -4,6 +4,7 @@ import com.hundsun.accountingsystem.Global.bean.SysUser;
 import com.hundsun.accountingsystem.Global.mapper.UserMapper;
 import com.hundsun.accountingsystem.Global.service.UserService;
 import com.hundsun.accountingsystem.Global.util.MD5Util;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+
 public class UserController {
 
   @Autowired
@@ -52,7 +54,21 @@ public class UserController {
       i = 1;
     }
     return String.valueOf(i);
-  }
+    }
+    @PutMapping("/updatepwd")
+    @ResponseBody
+    public String updatePwd(@RequestParam(value = "newpwd1",required = true)String newpwd,HttpServletRequest request
+                         ){
+      System.out.println(newpwd);
+      SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+      SysUser byUserName = userMapper.findByUserName(securityContextImpl.getAuthentication().getName());
+      System.out.println(byUserName);
+      byUserName.setPassword(MD5Util.encode(newpwd));
+      System.out.println(byUserName);
+      int i = userMapper.updatePwd(byUserName);
+      return String.valueOf(i);
+    }
+
 
 
 }

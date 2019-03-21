@@ -8,6 +8,7 @@ public interface UserMapper {
 
     SysUser findByUserName(String username);
 
+    int updatePwd(SysUser sysUser);
     //int register(SysUser sysUser);
 
 }

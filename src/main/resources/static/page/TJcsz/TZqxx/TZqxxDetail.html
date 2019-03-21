@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <title>证券信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/public.css" media="all"/>
+</head>
+<body class="childrenBody">
+<form class="layui-form layui-row layui-col-space10 editform" lay-filter="editform" id="editform">
+    <div class="layui-col-md6 layui-col-xs12">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md-offset2 layui-col-md8 layui-col-xs7">
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label">证券内码</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input zqnm" name="zqnm" id="zqnm" lay-verify="zqnm"  disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证券代码</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input zqdm" name="zqdm" id="zqdm" lay-verify="zqdm"  disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证券类别</label>
+                    <div class="layui-input-block">
+                        <select name="zqlb"  class="zqlb" id="zqlb" lay-verify="zqlb" lay-search disabled>
+                            <option value="1">回购</option>
+                            <option value="3">股票</option>
+                            <option value="4">基金</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">市场类别</label>
+                    <div class="layui-input-block">
+                        <select name="sclb"  class="sclb" id="sclb" lay-verify="sclb" lay-search disabled>
+                            <option value="1">上海</option>
+                            <option value="2">深圳</option>
+                            <option value="3">国内银行间</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证券简称</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input zqjg" name="zqjg"  id="zqjg" lay-verify="zqjg"  disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">总股本</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input zgb" name="zgb"  id="zgb" lay-verify="zgb"  disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label">流通股数</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input ltgs"  name="ltgs"  id="ltgs" lay-verify="ltgs"  disabled>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">面值</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input mgmz" name="mgmz"  id="mgmz" lay-verify="mgmz"  disabled>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-col-md6 layui-col-xs12">
+        <div class="layui-col-md-offset2 layui-col-md8 layui-col-xs7">
+            <div class="layui-form-item">
+                <label class="layui-form-label">发行日期</label>
+                <div class="layui-input-block">
+                    <input type="test" class="layui-input fxrq"  name="fxrq"  id="fxrq"  disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">到期日期</label>
+                <div class="layui-input-block">
+                    <input type="test" class="layui-input dqrq" name="dqrq" id="dqrq"  disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">回购天数</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input hgts" name="hgts" id="hgts" lay-verify="hgts"  disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年计息天数</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input njxts" name="njxts" id="njxts" lay-verify="njxts"  disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">年利率</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input nll"  name="nll" id="nll" lay-verify="nll"  disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">起息日</label>
+                <div class="layui-input-block">
+                    <input type="test" class="layui-input qxr" id="qxr" name="qxr"   disabled>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">付息方式</label>
+                <div class="layui-input-block">
+                    <select name="fxfs" id="fxfs" class="fxfs" lay-verify="fxfs" lay-search disabled>
+                        <option value="1">到期还本付息</option>
+                        <option value="2">一年付息</option>
+                        <option value="3">半年付息</option>
+                        <option value="4">3个月付息</option>
+                        <option value="5">1个月付息</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">发行价格</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input fxjg"  name="fxjg" id="fxjg" lay-verify="fxjg"  disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+<script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="TZqxxEdit.js"></script>
+</body>
+</html>

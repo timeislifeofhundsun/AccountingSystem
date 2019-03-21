@@ -47,6 +47,175 @@ layui.use(['form','jquery',"layer"],function() {
     $(".showNotice").on("click",function(){
         showNotice();
     })
+    $("#mopwdbtn").on("click",function(){
+        showModifyLayer();
+    });
+    function clear () {
+        $("#mopwd").val("")
+        //$("#mopwd-aux").css("display", "none")
+        $("#newpwd1").val("")
+        //$("#newpwd1-aux").css("display", "none")
+        $("#newpwd2").val("")
+        //$("#newpwd2-aux").css("display", "none")
+    }
+    function showModifyLayer() {
+        var index = layer.open({
+            type: 1,
+            btn: ['取消','确定'],
+            title: "修改密码",
+            area: ["460px", "400px"],
+            content: $("#modifypwdlayer"),
+            //++enter
+            success: function(layero, index){
+                $(document).on('keydown', function(e){
+                    if(e.keyCode == 13){
+                        deleteFile(index);
+                    }
+                })
+                getModifyPwd()
+            },
+            cancel: function(index, layero){
+                clear();
+            },
+            yes: function (index) {
+                clear();
+                layer.close(index);
+            },
+            btn2: function (index) {
+                var newpwd1 = $("#newpwd1").val().trim();
+                $.ajax({
+                    url: "/updatepwd",
+                    data: {newpwd1:newpwd1},
+                    type: 'PUT',
+                    success:function (data) {
+                        console.log(data);
+                        if (data==1){
+                            clear();
+                            layer.close(index);
+                            layer.msg('修改成功', {
+                                time: 2000, //20s后自动关闭
+                            });
+                        }else{
+                            clear();
+                            layer.close(index);
+                            layer.msg('修改失败', {
+                                time: 2000, //20s后自动关闭
+                            });
+                        }
+                    }
+                });
+                console.log(444);
+            }
+        });
+    }
+    function getModifyPwd() {
+        var pwd;
+        $("#mopwd").blur(function () {
+            var mopwd = $("#mopwd").val().trim();
+            if (mopwd.length == 0) {
+                $("#mopwd-aux").css({
+                    display: "block",
+                    color: "#ff1010",
+                }).html("请输入原密码")
+            } else {
+                //发送ajax获得原密码 pwd
+                $.ajax({
+                    url: "/unlock",
+                    data: {password:mopwd},
+                    type: 'GET',
+                    success:function (data) {
+                        console.log(data);
+                        if (data==1){
+                            $("#mopwd-aux").css({
+                                display: "block",
+                                color: "#5FB878"
+                            }).html("输入正确")
+                            pwd = mopwd;
+
+                        }else{
+                            $("#mopwd-aux").css({
+                                display: "block",
+                                color: "#ff1010",
+                            }).html("密码不正确")
+                        }
+                    }
+                });
+            }
+        })
+
+        var newpwd1 = $("#newpwd1").val().trim()
+        $("#newpwd1").blur( function () {
+            newpwd1 = $("#newpwd1").val().trim()
+            if (newpwd1.length == 0) {
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("请输入新密码")
+            } else if (newpwd1 == pwd) {
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("新密码不能与原密码相同")
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("新密码不能与原密码相同")
+            } else {
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#5FB878"
+                }).html("输入正确")
+            }
+        })
+
+        $("#newpwd2").focus(function () {
+            var newpwd1 = $("#newpwd1").val().trim();
+            if (newpwd1.length == 0) {
+            $("#newpwd1-aux").css({
+                display: "block",
+                color: "#ff1010"
+            }).html("请输入新密码")
+        }
+    })
+        $("#newpwd2").blur( function () {
+            var newpwd2 = $("#newpwd2").val().trim()
+            if (newpwd2.length == 0) {
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("请输入新密码")
+            } else if (newpwd1 != newpwd2) {
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("两次输入不一致")
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("两次输入不一致")
+
+            } else if (newpwd2 == pwd) {
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("新密码不能与原密码相同")
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("新密码不能与原密码相同")
+            } else {
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#5FB878"
+                }).html("输入正确")
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#5FB878"
+                }).html("输入正确")
+                $("#adduserlayer").data("new_pwd", newpwd1)
+            }
+        });
+    }
 
     //锁屏
     function lockPage(){
@@ -60,7 +229,6 @@ layui.use(['form','jquery',"layer"],function() {
                                 '<input type="password" class="admin-header-lock-input layui-input" autocomplete="off" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />'+
                                 '<button class="layui-btn" id="unlock">解锁</button>'+
                             '</div>'+
-                            '<p>请输入“123456”，否则不会解锁成功哦！！！</p>'+
                         '</div>',
             closeBtn : 0,
             shade : 0.9,
