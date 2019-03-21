@@ -7,6 +7,9 @@ import com.hundsun.accountingsystem.Global.controller.TCjhbbController;
 import com.hundsun.accountingsystem.Global.VO.TJyflVO;
 import com.hundsun.accountingsystem.Global.mapper.TGhkMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
+import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
+import com.hundsun.accountingsystem.Global.util.FileParsing;
+import com.hundsun.accountingsystem.TGp.service.XGService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,10 @@ public class AccountingSystemApplicationTests {
 
 	@Autowired
 	TGhkMapper tGhkMapper;
+
+	@Autowired
+	XGService xgService;
+
 	@Autowired
 	TJyflMapper tJyflMapper;
 
@@ -41,7 +48,7 @@ public class AccountingSystemApplicationTests {
 	}
 
 	@Test
-	public void test() {
-		tcjhbbController.insertTest();
+	public void test() throws IOException {
+		System.out.println(xgService.insert_xg("F:\\HUNDSUN\\JYQS\\20180604\\JSMXjsmr1.dbf"));
 	}
 }

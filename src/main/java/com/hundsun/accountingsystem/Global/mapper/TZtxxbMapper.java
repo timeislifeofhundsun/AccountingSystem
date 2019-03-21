@@ -1,5 +1,6 @@
 package com.hundsun.accountingsystem.Global.mapper;
 
+import com.hundsun.accountingsystem.Global.VO.TZtxxbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.TZtxxb;
 import com.hundsun.accountingsystem.Global.bean.TZtxxbExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface TZtxxbMapper {
     int updateByPrimaryKeySelective(TZtxxb record);
 
     int updateByPrimaryKey(TZtxxb record);
+    
+    List<TZtxxb> selectByLimit(TZtxxbParamPojo params);
 }
