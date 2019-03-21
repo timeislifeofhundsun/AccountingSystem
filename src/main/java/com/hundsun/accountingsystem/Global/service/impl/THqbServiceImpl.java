@@ -7,8 +7,10 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -21,7 +23,9 @@ import org.springframework.stereotype.Service;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.Assist.WhereRequire;
 import com.hundsun.accountingsystem.Global.bean.THqb;
+import com.hundsun.accountingsystem.Global.bean.TZqxx;
 import com.hundsun.accountingsystem.Global.mapper.THqbMapper;
+import com.hundsun.accountingsystem.Global.mapper.TZqxxMapper;
 import com.hundsun.accountingsystem.Global.service.THqbService;
 
 @Service
@@ -32,14 +36,33 @@ public class THqbServiceImpl implements THqbService {
 	@Autowired
 	private THqbMapper tHqbMapper;
 	
+	@Autowired
+	private TZqxxMapper zqxxMapper;
+	
+	/**
+	 * 证券信息，key：zqdm，value：zqxx
+	 */
+	private Map<String, TZqxx> zqxxMap = new HashMap<String,TZqxx>();
+	
 	@Override
 	public boolean readHqDataByFile(String SHFilePath,String SZFilePath,Date date) {
 		boolean res = false;
+		/**
+		 * 加载证券信息map
+		 */
+		this.loadZqxxMap();
+		/**
+		 * 删除旧的行情数据
+		 */
 		Assist assist = new Assist();
 		WhereRequire<?> require = assist.new WhereRequire<Object>(
 			"hqrq = " +"'"+new SimpleDateFormat("yyyy-MM-dd").format(date) +"'", null);
 		assist.setRequires(require);
 		tHqbMapper.deleteTHqb(assist);
+		
+		/**
+		 * 插入新的行情数据
+		 */
 		try {
 			List<THqb> tHqbs = this.getbeanByXML(SZFilePath, date);
 			List<THqb> temp = this.getBeanByTxt(SHFilePath, date);
@@ -49,6 +72,7 @@ public class THqbServiceImpl implements THqbService {
 		}catch (NullPointerException e) {
 			log.error("行情文件可能不存在");
 			log.error(e.getMessage());
+			e.printStackTrace();
 		} catch (Exception e) {
 			log.error("读取行情文件出错");
 			log.error(e.getMessage());
@@ -95,10 +119,13 @@ public class THqbServiceImpl implements THqbService {
 			if(!ePrevClosePx.getText().equals("")) {
 				tHqb.setZrspj(Double.parseDouble(ePrevClosePx.getText()));
 			}
-			tHqb.setZqdm(eSecurityID.getText());
-			tHqb.setZqmc(eSymbol.getText());
-//			tHqb.setZqnm(zqnm)
-			tHqbs.add(tHqb);
+			tHqb.setZqmc(eSymbol.getText().trim());
+			String zqdm = eSecurityID.getText().trim();
+			tHqb.setZqdm(zqdm);
+			if(zqxxMap.get(zqdm)!=null && zqxxMap.get(zqdm).getSclb()==2) {
+				tHqb.setZqnm(zqxxMap.get(zqdm).getZqlb());
+				tHqbs.add(tHqb);
+			}
 		}
 		return tHqbs;
 	}
@@ -114,8 +141,6 @@ public class THqbServiceImpl implements THqbService {
 		while ((line = br.readLine()) != null) {
 			arrs = line.split("\\|");
 			if(arrs[0].contains("MD")) {
-//				System.out.println("成交数量:"+arrs[3].trim());
-//				System.out.println("成交金额:"+arrs[4].trim());
 				String zqdmStr = arrs[1].trim();
 				String zqmcStr = arrs[2].trim();
 				String zrspjStr = arrs[5].trim();
@@ -134,7 +159,10 @@ public class THqbServiceImpl implements THqbService {
 				}
 				tHqb.setZqdm(zqdmStr);
 				tHqb.setZqmc(zqmcStr);
-				tHqbs.add(tHqb);
+				if(zqxxMap.get(zqdmStr)!=null && zqxxMap.get(zqdmStr).getSclb()==1) {
+					tHqb.setZqnm(zqxxMap.get(zqdmStr).getZqlb());
+					tHqbs.add(tHqb);
+				}
 			}else {
 				continue;
 			}
@@ -143,6 +171,16 @@ public class THqbServiceImpl implements THqbService {
 		is.close();
 		fr.close();
 		return tHqbs;
+	}
+	
+	/**
+	 * 加载证券信息map
+	 */
+	private void loadZqxxMap() {
+		List<TZqxx> zqxxs = zqxxMapper.findAllTZqxx();
+		for (TZqxx tZqxx : zqxxs) {
+			this.zqxxMap.put(tZqxx.getZqdm(), tZqxx);
+		}
 	}
 	
 }

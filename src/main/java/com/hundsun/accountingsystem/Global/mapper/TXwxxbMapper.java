@@ -1,5 +1,6 @@
 package com.hundsun.accountingsystem.Global.mapper;
 
+import com.hundsun.accountingsystem.Global.VO.TXwxxbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.TXwxxb;
 import com.hundsun.accountingsystem.Global.bean.TXwxxbExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface TXwxxbMapper {
     int updateByPrimaryKeySelective(TXwxxb record);
 
     int updateByPrimaryKey(TXwxxb record);
+
+	List<TXwxxb> selectByLimit(TXwxxbParamPojo params);
 }

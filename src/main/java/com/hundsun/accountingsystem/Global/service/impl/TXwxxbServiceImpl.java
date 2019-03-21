@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hundsun.accountingsystem.Global.VO.TXwxxbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.TXwxxb;
 import com.hundsun.accountingsystem.Global.bean.TXwxxbExample;
 import com.hundsun.accountingsystem.Global.bean.TXwxxbExample.Criteria;
@@ -54,9 +55,22 @@ public class TXwxxbServiceImpl implements TXwxxbService {
 		try {
 			txwxxbMapper.deleteByPrimaryKey(xwbh);
 		} catch (Exception e) {
-			throw new Exception("删除失败！");
+			throw new Exception("未知错误！");
 		}
 
+	}
+
+	@Override
+	public int getCounts() {
+		return txwxxbMapper.countByExample(null);
+	}
+
+	@Override
+	public List<TXwxxb> findListByPage(int page, int limit) {
+		TXwxxbParamPojo params = new TXwxxbParamPojo();
+		params.setStart((page-1)*limit);
+		params.setEnd(limit);
+		return txwxxbMapper.selectByLimit(params);
 	}
 
 }

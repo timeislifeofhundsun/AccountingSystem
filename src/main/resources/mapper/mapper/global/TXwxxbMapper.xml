@@ -193,4 +193,10 @@
       qs_name = #{qsName,jdbcType=VARCHAR}
     where xwbh = #{xwbh,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectByLimit" resultMap="BaseResultMap" parameterType="com.hundsun.accountingsystem.Global.VO.TXwxxbParamPojo" >
+  	select xwbh, xw_name, qsbh, qs_name
+  		from t_xwxxb
+  		limit #{start},#{end}
+  </select>
 </mapper>
