@@ -43,7 +43,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     $('.addTGdxx').click(function(){
     	ztbh=$('#ztbh').val();
     	if(ztbh==""){
-            layer.msg('请先选择股东', {
+            layer.msg('请先选择账套', {
                 time: 1000, //2s后自动关闭
             });
     		return;
