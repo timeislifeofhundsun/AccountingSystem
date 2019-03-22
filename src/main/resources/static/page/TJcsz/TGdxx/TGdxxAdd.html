@@ -16,7 +16,7 @@
 <form class="layui-form layui-row layui-col-space10">
     <div class="layui-col-md12 layui-col-xs12">
         <div class="layui-col-md-offset4 layui-col-xs12 layui-col-md4 ">
-            <div class="layui-form-item gddm">
+         <div class="layui-form-item gddm">
             <label class="layui-form-label">股东代码</label>
             <div class="layui-input-block">
                 <input type="text" class="layui-input gddm" name="gddm" id="gddm" lay-verify="gddm" />
@@ -34,14 +34,20 @@
                 <input type="text" class="layui-input name" name="name" id="name" lay-verify="name" />
             </div>
         </div>
-        <div class="layui-form-item xwbh">
-            <label class="layui-form-label">席位编号</label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input xwbh" name="xwbh" id="xwbh" lay-verify="xwbh" />
-            </div>
-        </div>    
+        <div class="layui-col-xs12">
+	        <div class="layui-form-item xwbh  layui-col-md10">
+	            <label class="layui-form-label">席位信息</label>
+	            <div class="layui-input-block">
+	                <input type="text" class="layui-input xwbh layui-hide" name="xwbh" id="xwbh" lay-verify="xwbh" disabled="disabled"/>  
+	                <input type="text" class="layui-input xwName" name="xwName" id="xwName" lay-verify="xwName" disabled="disabled"/>             
+	            </div>
+	        </div> 
+	        <div class="layui-col-md2">
+	        	<a class="layui-btn layui-btn-normal selectXwxx">选择</a>
+	        </div> 
+        </div>  
          <hr class="layui-bg-gray"/>
-         <div class="layui-right">
+         <div class="layui-center">
              <a class="layui-btn layui-btn-sm" lay-filter="AddTGdxx" lay-submit><i
                      class="layui-icon">&#xe609;</i>立即提交</a>
          </div>

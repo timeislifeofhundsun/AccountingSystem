@@ -30,4 +30,6 @@ public interface TZtxxbMapper {
     int updateByPrimaryKey(TZtxxb record);
     
     List<TZtxxb> selectByLimit(TZtxxbParamPojo params);
+
+	int getMaxZtbh();
 }

@@ -25,6 +25,10 @@ public class TGdxxbController {
 	@PostMapping("/TGdxx")
 	public String insertGdTest(String data) {
 		TGdxxb tgdxxb = JSON.parseObject(data,TGdxxb.class);
+		
+		if(tgdxxb.getGddm().length()>10) {
+			return "股东代码不能超过10位";
+		}
 		try {
 			tgdxxbServiceImpl.insertGd(tgdxxb);
 		} catch (Exception e) {

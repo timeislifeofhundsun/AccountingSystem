@@ -33,6 +33,22 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
             }
         }
     })
+    
+    $('.selectXwxx').click(function(){
+    	var index = layui.layer.open({
+            title : "选择席位",
+            type : 2,
+            content : "TXwxxList_Gd.html"
+        })
+        
+        layui.layer.full(index);   	
+    	setTimeout(function(){
+        layui.layer.tips('点击此处返回股东添加列表', '.layui-layer-setwin .layui-layer-close', {
+            tips: 3
+        	});
+    	},500)
+    });
+    
     form.on("submit(AddTGdxx)",function(data){
         console.log(data.field);
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
