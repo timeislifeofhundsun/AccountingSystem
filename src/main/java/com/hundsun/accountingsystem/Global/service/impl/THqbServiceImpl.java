@@ -145,7 +145,7 @@ public class THqbServiceImpl implements THqbService {
 				String zqmcStr = arrs[2].trim();
 				String zrspjStr = arrs[5].trim();
 				String jrkpj = arrs[6].trim();
-				String jrspj = arrs[9].trim();
+				String jrspj = arrs[10].trim();
 				THqb tHqb = new THqb();
 				tHqb.setHqrq(date);
 				if(!jrkpj.equals("")) {

@@ -6,18 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
-import com.hundsun.accountingsystem.TGp.service.GPQSService;
+import com.hundsun.accountingsystem.Global.bean.TCcyeb;
+import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GpQsTest {
+public class TCcyeTest {
 	@Autowired
-	GPQSService service;
+	TCcyebMapper mapper;
 
 	@Test
 	public void test() throws Exception {
-		service.gpqs(10004, DateFormatUtil.getDateByString("2018-06-04"));
+		TCcyeb ccyeb = mapper.selectTCcyebById(43);
+		System.out.println(ccyeb);
 	}
 
 }

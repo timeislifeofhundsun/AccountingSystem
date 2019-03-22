@@ -85,10 +85,14 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 			tcjhbb.setZtbh(ztbh);
 			tcjhbb.setZqdm(ghkList.get(i).getZqcode());	
 			tcjhbb.setJysc(ghkList.get(i).getSclb());
-			tcjhbb.setCjsl(ghkList.get(i).getCjsl());
+			tcjhbb.setMmfx(ghkList.get(i).getBs());
+			if(tcjhbb.getJysc()==1) {
+				tcjhbb.setCjsl(Math.abs((ghkList.get(i).getCjsl())));
+			}else {
+				tcjhbb.setCjsl(ghkList.get(i).getCjsl());
+			}
 			tcjhbb.setCjjg(ghkList.get(i).getCjjg());
 			tcjhbb.setCjje(ghkList.get(i).getCjje());
-			tcjhbb.setMmfx(ghkList.get(i).getBs());
 			tcjhbb.setYwrq(date);
 			//如果map中含有证券代码的键值对，取出值，并设置业务类别
 			if(map.containsKey(ghkList.get(i).getZqcode())) {
