@@ -24,6 +24,7 @@ import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TCjhbbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
+import com.hundsun.accountingsystem.Global.mapper.TZqxxMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TGp.service.GPQSService;
 import com.hundsun.accountingsystem.Global.mapper.THqbMapper;
@@ -63,6 +64,9 @@ public class GPQSServiceImpl implements GPQSService{
 	
 	@Autowired
 	private THqbMapper THqbMapper;
+	
+	@Autowired
+	private TZqxxMapper zqxxMapper;
 	
 	/**
 	 * 1.获取交易费率
@@ -105,26 +109,40 @@ public class GPQSServiceImpl implements GPQSService{
 			zqdmMap.put(zqdm,tcjs);
 		}
 		
+		for(String zqdm:zqdmMap.keySet()) {
+			List<TCjhbb> list = zqdmMap.get(zqdm);
+			System.out.println(list.get(0).getZqdm()+" "+list.get(0).getMmfx());
+		}
+		
+		
 		/**
 		 * 3.计算股票买入
 		 */
-		res = this.gpmr(zqdmMap, ztbh, ywrq);
-		if(!res) {
-			throw new Exception("股票清算-股票买入清算失败");
-		}
+//		res = this.gpmr(zqdmMap, ztbh, ywrq);
+//		if(!res) {
+//			throw new Exception("股票清算-股票买入清算失败");
+//		}
 
+		for(String zqdm:zqdmMap.keySet()) {
+			List<TCjhbb> list = zqdmMap.get(zqdm);
+			System.out.println(list.get(0).getZqdm()+" "+list.get(0).getMmfx());
+		}
+		
+		
 		/**
 		 * 4.计算股票卖出
 		 */
-		
-		
+		res = this.gpmc(zqdmMap, ztbh, ywrq);
+		if(!res) {
+			throw new Exception("股票清算-股票买入清算失败");
+		}		
 		/**
 		 * 5.计算估值增值
 		 */
-		res = this.gpgz(ztbh, ywrq);
-		if(!res) {
-			throw new Exception("股票清算-股票估增清算失败");
-		}
+//		res = this.gpgz(ztbh, ywrq);
+//		if(!res) {
+//			throw new Exception("股票清算-股票估增清算失败");
+//		}
 		
 		returnData = true;
 		return returnData;
@@ -196,7 +214,10 @@ public class GPQSServiceImpl implements GPQSService{
          */
         List<TQsb> needInsertQsbs = new ArrayList<>();
 		for(String zqdm:zqdmMap.keySet()) {
-			needInsertQsbs.add(this.gpmr(zqdmMap.get(zqdm)));
+			TQsb tQsb = this.gpmr(zqdmMap.get(zqdm));
+			if(tQsb!=null) {
+				needInsertQsbs.add(this.gpmr(zqdmMap.get(zqdm)));
+			}
 		}
 		/**
 		 * 插入新的qsb数据
@@ -301,22 +322,45 @@ public class GPQSServiceImpl implements GPQSService{
 	 */
 	private boolean gpmc(Map<String, List<TCjhbb>> zqdmMap,int ztbh, Date ywrq) {
 		boolean res = false;
-		List<TQsb> tcjhbbList = new ArrayList<>();
-		for(String zqdm:zqdmMap.keySet()) {
-			tcjhbbList.add(this.gpmc(zqdmMap.get(zqdm)));
-		}
 		/**
-		 * 删除qsb旧数据
+		 * 获取持仓余额表
 		 */
-        Assist assist = new Assist();
-        assist.setRequires(Assist.andEq("ztbh",ztbh));
-        assist.setRequires(Assist.andEq("rq",DateFormatUtil.getStringByDate(ywrq)));
-        assist.setRequires(Assist.andEq("ywlb",1102));
-        tQsbMapper.deleteTQsb(assist);
+		HashMap<String, TCcyeb> ccyeMap = this.loadCcyeb(ztbh);
+		
+//		/**
+//		 * 获取需要删除的清算表数据，以便于恢复持仓余额表
+//		 */
+//        Assist assist = new Assist();
+//        assist.setRequires(Assist.andEq("ztbh",ztbh));
+//        assist.setRequires(Assist.andEq("rq",DateFormatUtil.getStringByDate(ywrq)));
+//        assist.setRequires(Assist.andEq("ywlb",1102));
+//        List<TQsb> needDeleteQSbs = tQsbMapper.selectTQsb(assist);
+//        /**
+//         * 恢复持仓余额表数据
+//         */
+//        
+//        
+//        /**
+//         * 删除清算表数据
+//         */
+//        tQsbMapper.deleteTQsb(assist);
+        
 		/**
 		 * 插入新的qsb数据
 		 */
-        tQsbMapper.insertTQsbByBatch(tcjhbbList);
+        List<TQsb> needInsertQsb = new ArrayList<>();
+		for(String zqdm:zqdmMap.keySet()) {
+			TQsb qsb = this.gpmc(zqdmMap.get(zqdm),ccyeMap);
+			if(qsb!=null) {
+				needInsertQsb.add(qsb);
+			}
+		}
+//        tQsbMapper.insertTQsbByBatch(needInsertQsb);
+        /**
+         * 修改持仓余额表
+         */
+        
+        
         res = true;
 		return res;
 	} 
@@ -328,10 +372,20 @@ public class GPQSServiceImpl implements GPQSService{
 	* @return boolean    返回类型
 	* @author gaozhen
 	 */
-	private TQsb gpmc(List<TCjhbb> tCjhbbs) {
+	private TQsb gpmc(List<TCjhbb> tCjhbbs,HashMap<String, TCcyeb> ccyeMap) {
 		TQsb qsb = null;
 		//校验参数
-		if(tCjhbbs.size()>0 && tCjhbbs.get(0).getMmfx().equals("B")) {
+		if(tCjhbbs.size()>0 && tCjhbbs.get(0).getMmfx().equals("S")) {
+			/**
+			 * 基础数据
+			 */
+			String zqdm = tCjhbbs.get(0).getZqdm();
+			double zqcb = ccyeMap.get(zqdm).getZqcb();
+			double ljgz = ccyeMap.get(zqdm).getLjgz();
+			double zsl = ccyeMap.get(zqdm).getCysl();
+			/**
+			 * 需要计算的数据
+			 */
 			double cjje = 0;
 			double jsf = 0;
 			double ghf = 0;
@@ -340,9 +394,10 @@ public class GPQSServiceImpl implements GPQSService{
 			double myj = 0;
 			Integer cjsl = 0;
 			for (TCjhbb tCjhbb : tCjhbbs) {
-				double tempCjje = tCjhbb.getCjjg()*tCjhbb.getCjsl();
+				int tempCjsl = -tCjhbb.getCjsl();
+				double tempCjje = tCjhbb.getCjjg()*tempCjsl;
 				cjje=cjje+tempCjje;
-				cjsl=cjsl+tCjhbb.getCjsl();
+				cjsl=cjsl+tempCjsl;
 				jsf=new BigDecimal(jsf+tempCjje*this.mrjyfl.getJsfl())
 						.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 				ghf=new BigDecimal(ghf+tempCjje*this.mcjyfl.getGh())
@@ -355,20 +410,34 @@ public class GPQSServiceImpl implements GPQSService{
 			myj = new BigDecimal(cjje*this.mcjyfl.getYj())
 					.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 			double cyj = myj-jsf-zgf;
+			//交易费用
 			double jyfy = jsf+ghf+zgf+yhs+cyj;
+			//证券清算款
 			double zqqsk = cjje-jyfy+cyj;
+			System.out.println(zqcb+" "+zsl+" "+ljgz+" 卖出数量:"+cjsl);
+			//卖出证券成本
+			double mczqcb = new BigDecimal(zqcb/zsl*cjsl)
+					.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			//卖出估值增值
+			double mcgz = new BigDecimal(ljgz/zsl*cjsl)
+					.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			//应付佣金cyj
+			//差价收入
+			double phs = jyfy+zqqsk-mczqcb-mcgz-cyj;
+			
 			TCjhbb tempTCjhbb = tCjhbbs.get(0);
 			/**
 			 * 构建qsb对象
 			 */
 			qsb = new TQsb(null, tempTCjhbb.getZtbh(), tempTCjhbb.getYwrq(), 
-					tempTCjhbb.getZqdm(),1102, //ywlb
-					"B", cjsl, cjje, null, //印花税
+					zqdm,1102, //ywlb
+					"S", cjsl, cjje, yhs, //印花税
 					jsf, ghf, zgf, cyj, jyfy, //交易费用
 					null,null, null, null, null, null,//扩展字段
-					null, //公允价值变动
-					zqqsk,null//差价收入
-					, tempTCjhbb.getJysc(), cjje);//成本
+					mcgz, //公允价值变动
+					zqqsk,phs,//差价收入
+					tempTCjhbb.getJysc(), mczqcb);//成本
+			System.out.println(qsb);
 		}
 		return qsb;
 	}
@@ -469,50 +538,22 @@ public class GPQSServiceImpl implements GPQSService{
 		return res;
 	}
 
-//	private boolean gpgz(int ztbh, Date ywrq){
-//		boolean res = false;
-//		HashMap<String,THqb> hqMap = new HashMap<>();
-//		/**
-//		 * 临时变量
-//		 */
-//		TCcyeb ccyePara = null;
-//		Assist assist = null;
-//		
-//		/**
-//		 * 获取行情
-//		 */
-//		assist = new Assist();
-//        assist.setRequires(Assist.andEq("zqnm",1));
-//        assist.setRequires(Assist.andEq("hqrq",DateFormatUtil.getStringByDate(ywrq)));
-//		List<THqb> hqbs = THqbMapper.selectTHqb(assist);
-//		for (THqb tHqb : hqbs) {
-//			hqMap.put(tHqb.getZqdm(), tHqb);
-//		}
-//
-//		/**
-//		 * 获取需要计算估增的股票
-//		 */
-//		assist = new Assist();
-//        assist.setRequires(Assist.andEq("extenda","11"));
-//		List<TCcyeb> tCcyebs = tCcyebMapper.selectTCcyeb(assist);
-//		/**
-//		 * 计算估值增值
-//		 */
-//		ArrayList<TQsb> needInsertQsbs = new ArrayList<>();
-//		for (TCcyeb tCcyeb : tCcyebs) {
-//			double jrspj = hqMap.get(tCcyeb.getZqdm()).getJrsp();
-//			double gz = tCcyeb.getCysl()*jrspj-tCcyeb.getZqcb()-tCcyeb.getLjgz();
-//			TQsb tQsb = new TQsb();
-//			tQsb.setZtbh(ztbh);
-//			tQsb.setRq(ywrq);
-//			tQsb.setZqcode(tCcyeb.getZqdm());
-//			tQsb.setYwlb(1103);
-//			tQsb.setGyjzbd(gz);
-//			needInsertQsbs.add(tQsb);
-//			System.out.println(jrspj+"  "+tCcyeb.getZqcb());
-//			System.out.println(tQsb.getZqcode()+"   "+tQsb.getGyjzbd());
-//		}		
-//		res = true;
-//		return res;
-//	}
+	/**
+	 * 
+	* @Description: 加载科目余额 
+	* @param  参数说明
+	* @return HashMap<String,TCcyeb>    返回类型
+	* @author gaozhen
+	 */
+	private HashMap<String, TCcyeb> loadCcyeb(int ztbh){
+		HashMap<String, TCcyeb> ccyeMap = new HashMap<>();
+		Assist assist = new Assist();
+        assist.setRequires(Assist.andEq("ztbh",ztbh));
+        assist.setRequires(Assist.andEq("extenda",11));
+        List<TCcyeb> ccyes = tCcyebMapper.selectTCcyeb(assist);
+        for (TCcyeb ccye : ccyes) {
+			ccyeMap.put(ccye.getZqdm(), ccye);
+		}
+		return ccyeMap;
+	}
 }

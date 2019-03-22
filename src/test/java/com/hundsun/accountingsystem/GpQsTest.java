@@ -17,7 +17,7 @@ public class GpQsTest {
 
 	@Test
 	public void test() throws Exception {
-		service.gpqs(10004, DateFormatUtil.getDateByString("2018-05-30"));
+		service.gpqs(10004, DateFormatUtil.getDateByString("2018-05-31"));
 		
 	}
 
