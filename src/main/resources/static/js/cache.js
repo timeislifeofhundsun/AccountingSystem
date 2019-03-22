@@ -52,11 +52,8 @@ layui.use(['form','jquery',"layer"],function() {
     });
     function clear () {
         $("#mopwd").val("")
-        //$("#mopwd-aux").css("display", "none")
         $("#newpwd1").val("")
-        //$("#newpwd1-aux").css("display", "none")
         $("#newpwd2").val("")
-        //$("#newpwd2-aux").css("display", "none")
     }
     function showModifyLayer() {
         var index = layer.open({
@@ -118,7 +115,7 @@ layui.use(['form','jquery',"layer"],function() {
                     color: "#ff1010",
                 }).html("请输入原密码")
             } else {
-                //发送ajax获得原密码 pwd
+                //发送ajax验证密码
                 $.ajax({
                     url: "/unlock",
                     data: {password:mopwd},
@@ -219,12 +216,13 @@ layui.use(['form','jquery',"layer"],function() {
 
     //锁屏
     function lockPage(){
+        var userName = $.cookie('userName');
         layer.open({
             title : false,
             type : 1,
             content : '<div class="admin-header-lock" id="lock-box">'+
                             '<div class="admin-header-lock-img"><img src="images/face.jpg" class="userAvatar"/></div>'+
-                            '<div class="admin-header-lock-name" id="lockUserName">驊驊龔頾</div>'+
+                            '<div class="admin-header-lock-name" id="lockUserName">'+userName+'</div>'+
                             '<div class="input_btn">'+
                                 '<input type="password" class="admin-header-lock-input layui-input" autocomplete="off" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />'+
                                 '<button class="layui-btn" id="unlock">解锁</button>'+
@@ -360,14 +358,20 @@ layui.use(['form','jquery',"layer"],function() {
     //更换皮肤
     function skins(){
         var skin = window.sessionStorage.getItem("skin");
+        console.log("skins function : skin值为"+skin);
         if(skin){  //如果更换过皮肤
             if(window.sessionStorage.getItem("skinValue") != "自定义"){
                 $("body").addClass(window.sessionStorage.getItem("skin"));
+                $("#left").removeClass("layui-bg-black");
+                $("#left").css("background-color",skin);
             }else{
-                $(".layui-layout-admin .layui-header").css("background-color",skin.split(',')[0]);
-                $(".layui-bg-black").css("background-color",skin.split(',')[1]);
-                $(".hideMenu").css("background-color",skin.split(',')[2]);
+                $(".layui-layout-admin .layui-header").css("background-color",skin);
+                $("#left").removeClass("layui-bg-black");
+                $("#left").css("background-color",skin);
+                //$(".topLevelMenus").css("background-color",skin);//hideMenu
             }
+        }else{
+            $("#left").addClass("layui-bg-black");
         }
     }
     skins();
@@ -384,9 +388,7 @@ layui.use(['form','jquery',"layer"],function() {
                                     '<input type="radio" name="skin" value="蓝色" title="蓝色" lay-filter="blue">'+
                                     '<input type="radio" name="skin" value="自定义" title="自定义" lay-filter="custom">'+
                                     '<div class="skinCustom">'+
-                                        '<input type="text" class="layui-input topColor" name="topSkin" placeholder="顶部颜色" />'+
-                                        '<input type="text" class="layui-input leftColor" name="leftSkin" placeholder="左侧颜色" />'+
-                                        '<input type="text" class="layui-input menuColor" name="btnSkin" placeholder="顶部菜单按钮" />'+
+                                        '<input type="text" class="layui-input bodyColor" name="bodyColor" placeholder="颜色（red、blue等方式）" />'+
                                     '</div>'+
                                 '</div>'+
                                 '<div class="layui-form-item skinBtn">'+
@@ -402,9 +404,7 @@ layui.use(['form','jquery',"layer"],function() {
                 };
                 if($(".skins_box input[value=自定义]").attr("checked")){
                     $(".skinCustom").css("visibility","inherit");
-                    $(".topColor").val(skin.split(',')[0]);
-                    $(".leftColor").val(skin.split(',')[1]);
-                    $(".menuColor").val(skin.split(',')[2]);
+                    $(".bodyColor").val(skin);
                 };
                 form.render();
                 $(".skins_box").removeClass("layui-hide");
@@ -412,29 +412,29 @@ layui.use(['form','jquery',"layer"],function() {
                     var skinColor;
                     if($(this).find("div").text() == "橙色"){
                         skinColor = "orange";
+                        $("#left").css("background-color",skinColor);
                     }else if($(this).find("div").text() == "蓝色"){
                         skinColor = "blue";
+                        $("#left").css("background-color",skinColor);
                     }else if($(this).find("div").text() == "默认"){
                         skinColor = "";
+                        $("#left").addClass("layui-bg-black");
                     }
                     if($(this).find("div").text() != "自定义"){
-                        $(".topColor,.leftColor,.menuColor").val('');
+                        $(".bodyColor").val('');
                         $("body").removeAttr("class").addClass("main_body "+skinColor+"");
                         $(".skinCustom").removeAttr("style");
-                        $(".layui-bg-black,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
+                        $(".hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
                     }else{
                         $(".skinCustom").css("visibility","inherit");
                     }
                 })
                 var skinStr,skinColor;
-                $(".topColor").blur(function(){
+                $(".bodyColor").blur(function(){
                     $(".layui-layout-admin .layui-header").css("background-color",$(this).val()+" !important");
-                })
-                $(".leftColor").blur(function(){
-                    $(".layui-bg-black").css("background-color",$(this).val()+" !important");
-                })
-                $(".menuColor").blur(function(){
                     $(".hideMenu").css("background-color",$(this).val()+" !important");
+                    $("#left").css("background-color",$(this).val()+" !important");
+                    skinColor=$(this).val();
                 })
 
                 form.on("submit(changeSkin)",function(data){
@@ -445,27 +445,28 @@ layui.use(['form','jquery',"layer"],function() {
                             skinColor = "blue";
                         }else if(data.field.skin == "默认"){
                             skinColor = "";
+                            $("#left").addClass("layui-bg-black");
                         }
                         window.sessionStorage.setItem("skin",skinColor);
                     }else{
-                        skinStr = $(".topColor").val()+','+$(".leftColor").val()+','+$(".menuColor").val();
-                        window.sessionStorage.setItem("skin",skinStr);
+                        skinStr = $(".bodyColor").val();
+                        skinColor = skinStr;
+                        window.sessionStorage.setItem("skin",skinColor);
                         $("body").removeAttr("class").addClass("main_body");
+                        skins();
                     }
                     window.sessionStorage.setItem("skinValue",data.field.skin);
                     layer.closeAll("page");
                 });
                 form.on("submit(noChangeSkin)",function(){
                     $("body").removeAttr("class").addClass("main_body "+window.sessionStorage.getItem("skin")+"");
-                    $(".layui-bg-black,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
-                    skins();
+                    $("#left,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
                     layer.closeAll("page");
                 });
             },
             cancel : function(){
                 $("body").removeAttr("class").addClass("main_body "+window.sessionStorage.getItem("skin")+"");
-                $(".layui-bg-black,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
-                skins();
+                $("#left,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
             }
         })
     })

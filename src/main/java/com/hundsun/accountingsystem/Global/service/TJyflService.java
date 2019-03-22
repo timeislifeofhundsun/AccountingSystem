@@ -26,6 +26,8 @@ public interface TJyflService {
 
   TJyfl selectByPrimaryKey(Integer ywcode);
 
+  public List<TJyfl> getTJyflPage(int curr, int pagesize);
+
   int updateByPrimaryKeySelective(TJyfl record);
 
   int updateByPrimaryKey(TJyfl record);

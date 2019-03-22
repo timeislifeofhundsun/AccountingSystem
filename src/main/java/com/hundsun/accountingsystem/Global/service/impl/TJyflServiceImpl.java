@@ -50,6 +50,20 @@ public class TJyflServiceImpl implements TJyflService {
   }
 
   @Override
+  public List<TJyfl> getTJyflPage(int curr, int pagesize) {
+    List<TJyfl> allTJyfl = tJyflMapper.findAllTJyfl();
+    int firstindex = (curr-1)*pagesize;
+    int lastindex =  curr*pagesize;
+    if (lastindex>allTJyfl.size()){
+      return allTJyfl.subList(firstindex,allTJyfl.size());
+    }
+    if (firstindex>allTJyfl.size()){
+      return null;
+    }
+    return allTJyfl.subList(firstindex,lastindex);
+  }
+
+  @Override
   public int updateByPrimaryKeySelective(TJyfl record) {
     int i = tJyflMapper.updateByPrimaryKeySelective(record);
     return i;
