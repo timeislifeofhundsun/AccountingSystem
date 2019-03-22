@@ -3,60 +3,80 @@ package com.hundsun.accountingsystem.Global.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.hundsun.accountingsystem.Global.VO.TGdxxbVO;
 import com.hundsun.accountingsystem.Global.bean.TGdxxb;
+import com.hundsun.accountingsystem.Global.bean.TGdxxbExample;
+import com.hundsun.accountingsystem.Global.bean.TGdxxbExample.Criteria;
 import com.hundsun.accountingsystem.Global.service.TGdxxbService;
 
-@Controller
+@RestController
 public class TGdxxbController {
 	
 	@Autowired
 	TGdxxbService tgdxxbServiceImpl;
 	
-	public void insertGdTest() {
-		TGdxxb tgdxxb = new TGdxxb();
-		tgdxxb.setGddm("B880580627");
-		tgdxxb.setName("测试股东11");
-		tgdxxb.setXwbh("32562");
-		tgdxxb.setZtbh(10004);
+	@PostMapping("/TGdxx")
+	public String insertGdTest(String data) {
+		TGdxxb tgdxxb = JSON.parseObject(data,TGdxxb.class);
 		try {
 			tgdxxbServiceImpl.insertGd(tgdxxb);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return;
+			return e.getMessage();
 		}
-		System.out.println("insert successful!!!");
+		return String.valueOf(1);
 	}
 	
-	public void updateGdTest() {
-		TGdxxb tgdxxb = new TGdxxb();
-		tgdxxb.setGddm("B880580627");
-		tgdxxb.setName("第一个股东账号");
-		tgdxxb.setXwbh("32562");
-		tgdxxb.setZtbh(10004);
+	@PutMapping("/TGdxx")
+	public String updateGdxx(@RequestParam(value = "Gdxx",required = true) String data) {
+		TGdxxb tgdxxb = JSON.parseObject(data,TGdxxb.class);
 		tgdxxbServiceImpl.updateGd(tgdxxb);
-		System.out.println("update successful!!!");
+		return String.valueOf(1);
 	}
 	
-	public void deleteGdTest() {
+	@PostMapping("/deleteTGdxx")
+	public String deleteGdTest(String gddm) {
 		try {
-			tgdxxbServiceImpl.deleteGdById("B00523155");
+			tgdxxbServiceImpl.deleteGdById(gddm);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			return e.getMessage();
 		}
-		System.out.println("delete successful!!!");
+		return String.valueOf(1);
 	}
 	
-	public void findGdAllTest() {
-		List<TGdxxb> list = tgdxxbServiceImpl.findGdList();
-		for (TGdxxb tGdxxb : list) {
-			System.out.println(tGdxxb.toString());
-		}
+	@GetMapping("/TGdxx")
+	public String findGdList(int page,int limit) {
+		/*
+		 * 1.查询出股东信息表中数据的总数量
+		 * 2.根据分页信息查询出数据
+		 * 3.layuiJson字符串转换
+		 * */
+		int count = tgdxxbServiceImpl.getCounts();
+		List<TGdxxb> findList = tgdxxbServiceImpl.findGdListByPage(page,limit);
+		TGdxxbVO layuiJson = new TGdxxbVO();
+		layuiJson.setCode(0);
+	    layuiJson.setCount(count);
+	    layuiJson.setMsg("");
+	    layuiJson.setData(findList);
+	    String jsonString = JSON.toJSONString(layuiJson);
+		return jsonString;
 	}
 
-	public void findGdByIdTest() {
-		TGdxxb tgdxxb = tgdxxbServiceImpl.findGdById("B880580627");
-		System.out.println(tgdxxb.toString());
+	@GetMapping("/findByZtbh")
+	public String findGdById(int ztbh) {
+		List<TGdxxb> findList = tgdxxbServiceImpl.findgDgByZtbh(ztbh);
+		TGdxxbVO layuiJson = new TGdxxbVO();
+		layuiJson.setCode(0);
+	    layuiJson.setCount(1);
+	    layuiJson.setMsg("");
+	    layuiJson.setData(findList);
+	    String jsonString = JSON.toJSONString(layuiJson);
+		return jsonString;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hundsun.accountingsystem.Global.VO.TGdxxbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.TGdxxb;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample.Criteria;
@@ -35,6 +36,8 @@ public class TGdxxbServiceImpl implements TGdxxbService {
 		TGdxxbExample example=new TGdxxbExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andGddmEqualTo(tgdxxb.getGddm());
+		criteria.andXwbhEqualTo(tgdxxb.getXwbh());
+		criteria.andZtbhEqualTo(tgdxxb.getZtbh());
 		tgdxxbMapper.updateByExample(tgdxxb, example);
 		return true;
 	}
@@ -54,9 +57,30 @@ public class TGdxxbServiceImpl implements TGdxxbService {
 		try {
 			tgdxxbMapper.deleteByPrimaryKey(gddm);
 		} catch(Exception e) {
-			throw new Exception("删除失败");
+			throw new Exception("未知原因");
 		}
 
+	}
+
+	@Override
+	public int getCounts() {
+		return tgdxxbMapper.countByExample(null);
+	}
+
+	@Override
+	public List<TGdxxb> findGdListByPage(int page, int limit) {
+		TGdxxbParamPojo params = new TGdxxbParamPojo();
+		params.setStart((page-1)*limit);
+		params.setEnd(limit);
+		return tgdxxbMapper.selectByLimit(params);
+	}
+
+	@Override
+	public List<TGdxxb> findgDgByZtbh(int ztbh) {
+		TGdxxbExample example = new TGdxxbExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andZtbhEqualTo(ztbh);
+		return tgdxxbMapper.selectByExample(example);
 	}
 
 }
