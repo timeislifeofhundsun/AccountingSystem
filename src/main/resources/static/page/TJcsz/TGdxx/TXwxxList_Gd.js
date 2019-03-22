@@ -42,11 +42,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 	        id : "newsListTable",
 	        cols : [[
 	            {type: "checkbox", fixed:"left", width:50},
-	            {field: 'xwbh', title: '席位编号',  align:"center",width:200},
-	            {field: 'xwName', title: '席位名称', align:'center',width:200},
-	            {field: 'qsbh', title: '券商编号', align:'center',width:200},
-	            {field: 'qsName', title: '券商名称',  align:'center',width:200},
-	            {title: '操作', width:200, templet:'#TXwxxListBar',fixed:"right",align:"center"}
+	            {field: 'xwbh', title: '席位编号',  align:"center",width:340},
+	            {field: 'xwName', title: '席位名称', align:'center',width:340},
+	            {field: 'qsbh', title: '券商编号', align:'center',width:340},
+	            {field: 'qsName', title: '券商名称',  align:'center',width:340},
+	            {title: '操作', width:106, templet:'#TXwxxListBar',fixed:"right",align:"center"}
 	        ]]
 	    });
 		

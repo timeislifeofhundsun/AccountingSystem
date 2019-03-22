@@ -40,15 +40,14 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 	        limits : [10,15,20,25],
 	        id : "newsListTable",
 	        cols : [[
-	            {type: "checkbox", fixed:"left", width:50},
-	            {field: 'ztbh', title: '账套编号',  align:"center",width:120},
-	            {field: 'name', title: '账套名称', align:'center',width:200},
-	            {field: 'createdate', title: '创建时间', align:'center',width:150},
-	            {field: 'enddate', title: '结束时间',  align:'center',width:150},
-	            {field: 'jjdm', title: '基金代码', align:'center',width:150},
-	            {field: 'money', title: '初始金额', align:'center',width:150},
-	            {field: 'number', title: '初始份额', align:'center',width:150},
-	            {title: '操作', width:150, templet:'#TZtxxListBar',fixed:"right",align:"center"}
+	            {field: 'ztbh', title: '账套编号',  align:"center",width:150},
+	            {field: 'name', title: '账套名称', align:'center',width:150},
+	            {field: 'createdate', title: '创建时间', align:'center',width:250},
+	            {field: 'enddate', title: '结束时间',  align:'center',width:250},
+	            {field: 'jjdm', title: '基金代码', align:'center',width:200},
+	            {field: 'money', title: '初始金额', align:'center',width:200},
+	            {field: 'number', title: '初始份额', align:'center',width:200},
+	            {title: '操作', width:114, templet:'#TZtxxListBar',fixed:"right",align:"center"}
 	        ]]
 	    });
 		

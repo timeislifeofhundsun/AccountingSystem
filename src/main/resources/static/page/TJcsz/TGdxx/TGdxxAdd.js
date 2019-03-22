@@ -42,11 +42,11 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         })
         
         layui.layer.full(index);   	
-    	setTimeout(function(){
+    	/*setTimeout(function(){
         layui.layer.tips('点击此处返回股东添加列表', '.layui-layer-setwin .layui-layer-close', {
             tips: 3
         	});
-    	},500)
+    	},500)*/
     });
     
     form.on("submit(AddTGdxx)",function(data){

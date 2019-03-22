@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <title>两费计息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/public.css" media="all"/>
+</head>
+<body class="childrenBody">
+<form class="layui-form layui-row layui-col-space10 lfjxform" lay-filter="lfjxform" id="lfjxform">
+        <div class="layui-row layui-col-space10" style="padding-top: 150px">
+            <div class="layui-col-md-offset4 layui-col-md4 layui-col-xs7">
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label">存款利率</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input yhlx" name="yhlx" id="yhlx" lay-verify="yhlx"
+                               placeholder="请输入存款利率">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回购利率</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input hglx" name="hglx" id="hglx" lay-verify="hglx"
+                               placeholder="请输入回购利率">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">信息披露费</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input xxplf" name="xxplf" id="xxplf" lay-verify="xxplf"
+                               placeholder="请输入信息披露费">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">披露次数</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input xxplcs" name="xxplcs" id="xxplcs" lay-verify="xxplcs"
+                               placeholder="请输入披露次数">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">审计费</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input sjf" name="sjf" id="sjf" lay-verify="sjf"
+                               placeholder="请输入审计费">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">审计次数</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input sjfcs" name="sjfcs" id="sjfcs" lay-verify="sjfcs"
+                               placeholder="请输入审计次数">
+                    </div>
+                </div>
+                <hr class="layui-bg-gray"/>
+                <div class="layui-center">
+                    <a class="layui-btn layui-btn-sm" lay-filter="SaveTLfjx" lay-submit><i
+                            class="layui-icon">&#xe609;</i>保存</a>
+                </div>
+            </div>
+        </div>
+</form>
+<script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="TLfjxbList.js"></script>
+</body>
+</html>

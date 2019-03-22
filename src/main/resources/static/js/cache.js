@@ -90,13 +90,13 @@ layui.use(['form','jquery',"layer"],function() {
                             clear();
                             layer.close(index);
                             layer.msg('修改成功', {
-                                time: 2000, //20s后自动关闭
+                                time: 1000, //20s后自动关闭
                             });
                         }else{
                             clear();
                             layer.close(index);
                             layer.msg('修改失败', {
-                                time: 2000, //20s后自动关闭
+                                time: 1000, //20s后自动关闭
                             });
                         }
                     }

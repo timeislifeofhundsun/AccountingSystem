@@ -31,15 +31,9 @@
 			"spread": false
 		},
         {
-          "title": "计息设置",
+          "title": "两费计息",
           "icon": "&#xe634;",
-          "href": "page/TJcsz/TJx/TJxList.html",
-          "spread": false
-        },
-        {
-          "title": "结转设置",
-          "icon": "&#xe634;",
-          "href":"page/TJcsz/TJz/TJzList.html",
+          "href": "page/TJcsz/TLfjx/TLfjxbList.html",
           "spread": false
         }
 	],
