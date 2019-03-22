@@ -136,5 +136,11 @@ public class TCcyeb implements java.io.Serializable {
     public void setLjjx(Double ljjx) {
         this.ljjx = ljjx;
     }
-
+	@Override
+	public String toString() {
+		return "TCcyeb [id=" + id + ", cysl=" + cysl + ", ljgz=" + ljgz + ", extendc=" + extendc + ", extendb="
+				+ extendb + ", extenda=" + extenda + ", zqnm=" + zqnm + ", zqcb=" + zqcb + ", kjkmdm=" + kjkmdm
+				+ ", zqdm=" + zqdm + ", ztbh=" + ztbh + ", fsrq=" + fsrq + ", ljjx=" + ljjx + "]";
+	}
+    
 }
