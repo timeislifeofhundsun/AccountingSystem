@@ -187,7 +187,9 @@ public class GPQSServiceImpl implements GPQSService {
 		/**
 		 * 插入新的qsb数据
 		 */
-		tQsbMapper.insertTQsbByBatch(needInsertQsbs);
+		if(needInsertQsbs!=null && needInsertQsbs.size()>0) {
+			tQsbMapper.insertTQsbByBatch(needInsertQsbs);
+		}
 		/**
 		 * 插入或者修改持仓余额表
 		 */

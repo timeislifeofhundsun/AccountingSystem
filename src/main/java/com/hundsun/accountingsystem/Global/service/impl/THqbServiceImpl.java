@@ -120,7 +120,9 @@ public class THqbServiceImpl implements THqbService {
 				tHqb.setZrspj(Double.parseDouble(ePrevClosePx.getText()));
 			}
 			if(!eTotalValueTrade.getText().equals("")) {
-				tHqb.setCjje(Double.parseDouble(eTotalValueTrade.getText()));
+				double cjje = Double.parseDouble(eTotalValueTrade.getText());
+				if(cjje<10000)
+				tHqb.setCjje(cjje);
 			}
 			tHqb.setZqmc(eSymbol.getText().trim());
 			String zqdm = eSecurityID.getText().trim();
