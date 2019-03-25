@@ -31,6 +31,10 @@ public class FilePathUtil {
 			String mkt = root+ywrq+"/mktdt00.txt";
 			String temp = ywrq.replaceAll("-", "").substring(4, 8);
 			String sjsmx = root+ywrq+"/SJSMX1"+temp+".dbf";
+			String jsmx = root+ywrq+"/JSMXjsmr1.dbf";
+			String zqbd = root+ywrq+"/ZQBDjsmr1.dbf";
+			temp = ywrq.replaceAll("-", "").substring(4, 8);
+			String sjsjg = root+ywrq+"/SJSJG"+temp+".dbf";
 			
 			File ftemp = new File(cash);
 			if(ftemp.exists()) {
@@ -59,10 +63,31 @@ public class FilePathUtil {
 			}else {
 				res.put("SJSMX1", null);
 			}
+			
+			ftemp = new File(jsmx);
+			if(ftemp.exists()) {
+				res.put("JSMX", jsmx);
+			}else {
+				res.put("JSMX", null);
+			}
+			
+			ftemp = new File(zqbd);
+			if(ftemp.exists()) {
+				res.put("ZQBD", zqbd);
+			}else {
+				res.put("ZQBD", null);
+			}
+
+			ftemp = new File(sjsjg);
+			if(ftemp.exists()) {
+				res.put("SJSJG", sjsjg);
+			}else {
+				res.put("SJSJG", null);
+			}
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return res;
 	}
-
 }

@@ -107,7 +107,7 @@ public class THqbServiceImpl implements THqbService {
 			//成交数量
 //			Element eTotalVolumeTrade = e.element("TotalVolumeTrade");
 			//成交金额
-//			Element eTotalValueTrade = e.element("TotalValueTrade");
+			Element eTotalValueTrade = e.element("TotalValueTrade");
 			THqb tHqb = new THqb();
 			tHqb.setHqrq(date);
 			if(!eOpenPrice.getText().equals("")) {
@@ -118,6 +118,9 @@ public class THqbServiceImpl implements THqbService {
 			}
 			if(!ePrevClosePx.getText().equals("")) {
 				tHqb.setZrspj(Double.parseDouble(ePrevClosePx.getText()));
+			}
+			if(!eTotalValueTrade.getText().equals("")) {
+				tHqb.setCjje(Double.parseDouble(eTotalValueTrade.getText()));
 			}
 			tHqb.setZqmc(eSymbol.getText().trim());
 			String zqdm = eSecurityID.getText().trim();
