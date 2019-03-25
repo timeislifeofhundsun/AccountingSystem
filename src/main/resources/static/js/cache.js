@@ -360,16 +360,10 @@ layui.use(['form','jquery',"layer"],function() {
         var skin = window.sessionStorage.getItem("skin");
         console.log("skins function : skin值为"+skin);
         if(skin){  //如果更换过皮肤
-            if(window.sessionStorage.getItem("skinValue") != "自定义"){
                 $("body").addClass(window.sessionStorage.getItem("skin"));
-                $("#left").removeClass("layui-bg-black");
-                $("#left").css("background-color",skin);
-            }else{
                 $(".layui-layout-admin .layui-header").css("background-color",skin);
                 $("#left").removeClass("layui-bg-black");
                 $("#left").css("background-color",skin);
-                //$(".topLevelMenus").css("background-color",skin);//hideMenu
-            }
         }else{
             $("#left").addClass("layui-bg-black");
         }
@@ -431,10 +425,11 @@ layui.use(['form','jquery',"layer"],function() {
                 })
                 var skinStr,skinColor;
                 $(".bodyColor").blur(function(){
-                    $(".layui-layout-admin .layui-header").css("background-color",$(this).val()+" !important");
+                    /*$(".layui-layout-admin .layui-header").css("background-color",$(this).val()+" !important");
                     $(".hideMenu").css("background-color",$(this).val()+" !important");
-                    $("#left").css("background-color",$(this).val()+" !important");
+                    $("#left").css("background-color",$(this).val()+" !important");*/
                     skinColor=$(this).val();
+                    $("#left").addClass("layui-bg-black");
                 })
 
                 form.on("submit(changeSkin)",function(data){
