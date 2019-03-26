@@ -190,7 +190,7 @@ public class FileParsing {
 //        //去掉小数点2
 //        String temp2 = rowValues[2].toString().substring(0,rowValues[2].toString().length()-1);
         tQsb.setZtbh(10000).setRq(sdf.parse(rowValues[12].toString())).setZqcode(rowValues[24].toString()).setYwlb(1302)
-        .setBs(rowValues[29].toString()).setQuantity(Integer.valueOf(rowValues[31].toString().trim())).setAmount(Double.valueOf(temp))
+        .setBs(rowValues[29].toString().trim()).setQuantity(Integer.valueOf(rowValues[31].toString().trim())).setAmount(Double.valueOf(temp))
         .setYhs(Double.valueOf(rowValues[37].toString())).setJsf(Double.valueOf(rowValues[38].toString())).setGhf(Double.valueOf(rowValues[39].toString()))
         .setZgf(Double.valueOf(rowValues[40].toString())).setYj(Double.valueOf(rowValues[41].toString())).setCost(Double.valueOf(temp1))
         .setExtenda(rowValues[13].toString().trim()).setExtendb(rowValues[11].toString().trim());
