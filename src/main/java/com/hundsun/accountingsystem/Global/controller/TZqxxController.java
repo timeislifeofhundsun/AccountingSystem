@@ -12,6 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.hundsun.accountingsystem.Global.VO.TJyflVO;
 import com.hundsun.accountingsystem.Global.VO.TZqxxVO;
 import com.hundsun.accountingsystem.Global.bean.TZqxx;
+import com.hundsun.accountingsystem.Global.mapper.TZqxxMapper;
 import com.hundsun.accountingsystem.Global.service.TZqxxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +34,8 @@ import java.util.List;
 public class TZqxxController {
   @Autowired
   public TZqxxService tZqxxService;
+  @Autowired
+  public TZqxxMapper tZqxxMapper;
 
   @GetMapping("/TZqxx")
   public String getAllZqxx(@RequestParam(value ="indexpage" ) int indexpage,@RequestParam(value = "sizepage") int sizepage ){
@@ -67,5 +70,11 @@ public class TZqxxController {
     int zqnm = Integer.valueOf(data);
     int i = tZqxxService.deleteByPrimaryKey(zqnm);
     return String.valueOf(i);
+  }
+
+  @GetMapping("/TZqxxList")
+  public List<TZqxx> getTZqxxList(){
+    List<TZqxx> allTZqxx = tZqxxMapper.findAllTZqxx();
+    return allTZqxx;
   }
 }

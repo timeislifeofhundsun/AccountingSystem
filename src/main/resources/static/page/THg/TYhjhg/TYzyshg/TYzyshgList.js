@@ -27,10 +27,8 @@ layui.use(['form','layer','laydate','table'],function(){
     });
     var myDate = new Date();
     var date = myDate.toLocaleDateString();
-    console.log(date);
     var re=new RegExp("/","g");
     var newdate=date.replace(re,"-");
-    console.log(newdate);
     //费率设置列表渲染
     var tableIns = table.render({
         elem: '#TYzyshgList',
@@ -80,10 +78,13 @@ layui.use(['form','layer','laydate','table'],function(){
     //添加证券信息
     function addTYzyshg(edit){
         var index = layui.layer.open({
-            title : "添加质押式回购",
+            title : "新增质押式回购",
             type : 2,
             content : "TYzyshgAdd.html",
             success : function(layero, index){
+                $("#bs").on('change',function () {
+                    console.log(31231);
+                });
                 var body = layui.layer.getChildFrame('body', index);
                 setTimeout(function(){
                     layui.layer.tips('点击此处返回质押式回购列表', '.layui-layer-setwin .layui-layer-close', {
@@ -228,15 +229,6 @@ layui.use(['form','layer','laydate','table'],function(){
     };
 
     $('#ckrqbtn').on('click', function(){
-        // console.log(document.getElementById("ckrq").value);
-        // table.reload('TYzyshgList', {
-        //     page: {
-        //         curr: 1 //重新从第 1 页开始
-        //     }
-        //     ,where: {
-        //         ckrq : document.getElementById("ckrq").value
-        //     }
-        // });
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });

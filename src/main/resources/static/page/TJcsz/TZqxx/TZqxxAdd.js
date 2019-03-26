@@ -26,7 +26,9 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         elem: '#qxr',
         format: 'yyyy-MM-dd'
     });
-
+    form.on("select(zqlb)",function (data) {
+        console.log(data);
+    });
     form.verify({
         zqnm : function(val){
             if(val == ''){
