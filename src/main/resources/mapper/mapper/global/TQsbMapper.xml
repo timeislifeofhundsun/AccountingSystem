@@ -164,7 +164,13 @@
             <if test="id != null "> and t_qsb.id = #{id}</if>
         </where>
     </select> 
-
+    <select id="findAllTQsb" resultType="com.hundsun.accountingsystem.Global.bean.TQsb">
+      select * from t_qsb where extenda=#{extenda} and extendc=#{extendc} and ywlb in
+        <foreach collection="ywlb" item="ywlb" index="index"
+                 open="(" close=")" separator=",">
+            #{ywlb}
+        </foreach>
+    </select>
     <!-- 通过TQsb的id获得对应数据库中表的数据对象-->
     <select id="selectTQsbById" parameterType="java.lang.Integer" resultMap="result_TQsb_Map">
         select 

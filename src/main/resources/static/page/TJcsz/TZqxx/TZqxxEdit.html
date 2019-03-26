@@ -16,134 +16,144 @@
 </head>
 <body class="childrenBody">
 <form class="layui-form layui-row layui-col-space10 editform" lay-filter="editform" id="editform">
-    <div class="layui-col-md6 layui-col-xs12">
-        <div class="layui-row layui-col-space10">
-            <div class="layui-col-md-offset2 layui-col-md8 layui-col-xs7">
-                <div class="layui-form-item magt3">
-                    <label class="layui-form-label">证券内码</label>
-                    <div class="layui-input-block">
-                        <input type="text" class="layui-input zqnm" name="zqnm" id="zqnm" lay-verify="zqnm" placeholder="请输入证券内码">
+        <div class="layui-col-md6 layui-col-xs12" style="padding-top: 50px">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md-offset2 layui-col-md8 layui-col-xs7">
+                    <div class="layui-form-item magt3">
+                        <label class="layui-form-label">证券内码</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input zqnm" name="zqnm" id="zqnm" lay-verify="zqnm"
+                                   placeholder="请输入证券内码">
+                        </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">证券代码</label>
-                    <div class="layui-input-block">
-                        <input type="text" class="layui-input zqdm" name="zqdm" id="zqdm" lay-verify="zqdm" placeholder="请输入证券代码">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">证券代码</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input zqdm" name="zqdm" id="zqdm" lay-verify="zqdm"
+                                   placeholder="请输入证券代码">
+                        </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">证券类别</label>
-                    <div class="layui-input-block">
-                        <select name="zqlb"  class="zqlb" id="zqlb" lay-verify="zqlb" lay-search>
-                            <option  value="">请选择证券类别</option>
-                            <option value="1">回购</option>
-                            <option value="3">股票</option>
-                            <option value="4">基金</option>
-                        </select>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">证券类别</label>
+                        <div class="layui-input-block">
+                            <select name="zqlb" class="zqlb" id="zqlb" lay-verify="zqlb" lay-search>
+                                <option value="">请选择证券类别</option>
+                                <option value="1">回购</option>
+                                <option value="3">股票</option>
+                                <option value="4">基金</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">市场类别</label>
-                    <div class="layui-input-block">
-                        <select name="sclb"  class="sclb" id="sclb" lay-verify="sclb" lay-search>
-                            <option  value="">请选择市场类别</option>
-                            <option value="1">上海</option>
-                            <option value="2">深圳</option>
-                            <option value="3">国内银行间</option>
-                        </select>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">市场类别</label>
+                        <div class="layui-input-block">
+                            <select name="sclb" class="sclb" id="sclb" lay-verify="sclb" lay-search>
+                                <option value="">请选择市场类别</option>
+                                <option value="1">上海</option>
+                                <option value="2">深圳</option>
+                                <option value="3">国内银行间</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">证券简称</label>
-                    <div class="layui-input-block">
-                        <input type="text" class="layui-input zqjg" name="zqjg"  id="zqjg" lay-verify="zqjg" placeholder="请输入证券简称">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">证券简称</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input zqjg" name="zqjg" id="zqjg" lay-verify="zqjg"
+                                   placeholder="请输入证券简称">
+                        </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">总股本</label>
-                    <div class="layui-input-block">
-                        <input type="text" class="layui-input zgb" name="zgb"  id="zgb" lay-verify="zgb" placeholder="请输入总股本">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">总股本</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input zgb" name="zgb" id="zgb" lay-verify="zgb"
+                                   placeholder="请输入总股本">
+                        </div>
                     </div>
-                </div>
-                <div class="layui-form-item magt3">
-                    <label class="layui-form-label">流通股数</label>
-                    <div class="layui-input-block">
-                        <input type="text" class="layui-input ltgs"  name="ltgs"  id="ltgs" lay-verify="ltgs" placeholder="请输入流通股数">
+                    <div class="layui-form-item magt3">
+                        <label class="layui-form-label">流通股数</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input ltgs" name="ltgs" id="ltgs" lay-verify="ltgs"
+                                   placeholder="请输入流通股数">
+                        </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">面值</label>
-                    <div class="layui-input-block">
-                        <input type="text" class="layui-input mgmz" name="mgmz"  id="mgmz" lay-verify="mgmz" placeholder="请输入面值">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">面值</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input mgmz" name="mgmz" id="mgmz" lay-verify="mgmz"
+                                   placeholder="请输入面值">
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
+
         </div>
-
-    </div>
-    <div class="layui-col-md6 layui-col-xs12">
-        <div class="layui-col-md-offset2 layui-col-md8 layui-col-xs7">
-            <div class="layui-form-item">
-                <label class="layui-form-label">发行日期</label>
-                <div class="layui-input-block">
-                    <input type="test" class="layui-input fxrq"  name="fxrq"  id="fxrq" placeholder="yyyy-MM-dd">
+        <div class="layui-col-md6 layui-col-xs12" style="padding-top: 50px">
+            <div class="layui-col-md-offset2 layui-col-md8 layui-col-xs7">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发行日期</label>
+                    <div class="layui-input-block">
+                        <input type="test" class="layui-input fxrq" name="fxrq" id="fxrq" placeholder="yyyy-MM-dd">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">到期日期</label>
-                <div class="layui-input-block">
-                    <input type="test" class="layui-input dqrq" name="dqrq" id="dqrq" placeholder="yyyy-MM-dd">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">到期日期</label>
+                    <div class="layui-input-block">
+                        <input type="test" class="layui-input dqrq" name="dqrq" id="dqrq" placeholder="yyyy-MM-dd">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">回购天数</label>
-                <div class="layui-input-block">
-                    <input type="text" class="layui-input hgts" name="hgts" id="hgts" lay-verify="hgts" placeholder="请输入回购天数">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回购天数</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input hgts" name="hgts" id="hgts" lay-verify="hgts"
+                               placeholder="请输入回购天数">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">年计息天数</label>
-                <div class="layui-input-block">
-                    <input type="text" class="layui-input njxts" name="njxts" id="njxts" lay-verify="njxts" placeholder="请输入年计息天数">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">年计息天数</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input njxts" name="njxts" id="njxts" lay-verify="njxts"
+                               placeholder="请输入年计息天数">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">年利率</label>
-                <div class="layui-input-block">
-                    <input type="text" class="layui-input nll"  name="nll" id="nll" lay-verify="nll" placeholder="请输入年利率">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">年利率</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input nll" name="nll" id="nll" lay-verify="nll"
+                               placeholder="请输入年利率">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">起息日</label>
-                <div class="layui-input-block">
-                    <input type="test" class="layui-input qxr" id="qxr" name="qxr"   placeholder="yyyy-MM-dd">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">起息日</label>
+                    <div class="layui-input-block">
+                        <input type="test" class="layui-input qxr" id="qxr" name="qxr" placeholder="yyyy-MM-dd">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">付息方式</label>
-                <div class="layui-input-block">
-                    <select name="fxfs" id="fxfs" class="fxfs" lay-verify="fxfs" lay-search>
-                        <option  value="">请选择付息方式</option>
-                        <option value="1">到期还本付息</option>
-                        <option value="2">一年付息</option>
-                        <option value="3">半年付息</option>
-                        <option value="4">3个月付息</option>
-                        <option value="5">1个月付息</option>
-                    </select>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">付息方式</label>
+                    <div class="layui-input-block">
+                        <select name="fxfs" id="fxfs" class="fxfs" lay-verify="fxfs" lay-search>
+                            <option value="">请选择付息方式</option>
+                            <option value="1">到期还本付息</option>
+                            <option value="2">一年付息</option>
+                            <option value="3">半年付息</option>
+                            <option value="4">3个月付息</option>
+                            <option value="5">1个月付息</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">发行价格</label>
-                <div class="layui-input-block">
-                    <input type="text" class="layui-input fxjg"  name="fxjg" id="fxjg" lay-verify="fxjg" placeholder="请输入发行价格">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发行价格</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input fxjg" name="fxjg" id="fxjg" lay-verify="fxjg"
+                               placeholder="请输入发行价格">
+                    </div>
                 </div>
-            </div>
-            <hr class="layui-bg-gray"/>
-            <div class="layui-right">
-                <a class="layui-btn layui-btn-sm" lay-filter="AddTZqxx" lay-submit><i
-                        class="layui-icon">&#xe609;</i>提交</a>
-            </div>
+                <hr class="layui-bg-gray"/>
+                <div class="layui-right">
+                    <a class="layui-btn layui-btn-sm" lay-filter="AddTZqxx" lay-submit><i
+                            class="layui-icon">&#xe609;</i>提交</a>
+                </div>
         </div>
     </div>
     </div>

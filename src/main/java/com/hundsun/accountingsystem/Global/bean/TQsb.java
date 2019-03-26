@@ -49,7 +49,7 @@ public class TQsb {
 
     private Double lumpsum;
 
-    private String extenda;//新股情况下代表交收时期
+    private String extenda;//新股情况下代表交收时期,红股情况代表到账日期
 
     private String extendb;//新股情况代表交易日期
 

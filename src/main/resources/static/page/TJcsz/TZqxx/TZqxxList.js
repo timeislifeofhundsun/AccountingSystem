@@ -28,15 +28,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         url : '/TZqxx',
         method: 'GET',
         cellMinWidth : 95,
-        toolbar: '#TZqxxbar',
         request: {
             pageName: 'indexpage', //页码的参数名称，默认：page
             limitName: 'sizepage' //每页数据量的参数名，默认：limit
         },
-        page : {
-            layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'],
-            groups: 5
-        },
+        page : true,
         height : "full-125",
         limit : 10,
         limits : [10,15,20,25],
@@ -132,6 +128,52 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             layui.layer.full(index);
         })
     }
+    //点击查看操作
+    function showDetail(data){
+        var index = layui.layer.open({
+            title : "查看证券信息",
+            type : 2,
+            content : "TZqxxDetail.html",
+            success : function(layero, index){
+                var ZqxxFrom = layer.getChildFrame('', index);
+                var iframeWindow = layero.find('iframe')[0].contentWindow;
+                var body = layui.layer.getChildFrame('body', index);
+                console.log(data);
+                if(data){
+                    body.find(".zqnm").val(data.zqnm);
+                    body.find(".zqdm").val(data.zqdm);
+                    body.find(".zqlb").val(data.zqlb);
+                    body.find(".sclb").val(data.sclb);
+                    body.find(".zqjg").val(data.zqjg);
+                    body.find(".zgb").val(data.zgb);
+                    body.find(".ltgs").val(data.ltgs);
+                    body.find(".mgmz").val(data.mgmz);
+                    body.find(".fxrq").val(data.fxrq);
+                    body.find(".dqrq").val(data.dqrq);
+                    body.find(".hgts").val(data.hgts);
+                    body.find(".njxts").val(data.njxts);
+                    body.find(".nll").val(data.nll);
+                    body.find(".qxr").val(data.qxr);
+                    body.find(".fxfs").val(data.fxfs);
+                    body.find(".fxjg").val(data.fxjg);
+                    layui.use(['form'], function(){
+                        iframeWindow.layui.form.render();
+                    });
+                    form.render();
+                }
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回证券列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })
+    };
     //列表中判断点击编辑操作
     table.on('tool(TZqxxList)', function(obj){
         var layEvent = obj.event,
@@ -153,7 +195,9 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                     },
                 });
             });
-        }
+        }else if(layEvent === 'detail'){
+        showDetail(data);
+    }
     });
 
 })

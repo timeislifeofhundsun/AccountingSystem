@@ -21,6 +21,9 @@
         and sru.sys_role_id=r.rid
         and username= #{username}
 	</select>
+    <update id="updatePwd" parameterType="com.hundsun.accountingsystem.Global.bean.SysUser">
+		update sys_user set password = #{password} where uid =#{uid}
+	</update>
 
 
 </mapper>

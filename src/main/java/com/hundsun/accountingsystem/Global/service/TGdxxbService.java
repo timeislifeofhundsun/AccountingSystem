@@ -14,4 +14,11 @@ public interface TGdxxbService {
 	public TGdxxb findGdById(String gddm);
 	
 	public void deleteGdById(String gddm) throws Exception;
+
+	public int getCounts();
+
+	public List<TGdxxb> findGdListByPage(int page, int limit);
+
+	public List<TGdxxb> findgDgByZtbh(int ztbh);
+
 }

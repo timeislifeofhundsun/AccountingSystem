@@ -20,6 +20,10 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         url : '/TJyfl',
         method: 'GET',
         cellMinWidth : 95,
+        request: {
+            pageName: 'indexpage', //页码的参数名称，默认：page
+            limitName: 'sizepage' //每页数据量的参数名，默认：limit
+        },
         page : true,
         height : "full-125",
         limit : 10,
@@ -42,7 +46,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         var index = layui.layer.open({
             title : "修改费率",
             type : 2,
-            content : "TZqxxEdit.html",
+            content : "TJyflEdit.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){

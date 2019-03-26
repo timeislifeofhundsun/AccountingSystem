@@ -261,4 +261,9 @@
   		from t_ztxxb
   		limit #{start},#{end}
   </select>
+  
+  <select id="getMaxZtbh" resultType="java.lang.Integer" >
+    select max(ztbh) from t_ztxxb
+  </select>
+  
 </mapper>

@@ -47,20 +47,186 @@ layui.use(['form','jquery',"layer"],function() {
     $(".showNotice").on("click",function(){
         showNotice();
     })
+    $("#mopwdbtn").on("click",function(){
+        showModifyLayer();
+    });
+    function clear () {
+        $("#mopwd").val("")
+        $("#newpwd1").val("")
+        $("#newpwd2").val("")
+    }
+    function showModifyLayer() {
+        var index = layer.open({
+            type: 1,
+            btn: ['取消','确定'],
+            title: "修改密码",
+            area: ["460px", "400px"],
+            content: $("#modifypwdlayer"),
+            //++enter
+            success: function(layero, index){
+                $(document).on('keydown', function(e){
+                    if(e.keyCode == 13){
+                        deleteFile(index);
+                    }
+                })
+                getModifyPwd()
+            },
+            cancel: function(index, layero){
+                clear();
+            },
+            yes: function (index) {
+                clear();
+                layer.close(index);
+            },
+            btn2: function (index) {
+                var newpwd1 = $("#newpwd1").val().trim();
+                $.ajax({
+                    url: "/updatepwd",
+                    data: {newpwd1:newpwd1},
+                    type: 'PUT',
+                    success:function (data) {
+                        console.log(data);
+                        if (data==1){
+                            clear();
+                            layer.close(index);
+                            layer.msg('修改成功', {
+                                time: 1000, //20s后自动关闭
+                            });
+                        }else{
+                            clear();
+                            layer.close(index);
+                            layer.msg('修改失败', {
+                                time: 1000, //20s后自动关闭
+                            });
+                        }
+                    }
+                });
+                console.log(444);
+            }
+        });
+    }
+    function getModifyPwd() {
+        var pwd;
+        $("#mopwd").blur(function () {
+            var mopwd = $("#mopwd").val().trim();
+            if (mopwd.length == 0) {
+                $("#mopwd-aux").css({
+                    display: "block",
+                    color: "#ff1010",
+                }).html("请输入原密码")
+            } else {
+                //发送ajax验证密码
+                $.ajax({
+                    url: "/unlock",
+                    data: {password:mopwd},
+                    type: 'GET',
+                    success:function (data) {
+                        console.log(data);
+                        if (data==1){
+                            $("#mopwd-aux").css({
+                                display: "block",
+                                color: "#5FB878"
+                            }).html("输入正确")
+                            pwd = mopwd;
+
+                        }else{
+                            $("#mopwd-aux").css({
+                                display: "block",
+                                color: "#ff1010",
+                            }).html("密码不正确")
+                        }
+                    }
+                });
+            }
+        })
+
+        var newpwd1 = $("#newpwd1").val().trim()
+        $("#newpwd1").blur( function () {
+            newpwd1 = $("#newpwd1").val().trim()
+            if (newpwd1.length == 0) {
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("请输入新密码")
+            } else if (newpwd1 == pwd) {
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("新密码不能与原密码相同")
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("新密码不能与原密码相同")
+            } else {
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#5FB878"
+                }).html("输入正确")
+            }
+        })
+
+        $("#newpwd2").focus(function () {
+            var newpwd1 = $("#newpwd1").val().trim();
+            if (newpwd1.length == 0) {
+            $("#newpwd1-aux").css({
+                display: "block",
+                color: "#ff1010"
+            }).html("请输入新密码")
+        }
+    })
+        $("#newpwd2").blur( function () {
+            var newpwd2 = $("#newpwd2").val().trim()
+            if (newpwd2.length == 0) {
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("请输入新密码")
+            } else if (newpwd1 != newpwd2) {
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("两次输入不一致")
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("两次输入不一致")
+
+            } else if (newpwd2 == pwd) {
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("新密码不能与原密码相同")
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("新密码不能与原密码相同")
+            } else {
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#5FB878"
+                }).html("输入正确")
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#5FB878"
+                }).html("输入正确")
+                $("#adduserlayer").data("new_pwd", newpwd1)
+            }
+        });
+    }
 
     //锁屏
     function lockPage(){
+        var userName = $.cookie('userName');
         layer.open({
             title : false,
             type : 1,
             content : '<div class="admin-header-lock" id="lock-box">'+
                             '<div class="admin-header-lock-img"><img src="images/face.jpg" class="userAvatar"/></div>'+
-                            '<div class="admin-header-lock-name" id="lockUserName">驊驊龔頾</div>'+
+                            '<div class="admin-header-lock-name" id="lockUserName">'+userName+'</div>'+
                             '<div class="input_btn">'+
                                 '<input type="password" class="admin-header-lock-input layui-input" autocomplete="off" placeholder="请输入密码解锁.." name="lockPwd" id="lockPwd" />'+
                                 '<button class="layui-btn" id="unlock">解锁</button>'+
                             '</div>'+
-                            '<p>请输入“123456”，否则不会解锁成功哦！！！</p>'+
                         '</div>',
             closeBtn : 0,
             shade : 0.9,
@@ -193,13 +359,12 @@ layui.use(['form','jquery',"layer"],function() {
     function skins(){
         var skin = window.sessionStorage.getItem("skin");
         if(skin){  //如果更换过皮肤
-            if(window.sessionStorage.getItem("skinValue") != "自定义"){
                 $("body").addClass(window.sessionStorage.getItem("skin"));
-            }else{
-                $(".layui-layout-admin .layui-header").css("background-color",skin.split(',')[0]);
-                $(".layui-bg-black").css("background-color",skin.split(',')[1]);
-                $(".hideMenu").css("background-color",skin.split(',')[2]);
-            }
+                $(".layui-layout-admin .layui-header").css("background-color",skin);
+                $("#left").removeClass("layui-bg-black");
+                $("#left").css("background-color",skin);
+        }else{
+            $("#left").addClass("layui-bg-black");
         }
     }
     skins();
@@ -216,9 +381,7 @@ layui.use(['form','jquery',"layer"],function() {
                                     '<input type="radio" name="skin" value="蓝色" title="蓝色" lay-filter="blue">'+
                                     '<input type="radio" name="skin" value="自定义" title="自定义" lay-filter="custom">'+
                                     '<div class="skinCustom">'+
-                                        '<input type="text" class="layui-input topColor" name="topSkin" placeholder="顶部颜色" />'+
-                                        '<input type="text" class="layui-input leftColor" name="leftSkin" placeholder="左侧颜色" />'+
-                                        '<input type="text" class="layui-input menuColor" name="btnSkin" placeholder="顶部菜单按钮" />'+
+                                        '<input type="text" class="layui-input bodyColor" name="bodyColor" placeholder="颜色（red、blue等方式）" />'+
                                     '</div>'+
                                 '</div>'+
                                 '<div class="layui-form-item skinBtn">'+
@@ -234,9 +397,7 @@ layui.use(['form','jquery',"layer"],function() {
                 };
                 if($(".skins_box input[value=自定义]").attr("checked")){
                     $(".skinCustom").css("visibility","inherit");
-                    $(".topColor").val(skin.split(',')[0]);
-                    $(".leftColor").val(skin.split(',')[1]);
-                    $(".menuColor").val(skin.split(',')[2]);
+                    $(".bodyColor").val(skin);
                 };
                 form.render();
                 $(".skins_box").removeClass("layui-hide");
@@ -244,29 +405,30 @@ layui.use(['form','jquery',"layer"],function() {
                     var skinColor;
                     if($(this).find("div").text() == "橙色"){
                         skinColor = "orange";
+                        $("#left").css("background-color",skinColor);
                     }else if($(this).find("div").text() == "蓝色"){
                         skinColor = "blue";
+                        $("#left").css("background-color",skinColor);
                     }else if($(this).find("div").text() == "默认"){
                         skinColor = "";
+                        $("#left").addClass("layui-bg-black");
                     }
                     if($(this).find("div").text() != "自定义"){
-                        $(".topColor,.leftColor,.menuColor").val('');
+                        $(".bodyColor").val('');
                         $("body").removeAttr("class").addClass("main_body "+skinColor+"");
                         $(".skinCustom").removeAttr("style");
-                        $(".layui-bg-black,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
+                        $(".hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
                     }else{
                         $(".skinCustom").css("visibility","inherit");
                     }
                 })
                 var skinStr,skinColor;
-                $(".topColor").blur(function(){
-                    $(".layui-layout-admin .layui-header").css("background-color",$(this).val()+" !important");
-                })
-                $(".leftColor").blur(function(){
-                    $(".layui-bg-black").css("background-color",$(this).val()+" !important");
-                })
-                $(".menuColor").blur(function(){
+                $(".bodyColor").blur(function(){
+                    /*$(".layui-layout-admin .layui-header").css("background-color",$(this).val()+" !important");
                     $(".hideMenu").css("background-color",$(this).val()+" !important");
+                    $("#left").css("background-color",$(this).val()+" !important");*/
+                    skinColor=$(this).val();
+                    $("#left").addClass("layui-bg-black");
                 })
 
                 form.on("submit(changeSkin)",function(data){
@@ -277,27 +439,28 @@ layui.use(['form','jquery',"layer"],function() {
                             skinColor = "blue";
                         }else if(data.field.skin == "默认"){
                             skinColor = "";
+                            $("#left").addClass("layui-bg-black");
                         }
                         window.sessionStorage.setItem("skin",skinColor);
                     }else{
-                        skinStr = $(".topColor").val()+','+$(".leftColor").val()+','+$(".menuColor").val();
-                        window.sessionStorage.setItem("skin",skinStr);
+                        skinStr = $(".bodyColor").val();
+                        skinColor = skinStr;
+                        window.sessionStorage.setItem("skin",skinColor);
                         $("body").removeAttr("class").addClass("main_body");
+                        skins();
                     }
                     window.sessionStorage.setItem("skinValue",data.field.skin);
                     layer.closeAll("page");
                 });
                 form.on("submit(noChangeSkin)",function(){
                     $("body").removeAttr("class").addClass("main_body "+window.sessionStorage.getItem("skin")+"");
-                    $(".layui-bg-black,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
-                    skins();
+                    $("#left,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
                     layer.closeAll("page");
                 });
             },
             cancel : function(){
                 $("body").removeAttr("class").addClass("main_body "+window.sessionStorage.getItem("skin")+"");
-                $(".layui-bg-black,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
-                skins();
+                $("#left,.hideMenu,.layui-layout-admin .layui-header").removeAttr("style");
             }
         })
     })

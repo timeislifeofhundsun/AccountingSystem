@@ -1,5 +1,6 @@
 package com.hundsun.accountingsystem.Global.mapper;
 
+import com.hundsun.accountingsystem.Global.VO.TGdxxbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.TGdxxb;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface TGdxxbMapper {
     int updateByPrimaryKeySelective(TGdxxb record);
 
     int updateByPrimaryKey(TGdxxb record);
+
+	List<TGdxxb> selectByLimit(TGdxxbParamPojo params);
 }

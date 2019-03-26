@@ -31,15 +31,15 @@ public class TJyflController {
   @Autowired
   public TJyflService tJyflService;
   @GetMapping("/TJyfl")
-  public String getAllTJyfl(){
+  public String getAllTJyfl(@RequestParam(value ="indexpage" ) int indexpage,@RequestParam(value = "sizepage") int sizepage){
+    List<TJyfl> list = tJyflService.getTJyflPage(indexpage,sizepage);
     List<TJyfl> allTJyfl = tJyflService.findAllTJyfl();
     TJyflVO layuiJson = new TJyflVO();
     layuiJson.setCode(0);
     layuiJson.setCount(allTJyfl.size());
     layuiJson.setMsg("");
-    layuiJson.setData(allTJyfl);
+    layuiJson.setData(list);
     String jsonString = JSON.toJSONString(layuiJson);
-    System.out.println(jsonString);
     return jsonString;
   }
   @PutMapping("/TJyfl")
