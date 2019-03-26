@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -76,6 +77,19 @@ public class TjjhqxxController {
 		THqb thqb = JSON.parseObject(data,THqb.class);
 		thqb.setZqnm(4);
 		thqbServiceImpl.updateHqxx(thqb);
+		return String.valueOf(1);
+	}
+	
+	
+	@PostMapping("/THqxx")
+	public String addHqxx(@RequestParam(value = "Hqxx",required = true) String data) {
+		THqb thqb = JSON.parseObject(data,THqb.class);
+		thqb.setZqnm(4);
+		try {
+			thqbServiceImpl.insertHqxx(thqb);
+		} catch (Exception e) {
+			return e.getMessage();
+		}
 		return String.valueOf(1);
 	}
 	

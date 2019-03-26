@@ -226,5 +226,18 @@ public class THqbServiceImpl implements THqbService {
 		tHqbMapper.updateTHqb(thqb, assist);
 		
 	}
+
+	@Override
+	public void insertHqxx(THqb thqb) throws Exception {
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("zqdm", thqb.getZqdm()));
+		assist.setRequires(Assist.andEq("zqnm", 4));
+		assist.setRequires(Assist.andEq("hqrq", thqb.getHqrq()));
+		List<THqb> list = tHqbMapper.selectTHqb(assist);
+		if(list!=null&&list.size()!=0) {
+			throw new Exception("该基金的当日行情信息已经存在，请不要重复添加");
+		}
+		tHqbMapper.insertTHqb(thqb);
+	}
 	
 }
