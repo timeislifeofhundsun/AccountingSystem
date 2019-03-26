@@ -1,14 +1,12 @@
 $(function () {
     var header = $.cookie('header');
     var token = $.cookie('token');
-    console.log(header);
-    console.log(token);
     $(document).ajaxSend(function(e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
 })
 layui.use(['form','layer','layedit','laydate','upload'],function(){
-    var form = layui.form
+    var form = layui.form,
     layer = parent.layer === undefined ? layui.layer : top.layer,
         laypage = layui.laypage,
         upload = layui.upload,

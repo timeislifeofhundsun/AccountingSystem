@@ -197,26 +197,26 @@
         "spread": false,
         "children": [
           {
-            "title": "质押式回购",
+            "title": "银行间质押式回购",
             "icon": "&#xe61c;",
             "href": "page/THg/TYhjhg/TYzyshg/TYzyshgList.html",
             "spread": false
           },
           {
-            "title": "买断式回购",
+            "title": "银行间买断式回购",
             "icon": "&#xe609;",
             "href": "page/THg/TYhjhg/TYmdshg/TYmdshgList.html",
             "spread": false
           }
         ]
       },{
-			"title": "交易所间回购",
+			"title": "交易所回购",
 			"icon": "icon-mokuai",
             "href": "",
             "spread": false,
             "children": [
               {
-                "title": "质押式回购",
+                "title": "交易所质押式回购",
                 "icon": "&#xe61c;",
                 "href": "page/THg/TJyshg/TJzyshg/TJzyshgList.html",
                 "spread": false

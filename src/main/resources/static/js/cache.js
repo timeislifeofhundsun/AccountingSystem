@@ -358,7 +358,6 @@ layui.use(['form','jquery',"layer"],function() {
     //更换皮肤
     function skins(){
         var skin = window.sessionStorage.getItem("skin");
-        console.log("skins function : skin值为"+skin);
         if(skin){  //如果更换过皮肤
                 $("body").addClass(window.sessionStorage.getItem("skin"));
                 $(".layui-layout-admin .layui-header").css("background-color",skin);

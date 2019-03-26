@@ -3,6 +3,7 @@ package com.hundsun.accountingsystem.Global.bean;
 import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +25,16 @@ public class Assist {
 	// 条件集
 	private List<WhereRequire<?>> require = null;
 
+	@Override
+	public String toString() {
+		StringBuffer stringBuffer = new StringBuffer();
+		for (WhereRequire where: require
+			 ) {
+         stringBuffer.append(where.toString());
+		}
+		return stringBuffer.toString();
+	}
+
 	/**
 	 * 条件类,require属性为列的条件,value为条件值,suffix为结尾
 	 * 
@@ -34,7 +45,6 @@ public class Assist {
 		private T value;// 单个值
 		private Object[] values;// 多个值
 		private String suffix;// 结束语句
-
 		public WhereRequire(String require, T value) {
 			super();
 			this.require = require;
@@ -85,6 +95,16 @@ public class Assist {
 
 		public void setSuffix(String suffix) {
 			this.suffix = suffix;
+		}
+
+		@Override
+		public String toString() {
+			return "WhereRequire{" +
+					"require='" + require + '\'' +
+					", value=" + value +
+					", values=" + Arrays.toString(values) +
+					", suffix='" + suffix + '\'' +
+					'}';
 		}
 	}
 
