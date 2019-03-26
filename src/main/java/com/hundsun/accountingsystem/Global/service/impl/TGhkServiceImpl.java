@@ -25,11 +25,9 @@ public class TGhkServiceImpl implements TGhkService {
     TGhkMapper tGhkMapper;
 
     @Override
-    public boolean readGhDataByFile(String SHFilePath, String SZFilePath, String date) throws ParseException {
-    	boolean res = false;
+    public String readGhDataByFile(String SHFilePath, String SZFilePath, String date) throws ParseException {
+    	String res = "";
         if (date != null && !date.equals("")){
-            System.out.println(date.equals(""));
-            System.out.println(!date.equals(""));
             Assist assist = new Assist();
             assist.setRequires(Assist.andEq("bctime",date));
              tGhkMapper.deleteTGhk(assist);
@@ -37,6 +35,7 @@ public class TGhkServiceImpl implements TGhkService {
         if (SHFilePath != null && !SHFilePath.equals("")){
             try {
                 tGhkMapper.insertTGhkByBatch(FileParsing.ReadDbf(SHFilePath));
+                res += "上海接口文件读取成功  ";
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -45,11 +44,12 @@ public class TGhkServiceImpl implements TGhkService {
             System.out.println(SZFilePath);
             try {
                 tGhkMapper.insertTGhkByBatch(FileParsing.ReadSJSDbf(SZFilePath));
+                res += "深圳接口文件读取成功  ";
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        res = true;
+
         return res;
     }
 }

@@ -56,29 +56,28 @@ s	* @return boolean    返回类型
 		/**
 		 * 1.读取交易数据
 		 */
-		boolean res = false;
-		res = tGhkService.readGhDataByFile(gh,sjsmx,DateFormatUtil.getStringByDate(ywrq));
-		if(!res) {
+		String res = "";
+			res	= tGhkService.readGhDataByFile(gh,sjsmx,DateFormatUtil.getStringByDate(ywrq));
+		if(res.equals("")) {
 			throw new Exception("读取交易文件失败");
 		}
 		
 		/**
 		 * 2.读取行情数据
 		 */
-		res = tHqbService.readHqDataByFile(mkt, cash, ywrq);
-		if(!res) {
+		boolean resu = false;
+		resu = tHqbService.readHqDataByFile(mkt, cash, ywrq);
+		if(!resu) {
 			throw new Exception("读取行情文件失败");
 		}
 		
 		/**
 		 * 3.进行合笔计算，存储到成交回报表
 		 */
-		res = tCjhbbService.insertCjhbbByRzqs(ztbh, ywrq);
-		if(!res) {
+		resu = tCjhbbService.insertCjhbbByRzqs(ztbh, ywrq);
+		if(!resu) {
 			throw new Exception("合笔失败");
 		}
-		
-		
 		
 		returnData = true;
 		return returnData;

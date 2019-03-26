@@ -18,6 +18,22 @@
         <result column="ljjx" property="ljjx" />
     </resultMap>
 
+    <!-- 更新持仓库累计估值 -->
+    <update id="update_ljgz" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
+        update t_ccyeb
+        set
+        ljgz = #{ljgz} + ljgz
+        where  zqdm = #{zqdm}
+    </update>
+
+    <!-- 更新持仓库持有数量 -->
+    <update id="update_cysl" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
+        update t_ccyeb
+        set
+            cysl = #{cysl} + cysl
+           where  zqdm = #{zqdm}
+    </update>
+
 	   <!-- Assist用于辅助工具类setRequires设置的条件,${req.require}表示列名,#{req.value}表示值它是防SQL注入的 -->
     <sql id="Assist">
         <where>
@@ -222,7 +238,7 @@
         update t_ccyeb
         <set>
             <if test="cysl != null">
-                cysl=#{cysl},
+                cysl = #{cysl},
             </if>
             <if test="ljgz != null">
                 ljgz=#{ljgz},

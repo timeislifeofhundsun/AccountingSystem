@@ -304,5 +304,15 @@
 			<include refid="updateAssist" />
 		</if>
 	</update>
+	<select id="selectCounts" resultType="java.lang.Integer" >
+	  	select count(*) from t_hqb where zqnm=4
+	 </select>
+	 
+	 <select id="selectByLimit" resultMap="result_THqb_Map" parameterType="com.hundsun.accountingsystem.Global.VO.THqbParamPojo" >
+	  	select id,zqdm, hqrq, zqmc, zrspj,jrkp,jrsp,cjje
+	  		from t_hqb
+	  		where zqnm=4
+	  		limit #{start},#{end}
+	 </select>
 
 </mapper>

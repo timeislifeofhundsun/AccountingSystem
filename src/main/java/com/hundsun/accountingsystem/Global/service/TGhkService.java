@@ -12,5 +12,5 @@ public interface TGhkService{
  * @Return boolean
  * @Description 读取上海和深圳的交易文件
  **/
-	public boolean readGhDataByFile(String SHFilePath,String SZFilePath,String date) throws ParseException;
+	public String readGhDataByFile(String SHFilePath,String SZFilePath,String date) throws ParseException;
 }

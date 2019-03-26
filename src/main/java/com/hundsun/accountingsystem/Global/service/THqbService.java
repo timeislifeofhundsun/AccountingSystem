@@ -1,6 +1,9 @@
 package com.hundsun.accountingsystem.Global.service;
 
 import java.util.Date;
+import java.util.List;
+
+import com.hundsun.accountingsystem.Global.bean.THqb;
 
 /**
  * 
@@ -24,4 +27,14 @@ public interface THqbService {
 	* @author gaozhen
 	 */
 	public boolean readHqDataByFile(String SHFilePath,String SZFilePath,Date date);
+
+	public List<THqb> findHqxxByPage(int page, int limit);
+
+	public int selectCounts();
+
+	public List<THqb> findByZqdm(int zqdm);
+
+	public List<THqb> findByDate(String date);
+
+	public void updateHqxx(THqb thqb);
 }

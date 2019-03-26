@@ -63,4 +63,12 @@ public class TZqxxServiceImpl implements TZqxxService {
     return i;
   }
 
+@Override
+public List<TZqxx> selectByZqlb(int zqlb) {
+	TZqxxExample example = new TZqxxExample();
+	Criteria criteria = example.createCriteria();
+	criteria.andZqlbEqualTo(zqlb);
+	return tzqxxMapper.selectByExample(example);
+}
+
 }

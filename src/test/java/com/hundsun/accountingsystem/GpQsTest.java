@@ -24,10 +24,9 @@ public class GpQsTest {
 
 	@Test
 	public void test() throws Exception {
-		String date = "2018-06-06";
+		String date = "2018-06-15";
 		Map<String, String> res = FilePathUtil.getFilePathByDate(date);
 		hg.setPath(res.get("JSMX"), res.get("ZQBD"), res.get("SJSJG"));
-		
 		
 		hg.hgqs(10004, DateFormatUtil.getDateByString(date));
 		

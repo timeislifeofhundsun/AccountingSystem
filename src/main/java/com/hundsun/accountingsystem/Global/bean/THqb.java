@@ -1,4 +1,7 @@
 package com.hundsun.accountingsystem.Global.bean;
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class THqb implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;//主键
@@ -50,7 +53,7 @@ public class THqb implements java.io.Serializable {
     public void setJrsp(Double jrsp) {
         this.jrsp = jrsp;
     }
-
+    @JSONField(format = "yyyy-MM-dd")
     public java.util.Date getHqrq() {
         return this.hqrq;
     }
