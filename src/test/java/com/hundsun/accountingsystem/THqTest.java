@@ -22,9 +22,8 @@ public class THqTest {
 	@Test
 	public void testReadFile() throws IOException, ParseException {
 		Date date = null;
-		String SHFilePath = "/Users/gaozhen/userApp/hsdatasource/2018-05-30/mktdt00.txt";
-		String SZFilePath = "/Users/gaozhen/userApp/hsdatasource"
-				+ "/2018-05-30/securities_20180530.xml";
+		String SHFilePath = "E:\\Hundsun\\JYQS\\2018-05-30\\mktdt00.txt";
+		String SZFilePath = "E:\\Hundsun\\JYQS\\2018-05-30\\cashsecurityclosemd_20180530.xml";
 		// 这里会有一个异常，所以要用try catch捕获异常
 		date = new SimpleDateFormat("yyyy-MM-dd").parse("2018-05-30");
 		boolean res = tHqbService.readHqDataByFile(SHFilePath, SZFilePath, date);

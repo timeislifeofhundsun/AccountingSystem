@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.hundsun.accountingsystem.Global.VO.THqbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.THqb;
 
@@ -87,4 +88,6 @@ public interface THqbMapper{
 	 * @return
 	 */
     int updateNonEmptyTHqb(@Param("enti") THqb value, @Param("assist") Assist assist);
+	int selectCounts();
+	List<THqb> selectByLimit(THqbParamPojo params);
 }

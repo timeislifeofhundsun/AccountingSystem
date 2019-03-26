@@ -16,4 +16,6 @@ public interface TZqxxService {
 	int updateByPrimaryKeySelective(TZqxx record);
 
 	int deleteByPrimaryKey(Integer zqnm);
+
+	public List<TZqxx> selectByZqlb(int zqlb);
 }

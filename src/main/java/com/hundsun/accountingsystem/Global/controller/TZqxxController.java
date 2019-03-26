@@ -68,4 +68,17 @@ public class TZqxxController {
     int i = tZqxxService.deleteByPrimaryKey(zqnm);
     return String.valueOf(i);
   }
+  
+  @GetMapping("/TZqxx_Hq")
+  public String getZqxxByZqlb(@RequestParam(value ="indexpage" ) int indexpage,@RequestParam(value = "sizepage") int sizepage ){
+    List<TZqxx> list = tZqxxService.selectByZqlb(4);
+    TZqxxVO layuiJson = new TZqxxVO();
+    layuiJson.setCode(0);
+    layuiJson.setCount(list.size());
+    layuiJson.setMsg("");
+    layuiJson.setData(list);
+    String jsonString = JSON.toJSONString(layuiJson);
+    return jsonString;
+  }
+  
 }
