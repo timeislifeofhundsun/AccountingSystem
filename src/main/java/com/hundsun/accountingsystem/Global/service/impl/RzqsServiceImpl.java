@@ -50,7 +50,7 @@ s	* @return boolean    返回类型
 		String mkt = files.get("mktdt00");
 		String sjsmx =files.get("SJSMX1");
 		String gh = files.get("GH32562");
-		if(cash==null||mkt==null||sjsmx==null||gh==null) {
+		if(cash==null||mkt==null) {
 			throw new Exception("接口文件不全");
 		}
 		/**

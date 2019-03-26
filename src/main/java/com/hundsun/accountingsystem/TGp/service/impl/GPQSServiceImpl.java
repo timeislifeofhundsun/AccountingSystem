@@ -39,7 +39,7 @@ import com.hundsun.accountingsystem.TGp.service.GPQSService;
  * @date 2019年3月19日
  * @Version 1.1
  */
-@Service
+@Service("gpjy")
 public class GPQSServiceImpl implements GPQSService {
 
 	private static final Logger log = LoggerFactory.getLogger(GPQSServiceImpl.class);
@@ -187,7 +187,9 @@ public class GPQSServiceImpl implements GPQSService {
 		/**
 		 * 插入新的qsb数据
 		 */
-		tQsbMapper.insertTQsbByBatch(needInsertQsbs);
+		if(needInsertQsbs!=null && needInsertQsbs.size()>0) {
+			tQsbMapper.insertTQsbByBatch(needInsertQsbs);
+		}
 		/**
 		 * 插入或者修改持仓余额表
 		 */
@@ -473,7 +475,6 @@ public class GPQSServiceImpl implements GPQSService {
 		assist.setRequires(Assist.andEq("extenda", 11));
 		List<TCcyeb> ccyes = tCcyebMapper.selectTCcyeb(assist);
 		for (TCcyeb ccye : ccyes) {
-//			System.out.println(ccye);
 			ccyeMap.put(ccye.getZqdm(), ccye);
 		}
 		return ccyeMap;
@@ -595,6 +596,17 @@ public class GPQSServiceImpl implements GPQSService {
 		 * 删除清算表数据
 		 */
 		tQsbMapper.deleteTQsb(assist);
+	}
+
+	@Override
+	public boolean hgqs(int ztbh, Date ywrq) throws Exception {
+		//空方法
+		return false;
+	}
+
+	@Override
+	public void setPath(String jsmx, String zqbd, String sjsjg) {
+		//空方法
 	}
 
 }

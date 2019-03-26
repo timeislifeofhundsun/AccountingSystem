@@ -15,7 +15,6 @@ public class AccountingSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AccountingSystemApplication.class, args);
-		
 	}
 
 }

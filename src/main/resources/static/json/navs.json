@@ -106,31 +106,11 @@
 	],
 	"jjyw": [
 		{
-			"title": "基金交易",
+			"title": "行情设置",
 			"icon": "&#xe631;",
-			"href": "page/TJj/TJjjy/TJjjyList.html",
+			"href": "page/TJj/THqsz/THqszList.html",
 			"spread": false
-		},
-        {
-          "title": "基金认购",
-          "icon": "&#xe630;",
-          "href": "",
-          "spread": false,
-          "children": [
-            {
-              "title": "认购申请",
-              "icon": "&#xe61c;",
-              "href": "page/TJj/TJjrg/TRgsq/TRgsqList.html",
-              "spread": false
-            },
-            {
-              "title": "认购确认",
-              "icon": "&#xe609;",
-              "href": "page/TJj/TJjrg/TRgqr/TRgqrList.html",
-              "spread": false
-            }
-          ]
-        },{
+		},{
         "title": "基金申购",
         "icon": "&#xe630;",
         "href": "",
@@ -146,6 +126,45 @@
             "title": "申购确认",
             "icon": "&#xe609;",
             "href": "page/TJj/TJjsg/TSgqr/TSgqrList.html",
+            "spread": false
+          }
+        ]
+      },
+        {
+          "title": "基金估值",
+          "icon": "&#xe630;",
+          "href": "",
+          "spread": false,
+          "children": [
+            {
+              "title": "基金估值",
+              "icon": "&#xe61c;",
+              "href": "page/TJj/TJjgz/TJjgz/TJjgzList.html",
+              "spread": false
+            },
+            {
+              "title": "估值到账",
+              "icon": "&#xe609;",
+              "href": "page/TJj/TJjgz/TGzdz/TGzdzList.html",
+              "spread": false
+            }
+          ]
+        },{
+        "title": "基金红利",
+        "icon": "&#xe630;",
+        "href": "",
+        "spread": false,
+        "children": [
+          {
+            "title": "红利到账",
+            "icon": "&#xe61c;",
+            "href": "page/TJj/TJjfh/THldz/THldzList.html",
+            "spread": false
+          },
+          {
+            "title": "红利除权",
+            "icon": "&#xe609;",
+            "href": "page/TJj/TJjfh/THlcq/THlcqList.html",
             "spread": false
           }
         ]
@@ -165,25 +184,6 @@
             "title": "赎回到账",
             "icon": "&#xe609;",
             "href": "page/TJj/TJjsh/TShdz/TShdzList.html",
-            "spread": false
-          }
-        ]
-      },{
-        "title": "基金红利",
-        "icon": "&#xe630;",
-        "href": "",
-        "spread": false,
-        "children": [
-          {
-            "title": "红利到账",
-            "icon": "&#xe61c;",
-            "href": "page/TJj/TJjfh/THldz/THldzList.html",
-            "spread": false
-          },
-          {
-            "title": "红利除权",
-            "icon": "&#xe609;",
-            "href": "page/TJj/TJjfh/THlcq/THlcqList.html",
             "spread": false
           }
         ]
