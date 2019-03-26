@@ -128,7 +128,7 @@ public class XgQsbServiceImpl implements XgQsbService {
                 if (tCcyebMapper.selectTCcyeb(assist).size() == 0){//判断持仓余额表对应的证券代码是否为空
                     tCcyeb = new TCcyeb();
                     tCcyeb.setZqdm(tQsb.getZqcode()).setCysl(tQsb.getQuantity()).setZqcb(tQsb.getAmount())
-                            .setZtbh(tQsb.getZtbh()).setFsrq(tQsb.getRq()).setLjgz(0.0);
+                            .setZtbh(tQsb.getZtbh()).setFsrq(tQsb.getRq()).setLjgz(0.0).setExtenda("13");
                     int y = tCcyebMapper.insertTCcyeb(tCcyeb);
                     if (y == 1){
                         j = "持仓库数据插入  ";
