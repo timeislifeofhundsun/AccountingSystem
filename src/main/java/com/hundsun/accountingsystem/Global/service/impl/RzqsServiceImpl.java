@@ -79,8 +79,6 @@ s	* @return boolean    返回类型
 			throw new Exception("合笔失败");
 		}
 		
-		
-		
 		returnData = true;
 		return returnData;
 	}
