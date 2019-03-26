@@ -3,8 +3,6 @@ package com.hundsun.accountingsystem.Global.service.impl;
 import java.util.Date;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +12,12 @@ import com.hundsun.accountingsystem.Global.service.TGhkService;
 import com.hundsun.accountingsystem.Global.service.THqbService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FilePathUtil;
+import com.hundsun.accountingsystem.TGp.service.GPQSService;
 
 @Service
 public class RzqsServiceImpl implements RzqsService {
 	
-	private static final Logger log = LoggerFactory.getLogger(RzqsServiceImpl.class);
+//	private static final Logger log = LoggerFactory.getLogger(RzqsServiceImpl.class);
 
 	@Autowired
 	private THqbService tHqbService;
@@ -28,6 +27,12 @@ public class RzqsServiceImpl implements RzqsService {
 	
 	@Autowired
 	private TCjhbbService tCjhbbService;
+	
+	@Autowired
+	private GPQSService hg;
+	
+	@Autowired
+	private GPQSService gpjy;
 	
 	/**
 	* @Description: 日终清算
@@ -76,7 +81,23 @@ s	* @return boolean    返回类型
 		 */
 		resu = tCjhbbService.insertCjhbbByRzqs(ztbh, ywrq);
 		if(!resu) {
-			throw new Exception("合笔失败");
+			throw new Exception("成交回报失败");
+		}
+		
+		/**
+		 * 4.红股清算
+		 */
+		resu = hg.hgqs(ztbh, ywrq);
+		if(!resu) {
+			throw new Exception("红股清算失败");
+		}
+		
+		/**
+		 * 5.股票交易清算
+		 */
+		resu = gpjy.gpqs(ztbh, ywrq);
+		if(!resu) {
+			throw new Exception("股票交易清算失败");
 		}
 		
 		returnData = true;

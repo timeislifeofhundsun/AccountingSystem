@@ -1,6 +1,5 @@
 package com.hundsun.accountingsystem.Global.bean;
 
-import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
