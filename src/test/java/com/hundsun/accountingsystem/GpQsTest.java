@@ -2,6 +2,7 @@ package com.hundsun.accountingsystem;
 
 import java.util.Map;
 
+import com.hundsun.accountingsystem.Global.service.LfjxQsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class GpQsTest {
 	@Autowired
 	GPPZService pzService;
 
+	@Autowired
+	LfjxQsService lfjxQsService;
+
 	@Test
 	public void test() throws Exception {
 		String date = "2018-06-15";
@@ -41,7 +45,11 @@ public class GpQsTest {
 	public void pztest() throws Exception {
 		pzService.insertGPPZ(10004, DateFormatUtil.getDateByString("2018-05-30"));
 	}
-	
-	
+
+
+	@Test
+	public void lfjxtest() throws Exception {
+		System.out.println(lfjxQsService.lfjxQs(10004, DateFormatUtil.getDateByString("2018-05-30")));;
+	}
 	
 }

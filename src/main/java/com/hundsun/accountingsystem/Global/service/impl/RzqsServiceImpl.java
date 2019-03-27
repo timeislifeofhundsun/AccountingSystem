@@ -3,13 +3,10 @@ package com.hundsun.accountingsystem.Global.service.impl;
 import java.util.Date;
 import java.util.Map;
 
+import com.hundsun.accountingsystem.Global.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hundsun.accountingsystem.Global.service.RzqsService;
-import com.hundsun.accountingsystem.Global.service.TCjhbbService;
-import com.hundsun.accountingsystem.Global.service.TGhkService;
-import com.hundsun.accountingsystem.Global.service.THqbService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FilePathUtil;
 import com.hundsun.accountingsystem.TGp.service.GPQSService;
@@ -33,7 +30,10 @@ public class RzqsServiceImpl implements RzqsService {
 	
 	@Autowired
 	private GPQSService gpjy;
-	
+
+	@Autowired
+	private LfjxQsService lfjxQsService;
+
 	/**
 	* @Description: 日终清算
 	* 1.读取交易数据
@@ -91,15 +91,35 @@ s	* @return boolean    返回类型
 		if(!resu) {
 			throw new Exception("红股清算失败");
 		}
-		
+
 		/**
-		 * 5.股票交易清算
+		 *5.新股清算
+		 */
+
+		/**
+		 * 6.股票交易清算
 		 */
 		resu = gpjy.gpqs(ztbh, ywrq);
 		if(!resu) {
 			throw new Exception("股票交易清算失败");
 		}
-		
+
+		/**
+		 * 7.回购清算
+		 */
+
+		/**
+		 * 8.回购清算
+		 */
+
+		/**
+		 * 9.其他清算
+		 */
+		resu = lfjxQsService.lfjxQs(ztbh,ywrq);
+		if(!resu) {
+			throw new Exception("其他费用清算失败");
+		}
+
 		returnData = true;
 		return returnData;
 	}
