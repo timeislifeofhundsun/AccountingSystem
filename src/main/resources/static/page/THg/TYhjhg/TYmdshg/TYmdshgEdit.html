@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>查看银行质押式回购信息</title>
+    <title>编辑银行质押式回购信息</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -63,6 +63,13 @@
                     <div class="layui-input-block">
                         <input type="text" class="layui-input amount" name="amount" id="amount" lay-verify="amount"
                                placeholder="请输入成交金额">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">总利息</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input cjsr" name="cjsr" id="cjsr" lay-verify="cjsr"
+                               placeholder="请输入总利息" disabled>
                     </div>
                 </div>
                 <div class="layui-form-item magt3">
@@ -150,6 +157,12 @@
                     </select>
                 </div>
             </div>
+
+            <hr class="layui-bg-gray"/>
+            <div class="layui-right">
+                <a class="layui-btn layui-btn-sm" lay-filter="EditTYmdshg" lay-submit><i
+                        class="layui-icon">&#xe609;</i>提交</a>
+            </div>
         </div>
     </div>
     </div>
@@ -158,7 +171,7 @@
 <script type="text/javascript" src="../../../../js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="../../../../js/jquery.cookie.js"></script>
 <script type="text/javascript" src="../../../../layui/layui.js"></script>
-<script type="text/javascript" src="TYzyshgDetail.js"></script>
+<script type="text/javascript" src="TYmdshgEdit.js"></script>
 <script>
 </script>
 </html>
