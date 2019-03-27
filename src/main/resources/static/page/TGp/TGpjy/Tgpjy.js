@@ -7,6 +7,21 @@ layui.use(['form','table','laydate'],function(){
      *账套
      */
 
+    $('.select_btn').click(function(){
+    	var index = layui.layer.open({
+            title : "选择账套",
+            type : 2,
+            content : "TZtxxList_Gp.html",
+        })
+        
+        layui.layer.full(index);   	
+    	setTimeout(function(){
+        layui.layer.tips('点击此处返回股东信息列表', '.layui-layer-setwin .layui-layer-close', {
+            tips: 3
+        	});
+    	},500)
+    });
+    
     /**
      * 日期
      */
