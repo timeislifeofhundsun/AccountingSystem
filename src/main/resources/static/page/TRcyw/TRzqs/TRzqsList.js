@@ -3,57 +3,25 @@ $(function () {
     //设置日期
     $('#showDate').html("2018-05-30");
     getFileStatus();
-    /* 读取接口文件状态 */
-    function getFileStatus() {
-        var ywrq = $('#showDate').text();
-        var request = {"ywrq": ywrq};
-        if (ywrq != "") {
-            $.ajax({
-            	type: "POST",
-                url: "/rest/RzqsRest/getFileStatus",
-                data: JSON.stringify(request),
-                contentType : "application/json",
-                success: function (response) {
-                    var htmlStr = "";
-                    console.log(response);
-                    if (response.res) {
-                        var data = response.data;
-                        for (var i = 0; i < data.length; i++) {
-                            var obj = data[i];
-                            htmlStr = htmlStr + "<tr><td>" + obj.fileName + "</td>";
-                            if (obj.filePath == null) {
-                                htmlStr = htmlStr + "<td></td>"
-                                    + "<td>×</td></tr>";
-                            } else {
-                                htmlStr = htmlStr + "<td>" + obj.filePath + "</td>"
-                                    + "<td>√</td></tr>";
-                            }
-                        }
-                        $('#fileStutasTable').html(htmlStr);
-                    }
-                }
-            });
-        } else {
-            layer.msg('温馨提示:请选择业务日期!');
-        }
-    }
 })
 $("#resetBtn").click(function(){
 	console.log("resetBtn");
 })
 
 
-layui.use(['layer','laydate'],function(){
+layui.use(['layer','laydate','form'],function(){
     var layer = parent.layer === undefined ? layui.layer : top.layer;
     var laydate = layui.laydate;
-
+    var form = layui.form;
 
     /*layui时间显示 */
     laydate.render({
         elem: '#date'
+        ,value: '2018-05-30'
         ,position: 'static'
         ,change: function(value, date){ //监听日期被切换
             lay('#showDate').html(value);
+            getFileStatus();
         }
     });
     /* 清算 */
@@ -83,3 +51,41 @@ layui.use(['layer','laydate'],function(){
 
     })
 })
+
+
+/**
+ * 读取接口文件状态
+ */
+function getFileStatus() {
+    var ywrq = $('#showDate').text();
+    var request = {"ywrq": ywrq};
+    if (ywrq != "") {
+        $.ajax({
+            type: "POST",
+            url: "/rest/RzqsRest/getFileStatus",
+            data: JSON.stringify(request),
+            contentType : "application/json",
+            success: function (response) {
+                var htmlStr = "";
+                console.log(response);
+                if (response.res) {
+                    var data = response.data;
+                    for (var i = 0; i < data.length; i++) {
+                        var obj = data[i];
+                        htmlStr = htmlStr + "<tr><td>" + obj.fileName + "</td>";
+                        if (obj.filePath == null) {
+                            htmlStr = htmlStr + "<td></td>"
+                                + "<td>×</td></tr>";
+                        } else {
+                            htmlStr = htmlStr + "<td>" + obj.filePath + "</td>"
+                                + "<td>√</td></tr>";
+                        }
+                    }
+                    $('#fileStutasTable').html(htmlStr);
+                }
+            }
+        });
+    } else {
+        layer.msg('温馨提示:请选择业务日期!');
+    }
+}
