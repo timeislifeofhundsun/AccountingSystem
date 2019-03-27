@@ -12,8 +12,8 @@ $(function () {
     $(document).ajaxSend(function (e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
+});
 
-})
 layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
@@ -22,11 +22,69 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
         layedit = layui.layedit,
         laydate = layui.laydate,
         $ = layui.jquery;
+        //计算到期日期
+        function Addtime(day) {
+            var Holiday = ["2019/4/5", "2019/5/1", "2019/5/2", "2019/5/3", "2019/6/7", "2019/9/13",
+                "2019/10/1", "2019/10/2", "2019/10/3", "2019/10/4", "2019/10/7"
+            ];
+            var Workday = ["2019/4/28", "2019/5/5", "2019/9/29", "2019/10/12"];
+            var nowTime = new Date().getTime(); //当天的时间戳
+            var t, ymd, i = 0;
+            while (i != day) {
+                i++;
+                dayTime = i * 24 * 60 * 60 * 1000;
+                t = new Date(nowTime + dayTime);
+                var week = t.getDay();
+                var ymd = t.toLocaleDateString();
+                if ((week == 6 || week == 0) && $.inArray(ymd, Workday) != 0) {
+                    day++;
+                }else if ($.inArray(ymd, Workday)==0) {
+                }else if ($.inArray(ymd, Holiday) == 0) {
+                    day++;
+                }else{
+                }
+            }
+            return ymd;
+        }
     form.on("select", function(data){
-        console.log(data.elem.id); //得到select原始DOM对象
         if (data.elem.id=="zqcode") {
-            console.log(data.value);
-            console.log(this.innerHTML);
+            var text = this.innerText.substr(1,this.innerText.length-1);
+            var days = text.replace(/\b(0+)/gi,"");
+            $("#quantity").val(days);
+            $('#quantity').attr("disabled",true);
+            var myDate = new Date();
+            var date = myDate.toLocaleDateString();
+            var re=new RegExp("/","g");
+            var newdate=date.replace(re,"-");
+            var dqdate=Addtime(days);
+            var newdqdate=dqdate.replace(re,"-");
+            laydate.render({
+                elem: '#extenda',
+                format: 'yyyy-MM-dd',
+                value:newdate
+            });
+            $('#extenda').prop('disabled', true);
+            laydate.render({
+                elem: '#extendb',
+                format: 'yyyy-MM-dd',
+                value:newdqdate
+            });
+            $('#extendb').prop('disabled', true);
+            $("#sclb").val(3);
+            $('#sclb').prop('disabled', true);
+            form.render('select');
+        }else if (data.elem.id=="ztbh"){
+            $.ajax({
+                url: "/getByZtbh",
+                type: "GET",
+                data: {ztbh:data.value},
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                            $("#extendd").append("<option value='" + data[i].gddm + "'>" + data[i].gddm + "</option>");
+                    }
+                    form.render('select');
+                }
+            });
         }
     });
     laydate.render({
@@ -45,6 +103,7 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
             for (var i = 0; i < data.length; i++) {
                 $("#ztbh").append("<option value='" + data[i].ztbh + "'>" + data[i].name + "</option>");
             }
+
             form.render('select');
         }
     });
@@ -60,104 +119,80 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
             form.render('select');
         }
     });
-   /* $('#zqcode').change(function(){
-        console.log($(this).children('option:selected').val());
-    })
-    $('#zqcode').click(function(){
-        console.log($(this).children('option:selected').val());
-    })*/
-   form.on("select(jsfs)",function (data) {
-       console.log(1111);
-       console.log(data);
-   });
-    form.on("select(bs)",function (data) {
-        console.log(1111);
-        console.log(data);
+    $("#amount").change(function () {
+        if ($("#quantity").val()==""){
+            $("#amount").val("");
+            layer.msg('请选择回购品种', {
+                time: 1000, //20s后自动关闭
+            });
+            return ;
+        }else{
+            var hglx;
+            $.ajax({
+                url: "/TLfjxb",
+                type: "GET",
+                success: function (data) {
+                    hglx = data.hglx;
+                    var lxcount = Number($("#amount").val())*Number($("#quantity").val())*Number(hglx);
+                    $("#yhs").val((Number(($("#amount").val())*1)+(Number(lxcount))*1));
+                }
+            });
+
+        }
     });
     form.verify({
         ztbh: function (val) {
             if (val == '') {
-                return "证券内码不能为空";
+                return "账套编号不能为空";
             }
         },
         zqcode: function (val) {
             if (val == '') {
-                return "证券代码不能为空";
+                return "回购品种不能为空";
             }
         },
-        zqlb: function (val) {
+        bs: function (val) {
             if (val == '') {
-                return "证券类别不能为空";
+                return "回购方向不能为空";
+            }
+        },
+        lumpsum: function (val) {
+            if (val == '') {
+                return "结算机构不能为空";
+            }
+        },
+        amount: function (val) {
+            if (val == '') {
+                return "成交金额不能为空";
+            }
+        },
+        jsf: function (val) {
+            if (val == '') {
+                return "结算手续费不能为空";
+            }
+        },
+        ghf: function (val) {
+            if (val == '') {
+                return "交易手续费不能为空";
             }
         },
         sclb: function (val) {
             if (val == '') {
-                return "市场类别不能为空";
+                return "交易市场不能为空";
             }
         },
-        zqjg: function (val) {
+        extendd: function (val) {
             if (val == '') {
-                return "证券简称不能为空";
+                return "资金账号不能为空";
             }
         },
-        zgb: function (val) {
+        yj: function (val) {
             if (val == '') {
-                return "总股本不能为空";
-            }
-        },
-        ltgs: function (val) {
-            if (val == '') {
-                return "流通股数不能为空";
-            }
-        },
-        mgmz: function (val) {
-            if (val == '') {
-                return "面值不能为空";
-            }
-        },
-        fxrq: function (val) {
-            if (val == '') {
-                return "发行日期不能为空";
-            }
-        },
-        dqrq: function (val) {
-            if (val == '') {
-                return "到期日期不能为空";
-            }
-        },
-        hgts: function (val) {
-            if (val == '') {
-                return "回购天数不能为空";
-            }
-        },
-        njxts: function (val) {
-            if (val == '') {
-                return "年计息天数不能为空";
-            }
-        },
-        nll: function (val) {
-            if (val == '') {
-                return "年利率不能为空";
-            }
-        },
-        qxr: function (val) {
-            if (val == '') {
-                return "起息日不能为空";
-            }
-        },
-        fxfs: function (val) {
-            if (val == '') {
-                return "付款方式不能为空";
-            }
-        },
-        fxjg: function (val) {
-            if (val == '') {
-                return "发行价格不能为空";
+                return "结算方式不能为空";
             }
         }
     })
     form.on("submit(AddTYzyshg)", function (data) {
-        console.log(data.field);
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
         $.ajax({
             url: "/TYzyshg",
@@ -173,10 +208,6 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
                         parent.location.reload();
                     }, 500);
                 }
-            },
-            complete: function (XMLHttpRequest, textStatus) {
-                console.log(XMLHttpRequest);
-                console.log(textStatus);
             }
         });
         return false;

@@ -35,10 +35,8 @@ public class TLfjxbController {
 
   @PutMapping("/TLfjxb")
   public String updateTLfjxb(@RequestParam(value ="TLfjxb",required = true)String data){
-    System.out.println("TLJ信息"+data);
     TLfjxb tLfjxb = JSON.parseObject(data,TLfjxb.class);
     tLfjxb.setId(1);
-    System.out.println(tLfjxb);
     int i = tLfjxbService.updateByPrimaryKey(tLfjxb);
     return String.valueOf(i);
   }

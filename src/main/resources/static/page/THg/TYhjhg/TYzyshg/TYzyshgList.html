@@ -33,37 +33,29 @@
         </div>
     </div>
     <table id="TYzyshgList" lay-filter="TYzyshgList"></table>
-    <!-- <script type="text/html" id="zqlb">
-         {{#  if(d.zqlb == "1"){ }}
-         <span >回购</span>
-         {{#  } else if(d.zqlb == "3"){ }}
-         <span >股票</span>
-         {{#  } else { }}
-         <span >基金</span>
+     <script type="text/html" id="bs">
+         {{#  if(d.bs == "B"){ }}
+         <span >融资</span>
+         {{#  } else if(d.bs == "S"){ }}
+         <span >融券</span>
          {{#  }}}
      </script>
-     <script type="text/html" id="sclb">
-         {{#  if(d.sclb == "1"){ }}
-         <span>上海</span>
-         {{#  } else if(d.sclb == "2"){ }}
-         <span>深圳</span>
-         {{#  } else { }}
-         <span>国内银行间</span>
+     <script type="text/html" id="lumpsum">
+         {{#  if(d.lumpsum == "1"){ }}
+         <span>中债登</span>
          {{#  }}}
      </script>
-     <script type="text/html" id="fxfs">
-         {{#  if(d.fxfs == "1"){ }}
-         <span>到期还本付息</span>
-         {{#  } else if(d.fxfs == "2"){ }}
-         <span>一年付息</span>
-         {{#  } else if(d.fxfs == "3"){ }}
-         <span>半年付息</span>
-         {{#  } else if(d.fxfs == "4"){ }}
-         <span>3个月付息</span>
-         {{#  } else if(d.fxfs == "5"){ }}
-         <span>1个月付息</span>
+     <script type="text/html" id="yj">
+         {{#  if(d.yj == "1"){ }}
+         <span>券款对付</span>
+         {{#  } else if(d.yj == "2"){ }}
+         <span>见券付款</span>
+         {{#  } else if(d.yj == "3"){ }}
+         <span>见款付券</span>
+         {{#  } else if(d.yj == "4"){ }}
+         <span>纯券过户</span>
          {{#  }}}
-     </script>-->
+     </script>
     <!--操作-->
     <script type="text/html" id="TYzyshgListBar">
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>

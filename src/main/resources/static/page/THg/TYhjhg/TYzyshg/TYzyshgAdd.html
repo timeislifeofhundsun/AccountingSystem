@@ -26,9 +26,9 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">回购代码</label>
+                    <label class="layui-form-label">回购品种</label>
                     <div class="layui-input-block">
-                        <select  id="zqcode" lay-verify="zqcode">
+                        <select  id="zqcode" name="zqcode" lay-verify="zqcode">
                             <option value="">请选择回购品种</option>
                         </select>
                     </div>
@@ -62,7 +62,7 @@
                     <label class="layui-form-label">到期金额</label>
                     <div class="layui-input-block">
                         <input type="text" class="layui-input yhs" name="yhs" id="yhs" lay-verify="yhs"
-                               placeholder="请输入到期金额">
+                               placeholder="到期金额" disabled>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -81,59 +81,65 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">交易日期</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" name="extenda" id="extenda" placeholder="yyyy-MM-dd">
+                    <input type="text" class="layui-input" name="extenda" id="extenda" placeholder="yyyy-MM-dd" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">到期日期</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input" name="extendb" id="extendb" placeholder="yyyy-MM-dd">
+                    <input type="text" class="layui-input" name="extendb" id="extendb" placeholder="yyyy-MM-dd" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">回购天数</label>
                 <div class="layui-input-block">
                     <input type="text" class="layui-input quantity" name="quantity" id="quantity" lay-verify="quantity"
-                           placeholder="请输入回购天数">
+                           placeholder="回购天数" >
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">结算手续费</label>
                 <div class="layui-input-block">
                     <input type="text" class="layui-input jsf" name="jsf" id="jsf" lay-verify="jsf"
-                           placeholder="请输入回购天数">
+                           placeholder="请输入结算手续费">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">交易手续费</label>
                 <div class="layui-input-block">
                     <input type="text" class="layui-input ghf" name="ghf" id="ghf" lay-verify="ghf"
-                           placeholder="请输入年计息天数">
+                           placeholder="请输入交易手续费">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">交易市场</label>
                 <div class="layui-input-block">
-                    <input type="text" class="layui-input sclb" name="sclb" id="sclb" lay-verify="sclb"
-                           placeholder="请输入市场类别">
+                    <select name="sclb" id="sclb" lay-verify="sclb" lay-search>
+                        <option value="">请选择交易市场</option>
+                        <option value="1">上海</option>
+                        <option value="2">深圳</option>
+                        <option value="3">国内银行间</option>
+
+                    </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">资金账号</label>
                 <div class="layui-input-block">
-                    <input type="test" class="layui-input" id="extendd" name="extendd" placeholder="yyyy-MM-dd">
+                    <select name="extendd" id="extendd" lay-verify="extendd" lay-search>
+                        <option value="">请选择资金账号</option>
+                    </select>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">结算方式</label>
                 <div class="layui-input-block">
                     <select name="yj" id="yj" lay-verify="yj" lay-search>
-                        <option value="">请选择付息方式</option>
-                        <option value="1">到期还本付息</option>
-                        <option value="2">一年付息</option>
-                        <option value="3">半年付息</option>
-                        <option value="4">3个月付息</option>
-                        <option value="5">1个月付息</option>
+                        <option value="">请选择结算方式</option>
+                        <option value="1">券款对付</option>
+                        <option value="2">见券付款</option>
+                        <option value="3">见款付券</option>
+                        <option value="4">纯券过户</option>
                     </select>
                 </div>
             </div>
