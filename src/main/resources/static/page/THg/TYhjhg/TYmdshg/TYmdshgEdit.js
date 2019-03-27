@@ -82,6 +82,8 @@ function getValue(data) {
             $('#lumpsum').prop('disabled', true);
             $("#amount").val(data.amount);
             $('#amount').prop('disabled', true);
+            $("#cjsr").val(data.cjsr);
+            $('#cjsr').prop('disabled', true);
             $("#yhs").val(data.yhs);
             $('#yhs').prop('disabled', true);
             $("#zgf").val(data.zgf);
@@ -160,11 +162,11 @@ layui.use(['form', 'layer', 'laydate'], function () {
         }
     })
     //提交更改证券信息
-    form.on("submit(EditTYzyshg)", function (data) {
+    form.on("submit(EditTYmdshg)", function (data) {
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
         $.ajax({
-            url: "/TYzyshg",
-            data: {TYzyshg: JSON.stringify(data.field)},
+            url: "/TYmdshg",
+            data: {TYmdshg: JSON.stringify(data.field)},
             type: 'PUT',
             success: function (obj) {
                 if (obj == 1) {

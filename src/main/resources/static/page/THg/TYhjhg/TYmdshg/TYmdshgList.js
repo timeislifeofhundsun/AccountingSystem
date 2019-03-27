@@ -39,8 +39,8 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
     newdate = dates[0] + "-" + dates[1] + "-" + dates[2];
     //费率设置列表渲染
     var tableIns = table.render({
-        elem: '#TYzyshgList',
-        url: '/TYzyshg',
+        elem: '#TYmdshgList',
+        url: '/TYmdshg',
         method: 'GET',
         cellMinWidth: 95,
         request: {
@@ -54,7 +54,7 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
         height: "full-125",
         limit: 10,
         limits: [10, 15, 20, 25],
-        id: "TYzyshgList",
+        id: "TYmdshgList",
         cols: [[
             {type: 'checkbox', fixed: 'left'},
             {field: 'id', title: 'ID', align: "center",hide:true},
@@ -70,9 +70,10 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
             {field: 'zgf', title: '券面总额', align: 'center', width: 140},
             {field: 'jsf', title: '结算手续费', align: 'center', width: 140},
             {field: 'ghf', title: '交易手续费', align: 'center', width: 140},
+            {field: 'cjsr', title: '总利息', align: 'center', width: 140},
             {field: 'yj', title: '结算方式', align: 'center', templet: "#yj"},
             {field: 'extendd', title: '资金账号', align: 'center', width: 140},
-            {title: '操作', width: 170, templet: '#TYzyshgListBar', fixed: "right", align: "center"}
+            {title: '操作', width: 170, templet: '#TYmdshgListBar', fixed: "right", align: "center"}
         ]],
         done: function () {
             laydate.render({
@@ -81,20 +82,20 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
             });
         }
     });
-    $(".addTYzyshg").click(function () {
-        addTYzyshg();
+    $(".addTYmdshg").click(function () {
+        addTYmdshg();
     })
 
     //添加证券信息
-    function addTYzyshg(edit) {
+    function addTYmdshg(edit) {
         var index = layui.layer.open({
-            title: "新增质押式回购",
+            title: "新增银行买断式回购",
             type: 2,
-            content: "TYzyshgAdd.html",
+            content: "TYmdshgAdd.html",
             success: function (layero, index) {
                 var body = layui.layer.getChildFrame('body', index);
                 setTimeout(function () {
-                    layui.layer.tips('点击此处返回质押式回购列表', '.layui-layer-setwin .layui-layer-close', {
+                    layui.layer.tips('点击此处返回银行买断式回购列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 }, 500)
@@ -108,12 +109,12 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
     }
 
     //点击编辑操作
-    function EditTYzyshg(edit) {
+    function EditTYmdshg(edit) {
         var index = layui.layer.open({
-            title: "修改质押式回购信息",
+            title: "修改买断式回购信息",
             type: 2,
             totalRow: true,
-            content: "TYzyshgEdit.html",
+            content: "TYmdshgEdit.html",
             success: function (layero, index) {
                 var iframe = window['layui-layer-iframe' + index];
                 iframe.getValue(edit);
@@ -136,12 +137,12 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
         var index = layui.layer.open({
             title: "查看回购信息",
             type: 2,
-            content: "TYzyshgDetail.html",
+            content: "TYmdshgDetail.html",
             success: function (layero, index) {
                 var iframe = window['layui-layer-iframe' + index];
                 iframe.getValue(data);
                 setTimeout(function () {
-                    layui.layer.tips('点击此处返回质押式回购列表', '.layui-layer-setwin .layui-layer-close', {
+                    layui.layer.tips('点击此处返回买断式回购列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 }, 500)
@@ -154,15 +155,15 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
         })
     };
     //列表中判断点击编辑操作
-    table.on('tool(TYzyshgList)', function (obj) {
+    table.on('tool(TYmdshgList)', function (obj) {
         var layEvent = obj.event,
             data = obj.data;
         if (layEvent == 'edit') { //编辑
-            EditTYzyshg(data);
+            EditTYmdshg(data);
         } else if (layEvent == 'delete') {
             layer.confirm('确定删除此回购？', {icon: 3, title: '提示信息'}, function (index) {
                 $.ajax({
-                    url: "/TYzyshg",
+                    url: "/TYmdshg",
                     data: {id: JSON.stringify(data.id), _method: "DELETE"},
                     type: 'POST',
                     success: function (obj) {
@@ -188,14 +189,13 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
             }else{
                 reloaddate=document.getElementById("ckrq").value;
             }
-            console.log(reloaddate);
             //执行重载
-            table.reload('TYzyshgList', {
+            table.reload('TYmdshgList', {
                 page: {
                     curr: 1 //重新从第 1 页开始
                 }
                 , where: {
-                    ckrq: reloaddate
+                    ckrq:reloaddate
                 }
             });
         }

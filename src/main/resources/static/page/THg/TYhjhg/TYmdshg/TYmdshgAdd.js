@@ -134,6 +134,7 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
                 success: function (data) {
                     hglx = data.hglx;
                     var lxcount = Number($("#amount").val())*Number($("#quantity").val())*Number(hglx);
+                    $("#cjsr").val(lxcount);
                     $("#yhs").val((Number(($("#amount").val())*1)+(Number(lxcount))*1));
                 }
             });
@@ -192,17 +193,17 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
             }
         }
     })
-    form.on("submit(AddTYzyshg)", function (data) {
+    form.on("submit(AddTYmdshg)", function (data) {
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
         $.ajax({
-            url: "/TYzyshg",
-            data: {TYzyshg: JSON.stringify(data.field)},
+            url: "/TYmdshg",
+            data: {TYmdshg: JSON.stringify(data.field)},
             type: 'POST',
             success: function (obj) {
                 if (obj == 1) {
                     setTimeout(function () {
                         top.layer.close(index);
-                        top.layer.msg("回购添加成功！");
+                        top.layer.msg("银行买断式回购添加成功！");
                         layer.closeAll("iframe");
                         //刷新父页面
                         parent.location.reload();

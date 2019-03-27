@@ -37,7 +37,6 @@ public class TZqxxController {
   @Autowired
   public TZqxxMapper tZqxxMapper;
 
-
   @GetMapping("/TZqxx")
   public String getAllZqxx(@RequestParam(value ="indexpage" ) int indexpage,@RequestParam(value = "sizepage") int sizepage ){
     List<TZqxx> list = tZqxxService.getTZqxxPage(indexpage,sizepage);
@@ -72,6 +71,7 @@ public class TZqxxController {
     int i = tZqxxService.deleteByPrimaryKey(zqnm);
     return String.valueOf(i);
   }
+
   @GetMapping("/TZqxxList")
   public List<TZqxx> getTZqxxList(){
     List<TZqxx> allTZqxx = tZqxxMapper.findAllTZqxx();
@@ -88,5 +88,4 @@ public class TZqxxController {
     String jsonString = JSON.toJSONString(layuiJson);
     return jsonString;
   }
-
 }
