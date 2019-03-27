@@ -37,4 +37,6 @@ public interface THqbService {
 	public List<THqb> findByDate(String date);
 
 	public void updateHqxx(THqb thqb);
+
+	public void insertHqxx(THqb thqb) throws Exception;
 }

@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FilePathUtil;
+import com.hundsun.accountingsystem.TGp.service.GPPZService;
 import com.hundsun.accountingsystem.TGp.service.GPQSService;
 
 @RunWith(SpringRunner.class)
@@ -21,6 +22,9 @@ public class GpQsTest {
 	
 	@Autowired
 	GPQSService gpjy;
+	
+	@Autowired
+	GPPZService pzService;
 
 	@Test
 	public void test() throws Exception {
@@ -34,8 +38,8 @@ public class GpQsTest {
 	}
 
 	@Test
-	public void hg() throws Exception {
-		
+	public void pztest() throws Exception {
+		pzService.insertGPPZ(10004, DateFormatUtil.getDateByString("2018-05-30"));
 	}
 	
 	

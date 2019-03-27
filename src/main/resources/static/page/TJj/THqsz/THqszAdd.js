@@ -69,19 +69,19 @@ layui.use(['form', 'layer','laydate'], function () {
     
     
     //提交更改账套信息
-    form.on("submit(updateTHqxx)", function (data) {
+    form.on("submit(addTHqxx)", function (data) {
         top.layer.msg(JSON.stringify(data.field));
         console.log(data);
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
         $.ajax({
             url: "/THqxx",
             data: {Hqxx:JSON.stringify(data.field)},
-            type: 'PUT',
+            type: 'POST',
             success:function (obj) {
                 if (obj==1) {
                     setTimeout(function () {
                         top.layer.close(index);
-                        top.layer.msg("行情信息更改成功！");
+                        top.layer.msg("行情信息添加成功！");
                         layer.closeAll("iframe");
                         //刷新父页面
                         parent.location.reload();
@@ -89,7 +89,7 @@ layui.use(['form', 'layer','laydate'], function () {
                 }else{
                 	setTimeout(function () {
                 		top.layer.close(index);
-                        top.layer.msg("修改失败，原因："+obj);
+                        top.layer.msg("添加失败，原因："+obj);
                     }, 500);                	
                 }
             },
