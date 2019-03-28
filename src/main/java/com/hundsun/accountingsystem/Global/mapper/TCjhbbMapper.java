@@ -5,7 +5,9 @@ import com.hundsun.accountingsystem.Global.bean.TCjhbb;
 import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TCjhbbMapper {
     int countByExample(TCjhbbExample example);
 

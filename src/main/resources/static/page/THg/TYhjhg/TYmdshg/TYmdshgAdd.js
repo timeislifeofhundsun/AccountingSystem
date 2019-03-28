@@ -127,15 +127,21 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
             });
             return ;
         }else{
-            var hglx;
+            var hglv,jylv,jslv;
             $.ajax({
                 url: "/TLfjxb",
                 type: "GET",
                 success: function (data) {
-                    hglx = data.hglx;
-                    var lxcount = Number($("#amount").val())*Number($("#quantity").val())*Number(hglx);
+                    hglv = data.hglv;
+                    var lxcount = Number($("#amount").val())*Number($("#quantity").val())*Number(hglv);
                     $("#cjsr").val(lxcount);
                     $("#yhs").val((Number(($("#amount").val())*1)+(Number(lxcount))*1));
+                    jylv = data.jylv;
+                    jslv = data.jslv;
+                    $("#jsf").val(Number(($("#amount").val()))*Number(jslv));
+                    $("#ghf").val(Number(($("#amount").val()))*Number(jylv));
+                    $('#ghf').prop('disabled', true);
+                    $('#jsf').prop('disabled', true);
                 }
             });
 

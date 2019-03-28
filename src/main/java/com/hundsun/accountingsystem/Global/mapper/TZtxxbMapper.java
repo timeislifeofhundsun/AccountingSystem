@@ -5,7 +5,9 @@ import com.hundsun.accountingsystem.Global.bean.TZtxxb;
 import com.hundsun.accountingsystem.Global.bean.TZtxxbExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TZtxxbMapper {
     int countByExample(TZtxxbExample example);
 

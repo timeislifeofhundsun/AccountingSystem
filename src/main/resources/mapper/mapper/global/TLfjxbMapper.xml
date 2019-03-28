@@ -3,12 +3,14 @@
 <mapper namespace="com.hundsun.accountingsystem.Global.mapper.TLfjxbMapper" >
   <resultMap id="BaseResultMap" type="com.hundsun.accountingsystem.Global.bean.TLfjxb" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="yhlx" property="yhlx" jdbcType="VARCHAR" />
-    <result column="hglx" property="hglx" jdbcType="VARCHAR" />
+    <result column="yhlv" property="yhlv" jdbcType="VARCHAR" />
+    <result column="hglv" property="hglv" jdbcType="VARCHAR" />
     <result column="xxplf" property="xxplf" jdbcType="VARCHAR" />
     <result column="sjf" property="sjf" jdbcType="VARCHAR" />
-    <result column="xxplcs" property="xxplcs" jdbcType="INTEGER" />
-    <result column="sjcs" property="sjcs" jdbcType="INTEGER" />
+    <result column="xxplcs" property="xxplcs" jdbcType="VARCHAR" />
+    <result column="sjcs" property="sjcs" jdbcType="VARCHAR" />
+    <result column="jylv" property="jylv" jdbcType="VARCHAR" />
+    <result column="jslv" property="jslv" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, yhlx, hglx, xxplf, sjf, xxplcs, sjcs
+    id, yhlv, hglv, xxplf, sjf, xxplcs, sjcs, jylv, jslv
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hundsun.accountingsystem.Global.bean.TLfjxbExample" >
     select
@@ -102,12 +104,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hundsun.accountingsystem.Global.bean.TLfjxb" >
-    insert into t_lfjxb (id, yhlx, hglx, 
+    insert into t_lfjxb (id, yhlv, hglv, 
       xxplf, sjf, xxplcs, 
-      sjcs)
-    values (#{id,jdbcType=INTEGER}, #{yhlx,jdbcType=VARCHAR}, #{hglx,jdbcType=VARCHAR}, 
-      #{xxplf,jdbcType=VARCHAR}, #{sjf,jdbcType=VARCHAR}, #{xxplcs,jdbcType=INTEGER}, 
-      #{sjcs,jdbcType=INTEGER})
+      sjcs, jylv, jslv)
+    values (#{id,jdbcType=INTEGER}, #{yhlv,jdbcType=VARCHAR}, #{hglv,jdbcType=VARCHAR}, 
+      #{xxplf,jdbcType=VARCHAR}, #{sjf,jdbcType=VARCHAR}, #{xxplcs,jdbcType=VARCHAR}, 
+      #{sjcs,jdbcType=VARCHAR}, #{jylv,jdbcType=VARCHAR}, #{jslv,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hundsun.accountingsystem.Global.bean.TLfjxb" >
     insert into t_lfjxb
@@ -115,11 +117,11 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="yhlx != null" >
-        yhlx,
+      <if test="yhlv != null" >
+        yhlv,
       </if>
-      <if test="hglx != null" >
-        hglx,
+      <if test="hglv != null" >
+        hglv,
       </if>
       <if test="xxplf != null" >
         xxplf,
@@ -133,16 +135,22 @@
       <if test="sjcs != null" >
         sjcs,
       </if>
+      <if test="jylv != null" >
+        jylv,
+      </if>
+      <if test="jslv != null" >
+        jslv,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="yhlx != null" >
-        #{yhlx,jdbcType=VARCHAR},
+      <if test="yhlv != null" >
+        #{yhlv,jdbcType=VARCHAR},
       </if>
-      <if test="hglx != null" >
-        #{hglx,jdbcType=VARCHAR},
+      <if test="hglv != null" >
+        #{hglv,jdbcType=VARCHAR},
       </if>
       <if test="xxplf != null" >
         #{xxplf,jdbcType=VARCHAR},
@@ -151,10 +159,16 @@
         #{sjf,jdbcType=VARCHAR},
       </if>
       <if test="xxplcs != null" >
-        #{xxplcs,jdbcType=INTEGER},
+        #{xxplcs,jdbcType=VARCHAR},
       </if>
       <if test="sjcs != null" >
-        #{sjcs,jdbcType=INTEGER},
+        #{sjcs,jdbcType=VARCHAR},
+      </if>
+      <if test="jylv != null" >
+        #{jylv,jdbcType=VARCHAR},
+      </if>
+      <if test="jslv != null" >
+        #{jslv,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -170,11 +184,11 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.yhlx != null" >
-        yhlx = #{record.yhlx,jdbcType=VARCHAR},
+      <if test="record.yhlv != null" >
+        yhlv = #{record.yhlv,jdbcType=VARCHAR},
       </if>
-      <if test="record.hglx != null" >
-        hglx = #{record.hglx,jdbcType=VARCHAR},
+      <if test="record.hglv != null" >
+        hglv = #{record.hglv,jdbcType=VARCHAR},
       </if>
       <if test="record.xxplf != null" >
         xxplf = #{record.xxplf,jdbcType=VARCHAR},
@@ -183,10 +197,16 @@
         sjf = #{record.sjf,jdbcType=VARCHAR},
       </if>
       <if test="record.xxplcs != null" >
-        xxplcs = #{record.xxplcs,jdbcType=INTEGER},
+        xxplcs = #{record.xxplcs,jdbcType=VARCHAR},
       </if>
       <if test="record.sjcs != null" >
-        sjcs = #{record.sjcs,jdbcType=INTEGER},
+        sjcs = #{record.sjcs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jylv != null" >
+        jylv = #{record.jylv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jslv != null" >
+        jslv = #{record.jslv,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -196,12 +216,14 @@
   <update id="updateByExample" parameterType="map" >
     update t_lfjxb
     set id = #{record.id,jdbcType=INTEGER},
-      yhlx = #{record.yhlx,jdbcType=VARCHAR},
-      hglx = #{record.hglx,jdbcType=VARCHAR},
+      yhlv = #{record.yhlv,jdbcType=VARCHAR},
+      hglv = #{record.hglv,jdbcType=VARCHAR},
       xxplf = #{record.xxplf,jdbcType=VARCHAR},
       sjf = #{record.sjf,jdbcType=VARCHAR},
-      xxplcs = #{record.xxplcs,jdbcType=INTEGER},
-      sjcs = #{record.sjcs,jdbcType=INTEGER}
+      xxplcs = #{record.xxplcs,jdbcType=VARCHAR},
+      sjcs = #{record.sjcs,jdbcType=VARCHAR},
+      jylv = #{record.jylv,jdbcType=VARCHAR},
+      jslv = #{record.jslv,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -209,11 +231,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.accountingsystem.Global.bean.TLfjxb" >
     update t_lfjxb
     <set >
-      <if test="yhlx != null" >
-        yhlx = #{yhlx,jdbcType=VARCHAR},
+      <if test="yhlv != null" >
+        yhlv = #{yhlv,jdbcType=VARCHAR},
       </if>
-      <if test="hglx != null" >
-        hglx = #{hglx,jdbcType=VARCHAR},
+      <if test="hglv != null" >
+        hglv = #{hglv,jdbcType=VARCHAR},
       </if>
       <if test="xxplf != null" >
         xxplf = #{xxplf,jdbcType=VARCHAR},
@@ -222,22 +244,30 @@
         sjf = #{sjf,jdbcType=VARCHAR},
       </if>
       <if test="xxplcs != null" >
-        xxplcs = #{xxplcs,jdbcType=INTEGER},
+        xxplcs = #{xxplcs,jdbcType=VARCHAR},
       </if>
       <if test="sjcs != null" >
-        sjcs = #{sjcs,jdbcType=INTEGER},
+        sjcs = #{sjcs,jdbcType=VARCHAR},
+      </if>
+      <if test="jylv != null" >
+        jylv = #{jylv,jdbcType=VARCHAR},
+      </if>
+      <if test="jslv != null" >
+        jslv = #{jslv,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hundsun.accountingsystem.Global.bean.TLfjxb" >
     update t_lfjxb
-    set yhlx = #{yhlx,jdbcType=VARCHAR},
-      hglx = #{hglx,jdbcType=VARCHAR},
+    set yhlv = #{yhlv,jdbcType=VARCHAR},
+      hglv = #{hglv,jdbcType=VARCHAR},
       xxplf = #{xxplf,jdbcType=VARCHAR},
       sjf = #{sjf,jdbcType=VARCHAR},
-      xxplcs = #{xxplcs,jdbcType=INTEGER},
-      sjcs = #{sjcs,jdbcType=INTEGER}
+      xxplcs = #{xxplcs,jdbcType=VARCHAR},
+      sjcs = #{sjcs,jdbcType=VARCHAR},
+      jylv = #{jylv,jdbcType=VARCHAR},
+      jslv = #{jslv,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

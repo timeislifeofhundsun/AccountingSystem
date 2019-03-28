@@ -80,9 +80,9 @@ public class LfjxQsServiceImpl implements LfjxQsService {
 			TLfjxb lfjxb = lfjxbs.get(0);
 			Double amount = null;
 			if(ywlb==5101){
-				amount = Double.valueOf(lfjxb.getXxplf())/lfjxb.getXxplcs();
+				amount = Double.valueOf(Integer.valueOf(lfjxb.getXxplf()))/Integer.valueOf(lfjxb.getXxplcs());
 			}else if(ywlb==5102){
-				amount = Double.valueOf(lfjxb.getSjf())/lfjxb.getSjcs();
+				amount = Double.valueOf(Integer.valueOf(lfjxb.getSjf()))/Integer.valueOf(lfjxb.getSjcs());
 			}else{
 				log.error("参数ywlb错误");
 				return null;

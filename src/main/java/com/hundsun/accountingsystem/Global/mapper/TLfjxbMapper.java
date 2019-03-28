@@ -4,7 +4,9 @@ import com.hundsun.accountingsystem.Global.bean.TLfjxb;
 import com.hundsun.accountingsystem.Global.bean.TLfjxbExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TLfjxbMapper {
     int countByExample(TLfjxbExample example);
 

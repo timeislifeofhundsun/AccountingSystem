@@ -16,8 +16,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         type:"GET",
         success: (function  (data) {
             console.log(data);
-            $("#yhlx").val(data.yhlx);
-            $("#hglx").val(data.hglx);
+            $("#id").val(data.id);
+            $("#yhlv").val(data.yhlv);
+            $("#hglv").val(data.hglv);
+            $("#jylv").val(data.jylv);
+            $("#jslv").val(data.jslv);
             $("#xxplf").val(data.xxplf);
             $("#xxplcs").val(data.xxplcs);
             $("#sjf").val(data.sjf);

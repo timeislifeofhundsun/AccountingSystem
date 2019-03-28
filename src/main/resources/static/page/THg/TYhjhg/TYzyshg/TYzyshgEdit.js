@@ -81,14 +81,15 @@ function getValue(data) {
             $("#lumpsum").val(data.lumpsum);
             $('#lumpsum').prop('disabled', true);
             $("#amount").val(data.amount);
-            $('#amount').prop('disabled', true);
             $("#yhs").val(data.yhs);
             $('#yhs').prop('disabled', true);
             $("#zgf").val(data.zgf);
             $("#quantity").val(data.quantity);
             $('#quantity').prop('disabled', true);
             $("#jsf").val(data.jsf);
+            $('#jsf').prop('disabled', true);
             $("#ghf").val(data.ghf);
+            $('#ghf').prop('disabled', true);
             $("#extendd").val(data.extendd);
             $("#yj").val(data.yj);
             form.render();
@@ -158,7 +159,23 @@ layui.use(['form', 'layer', 'laydate'], function () {
                 return "结算方式不能为空";
             }
         }
-    })
+    });
+    $("#amount").change(function () {
+        var hglv, jylv, jslv;
+        $.ajax({
+            url: "/TLfjxb",
+            type: "GET",
+            success: function (data) {
+                hglv = data.hglv;
+                var lxcount = Number($("#amount").val()) * Number($("#quantity").val()) * Number(hglv);
+                $("#yhs").val((Number(($("#amount").val()) * 1) + (Number(lxcount)) * 1));
+                jylv = data.jylv;
+                jslv = data.jslv;
+                $("#jsf").val(Number(($("#amount").val())) * Number(jslv));
+                $("#ghf").val(Number(($("#amount").val())) * Number(jylv));
+            }
+        });
+    });
     //提交更改证券信息
     form.on("submit(EditTYzyshg)", function (data) {
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});

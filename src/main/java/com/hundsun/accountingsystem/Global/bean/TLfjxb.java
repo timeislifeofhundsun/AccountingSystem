@@ -1,19 +1,23 @@
 package com.hundsun.accountingsystem.Global.bean;
-
+// 银行利息 回购利息 信息披露费 审计费 信息披露次数 审计次数
 public class TLfjxb {
     private Integer id;
 
-    private String yhlx;
+    private String yhlv;
 
-    private String hglx;
+    private String hglv;
 
     private String xxplf;
 
     private String sjf;
 
-    private Integer xxplcs;
+    private String xxplcs;
 
-    private Integer sjcs;
+    private String sjcs;
+
+    private String jylv;
+
+    private String jslv;
 
     public Integer getId() {
         return id;
@@ -23,20 +27,20 @@ public class TLfjxb {
         this.id = id;
     }
 
-    public String getYhlx() {
-        return yhlx;
+    public String getYhlv() {
+        return yhlv;
     }
 
-    public void setYhlx(String yhlx) {
-        this.yhlx = yhlx == null ? null : yhlx.trim();
+    public void setYhlv(String yhlv) {
+        this.yhlv = yhlv == null ? null : yhlv.trim();
     }
 
-    public String getHglx() {
-        return hglx;
+    public String getHglv() {
+        return hglv;
     }
 
-    public void setHglx(String hglx) {
-        this.hglx = hglx == null ? null : hglx.trim();
+    public void setHglv(String hglv) {
+        this.hglv = hglv == null ? null : hglv.trim();
     }
 
     public String getXxplf() {
@@ -55,19 +59,35 @@ public class TLfjxb {
         this.sjf = sjf == null ? null : sjf.trim();
     }
 
-    public Integer getXxplcs() {
+    public String getXxplcs() {
         return xxplcs;
     }
 
-    public void setXxplcs(Integer xxplcs) {
-        this.xxplcs = xxplcs;
+    public void setXxplcs(String xxplcs) {
+        this.xxplcs = xxplcs == null ? null : xxplcs.trim();
     }
 
-    public Integer getSjcs() {
+    public String getSjcs() {
         return sjcs;
     }
 
-    public void setSjcs(Integer sjcs) {
-        this.sjcs = sjcs;
+    public void setSjcs(String sjcs) {
+        this.sjcs = sjcs == null ? null : sjcs.trim();
+    }
+
+    public String getJylv() {
+        return jylv;
+    }
+
+    public void setJylv(String jylv) {
+        this.jylv = jylv == null ? null : jylv.trim();
+    }
+
+    public String getJslv() {
+        return jslv;
+    }
+
+    public void setJslv(String jslv) {
+        this.jslv = jslv == null ? null : jslv.trim();
     }
 }

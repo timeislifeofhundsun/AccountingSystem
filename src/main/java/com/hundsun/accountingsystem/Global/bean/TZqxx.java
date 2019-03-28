@@ -3,7 +3,7 @@ package com.hundsun.accountingsystem.Global.bean;
 import com.alibaba.fastjson.annotation.JSONField;
 
 import java.util.Date;
-
+// 证券内码 证券代码 证券类别 市场类别 证券简称 总股本 流通股数 每股面值 发行日期 到期日期 回购天数 年计息天数 年利率 起息日 发行方式 发行价格
 public class TZqxx {
     private Integer zqnm;
 

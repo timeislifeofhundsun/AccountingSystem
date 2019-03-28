@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import com.hundsun.accountingsystem.Global.VO.THqbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.THqb;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface THqbMapper{
 	/**
 	 * 获得THqb数据的总行数,可以通过辅助工具Assist进行条件查询,如果没有条件则传入null

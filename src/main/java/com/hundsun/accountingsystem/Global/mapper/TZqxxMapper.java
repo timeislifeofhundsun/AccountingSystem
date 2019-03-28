@@ -4,7 +4,9 @@ import com.hundsun.accountingsystem.Global.bean.TZqxx;
 import com.hundsun.accountingsystem.Global.bean.TZqxxExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TZqxxMapper {
     int countByExample(TZqxxExample example);
 

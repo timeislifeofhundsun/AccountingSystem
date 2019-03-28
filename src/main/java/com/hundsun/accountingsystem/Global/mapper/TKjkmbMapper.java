@@ -1,9 +1,10 @@
 package com.hundsun.accountingsystem.Global.mapper;
 
 import com.hundsun.accountingsystem.Global.bean.TKjkmb;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface TKjkmbMapper {
     int deleteByPrimaryKey(String id);
 

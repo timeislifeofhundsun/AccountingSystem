@@ -3,6 +3,9 @@ import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import java.util.List;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface TCcyebMapper{
 
 	int update_cysl(TCcyeb tCcyeb);

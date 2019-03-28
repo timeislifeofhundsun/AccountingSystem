@@ -5,7 +5,9 @@ import com.hundsun.accountingsystem.Global.bean.TXwxxb;
 import com.hundsun.accountingsystem.Global.bean.TXwxxbExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TXwxxbMapper {
     int countByExample(TXwxxbExample example);
 
