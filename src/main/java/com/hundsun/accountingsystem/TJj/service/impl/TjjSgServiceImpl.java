@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import com.hundsun.accountingsystem.Global.VO.TQsbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TCcyeb;
+import com.hundsun.accountingsystem.Global.bean.TPzb;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
+import com.hundsun.accountingsystem.Global.mapper.TPzbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.TJj.service.TjjSgService;
 
@@ -23,6 +25,9 @@ public class TjjSgServiceImpl implements TjjSgService {
 	
 	@Autowired
 	TCcyebMapper tccyebMapper;
+	
+	@Autowired
+	TPzbMapper tpzbMapper;
 	
 	@Override
 	public List<TQsb> selectByPage(int page, int limit) {
@@ -133,6 +138,35 @@ public class TjjSgServiceImpl implements TjjSgService {
 		assist.setRequires(Assist.andEq("ztbh", tyhck.getZtbh()));
 		assist.setRequires(Assist.andEq("kjkmdm", tyhck.getKjkmdm()));
 		tccyebMapper.updateTCcyeb(tyhck, assist);	
+	}
+
+	@Override
+	public boolean isHavePz(Integer id) {
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("extendf", id+""));
+		List<TPzb> list = tpzbMapper.selectTPzb(assist);
+		if(list!=null && list.size()>0) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void updateTqsb(TQsb tqsb) {
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("id", tqsb.getId()));
+		tqsbMapper.updateTQsb(tqsb, assist);
+	}
+
+	@Override
+	public TQsb getTqsbByiD(Integer id) {
+		
+		return tqsbMapper.selectTQsbById(id);
+	}
+
+	@Override
+	public void deleteTqsbById(int id) {
+		tqsbMapper.deleteTQsbById(id);
 	}
 
 }

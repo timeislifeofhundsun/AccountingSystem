@@ -26,4 +26,12 @@ public interface TjjSgService {
 
 	void updateCcyeb(TCcyeb tyhck);
 
+	boolean isHavePz(Integer id);
+
+	void updateTqsb(TQsb tqsb);
+
+	TQsb getTqsbByiD(Integer id);
+
+	void deleteTqsbById(int id);
+
 }
