@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @ComponentScan(basePackages ="com.hundsun.accountingsystem")//扫描插件
 @SpringBootApplication
 public class AccountingSystemApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(AccountingSystemApplication.class, args);
 	}

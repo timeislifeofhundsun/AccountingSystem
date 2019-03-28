@@ -34,11 +34,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     	
     });
     
-    //查询股东
-    $('.selectTGdxx').click(function(){
-    	var ztbh=$('#ztbh').val();
-    	searchGdxx(ztbh);
+    $("#name").on('change', function(){
+        var ztbh = $("#ztbh").val();
+        searchGdxx(ztbh);
     });
+    
     var ztbh;
     $('.addTGdxx').click(function(){
     	ztbh=$('#ztbh').val();

@@ -3,15 +3,16 @@
  * 修改记录:
  * 修改日期     修改人员  修改说明
  * ========    =======  ============================================
- * 2019/3/19  wanggk25832  新增
+ * 2019/3/28  wanggk25832  新增
  * ========    =======  ============================================
  */
-package com.hundsun.accountingsystem.THg;
+package com.hundsun.accountingsystem.THg.Service;
 
 /**
  * 功能说明:
  *
  * @author wanggk25832
  */
-public class test {
+public interface HGQSService {
+
 }

@@ -57,12 +57,6 @@
               "spread": false
             },
             {
-              "title": "红利除权",
-              "icon": "&#xe609;",
-              "href": "page/TGp/TGpfh/THlcq/THlcqList.html",
-              "spread": false
-            },
-            {
               "title": "红利到账",
               "icon": "&#xe609;",
               "href": "page/TGp/TGpfh/THldz/THldzList.html",

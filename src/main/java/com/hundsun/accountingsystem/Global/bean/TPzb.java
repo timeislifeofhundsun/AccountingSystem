@@ -156,5 +156,12 @@ public class TPzb implements java.io.Serializable {
     public void setRq(java.util.Date rq) {
         this.rq = rq;
     }
+	@Override
+	public String toString() {
+		return "TPzb [id=" + id + ", extenda=" + extenda + ", bs=" + bs + ", pzid=" + pzid + ", ztbh=" + ztbh
+				+ ", kmms=" + kmms + ", je=" + je + ", zy=" + zy + ", rq=" + rq + "]";
+	}
 
+    
+    
 }

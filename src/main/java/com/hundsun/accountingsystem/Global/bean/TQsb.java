@@ -7,6 +7,8 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
+
+import com.alibaba.fastjson.annotation.JSONField;
 /**
  * @ClassName TQsb
  * @Aurhor yangjf25257
@@ -25,6 +27,7 @@ public class TQsb {
 
     private Integer ztbh;
 
+    @JSONField(format = "yyyy-MM-dd")
     private Date rq;//新股情况代表清算日期ok
 
     private String zqcode;

@@ -3,6 +3,7 @@ package com.hundsun.accountingsystem.Global.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hundsun.accountingsystem.Global.mapper.TZtxxbMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,8 @@ public class TZtxxbController {
 	
 	@Autowired
 	TZtxxbService tztxxbServiceImpl;
+	@Autowired
+	TZtxxbMapper tZtxxbMapper;
 	
 	@PostMapping("/TZtxx")
 	public String InsertZtxx(String data) {
@@ -76,4 +79,9 @@ public class TZtxxbController {
 		}
 		return String.valueOf(1);
 	}
+    @GetMapping("/getTZtxxList")
+	public List<TZtxxb> getList(){
+      List<TZtxxb> tZtxxbs = tZtxxbMapper.selectByExample(null);
+      return  tZtxxbs;
+    }
 }

@@ -5,7 +5,9 @@ import com.hundsun.accountingsystem.Global.bean.TGdxxb;
 import com.hundsun.accountingsystem.Global.bean.TGdxxbExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TGdxxbMapper {
     int countByExample(TGdxxbExample example);
 
@@ -20,8 +22,6 @@ public interface TGdxxbMapper {
     List<TGdxxb> selectByExample(TGdxxbExample example);
 
     TGdxxb selectByPrimaryKey(String gddm);
-
-    TGdxxb selectByGddmAndXwbh(TGdxxb tGdxxb);
 
     int updateByExampleSelective(@Param("record") TGdxxb record, @Param("example") TGdxxbExample example);
 

@@ -18,17 +18,37 @@
 <form class="layui-form layui-row layui-col-space10 lfjxform" lay-filter="lfjxform" id="lfjxform">
         <div class="layui-row layui-col-space10" style="padding-top: 150px">
             <div class="layui-col-md-offset4 layui-col-md4 layui-col-xs7">
+                <div class="layui-form-item magt3" hidden>
+                    <label class="layui-form-label">ID</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input id" name="id" id="id" lay-verify="id">
+                    </div>
+                </div>
                 <div class="layui-form-item magt3">
                     <label class="layui-form-label">存款利率</label>
                     <div class="layui-input-block">
-                        <input type="text" class="layui-input yhlx" name="yhlx" id="yhlx" lay-verify="yhlx"
+                        <input type="text" class="layui-input yhlv" name="yhlv" id="yhlv" lay-verify="yhlv"
                                placeholder="请输入存款利率">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">回购利率</label>
                     <div class="layui-input-block">
-                        <input type="text" class="layui-input hglx" name="hglx" id="hglx" lay-verify="hglx"
+                        <input type="text" class="layui-input hglv" name="hglv" id="hglv" lay-verify="hglv"
+                               placeholder="请输入回购利率">
+                    </div>
+                </div>
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label">交易利率</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input jylv" name="jylv" id="jylv" lay-verify="jylv"
+                               placeholder="请输入存款利率">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">结算利率</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input jslv" name="jslv" id="jslv" lay-verify="jslv"
                                placeholder="请输入回购利率">
                     </div>
                 </div>

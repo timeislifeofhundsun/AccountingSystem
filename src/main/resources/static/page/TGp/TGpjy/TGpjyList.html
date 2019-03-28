@@ -1,10 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>股票交易</title>
+    <meta name="_csrf" th:content="${_csrf.token}" /></meta>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" /></meta>
+    <!--<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">-->
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../../../css/public.css" media="all" />
 </head>
 <body>
-    股票交易
+<body class="childrenBody">
+<!--顶栏-->
+<div class="layui-row layui-col-space10">
+    <div class="layui-form">
+        <!--账套选择-->
+        <div class="layui-col-md3">
+            <div class="layui-inline">
+            <div class="layui-input-inline">
+            	<input type="text" class="layui-input layui-hide ztbh" id="ztbh" name="ztbh" />
+                <input type="text" class="layui-input name" id="name" name="name" placeholder="清选择账套" disabled="disabled"/>
+            </div>
+            <a class="layui-btn select_btn" data-type="reload">选择账套</a>
+        </div>
+        </div>
+        <!--日期选择-->
+        <div class="layui-col-md3">
+            <div class="layui-inline">
+                <label class="layui-form-label">日期选择</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" id="ywrq">
+                </div>
+            </div>
+        </div>
+        <!--查询按钮-->
+        <div class="layui-col-md6">
+            <button class="layui-btn" id="queryBtn">查询</button>
+        </div>
+    </div>
+</div>
+
+<!--数据-->
+<div class="layui-row layui-col-space10">
+    <table class="layui-hide" id="data" lay-filter="data"></table>
+</div>
+
+<script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="Tgpjy.js"></script>
 </body>
 </html>

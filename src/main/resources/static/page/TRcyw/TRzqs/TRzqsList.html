@@ -54,10 +54,28 @@
             <div class="layui-card">
                 <!-- header开始 -->
                 <div class="layui-card-header">
-                    业务日期：<span id="showDate"></span>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">日期选择</label>
+                        <div class="layui-input-block">
+                            <span id="showDate"></span>
+                        </div>
+                    </div>
                 </div>
                 <!-- header结束 -->
                 <div class="layui-card-body">
+
+                    <div class="layui-form">
+                        <!--账套选择-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">账套选择</label>
+                                <div class="layui-input-block">
+                                    <select name="interest" lay-filter="aihao">
+                                        <option value="10004">测试账套</option>
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+
                     <div style="height:550px;">
                         <div id="date"></div>
                         <div style="margin-top: 30px;">

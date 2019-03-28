@@ -64,7 +64,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     	parent$("#name").val(ztbh+"_"+name);
     	var index = parent.layer.getFrameIndex(window.name); 
     	parent.layer.close(index);
-    	
+    	parent$("#name").change();
     }
       
     //列表中判断点击选择操作

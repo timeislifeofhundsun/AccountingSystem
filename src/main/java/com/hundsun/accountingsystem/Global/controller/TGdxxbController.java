@@ -83,4 +83,11 @@ public class TGdxxbController {
 	    String jsonString = JSON.toJSONString(layuiJson);
 		return jsonString;
 	}
+
+
+	@GetMapping("/getByZtbh")
+	public List<TGdxxb> getGdById(int ztbh) {
+		List<TGdxxb> findList = tgdxxbServiceImpl.findgDgByZtbh(ztbh);
+		return findList;
+	}
 }

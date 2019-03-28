@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hundsun.accountingsystem.Global.VO.THqbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.Assist.WhereRequire;
 import com.hundsun.accountingsystem.Global.bean.THqb;
@@ -186,6 +187,57 @@ public class THqbServiceImpl implements THqbService {
 		for (TZqxx tZqxx : zqxxs) {
 			this.zqxxMap.put(tZqxx.getZqdm(), tZqxx);
 		}
+	}
+
+	@Override
+	public List<THqb> findHqxxByPage(int page, int limit) {
+		THqbParamPojo params = new THqbParamPojo();
+		params.setStart((page-1)*limit);
+		params.setEnd(limit);
+		return tHqbMapper.selectByLimit(params);
+	}
+
+	@Override
+	public int selectCounts() {
+		return tHqbMapper.selectCounts();
+	}
+
+	@Override
+	public List<THqb> findByZqdm(int zqdm) {
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("zqdm", zqdm));
+		assist.setRequires(Assist.andEq("zqnm", 4));
+		return tHqbMapper.selectTHqb(assist);
+	}
+
+	@Override
+	public List<THqb> findByDate(String date) {
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("hqrq", date));
+		assist.setRequires(Assist.andEq("zqnm", 4));
+		return tHqbMapper.selectTHqb(assist);
+	}
+
+	@Override
+	public void updateHqxx(THqb thqb) {
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("zqdm", thqb.getZqdm()));
+		assist.setRequires(Assist.andEq("zqnm", 4));
+		tHqbMapper.updateTHqb(thqb, assist);
+		
+	}
+
+	@Override
+	public void insertHqxx(THqb thqb) throws Exception {
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("zqdm", thqb.getZqdm()));
+		assist.setRequires(Assist.andEq("zqnm", 4));
+		assist.setRequires(Assist.andEq("hqrq", thqb.getHqrq()));
+		List<THqb> list = tHqbMapper.selectTHqb(assist);
+		if(list!=null&&list.size()!=0) {
+			throw new Exception("该基金的当日行情信息已经存在，请不要重复添加");
+		}
+		tHqbMapper.insertTHqb(thqb);
 	}
 	
 }

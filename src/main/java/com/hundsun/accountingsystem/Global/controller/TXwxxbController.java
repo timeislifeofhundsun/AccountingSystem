@@ -69,19 +69,4 @@ public class TXwxxbController {
 	    String jsonString = JSON.toJSONString(layuiJson);
 		return jsonString;
 	}
-	
-	@GetMapping("/findTXwxxByXwbh")
-	public String findById(String xwbh) {
-		TXwxxb txwxxb=txwxxbServiceImpl.findXwById(xwbh);
-		List<TXwxxb> findList = new ArrayList<TXwxxb>();
-		findList.add(txwxxb);
-		TXwxxbVO layuiJson = new TXwxxbVO();
-		layuiJson.setCode(0);
-	    layuiJson.setCount(1);
-	    layuiJson.setMsg("");
-	    layuiJson.setData(findList);
-	    String jsonString = JSON.toJSONString(layuiJson);
-		return jsonString;
-		
-	}
 }

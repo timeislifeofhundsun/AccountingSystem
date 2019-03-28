@@ -18,9 +18,10 @@ import org.springframework.stereotype.Service;
  */
 
 public interface TLfjxbService {
+  //查询两费计息BY主键
   TLfjxb selectByPrimaryKey(Integer id);
-
+  //更新两费计息BY主键（动态选择插入字段）
   int updateByPrimaryKeySelective(TLfjxb record);
-
+  //更新两费计息BY主键（更新全部字段）
   int updateByPrimaryKey(TLfjxb record);
 }

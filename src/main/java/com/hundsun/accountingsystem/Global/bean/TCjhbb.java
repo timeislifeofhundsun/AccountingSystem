@@ -3,7 +3,7 @@ package com.hundsun.accountingsystem.Global.bean;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
-
+// 股东代码 席位编号 证券代码 交易市场 成交数量 成交价格 成交金额 买卖方向 账套编号 业务日期 业务类别 经手费 过户费 证管费 印花税 交易费用 扩展字段1 扩展字段2
 public class TCjhbb {
     private Integer id;
 

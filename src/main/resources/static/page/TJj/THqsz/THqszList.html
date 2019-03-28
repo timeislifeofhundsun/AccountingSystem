@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>基金行情信息设置</title>
+    <meta name="_csrf" th:content="${_csrf.token}" /></meta>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" /></meta>
+    <!--<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">-->
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../../../css/public.css" media="all" />
 </head>
-<body>
-    基金交易
-    <input type="text" name=""/>
+<body class="childrenBody">
+<form class="layui-form">
+	<!-- toolbar -->
+    <div id="TZtxxbar" style="padding: 20px">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input zqdmSearch" id="zqdmSearch" name="zqdmSearch" placeholder="请输入证券代码" />
+            </div>
+            <a class="layui-btn search_btn" data-type="reload">搜索</a>
+        </div>
+        <div class="layui-inline">
+        	<div class="layui-input-inline">
+                <input type="text" class="layui-input datetime" id="datetime" name="datetime" placeholder="请选择日期" />
+            </div>
+            <a class="layui-btn layui-btn-normal addTHqxx">添加行情信息</a> 
+        </div>
+    </div>
+    <!-- <table id="TZtxxList" lay-filter="TZtxxList"></table> -->
+    <table class="layui-hide" id="THqbxxList" lay-filter="THqbxxList"></table>
+    <!--操作-->
+    <script type="text/html" id="THqbxxListBar">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    </script>
+</form>
+<script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="THqszList.js"></script>
+<script>
+</script>
 </body>
 </html>

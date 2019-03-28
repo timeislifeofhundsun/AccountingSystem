@@ -1,8 +1,13 @@
 package com.hundsun.accountingsystem.Global.mapper;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
 import java.util.List;
+
+import com.hundsun.accountingsystem.Global.VO.TQsbParamPojo;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface TQsbMapper{
 	/**
 	 * 获得TQsb数据的总行数,可以通过辅助工具Assist进行条件查询,如果没有条件则传入null
@@ -88,4 +93,14 @@ public interface TQsbMapper{
     int updateNonEmptyTQsb(@Param("enti") TQsb value, @Param("assist") Assist assist);
 
     List<TQsb> findAllTQsb(@Param("ywlb")int[] ywlb,@Param("extenda") String extenda ,@Param("extendc") String extendc);
+	
+    List<TQsb> selectByYwlbAndLimit(TQsbParamPojo params);
+    
+	List<TQsb> selectByPageAndZtbh(TQsbParamPojo params);
+	
+	int getCountsByZtbh(TQsbParamPojo params);
+	
+	List<TQsb> selectByPageAndDate(TQsbParamPojo params);
+	
+	int getCountsByDate(TQsbParamPojo params);
 }

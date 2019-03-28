@@ -115,7 +115,9 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 		}
 		//批量插入到数据库
 		try {
-			tcjhbbMapper.insertList(tcjhbbList);
+			if(tcjhbbList.size()>0) {
+				tcjhbbMapper.insertList(tcjhbbList);
+			}
 		} catch (Exception e) {
 			return false;
 		}		

@@ -3,6 +3,9 @@ import com.hundsun.accountingsystem.Global.bean.TGhk;
 import java.util.List;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface TGhkMapper{
 	/**
 	 * 获得TGhk数据的总行数,可以通过辅助工具Assist进行条件查询,如果没有条件则传入null

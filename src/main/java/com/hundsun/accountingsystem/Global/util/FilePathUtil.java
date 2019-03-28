@@ -35,7 +35,6 @@ public class FilePathUtil {
 			String zqbd = root+ywrq+"/ZQBDjsmr1.dbf";
 			temp = ywrq.replaceAll("-", "").substring(4, 8);
 			String sjsjg = root+ywrq+"/SJSJG"+temp+".dbf";
-			
 			File ftemp = new File(cash);
 			if(ftemp.exists()) {
 				res.put("cashsecurityclosemd", cash);
