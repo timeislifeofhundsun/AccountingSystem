@@ -59,10 +59,11 @@ public class AccountingSystemApplicationTests {
 
 	@Test
 	public void test() throws IOException, ParseException {
-		//System.out.println(xgQsbService.insert_xg_qsk("F:\\HUNDSUN\\JYQS\\20180604\\JSMXjsmr1.dbf"));;
+		//System.out.println(xgQsbService.insert_xg_qsk("F:\\HUNDSUN\\JYQS\\20180604\\JSMXjsmr1.dbf"));//放入清算库
 		//tGhkService.readGhDataByFile("","F:\\HUNDSUN\\JYQS\\20180531\\SJSMX10531.dbf","");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		System.out.println(xgQsbService.insete_gzzz_qsk(10000,sdf.parse("20180531")));
-
+		//System.out.println(xgQsbService.insert_gzzz_qsk(10000,sdf.parse("20180606")));//估值增值测试
+		//System.out.println(xgQsbService.insert_sclt_qsk("F:\\HUNDSUN\\JYQS\\20180608\\ZQBDjsmr1.dbf"));//上市流通
+		System.out.println(xgQsbService.xgqs("F:\\HUNDSUN\\JYQS\\20180604\\JSMXjsmr1.dbf","F:\\HUNDSUN\\JYQS\\20180608\\ZQBDjsmr1.dbf",10000,sdf.parse("20180606")));
 	}
 }

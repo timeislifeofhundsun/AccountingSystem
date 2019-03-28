@@ -253,6 +253,7 @@
         </foreach>
     </insert>
 
+
     <!-- 通过TQsb的id将数据库表中对应的数据删除-->
     <delete id="deleteTQsbById" parameterType="java.lang.Integer">
         delete from t_qsb

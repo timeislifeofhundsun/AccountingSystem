@@ -21,6 +21,8 @@ public interface TGdxxbMapper {
 
     TGdxxb selectByPrimaryKey(String gddm);
 
+    TGdxxb selectByGddmAndXwbh(TGdxxb tGdxxb);
+
     int updateByExampleSelective(@Param("record") TGdxxb record, @Param("example") TGdxxbExample example);
 
     int updateByExample(@Param("record") TGdxxb record, @Param("example") TGdxxbExample example);
