@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TGdxxbMapper {
+
+    TGdxxb selectByGddmAndXwbh(TGdxxb tGdxxb);
+
     int countByExample(TGdxxbExample example);
 
     int deleteByExample(TGdxxbExample example);

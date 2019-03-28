@@ -326,12 +326,12 @@ public class XgQsbServiceImpl implements XgQsbService {
     @Override
     public String xgqs(String path_xg_qsk, String path_sclt_qsk, int ztbh, Date date) throws ParseException {
         if (path_xg_qsk != null && path_sclt_qsk != null){
-            return "不能同时清算";
+          //  return "不能同时清算";
         }
       String n = insert_xg_qsk(path_xg_qsk);
-      System.out.println(n);
+     System.out.println(n);
       String m = insert_sclt_qsk(path_sclt_qsk);
-      System.out.println(m);
+     System.out.println(m);
       insert_gzzz_qsk(ztbh, date);
       return "清算成功";
     }
