@@ -88,9 +88,8 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 	            {field: 'rq', title: '清算日期', align:'center',width:150},
 	            {field: 'zqcode', title: '证券代码', align:'center'},
 	            {field: 'ywlb', title: '业务类别',  align:'center'},
-	            {field: 'quantity', title: '成交数量', align:'center'},
-	            {field: 'amount', title: '成交金额', align:'center'},
-	            {field: 'yhs', title: '印花税', align:'center'},
+	            {field: 'quantity', title: '成交数量', align:'center',width:150},
+	            {field: 'amount', title: '成交金额', align:'center',width:150},
 	            {field: 'jsf', title: '经手费', align:'center'},
 	            {field: 'ghf', title: '过户费', align:'center'},
 	            {field: 'zgf', title: '证管费', align:'center'},
@@ -126,9 +125,8 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 	            {field: 'rq', title: '清算日期', align:'center',width:150},
 	            {field: 'zqcode', title: '证券代码', align:'center'},
 	            {field: 'ywlb', title: '业务类别',  align:'center'},
-	            {field: 'quantity', title: '成交数量', align:'center'},
-	            {field: 'amount', title: '成交金额', align:'center'},
-	            {field: 'yhs', title: '印花税', align:'center'},
+	            {field: 'quantity', title: '成交数量', align:'center',width:150},
+	            {field: 'amount', title: '成交金额', align:'center',width:150},
 	            {field: 'jsf', title: '经手费', align:'center'},
 	            {field: 'ghf', title: '过户费', align:'center'},
 	            {field: 'zgf', title: '证管费', align:'center'},
@@ -170,22 +168,20 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     
     
     //点击编辑操作
-    function EditHqxx(edit){
+    function EditSgsq(edit){
         var index = layui.layer.open({
-            title : "修改基金行情信息",
+            title : "修改申购信息",
             type : 2,
-            content : "THqszEdit.html",
+            content : "TSgsqEdit.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
                 	body.find(".id").val(edit.id);
-                    body.find(".zqdm").val(edit.zqdm);
-                    body.find(".zqmc").val(edit.zqmc);
-                    body.find(".hqrq").val(edit.hqrq);
-                    body.find(".zrspj").val(edit.zrspj);
-                    body.find(".jrkp").val(edit.jrkp);
-                    body.find(".jrsp").val(edit.jrsp);
-                    body.find(".cjje").val(edit.cjje);
+                    body.find(".ztbh").val(edit.ztbh);
+                    body.find(".zqcode").val(edit.zqcode);
+                    body.find(".rq").val(edit.rq);
+                    body.find(".quantity").val(edit.quantity);
+                    body.find(".amount").val(edit.amount);
                     form.render();
                 }
                 setTimeout(function(){
@@ -202,13 +198,47 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         })
     }
     
+    //点击删除操作
+    function delSgsq(data){
+    	var id = data.id;
+    	var ztbh = $("#ztbh").val();
+    	var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
+    	$.ajax({
+            url: "/deleteTSgsq",
+            data: {id:id},
+            type: 'POST',
+            success:function (obj) {
+                if (obj==1) {
+                    setTimeout(function () {
+                        top.layer.close(index);
+                        top.layer.msg("申购申请删除成功！");
+                        searchSgsq(ztbh);
+                    }, 500);
+                }else{
+                	setTimeout(function () {
+                		top.layer.close(index);
+                        top.layer.msg("删除失败，原因："+obj);
+                    }, 500);                	
+                }
+            },
+            complete: function(XMLHttpRequest, textStatus) {
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+            },
+
+        });
+    }
     
     //列表中判断点击编辑操作
-    table.on('tool(THqbxxList)', function(obj){
+    table.on('tool(TSgsqList)', function(obj){
         var layEvent = obj.event,
             data = obj.data;
         if(layEvent === 'edit'){ //编辑
-            EditHqxx(data);
+            EditSgsq(data);
+        }else if(layEvent === 'del'){
+        	layer.confirm("确认删除该条申购申请吗？",{icon: 3, title:'提示'}, function(index){
+        		delSgsq(data);
+        	});
         }
     });
     
