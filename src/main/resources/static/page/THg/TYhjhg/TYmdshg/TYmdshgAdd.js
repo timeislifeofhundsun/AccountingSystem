@@ -135,6 +135,7 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
                     if ($("#yhs").val() != "") {
                         if (Number($("#yhs").val()) < Number($("#amount").val())) {
                             $("#amount").val("");
+
                             layer.msg('成交金额必须小于到期金额', {
                                 time: 1000, //20s后自动关闭
                             });
@@ -165,6 +166,7 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
                 return;
             } else {
                 if (Number($("#yhs").val()) < Number($("#amount").val())) {
+                    $("#cjsr").val("");
                     $("#yhs").val("");
                     layer.msg('到期金额必须大于成交金额', {
                         time: 1000, //20s后自动关闭

@@ -85,7 +85,6 @@ function getValue(data) {
             $("#cjsr").val(data.cjsr);
             $('#cjsr').prop('disabled', true);
             $("#yhs").val(data.yhs);
-            $('#yhs').prop('disabled', true);
             $("#zgf").val(data.zgf);
             $("#quantity").val(data.quantity);
             $('#quantity').prop('disabled', true);
@@ -165,21 +164,60 @@ layui.use(['form', 'layer', 'laydate'], function () {
         }
     });
     $("#amount").change(function () {
-        var hglv, jylv, jslv;
-        $.ajax({
-            url: "/TLfjxb",
-            type: "GET",
-            success: function (data) {
-                hglv = data.hglv;
-                var lxcount = Number($("#amount").val()) * Number($("#quantity").val()) * Number(hglv);
-                $("#cjsr").val(lxcount);
-                $("#yhs").val((Number(($("#amount").val()) * 1) + (Number(lxcount)) * 1));
-                jylv = data.jylv;
-                jslv = data.jslv;
-                $("#jsf").val(Number(($("#amount").val())) * Number(jslv));
-                $("#ghf").val(Number(($("#amount").val())) * Number(jylv));
+        if ($("#amount").val() == "") {
+            $("#cjsr").val("");
+            $("#jsf").val("");
+            $("#ghf").val("");
+        } else {
+            var jylv, jslv;
+            $.ajax({
+                url: "/TLfjxb",
+                type: "GET",
+                success: function (data) {
+                    if ($("#yhs").val() != "") {
+                        if (Number($("#yhs").val()) < Number($("#amount").val())) {
+                            $("#amount").val("");
+                            layer.msg('成交金额必须小于到期金额', {
+                                time: 1000, //20s后自动关闭
+                            });
+                            return;
+                        } else {
+                            $("#cjsr").val(Number($("#yhs").val() * 1) - Number($("#amount").val() * 1));
+
+                        }
+                    }
+                    jylv = data.jylv;
+                    jslv = data.jslv;
+                    $("#jsf").val(Number(($("#amount").val())) * Number(jslv));
+                    $("#ghf").val(Number(($("#amount").val())) * Number(jylv));
+                    $("#jsf").prop("disabled", true);
+                    $("#ghf").prop("disabled", true);
+                }
+            });
+        }
+    });
+    $("#yhs").change(function () {
+        if ($("#yhs").val() == "") {
+            $("#cjsr").val("");
+        } else {
+            if ($("#amount").val() == "") {
+                layer.msg('请输入成交金额', {
+                    time: 1000, //20s后自动关闭
+                });
+                return;
+            } else {
+                if (Number($("#yhs").val()) < Number($("#amount").val())) {
+                    $("#cjsr").val("");
+                    $("#yhs").val("");
+                    layer.msg('到期金额必须大于成交金额', {
+                        time: 1000, //20s后自动关闭
+                    });
+                    return;
+                } else {
+                    $("#cjsr").val(Number($("#yhs").val() * 1) - Number($("#amount").val() * 1));
+                }
             }
-        });
+        }
     });
     //提交更改证券信息
     form.on("submit(EditTYmdshg)", function (data) {

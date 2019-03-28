@@ -27,10 +27,10 @@ import com.hundsun.accountingsystem.TGp.service.GPQSService;
 * @date 2019年3月25日
 * @Version 1.1
  */
-@Service("hg")
-public class HGQSServiceImpl implements GPQSService {
+@Service("gphg")
+public class GPHGQSServiceImpl implements GPQSService {
 	
-	private static final Logger log = LoggerFactory.getLogger(HGQSServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(GPHGQSServiceImpl.class);
 	
 	private String jsmx;
 	
