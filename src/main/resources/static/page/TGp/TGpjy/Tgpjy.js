@@ -11,7 +11,7 @@ layui.use(['form','table','laydate'],function(){
     	var index = layui.layer.open({
             title : "选择账套",
             type : 2,
-            content : "TZtxxList_Gp.html",
+            content : "../../../common/TZtxx.html",
         })
         
         layui.layer.full(index);   	
