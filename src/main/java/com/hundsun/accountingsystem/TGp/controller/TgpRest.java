@@ -47,7 +47,7 @@ public class TgpRest {
 		log.info("处理股票交易请求,业务日期:"+ywrq+",账套编号:"+ztbh);
 		JSONObject response = new JSONObject();
 		try{
-			JSONArray jsonArray = gpManageService.selectQsb(
+			JSONArray jsonArray = gpManageService.selectGpjy(
 					Integer.valueOf(ztbh),DateFormatUtil.getDateByString(ywrq));
 			response.put("code",0);
 			response.put("msg","");
@@ -59,6 +59,25 @@ public class TgpRest {
 		}
 		return response.toJSONString();
 	}
+
+	@RequestMapping("/hg")
+	public String hg(@RequestParam String ywrq,@RequestParam int ztbh,@RequestParam int ywlb) {
+		log.info("处理股票交易请求,业务日期:"+ywrq+",账套编号:"+ztbh);
+		JSONObject response = new JSONObject();
+		try{
+			JSONArray jsonArray = gpManageService.selectHGQS(
+					ztbh,DateFormatUtil.getDateByString(ywrq),ywlb);
+			response.put("code",0);
+			response.put("msg","");
+			response.put("count",jsonArray.size());
+			response.put("data",jsonArray);
+		}catch (Exception e){
+			response.put("code",1);
+			response.put("msg",e.getMessage());
+		}
+		return response.toJSONString();
+	}
+
 
 
 }

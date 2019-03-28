@@ -11,7 +11,7 @@ layui.use(['form','table','laydate'],function(){
     	var index = layui.layer.open({
             title : "选择账套",
             type : 2,
-            content : "../../../common/TZtxx.html",
+            content : "../../../../common/TZtxx.html",
         })
         
         layui.layer.full(index);   	
@@ -37,20 +37,14 @@ layui.use(['form','table','laydate'],function(){
          */
         table.render({
             elem: '#data'
-            ,url:'/rest/gpRest/gpjy?ywrq='+$("#ywrq").val()+"&ztbh="+$("#ztbh").val()
+            ,url:'/rest/gpRest/hg?ywrq='+$("#ywrq").val()+"&ztbh="+$("#ztbh").val()+"&ywlb=1202"
             ,title: '用户数据表'
             ,cols: [[
-                {field:'rq', title:'日期'}
+                {field:'rq', title:'登记日期'}
+                ,{field:'extenda', title:'送股日期'}
                 ,{field:'zqmc', title:'证券名称'}
-                ,{field:'bs', title:'买卖方向'}
                 ,{field:'zqdm', title:'证券代码'}
-                ,{field:'cjje', title:'成交金额'}
-                ,{field:'cjsl', title:'成交数量'}
-                ,{field:'yhs', title:'印花费'}
-                ,{field:'jsf', title:'经手费'}
-                ,{field:'ghf', title:'过户费'}
-                ,{field:'zgf', title:'证管费'}
-                ,{field:'yj', title:'佣金'}
+                ,{field:'cjje', title:'到账金额'}
             ]]
             ,page: false
         });
