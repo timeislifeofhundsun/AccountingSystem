@@ -64,6 +64,9 @@ s	* @return boolean    返回类型
 		String mkt = files.get("mktdt00");
 		String sjsmx =files.get("SJSMX1");
 		String gh = files.get("GH32562");
+		String jsmx = files.get("JSMX");
+		String zqbd = files.get("ZQBD");
+		String sjsjg = files.get("SJSJG");
 
 		/**
 		 * 校验日期
@@ -111,6 +114,7 @@ s	* @return boolean    返回类型
 			/**
 			 * 4.红股清算
 			 */
+			hg.setPath(jsmx,zqbd,sjsjg);
 			returnData = hg.hgqs(ztbh, ywrq);
 			if(!returnData) {
 				throw new Exception("红股清算失败");

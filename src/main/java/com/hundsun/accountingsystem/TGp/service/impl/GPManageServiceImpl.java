@@ -40,7 +40,7 @@ public class GPManageServiceImpl implements GPManageService {
     private Map<String, TZqxx> zqxxMap;
 
     @Override
-    public JSONArray selectQsb(int ztbh, Date ywrq) throws Exception {
+    public JSONArray selectGpjy(int ztbh, Date ywrq) throws Exception {
         this.loadZqxxMap();
         JSONArray returnData = new JSONArray();
         Assist assist = new Assist();
@@ -64,6 +64,58 @@ public class GPManageServiceImpl implements GPManageService {
             obj.put("zgf",qsb.getZgf());
             obj.put("yj",qsb.getYj());
             returnData.add(obj);
+        }
+        this.zqxxMap=null;
+        return returnData;
+    }
+
+
+    /**
+     * 获取股票分红数据
+     * @param ztbh
+     * @param ywrq
+     * @param ywlb
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public JSONArray selectHGQS(int ztbh, Date ywrq,int ywlb) throws Exception {
+        this.loadZqxxMap();
+        JSONArray returnData = new JSONArray();
+        Assist assist = new Assist();
+        Assist.WhereRequire<?> require = assist.new WhereRequire<Object>(
+                "extenda = " +"'"+ DateFormatUtil.getStringByDate(ywrq) +"'"
+                        +" and ztbh ="+ztbh
+                        +" and ( ywlb="+ywlb+" )", null);
+        assist.setRequires(require);
+        List<TQsb> qsbs = qsbMapper.selectTQsb(assist);
+
+        if(ywlb==1203){
+            /**
+             * 送股
+             */
+            for (TQsb qsb:qsbs) {
+                JSONObject obj = new JSONObject();
+                obj.put("rq",DateFormatUtil.getStringByDate(qsb.getRq()));
+                obj.put("zqmc",zqxxMap.get(qsb.getZqcode()).getZqjg());
+                obj.put("zqdm",qsb.getZqcode());
+                obj.put("cjsl",qsb.getQuantity());
+                obj.put("extenda",qsb.getExtenda());
+                returnData.add(obj);
+            }
+        }else if(ywlb==1202){
+            /**
+             * 红利到账
+             */
+            for (TQsb qsb:qsbs) {
+                JSONObject obj = new JSONObject();
+                obj.put("rq",DateFormatUtil.getStringByDate(qsb.getRq()));
+                obj.put("zqmc",zqxxMap.get(qsb.getZqcode()).getZqjg());
+                obj.put("zqdm",qsb.getZqcode());
+                obj.put("cjje",qsb.getAmount());
+                obj.put("extenda",qsb.getExtenda());
+                returnData.add(obj);
+            }
         }
         this.zqxxMap=null;
         return returnData;

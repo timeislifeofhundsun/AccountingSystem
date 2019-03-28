@@ -16,6 +16,23 @@ import java.util.Date;
  */
 public interface GPManageService {
 
-	public JSONArray selectQsb(int ztbh, Date ywrq) throws Exception;
-	
+	/**
+	 * 获取股票交易数据
+	 * @param ztbh
+	 * @param ywrq
+	 * @return
+	 * @throws Exception
+	 */
+	public JSONArray selectGpjy(int ztbh, Date ywrq) throws Exception;
+
+
+	/**
+	 * 获取红股数据
+	 * @param ztbh
+	 * @param ywrq
+	 * @return
+	 * @throws Exception
+	 */
+	public JSONArray selectHGQS(int ztbh,Date ywrq,int ywlb) throws Exception;
+
 }
