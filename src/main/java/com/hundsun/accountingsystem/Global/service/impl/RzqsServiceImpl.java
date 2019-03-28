@@ -29,7 +29,7 @@ public class RzqsServiceImpl implements RzqsService {
 	private TCjhbbService tCjhbbService;
 	
 	@Autowired
-	private GPQSService hg;
+	private GPQSService gphg;
 	
 	@Autowired
 	private GPQSService gpjy;
@@ -114,8 +114,8 @@ s	* @return boolean    返回类型
 			/**
 			 * 4.红股清算
 			 */
-			hg.setPath(jsmx,zqbd,sjsjg);
-			returnData = hg.hgqs(ztbh, ywrq);
+			gphg.setPath(jsmx,zqbd,sjsjg);
+			returnData = gphg.hgqs(ztbh, ywrq);
 			if(!returnData) {
 				throw new Exception("红股清算失败");
 			}
