@@ -14,13 +14,13 @@ import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.bean.TZqxx;
 import com.hundsun.accountingsystem.Global.service.TZqxxService;
-import com.hundsun.accountingsystem.TJj.service.TjjSgService;
+import com.hundsun.accountingsystem.TJj.service.TjjSgsqService;
 
 @RestController
-public class TjjSgController {
+public class TjjSgsqController {
 
 	@Autowired
-	TjjSgService tjjSgServiceImpl;
+	TjjSgsqService tjjSgServiceImpl;
 	
 	@Autowired
 	TZqxxService tzqxxServiceImpl;
@@ -84,7 +84,7 @@ public class TjjSgController {
 		 * 1.将页面传递过来的申购申请信息进行对象转换
 		 * 2.查询出持仓余额表中的银行存款科目（100201 ）余额以及证券清算款余额（1133）
 		 * 3.补充业务类别(根据证券代码去证券信息表里面查出该证券到底是货币基金还是非货币基金)
-		 * 4.补充买卖方向、证券清算款、extendc（401代表手工录入的基金申购数据）
+		 * 4.补充买卖方向、证券清算款、extendc（401代表手工录入的基金申购数据）、extendf代表未被确认的数据
 		 * 5.将信息插入到清算表中
 		 * 6.将信息同步插入到持仓余额表
 		 * */
@@ -114,6 +114,7 @@ public class TjjSgController {
 		tqsb.setBs("B");
 		tqsb.setZqqsk(tqsb.getAmount());
 		tqsb.setExtendc("401");
+		tqsb.setExtendf("0");
 		
 		//插入到清算表中
 		try {
@@ -199,6 +200,7 @@ public class TjjSgController {
 		tqsb.setYwlb(beforeTsqb.getYwlb());
 		tqsb.setExtendc(beforeTsqb.getExtendc());
 		tqsb.setZqqsk(tqsb.getAmount());
+		tqsb.setExtendf(beforeTsqb.getExtendf());
 		tjjSgServiceImpl.updateTqsb(tqsb);
 		
 		//修改持仓余额表数据

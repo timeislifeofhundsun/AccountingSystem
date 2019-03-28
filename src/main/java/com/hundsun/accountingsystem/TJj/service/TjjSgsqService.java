@@ -6,7 +6,7 @@ import java.util.Map;
 import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
 
-public interface TjjSgService {
+public interface TjjSgsqService {
 
 	List<TQsb> selectByPage(int page, int limit);
 

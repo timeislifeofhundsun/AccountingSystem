@@ -15,10 +15,10 @@ import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TPzbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
-import com.hundsun.accountingsystem.TJj.service.TjjSgService;
+import com.hundsun.accountingsystem.TJj.service.TjjSgsqService;
 
 @Service
-public class TjjSgServiceImpl implements TjjSgService {
+public class TjjSgsqServiceImpl implements TjjSgsqService {
 
 	@Autowired
 	TQsbMapper tqsbMapper;
