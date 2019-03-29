@@ -51,5 +51,9 @@ public class GpQsTest {
 	public void lfjxtest() throws Exception {
 		System.out.println(lfjxQsService.lfjxQs(10004, DateFormatUtil.getDateByString("2018-05-30")));;
 	}
-	
+
+	@Test
+	public void lfjxPzTest() throws  Exception{
+		lfjxQsService.lfjxPz(10004, DateFormatUtil.getDateByString("2018-05-30"));
+	}
 }

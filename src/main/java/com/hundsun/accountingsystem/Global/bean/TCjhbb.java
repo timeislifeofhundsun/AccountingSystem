@@ -195,4 +195,29 @@ public class TCjhbb {
     public void setExtendb(String extendb) {
         this.extendb = extendb == null ? null : extendb.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TCjhbb{" +
+            "id=" + id +
+            ", gddm='" + gddm + '\'' +
+            ", xwbh='" + xwbh + '\'' +
+            ", zqdm='" + zqdm + '\'' +
+            ", jysc=" + jysc +
+            ", cjsl=" + cjsl +
+            ", cjjg=" + cjjg +
+            ", cjje=" + cjje +
+            ", mmfx='" + mmfx + '\'' +
+            ", ztbh=" + ztbh +
+            ", ywrq=" + ywrq +
+            ", ywlb=" + ywlb +
+            ", jsf=" + jsf +
+            ", ghf=" + ghf +
+            ", zgf=" + zgf +
+            ", yhs=" + yhs +
+            ", jyfy=" + jyfy +
+            ", extenda='" + extenda + '\'' +
+            ", extendb='" + extendb + '\'' +
+            '}';
+    }
 }

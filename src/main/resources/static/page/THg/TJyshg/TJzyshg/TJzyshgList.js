@@ -39,8 +39,8 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
     newdate = dates[0] + "-" + dates[1] + "-" + dates[2];
     //费率设置列表渲染
     var tableIns = table.render({
-        elem: '#TYzyshgList',
-        url: '/TYzyshg',
+        elem: '#TJzyshgList',
+        url: '/TJzyshg',
         method: 'GET',
         cellMinWidth: 95,
         request: {
@@ -54,7 +54,7 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
         height: "full-125",
         limit: 10,
         limits: [10, 15, 20, 25],
-        id: "TYzyshgList",
+        id: "TJzyshgList",
         cols: [[
             {type: 'checkbox', fixed: 'left'},
             {field: 'id', title: 'ID', align: "center",hide:true},
@@ -65,14 +65,18 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
             {field: 'lumpsum', title: '结算机构', align: 'center', templet: "#lumpsum"},
             {field: 'extenda', title: '交易日期', align: 'center', width: 140},
             {field: 'extendb', title: '到期日期', align: 'center', width: 140},
+            {field: 'cost', title: '成交数量', align: 'center', width: 140},
             {field: 'amount', title: '成交金额', align: 'center'},
+            {field: 'cjsr', title: '总利息', align: 'center', width: 140},
             {field: 'yhs', title: '到期金额', align: 'center', width: 140},
             {field: 'zgf', title: '券面总额', align: 'center', width: 140},
             {field: 'jsf', title: '结算手续费', align: 'center', width: 140},
             {field: 'ghf', title: '交易手续费', align: 'center', width: 140},
-            {field: 'yj', title: '结算方式', align: 'center', templet: "#yj"},
-            {field: 'extendd', title: '资金账号', align: 'center', width: 140},
-            {title: '操作', width: 170, templet: '#TYzyshgListBar', fixed: "right", align: "center"}
+            {field: 'yj', title: '佣金', align: 'center', templet: "#yj"},
+            {field: 'extendd', title: '股东代码', align: 'center', width: 140},
+            {field: 'extende', title: '席位代码', align: 'center', width: 140},
+            {field: 'sclb', title: '交易市场', align: 'center', width: 140,templet: "#sclb"},
+            {title: '操作', width: 170, templet: '#TJzyshgListBar', fixed: "right", align: "center"}
         ]],
         done: function () {
             laydate.render({
@@ -81,16 +85,16 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
             });
         }
     });
-    $(".addTYzyshg").click(function () {
-        addTYzyshg();
+    /*$(".addTJzyshg").click(function () {
+        addTJzyshg();
     })
 
     //添加证券信息
-    function addTYzyshg(edit) {
+    function addTJzyshg(edit) {
         var index = layui.layer.open({
             title: "新增质押式回购",
             type: 2,
-            content: "TYzyshgAdd.html",
+            content: "TJzyshgAdd.html",
             success: function (layero, index) {
                 var body = layui.layer.getChildFrame('body', index);
                 setTimeout(function () {
@@ -129,7 +133,7 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
         $(window).on("resize", function () {
             layui.layer.full(index);
         })
-    }
+    }*/
 
     //点击查看操作
     function showDetail(data) {
@@ -153,16 +157,16 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
             layui.layer.full(index);
         })
     };
-    //列表中判断点击编辑操作
-    table.on('tool(TYzyshgList)', function (obj) {
+
+    table.on('tool(TJzyshgList)', function (obj) {
         var layEvent = obj.event,
             data = obj.data;
         if (layEvent == 'edit') { //编辑
-            EditTYzyshg(data);
+            //EditTYzyshg(data);
         } else if (layEvent == 'delete') {
             layer.confirm('确定删除此回购？', {icon: 3, title: '提示信息'}, function (index) {
                 $.ajax({
-                    url: "/TYzyshg",
+                    url: "/TJzyshg",
                     data: {id: JSON.stringify(data.id), _method: "DELETE"},
                     type: 'POST',
                     success: function (obj) {
@@ -190,7 +194,7 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
             }
             console.log(reloaddate);
             //执行重载
-            table.reload('TYzyshgList', {
+            table.reload('TJzyshgList', {
                 page: {
                     curr: 1 //重新从第 1 页开始
                 }

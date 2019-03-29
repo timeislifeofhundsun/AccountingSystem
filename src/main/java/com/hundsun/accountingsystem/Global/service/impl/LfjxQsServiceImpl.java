@@ -3,10 +3,15 @@ package com.hundsun.accountingsystem.Global.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TLfjxb;
+import com.hundsun.accountingsystem.Global.bean.TPzb;
 import com.hundsun.accountingsystem.Global.mapper.TLfjxbMapper;
+import com.hundsun.accountingsystem.Global.mapper.TPzbMapper;
+import com.hundsun.accountingsystem.Global.service.TSequenceService;
+import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +33,19 @@ public class LfjxQsServiceImpl implements LfjxQsService {
 	@Autowired
 	private TLfjxbMapper lfjxbMapper;
 
+	@Autowired
+	private TSequenceService sequenceService;
+
+	@Autowired
+	private TPzbMapper pzbMapper;
+
+	/**
+	 * 两费计息清算
+	 * @param ztbh
+	 * @param ywrq
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
 	public boolean lfjxQs(int ztbh, Date ywrq) throws Exception {
 		boolean res = false;
@@ -49,6 +67,36 @@ public class LfjxQsServiceImpl implements LfjxQsService {
 		res = true;
 		return res;
 	}
+
+	@Override
+	public boolean lfjxPz(int ztbh, Date ywrq) throws Exception {
+		boolean res = false;
+		/**
+		 * 删除旧的凭证
+		 */
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("ztbh",ztbh));
+		assist.setRequires(Assist.andEq("rq",ywrq));
+		assist.setRequires(Assist.andEq("extendf",51));
+		pzbMapper.deleteTPzb(assist);
+
+		/**
+		 * 插入两费凭证
+		 */
+		List<TPzb> pzbs = new ArrayList<>();
+		//待摊信息披露费凭证
+		pzbs.addAll(this.insertLfPz(ztbh,ywrq,5101));
+		//审计费
+		pzbs.addAll(this.insertLfPz(ztbh,ywrq,5102));
+
+		if(pzbs.size()>0){
+			pzbMapper.insertTPzbByBatch(pzbs);
+		}
+
+		res = true;
+		return res;
+	}
+
 
 	/**
 	 * 计算披露费或者审计费
@@ -96,6 +144,59 @@ public class LfjxQsServiceImpl implements LfjxQsService {
 		return qsb;
 	}
 
+
+	private List<TPzb> insertLfPz(int ztbh, Date ywrq,int ywlb){
+		/**
+		 * 生成凭证
+		 */
+		List<TPzb> pzs = new ArrayList<>();
+
+		TQsb para = new TQsb();
+		para.setZtbh(ztbh);
+		para.setRq(ywrq);
+		para.setYwlb(ywlb);
+		TQsb qsb = qsbMapper.selectTQsbByObj(para);
+
+		//无数据
+		if(qsb==null){
+			return pzs;
+		}
+
+		String zhaiyao = null;
+		TPzb jie = null;
+		TPzb dai = null;
+		int pzid = sequenceService.getSequenceByName("pz");
+		if (ywlb==5101){
+			zhaiyao = "["+DateFormatUtil.getStringByDate(ywrq)+"]待摊信息披露费";
+			jie = new TPzb(null, "51", null, null, null, null, null //id,extenda=51(类别),extend
+					, "借", pzid,null //kjkm
+					, ztbh, "其他费用-信息披露费", qsb.getAmount()
+					,zhaiyao,ywrq);
+			dai = new TPzb(null, "51", null, null, null, null, null //id,extenda=11(类别),extend
+					, "借", pzid,null //kjkm
+					, ztbh, "待摊费用-待摊信息披露费",qsb.getAmount()
+					,zhaiyao,ywrq);
+		}else if(ywlb==5102){
+			zhaiyao = "["+DateFormatUtil.getStringByDate(ywrq)+"]预提审计费";
+
+			jie = new TPzb(null, "51", null, null, null, null, null //id,extenda=51(类别),extend
+					, "借", pzid,null //kjkm
+					, ztbh, "其他费用-审计费用", qsb.getAmount()
+					,zhaiyao,ywrq);
+			dai = new TPzb(null, "51", null, null, null, null, null //id,extenda=11(类别),extend
+					, "借", pzid,null //kjkm
+					, ztbh, "预提费用-审计费用",qsb.getAmount()
+					,zhaiyao,ywrq);
+		}else{
+			log.info("生成两费计息凭证，参数错误");
+		}
+
+
+
+		pzs.add(jie);
+		pzs.add(dai);
+		return pzs;
+	}
 
 	
 }

@@ -22,5 +22,15 @@ public interface LfjxQsService {
 	* @author gaozhen
 	 */
 	public boolean lfjxQs(int ztbh,Date ywrq) throws Exception;
+
+
+	/**
+	 * 两费计息生成凭证
+	 * @param ztbh
+	 * @param ywrq
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean lfjxPz(int ztbh,Date ywrq) throws Exception;
 	
 }

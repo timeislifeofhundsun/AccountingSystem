@@ -64,31 +64,36 @@
                 <!-- header结束 -->
                 <div class="layui-card-body">
 
-                    <div class="layui-form">
-                        <!--账套选择-->
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">账套选择</label>
-                                <div class="layui-input-block">
-                                    <select name="interest" lay-filter="aihao">
-                                        <option value="10004">测试账套</option>
-                                    </select>
-                                </div>
-                            </div>
-                    </div>
+			        <!--账套选择-->
+					<div class="layui-row">
+						<div class="layui-col-md6">
+					    	<input type="text" class="layui-input name" id="name" name="name" placeholder="清选择账套" disabled="disabled"/>
+					    </div>
+					    <div class=layui-col-md3>
+					    	<input type="text" class="layui-input layui-hide ztbh" id="ztbh" name="ztbh" />
+					    </div>
+					    <div class="layui-col-md3">
+					      	<a class="layui-btn select_btn" data-type="reload">选择账套</a>
+					    </div>
+					</div> 
 
+					<!--按钮组-->
                     <div style="height:550px;">
                         <div id="date"></div>
                         <div style="margin-top: 30px;">
                             <button id="qsBtn" class="layui-btn">清算</button>
-                            <button class="layui-btn layui-btn-danger">恢复</button>
+                            <button id=reset class="layui-btn layui-btn-danger">恢复</button>
                             <button class="layui-btn layui-btn-normal">备用</button>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
     <!--功能区结束  -->
+    
+    
 </div>
 <script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
