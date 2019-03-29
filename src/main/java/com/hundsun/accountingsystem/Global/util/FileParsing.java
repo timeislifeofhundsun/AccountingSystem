@@ -134,7 +134,7 @@ public class FileParsing {
         tGhk.setJszh(rowValues[0].toString()).setBfjzh(rowValues[1].toString()).setZqcode(rowValues[4].toString()).setSclb(1)
         .setCjsl(Integer.valueOf(temp1)).setCjjg(Double.valueOf(rowValues[14].toString())).setCjtime(sdf.parse(rowValues[34].toString()))
         .setJstime(sdf.parse(rowValues[36].toString())).setBctime(sdf.parse(rowValues[34].toString())).setGdname("null").setGdcode(rowValues[1].toString())
-        .setBs(BS).setCjje(Double.valueOf(rowValues[15].toString())).setXwcode(rowValues[5].toString()).setZtcode(null);
+        .setBs(BS).setCjje(Math.abs(Double.valueOf(rowValues[33].toString()))).setXwcode(rowValues[5].toString()).setZtcode(null);
         list.add(tGhk);
       }
 

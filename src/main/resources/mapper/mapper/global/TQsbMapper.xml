@@ -171,6 +171,13 @@
             #{ywlb}
         </foreach>
     </select>
+    <delete id="deleteAllTQsb" >
+        delete from t_qsb where ztbh=#{ztbh} and extenda=#{extenda} and extendc=#{extendc} and ywlb in
+        <foreach collection="ywlb" item="ywlb" index="index"
+                 open="(" close=")" separator=",">
+            #{ywlb}
+        </foreach>
+    </delete>
     <!-- 通过TQsb的id获得对应数据库中表的数据对象-->
     <select id="selectTQsbById" parameterType="java.lang.Integer" resultMap="result_TQsb_Map">
         select 

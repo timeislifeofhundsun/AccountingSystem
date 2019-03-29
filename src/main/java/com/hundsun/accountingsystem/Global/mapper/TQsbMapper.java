@@ -91,6 +91,8 @@ public interface TQsbMapper{
     int updateNonEmptyTQsb(@Param("enti") TQsb value, @Param("assist") Assist assist);
 
     List<TQsb> findAllTQsb(@Param("ywlb")int[] ywlb,@Param("extenda") String extenda ,@Param("extendc") String extendc);
+
+	int deleteAllTQsb(@Param("ywlb")int[] ywlb,@Param("extenda") String extenda ,@Param("extendc") String extendc,@Param("ztbh") int ztbh);
 	
     List<TQsb> selectByYwlbAndLimit(TQsbParamPojo params);
     

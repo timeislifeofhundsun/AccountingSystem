@@ -8,11 +8,17 @@
  */
 package com.hundsun.accountingsystem.THg.Service;
 
+
+import java.text.ParseException;
+import java.util.Date;
+
 /**
  * 功能说明:
  *
  * @author wanggk25832
  */
 public interface HGQSService {
+  public boolean hgqs(int ztbh,Date ywrq ) throws ParseException;
 
+  public String CalcDate(String start, int day) throws ParseException;
 }
