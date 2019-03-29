@@ -124,45 +124,18 @@
           }
         ]
       },
+      {
+			"title": "基金估值",
+			"icon": "&#xe631;",
+			"href": "page/TJj/TJjgz/TShqrList.html",
+			"spread": false
+		},{
+			"title": "基金红利",
+			"icon": "&#xe631;",
+			"href": "page/TJj/TJjfh/TShqrList.html",
+			"spread": false
+		},
         {
-          "title": "基金估值",
-          "icon": "&#xe630;",
-          "href": "",
-          "spread": false,
-          "children": [
-            {
-              "title": "基金估值",
-              "icon": "&#xe61c;",
-              "href": "page/TJj/TJjgz/TJjgz/TJjgzList.html",
-              "spread": false
-            },
-            {
-              "title": "估值到账",
-              "icon": "&#xe609;",
-              "href": "page/TJj/TJjgz/TGzdz/TGzdzList.html",
-              "spread": false
-            }
-          ]
-        },{
-        "title": "基金红利",
-        "icon": "&#xe630;",
-        "href": "",
-        "spread": false,
-        "children": [
-          {
-            "title": "红利到账",
-            "icon": "&#xe61c;",
-            "href": "page/TJj/TJjfh/THldz/THldzList.html",
-            "spread": false
-          },
-          {
-            "title": "红利除权",
-            "icon": "&#xe609;",
-            "href": "page/TJj/TJjfh/THlcq/THlcqList.html",
-            "spread": false
-          }
-        ]
-      },{
         "title": "基金赎回",
         "icon": "&#xe630;",
         "href": "",

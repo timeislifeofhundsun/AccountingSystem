@@ -1,5 +1,7 @@
 package com.hundsun.accountingsystem.Global.mapper;
 import com.hundsun.accountingsystem.Global.bean.TCcyeb;
+import com.hundsun.accountingsystem.TJj.VO.TjjGzParamsVO;
+
 import java.util.List;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import org.apache.ibatis.annotations.Param;
@@ -108,4 +110,6 @@ public interface TCcyebMapper{
 	 * @return
 	 */
     int updateNonEmptyTCcyeb(@Param("enti") TCcyeb value, @Param("assist") Assist assist);
+
+	List<TCcyeb> selectTccyebByTwoTable(TjjGzParamsVO params);
 }

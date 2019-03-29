@@ -29,7 +29,7 @@ import com.hundsun.accountingsystem.Global.service.THqbService;
  */
 
 @RestController
-public class TjjhqxxController {
+public class TjjHqxxController {
 	
 	@Autowired
 	THqbService thqbServiceImpl;
