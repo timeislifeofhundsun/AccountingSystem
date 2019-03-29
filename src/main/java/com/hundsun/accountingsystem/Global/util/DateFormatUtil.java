@@ -41,4 +41,16 @@ public class DateFormatUtil {
 		return now.getTime();
 	}
 
+	public static boolean  isWorkDay (Date date) {
+		boolean res = false;
+		Calendar now = Calendar.getInstance();
+		now.setTime(date);
+		@SuppressWarnings("deprecation")
+		int today = now.getTime().getDay();// 取得今天的星期值
+		if (today != 6 && today != 7) {
+			res = true;
+		}
+		return res;
+	}
+
 }

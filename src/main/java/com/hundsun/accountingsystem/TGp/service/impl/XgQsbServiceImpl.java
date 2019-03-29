@@ -304,12 +304,12 @@ public class XgQsbServiceImpl implements XgQsbService {
         tGdxxb.setGddm(list.get(0));
         tGdxxb.setXwbh(list.get(1));
         TGdxxb tGdxxb_sclt = tGdxxbMapper.selectByGddmAndXwbh(tGdxxb);
-
         //2、根据账套编号和证券代码去持仓表中查询数据
         TCcyeb tCcyeb = new TCcyeb();
         tCcyeb.setZqdm(list.get(2));
         tCcyeb.setZtbh(tGdxxb_sclt.getZtbh());
         TCcyeb tCcyeb_sclt = tCcyebMapper.selectTCcyebByObj(tCcyeb);//后面存入清算库中需要
+        System.out.println(tCcyeb_sclt);
 //        if (tCcyeb_sclt.getExtenda().equals("13")){
 //            //tCcyebMapper.update_ltlx(tCcyeb);八号那条不需要更新
 //        } else {
@@ -342,14 +342,9 @@ public class XgQsbServiceImpl implements XgQsbService {
      **/
     @Override
     public String xgqs(String path_xg_qsk, String path_sclt_qsk, int ztbh, Date date) throws ParseException {
-        if (path_xg_qsk != null && path_sclt_qsk != null){
-          //  return "不能同时清算";
-        }
-      String n = insert_xg_qsk(path_xg_qsk);
-     System.out.println(n);
-      String m = insert_sclt_qsk(path_sclt_qsk, date, ztbh);
-     System.out.println(m);
-      insert_gzzz_qsk(ztbh, date);
+        insert_xg_qsk(path_xg_qsk);
+        insert_sclt_qsk(path_sclt_qsk, date, ztbh);
+        insert_gzzz_qsk(ztbh, date);
       return "清算成功";
     }
 }

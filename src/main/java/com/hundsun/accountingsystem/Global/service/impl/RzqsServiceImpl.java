@@ -90,23 +90,27 @@ s	* @return boolean    返回类型
 		/**
 		 * 工作日
 		 */
-		if(cash!=null&& mkt!=null) {
+		if(DateFormatUtil.isWorkDay(ywrq)) {
 			/**
 			 * 1.读取交易数据
 			 */
-			String res = "";
-			res	= tGhkService.readGhDataByFile(gh,sjsmx,DateFormatUtil.getStringByDate(ywrq));
-			if(res.equals("")) {
-				throw new Exception("读取交易文件失败");
-			}
+            String res = "";
+			if(gh!=null || sjsmx!=null){
+                res	= tGhkService.readGhDataByFile(gh,sjsmx,DateFormatUtil.getStringByDate(ywrq));
+                if(res.equals("")) {
+                    throw new Exception("读取交易文件失败");
+                }
+            }
 
-			/**
-			 * 2.读取行情数据
-			 */
-			returnData = tHqbService.readHqDataByFile(mkt, cash, ywrq);
-			if(!returnData) {
-				throw new Exception("读取行情文件失败");
-			}
+            /**
+             * 2.读取行情数据
+             */
+			if(cash!=null && mkt!=null){
+                returnData = tHqbService.readHqDataByFile(mkt, cash, ywrq);
+                if(!returnData) {
+                    throw new Exception("读取行情文件失败");
+                }
+            }
 
 			/**
 			 * 3.进行合笔计算，存储到成交回报表
