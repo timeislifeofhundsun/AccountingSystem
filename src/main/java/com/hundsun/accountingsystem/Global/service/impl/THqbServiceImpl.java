@@ -220,10 +220,7 @@ public class THqbServiceImpl implements THqbService {
 
 	@Override
 	public void updateHqxx(THqb thqb) {
-		Assist assist = new Assist();
-		assist.setRequires(Assist.andEq("zqdm", thqb.getZqdm()));
-		assist.setRequires(Assist.andEq("zqnm", 4));
-		tHqbMapper.updateTHqb(thqb, assist);
+		tHqbMapper.updateTHqbById(thqb);
 		
 	}
 
