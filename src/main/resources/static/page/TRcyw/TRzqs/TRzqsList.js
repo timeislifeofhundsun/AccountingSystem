@@ -45,24 +45,29 @@ layui.use(['layer','laydate','form'],function(){
     /* 清算 */
     $("#qsBtn").click(function(){
         var ywrq = $('#showDate').text();
+        var ztbh = $("#ztbh").val()
         if(ywrq!=""){
-        	layer.msg('清算中......');
-        	var request = {"ywrq":ywrq,"ztbh":10004};
-            $.ajax({
-            	type:"POST",
-                url:"/rest/RzqsRest/Rzqs",
-                data:JSON.stringify(request),
-                contentType : "application/json",
-                success:function (data) {
-                    console.log(data);
-                    if(data.res){
-                        layer.msg('清算成功!');
-                    }else{
-                        console.log(data.msg)
-                        layer.msg(data.msg);
+        	if(ztbh!=''){
+        		layer.msg('清算中......');
+            	var request = {"ywrq":ywrq,"ztbh":ztbh};
+                $.ajax({
+                	type:"POST",
+                    url:"/rest/RzqsRest/Rzqs",
+                    data:JSON.stringify(request),
+                    contentType : "application/json",
+                    success:function (data) {
+                        console.log(data);
+                        if(data.res){
+                            layer.msg('清算成功!');
+                        }else{
+                            console.log(data.msg)
+                            layer.msg(data.msg);
+                        }
                     }
-                }
-            });
+                });
+        	}else{
+        		layer.msg('温馨提示:请选择账套!');
+        	}
         }else{
             layer.msg('温馨提示:请选择业务日期!');
         }

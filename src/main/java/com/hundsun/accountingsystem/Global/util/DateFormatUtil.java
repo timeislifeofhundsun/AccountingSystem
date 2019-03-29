@@ -58,7 +58,7 @@ public class DateFormatUtil {
 		now.setTime(date);
 		@SuppressWarnings("deprecation")
 		int today = now.getTime().getDay();// 取得今天的星期值
-		if (today == 1) {        //判断是否是周五
+		if (today == 1) {        //判断是否是周一
 			now.roll(Calendar.DAY_OF_YEAR, -3);
 		} else {
 			now.roll(Calendar.DAY_OF_YEAR, -1);
