@@ -410,9 +410,16 @@ public class GPQSServiceImpl implements GPQSService {
 		assist.setRequires(Assist.andEq("zqnm", 1));
 		assist.setRequires(Assist.andEq("hqrq", DateFormatUtil.getStringByDate(ywrq)));
 		List<THqb> hqbs = THqbMapper.selectTHqb(assist);
+
+		if (hqbs==null || hqbs.size()==0){
+			log.info("今日无行情，股票不计算估值增值");
+			return true;
+		}
+
 		for (THqb tHqb : hqbs) {
 			hqMap.put(tHqb.getZqdm(), tHqb);
 		}
+
 
 		/**
 		 * 获取需要计算估增的股票

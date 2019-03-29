@@ -1,5 +1,6 @@
 package com.hundsun.accountingsystem.TGp.service;
 
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -10,6 +11,5 @@ import java.util.Date;
  * @Description 新股清算库Servie层
  **/
 public interface XgQsbService {
-    String insert_xg_qsk(String path);
-    String insete_gzzz_qsk(int ztbh, Date date);
+    String  xgqs(String path_xg_qsk, String path_sclt_qsk, int ztbh, Date date) throws ParseException;
 }

@@ -8,8 +8,26 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TCcyebMapper{
 
+	/**
+	* @Author yangjf25257
+	* @MethodName update_cysl
+	 * @Param [tCcyeb]
+	 * @Return int
+	 * @Description 成交数量
+	 **/
 	int update_cysl(TCcyeb tCcyeb);
+
+	/**
+	* @Author yangjf25257
+	* @MethodName update_ljgz
+	 * @Param [tCcyeb]
+	 * @Return int
+	 * @Description 累计估值
+	 **/
 	int update_ljgz(TCcyeb tCcyeb);
+
+
+	int update_ltlx(TCcyeb tCcyeb);
 	/**
 	 * 获得TCcyeb数据的总行数,可以通过辅助工具Assist进行条件查询,如果没有条件则传入null
 	 * @param assist

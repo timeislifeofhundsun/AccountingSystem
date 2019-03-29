@@ -51,6 +51,8 @@ public interface TQsbMapper{
 	 * @return
 	 */
     int insertTQsbByBatch(List<TQsb> value);
+
+
 	/**
 	 * 通过TQsb的id删除TQsb
 	 * @param id

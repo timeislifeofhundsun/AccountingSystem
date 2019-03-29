@@ -7,6 +7,9 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="xwbh" property="xwbh" jdbcType="VARCHAR" />
   </resultMap>
+  <select id="selectByGddmAndXwbh" parameterType="com.hundsun.accountingsystem.Global.bean.TGdxxb" resultMap="BaseResultMap">
+       select * from t_gdxxb where gddm = #{gddm} and xwbh = #{xwbh}
+  </select>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

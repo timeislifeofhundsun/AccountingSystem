@@ -49,19 +49,6 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         searchSgsq(ztbh);
     });
     
-
-    $('.addTSgsq').click(function(){
-    	var ztbh = $("#ztbh").val();
-    	var name = $('#name').val();
-    	if(ztbh==""){
-            layer.msg('请先选择账套', {
-                time: 1000, //2s后自动关闭
-            });
-    		return;
-    	}    	
-    	addTSgsq(ztbh,name);
-    });
-    
     
   //查询基金行情信息
     function searchSgsq(ztbh){
@@ -141,38 +128,12 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 		layer.close(index);
     }
     
-    
-  //新增申购申请信息
-    function addTSgsq(ztbh,name){
-        var index = layui.layer.open({
-            title : "基金申购申请",
-            type : 2,
-            content : "TSgsqAdd.html",
-            success : function(layero, index){
-                var body = layui.layer.getChildFrame('body', index);
-                body.find(".ztbh").val(ztbh);
-                body.find(".name").val(name);
-                /*setTimeout(function(){
-                    layui.layer.tips('点击此处返回行情信息列表', '.layui-layer-setwin .layui-layer-close', {
-                        tips: 3
-                    });
-                },500)*/
-            }
-        })
-        layui.layer.full(index);
-        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
-        $(window).on("resize",function(){
-            layui.layer.full(index);
-        })
-    }
-    
-    
     //点击编辑操作
-    function EditSgsq(edit){
+    function confirmSgsq(edit){
         var index = layui.layer.open({
-            title : "修改申购信息",
+            title : "申购申请确认",
             type : 2,
-            content : "TSgsqEdit.html",
+            content : "TSgsqConfirm.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
                 if(edit){
@@ -198,47 +159,13 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         })
     }
     
-    //点击删除操作
-    function delSgsq(data){
-    	var id = data.id;
-    	var ztbh = $("#ztbh").val();
-    	var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
-    	$.ajax({
-            url: "/deleteTSgsq",
-            data: {id:id},
-            type: 'POST',
-            success:function (obj) {
-                if (obj==1) {
-                    setTimeout(function () {
-                        top.layer.close(index);
-                        top.layer.msg("申购申请删除成功！");
-                        searchSgsq(ztbh);
-                    }, 500);
-                }else{
-                	setTimeout(function () {
-                		top.layer.close(index);
-                        top.layer.msg("删除失败，原因："+obj);
-                    }, 500);                	
-                }
-            },
-            complete: function(XMLHttpRequest, textStatus) {
-                console.log(XMLHttpRequest);
-                console.log(textStatus);
-            },
-
-        });
-    }
     
     //列表中判断点击编辑操作
     table.on('tool(TSgsqList)', function(obj){
         var layEvent = obj.event,
             data = obj.data;
-        if(layEvent === 'edit'){ //编辑
-            EditSgsq(data);
-        }else if(layEvent === 'del'){
-        	layer.confirm("确认删除该条申购申请吗？",{icon: 3, title:'提示'}, function(index){
-        		delSgsq(data);
-        	});
+        if(layEvent === 'edit'){ //确认
+            confirmSgsq(data);
         }
     });
     

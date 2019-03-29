@@ -67,6 +67,10 @@ public class GPPZServiceImpl implements GPPZService {
 		needInsertPzs.addAll(this.insertGpmcpz(ztbh, ywrq));
 		//估值增值
 		needInsertPzs.addAll(this.insertGzpz(ztbh, ywrq));
+		//红利到账
+		needInsertPzs.addAll(this.insertHldzPz(ztbh,ywrq));
+		//送股
+		needInsertPzs.addAll(this.insertSGPz(ztbh,ywrq));
 		//插入数据库
 		if (needInsertPzs.size()>0) {
 			int effect = pzbMapper.insertTPzbByBatch(needInsertPzs);
@@ -224,6 +228,70 @@ public class GPPZServiceImpl implements GPPZService {
 		}
 		return gzpzs;
 	}
+
+	/**
+	 * 插入红利到账凭证
+	 * @param ztbh
+	 * @param ywrq
+	 * @return
+	 */
+	private List<TPzb> insertHldzPz(int ztbh,Date ywrq){
+		List<TPzb> gzpzs = new ArrayList<>();
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("ztbh", ztbh));
+		assist.setRequires(Assist.andEq("extenda", DateFormatUtil.getStringByDate(ywrq)));
+		assist.setRequires(Assist.andEq("ywlb", 1202));
+		List<TQsb> qsbs = tQsbMapper.selectTQsb(assist);
+		for (TQsb tQsb : qsbs) {
+			String zhaiyao = "["+DateFormatUtil.getStringByDate(ywrq)+"]股票红利到账["
+					+tQsb.getZqcode()+"]"+"["+zqxxMap.get(tQsb.getZqcode())+"]";
+			int pzid = sequenceService.getSequenceByName("pz");
+			TPzb yhck = new TPzb(null, "11", null, null, null, null, null //id,extenda=11(类别),extend
+					, "借", pzid,null //kjkm
+					, ztbh, "银行存款", tQsb.getAmount()
+					,zhaiyao,ywrq);
+			TPzb hlsr = new TPzb(null, "11", null, null, null, null, null //id,extenda=11(类别),extend
+					, "贷", pzid,null //kjkm
+					, ztbh, "股票红利收入",tQsb.getAmount()
+					,zhaiyao,ywrq);
+			gzpzs.add(yhck);
+			gzpzs.add(hlsr);
+		}
+		return gzpzs;
+	}
+
+	/**
+	 * 插入送股凭证
+	 * @param ztbh
+	 * @param ywrq
+	 * @return
+	 */
+	private List<TPzb> insertSGPz(int ztbh,Date ywrq){
+		List<TPzb> gzpzs = new ArrayList<>();
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("ztbh", ztbh));
+		assist.setRequires(Assist.andEq("extenda", DateFormatUtil.getStringByDate(ywrq)));
+		assist.setRequires(Assist.andEq("ywlb", 1203));
+		List<TQsb> qsbs = tQsbMapper.selectTQsb(assist);
+		for (TQsb tQsb : qsbs) {
+			String zhaiyao = "["+DateFormatUtil.getStringByDate(ywrq)+"]股票送股["
+					+tQsb.getZqcode()+"]"+"["+zqxxMap.get(tQsb.getZqcode())+"]";
+			int pzid = sequenceService.getSequenceByName("pz");
+			TPzb tzcb1 = new TPzb(null, "11", null, null, null, null, null //id,extenda=11(类别),extend
+					, "借", pzid,null //kjkm
+					, ztbh, "股票投资成本", 0.01
+					,zhaiyao,ywrq);
+			TPzb tzcb2 = new TPzb(null, "11", null, null, null, null, null //id,extenda=11(类别),extend
+					, "借", pzid,null //kjkm
+					, ztbh, "股票红利收入",-0.01
+					,zhaiyao,ywrq);
+			gzpzs.add(tzcb1);
+			gzpzs.add(tzcb2);
+		}
+		return gzpzs;
+	}
+
+
 
 	/**
 	 * 

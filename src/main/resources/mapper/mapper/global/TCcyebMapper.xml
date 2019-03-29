@@ -24,13 +24,25 @@
         set
         ljgz = #{ljgz} + ljgz
         where  zqdm = #{zqdm}
+        and    ztbh = #{ztbh}
     </update>
 
-    <!-- 更新持仓库持有数量 -->
+    <!-- 更新持仓库流通类型 -->
+    <update id="update_ltlx" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
+        update t_ccyeb
+        set
+        extenda = 11
+        where  zqdm = #{zqdm}
+        and    ztbh = #{ztbh}
+    </update>
+
+    <!-- 更新持仓库持有数量和extenda -->
     <update id="update_cysl" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
         update t_ccyeb
         set
-            cysl = #{cysl} + cysl
+            cysl = #{cysl} + cysl,
+            extenda = 13,
+            ljgz = 0.00
            where  zqdm = #{zqdm}
     </update>
 

@@ -50,7 +50,7 @@ public class TQsb {
 
     private Double yj;
 
-    private Double lumpsum;
+    private Double lumpsum;//新股中代表累计估值增值
 
     private String extenda;//新股情况下代表交收时期,红股情况代表到账日期
 
