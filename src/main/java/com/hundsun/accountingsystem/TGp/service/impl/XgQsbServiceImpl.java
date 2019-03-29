@@ -283,7 +283,6 @@ public class XgQsbServiceImpl implements XgQsbService {
             tCcyebMapper.update_ltlx(tCcyeb_dz);
         }
 
-
         if (path == null){
             return "今日无ZQBD数据文件";
         }
