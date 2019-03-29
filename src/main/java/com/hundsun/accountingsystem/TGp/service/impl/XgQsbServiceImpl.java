@@ -52,8 +52,10 @@ public class XgQsbServiceImpl implements XgQsbService {
      * 二、把数据同步到持仓余额表
      * 三、业务场景模拟为一个接口文件只能存放一天的数据操作，并且数据量只有一条
      **/
-    private String insert_xg_qsk(String path) throws ParseException {
+    private String insert_xg_qsk(String path,Date date) throws ParseException {
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        TCcyeb tCcyeb_zqjs = null;//用于中签交收生成
         if(path == null || path.equals("")){//判空
             return "今日无jsmx数据文件";
         }
@@ -110,7 +112,16 @@ public class XgQsbServiceImpl implements XgQsbService {
                 Assist assist_zqjs = new Assist();
                 assist_zqjs.setRequires(Assist.andEq("rq",DateFormatUtil.getNextWorkDay(date_xgjk)));
                 assist_zqjs.setRequires(Assist.andEq("zqcode",tQsb.getZqcode()));
+                Assist assist_ccye = new Assist();
+                //去持仓余额表中查询数据（中签交收需要）
+                assist_ccye.setRequires(Assist.andEq("fsrq",date));
+                assist_ccye.setRequires(Assist.andEq("zqdm",tQsb.getZqcode()));
+                if (tCcyebMapper.selectTCcyeb(assist_ccye).size() > 0){
+                    tCcyeb_zqjs = tCcyebMapper.selectTCcyeb(assist_ccye).get(0);//存放数据
+                    System.out.println(tCcyeb_zqjs.toString());
+                }
                 tQsbMapper.deleteTQsb(assist_zqjs);//新股缴款去重
+
 
                 //新股中签去重
                 int y = tQsbMapper.deleteTQsb(assist);
@@ -131,20 +142,6 @@ public class XgQsbServiceImpl implements XgQsbService {
                 System.out.println("清算库数据插入");
             }
 
-            //新股缴款和新股中签交收放入清算库中
-           for (int w = 0; w < list.size(); w ++){
-               //新股缴款
-               Date date_qsk = DateFormatUtil.getNextWorkDay(list.get(w).getRq());//中签交收是在缴款后一天
-               list.get(w).setRq(date_qsk);
-               list.get(w).setYwlb(1303);
-               tQsbMapper.insertTQsb(list.get(w));
-
-               //新股中签交收
-               list.get(w).setRq(DateFormatUtil.getNextWorkDay(date_qsk));
-               list.get(w).setYwlb(1306);
-               tQsbMapper.insertTQsb(list.get(w));
-           }
-
             //根据数据更新持仓余额表
             for (TQsb tQsb : list){
                 Assist assist1 = new Assist();
@@ -158,6 +155,27 @@ public class XgQsbServiceImpl implements XgQsbService {
                     tCcyebMapper.update_cysl(tCcyeb2);
                     iii = "持仓库更新  ";
                     System.out.println("持仓库更新");
+                }
+            }
+
+            //新股缴款和新股中签交收放入清算库中
+            for (int w = 0; w < list.size(); w ++){
+                //新股缴款
+                Date date_qsk = DateFormatUtil.getNextWorkDay(list.get(w).getRq());//中签交收是在缴款后一天
+                list.get(w).setRq(date_qsk);
+                list.get(w).setYwlb(1303);
+                tQsbMapper.insertTQsb(list.get(w));
+                if (tCcyeb_zqjs != null){
+                    System.out.println(tCcyeb_zqjs.getFsrq());
+                    System.out.println(date);
+                    int compareTo = tCcyeb_zqjs.getFsrq().compareTo(date);
+                    System.out.println(compareTo);
+                    if (compareTo == 0) {//判断是否到了中签交收时间
+                        //新股中签交收
+                        list.get(w).setRq(DateFormatUtil.getNextWorkDay(date_qsk));
+                        list.get(w).setYwlb(1306);
+                        tQsbMapper.insertTQsb(list.get(w));
+                    }
                 }
             }
 
@@ -341,7 +359,7 @@ public class XgQsbServiceImpl implements XgQsbService {
      **/
     @Override
     public String xgqs(String path_xg_qsk, String path_sclt_qsk, int ztbh, Date date) throws ParseException {
-        insert_xg_qsk(path_xg_qsk);
+        insert_xg_qsk(path_xg_qsk,date);
         insert_sclt_qsk(path_sclt_qsk, date, ztbh);
         insert_gzzz_qsk(ztbh, date);
       return "清算成功";
