@@ -4,7 +4,7 @@ $(function () {
     $('#showDate').html("2018-05-30");
     getFileStatus();
 })
-$("#resetBtn").click(function(){
+$("#reset").click(function(){
 	console.log("resetBtn");
 })
 
@@ -14,6 +14,24 @@ layui.use(['layer','laydate','form'],function(){
     var laydate = layui.laydate;
     var form = layui.form;
 
+    /**
+     * 账套选择
+     */
+    $('.select_btn').click(function(){
+    	var index = layui.layer.open({
+            title : "选择账套",
+            type : 2,
+            content : "../../../common/TZtxx.html",
+        })
+        
+        layui.layer.full(index);   	
+    	setTimeout(function(){
+        layui.layer.tips('点击此处返回股票交易', '.layui-layer-setwin .layui-layer-close', {
+            tips: 3
+        	});
+    	},500)
+    });
+    
     /*layui时间显示 */
     laydate.render({
         elem: '#date'
