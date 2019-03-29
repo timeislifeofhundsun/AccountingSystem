@@ -305,22 +305,21 @@ public class XgQsbServiceImpl implements XgQsbService {
         tGdxxb.setXwbh(list.get(1));
         TGdxxb tGdxxb_sclt = tGdxxbMapper.selectByGddmAndXwbh(tGdxxb);
 
-        //2、根据账套编号和证券代码去持仓表中更新数据
+        //2、根据账套编号和证券代码去持仓表中查询数据
         TCcyeb tCcyeb = new TCcyeb();
         tCcyeb.setZqdm(list.get(2));
         tCcyeb.setZtbh(tGdxxb_sclt.getZtbh());
-        System.out.println("参数："+tCcyeb.toString());
         TCcyeb tCcyeb_sclt = tCcyebMapper.selectTCcyebByObj(tCcyeb);//后面存入清算库中需要
-        System.out.println(tCcyeb_sclt);
-        if (tCcyeb_sclt.getExtenda().equals("13")){
-            //tCcyebMapper.update_ltlx(tCcyeb);八号那条不需要更新
-        } else {
-            return "已经上市流通，不需要再操作";
-        }
+//        if (tCcyeb_sclt.getExtenda().equals("13")){
+//            //tCcyebMapper.update_ltlx(tCcyeb);八号那条不需要更新
+//        } else {
+//            return "已经上市流通，不需要再操作";
+//        }
 
-        //根据业务类别去清算库中去重（上市流通）
+        //根据业务类和证券代码别去清算库中去重（上市流通）
         Assist assist_sc_qsk = new Assist();
         assist_sc_qsk.setRequires(Assist.andEq("ywlb",1305));
+        assist_sc_qsk.setRequires(Assist.andEq("zqcode",tCcyeb_sclt.getZqdm()));
         if (tQsbMapper.selectTQsb(assist_sc_qsk) != null){
             tQsbMapper.deleteTQsb(assist_sc_qsk);
         }
