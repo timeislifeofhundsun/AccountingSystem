@@ -187,8 +187,8 @@
     </select> 
 
     <!-- 将TQsb插入到对应数据库的表中,包括属性值为null的数据-->
-
-    <insert id="insertTQsb" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb">
+    <!-- keyColumn="id" keyProperty="id" useGeneratedKeys="true"-->
+    <insert id="insertTQsb" parameterType="com.hundsun.accountingsystem.Global.bean.TQsb"  keyColumn="id" keyProperty="id" useGeneratedKeys="true">
         insert into t_qsb(id,yhs,bs,yj,zgf,gyjzbd,zqqsk,extendf,amount,quantity,lumpsum,cost,ghf,extendc,extendb,extende,extendd,cjsr,extenda,ywlb,zqcode,sclb,ztbh,jsf,rq) 
         values(#{id},#{yhs},#{bs},#{yj},#{zgf},#{gyjzbd},#{zqqsk},#{extendf},#{amount},#{quantity},#{lumpsum},#{cost},#{ghf},#{extendc},#{extendb},#{extende},#{extendd},#{cjsr},#{extenda},#{ywlb},#{zqcode},#{sclb},#{ztbh},#{jsf},#{rq})
     </insert>

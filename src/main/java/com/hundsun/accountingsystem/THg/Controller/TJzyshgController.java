@@ -9,7 +9,9 @@
 package com.hundsun.accountingsystem.THg.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
+import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.THg.Service.TJzyshgService;
 import com.hundsun.accountingsystem.THg.VO.TJzyshgVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ import java.util.List;
 public class TJzyshgController {
   @Autowired
   public TJzyshgService tJzyshgService;
+  @Autowired
+  public TCcyebMapper tCcyebMapper;
 
   @GetMapping(value = "/TJzyshg")
   public String getAllTYzyshg(@RequestParam(value = "ckrq",required = true)String data,
@@ -51,6 +55,14 @@ public class TJzyshgController {
   @DeleteMapping("/TJzyshg")
   public String deleteTYzyshg(@RequestParam(value = "id",required = true)String id){
     int i = tJzyshgService.deleteTQsbById(Integer.valueOf(id));
-    return String.valueOf(i);
+    Assist assist = new Assist();
+    assist.setRequires(Assist.andEq("extendc",id));
+    int i1 = tCcyebMapper.deleteTCcyeb(assist);
+    //判断并返回处理标志
+    if (i1!=0&&i!=0){
+      return String.valueOf(i);
+    }else{
+      return "0";
+    }
   }
 }

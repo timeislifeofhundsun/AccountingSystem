@@ -170,6 +170,8 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
                             var type = "reload";
                             active[type] ? active[type].call(this) : '';
                             layer.close(index);
+                        }else{
+                            top.layer.msg("删除失败！");
                         }
                     },
                 });

@@ -213,6 +213,8 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
                         //刷新父页面
                         parent.location.reload();
                     }, 500);
+                }else{
+                    top.layer.msg("回购添加失败！");
                 }
             }
         });
