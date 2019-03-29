@@ -38,7 +38,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         
         layui.layer.full(index);   	
     	setTimeout(function(){
-        layui.layer.tips('点击此处返回股东信息列表', '.layui-layer-setwin .layui-layer-close', {
+        layui.layer.tips('点击此处返回申购申请列表', '.layui-layer-setwin .layui-layer-close', {
             tips: 3
         	});
     	},500)

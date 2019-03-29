@@ -61,7 +61,7 @@ public class TjjSgqrController {
 			return "更新持仓表时出错";
 		}
 		
-		//更新余额表
+		//更新余额表（计算交易费用、计算证券 清算款、应付交易费用（佣金））
 		
 		
 		return String.valueOf(1);

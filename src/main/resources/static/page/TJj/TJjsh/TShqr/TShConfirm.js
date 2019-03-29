@@ -15,52 +15,47 @@ layui.use(['form', 'layer','laydate'], function () {
     $ = layui.jquery;
     
     laydate.render({
-        elem: '#rq',
+        elem: '#fsrq',
         format: 'yyyy-MM-dd',
     });
     
+    var tcysl;
+    
     form .verify({
-    	ztbh: function (val) {
-            if (val == '') {
-                return "账套信息不能为空";
-            }
+        cysl: function (val) {
+            tcysl = val;
+        }, 
+        fsrq: function (val) {
+        	if (val == '') {
+        		return "发生日期不能为空";
+        	}
+            
         },
-        zqcode: function (val) {
+        shfe: function (val) {
             if (val == '') {
-                return "证券代码不能为空";
+                return "赎回份额不能为空";
             }
-        },
-        rq: function (val) {
-            if (val == '') {
-                return "申购日期不能为空";
-            }
-        },
-        quantity: function (val) {
-            if (val == '') {
-                return "申购份额不能为空";
-            }
-        },
-        amount: function (val) {
-            if (val == '') {
-                return "申购金额不能为空";
+            var num = val - tcysl;
+            if(num>0){
+            	return "赎回份额不能大于持有数量";
             }
         }        
     });
        
     //提交确认信息
-    form.on("submit(confirmTSgsq)", function (data) {
+    form.on("submit(confirmTSh)", function (data) {
         top.layer.msg(JSON.stringify(data.field));
         console.log(data);
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
         $.ajax({
-            url: "/TSgqr",
-            data: {Sgsq:JSON.stringify(data.field)},
+            url: "/TConfirmTSh",
+            data: {shxx:JSON.stringify(data.field)},
             type: 'POST',
             success:function (obj) {
                 if (obj==1) {
                     setTimeout(function () {
                         top.layer.close(index);
-                        top.layer.msg("确认成功！");
+                        top.layer.msg("赎回成功！");
                         layer.closeAll("iframe");
                         //刷新父页面
                         parent.location.reload();
@@ -68,7 +63,7 @@ layui.use(['form', 'layer','laydate'], function () {
                 }else{
                 	setTimeout(function () {
                 		top.layer.close(index);
-                        top.layer.msg("确认失败，原因："+obj);
+                        top.layer.msg("赎回失败，原因："+obj);
                     }, 500);                	
                 }
             },

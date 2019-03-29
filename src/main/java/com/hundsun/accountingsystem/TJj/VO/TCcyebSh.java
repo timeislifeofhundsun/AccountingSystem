@@ -1,4 +1,4 @@
-package com.hundsun.accountingsystem.Global.bean;
+package com.hundsun.accountingsystem.TJj.VO;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Data
 @Accessors(chain = true)
-public class TCcyeb implements java.io.Serializable {
+public class TCcyebSh implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;//主键
     private Integer cysl;//持有数量
@@ -28,5 +28,6 @@ public class TCcyeb implements java.io.Serializable {
     @JSONField(format = "yyyy-MM-dd")
     private java.util.Date fsrq;//发生日期
     private Double ljjx;//累计计息
+    private Integer shfe;
 
 }
