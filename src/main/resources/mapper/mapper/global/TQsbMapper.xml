@@ -499,6 +499,7 @@
         <if test="assist.require!=null"><include refid="updateAssist" /></if>
     </update>
 
+	<!-- 基金申购申请特有sql -->
 	<select id="selectByYwlbAndLimit" resultMap="result_TQsb_Map" parameterType="com.hundsun.accountingsystem.Global.VO.TQsbParamPojo" >
 	  	select *
 	  		from t_qsb
@@ -530,6 +531,41 @@
 	  	select count(*)
 	  		from t_qsb
 	  		where ywlb in ('4101','4201') and extendf = '0' and rq between #{date} and #{date}
+  	</select>
+  	
+  	
+  	<!-- 基金赎回到账特有sql -->
+	<select id="selectShxxByYwlbAndLimit" resultMap="result_TQsb_Map" parameterType="com.hundsun.accountingsystem.Global.VO.TQsbParamPojo" >
+	  	select *
+	  		from t_qsb
+	  		where ywlb in ('4105','4205') and extendf = '0'
+	  		limit #{start},#{end}
+  	</select>
+  	
+  	<select id="selectShxxByPageAndZtbh" resultMap="result_TQsb_Map" parameterType="com.hundsun.accountingsystem.Global.VO.TQsbParamPojo" >
+	  	select *
+	  		from t_qsb
+	  		where ywlb in ('4105','4205') and ztbh=#{ztbh} and extendf = '0'
+	  		limit #{start},#{end}
+  	</select>
+  	
+  	<select id="getShxxCountsByZtbh" resultType="java.lang.Integer" parameterType="com.hundsun.accountingsystem.Global.VO.TQsbParamPojo" >
+	  	select count(*)
+	  		from t_qsb
+	  		where ywlb in ('4105','4205') and ztbh=#{ztbh} and extendf = '0'
+  	</select>
+  	
+  	<select id="selectShxxByPageAndDate" resultMap="result_TQsb_Map" parameterType="com.hundsun.accountingsystem.Global.VO.TQsbParamPojo" >
+	  	select *
+	  		from t_qsb
+	  		where ywlb in ('4105','4205') and extendf = '0' and rq between #{date} and #{date}
+	  		limit #{start},#{end}
+  	</select>
+  	
+  	<select id="getShxxCountsByDate" resultType="java.lang.Integer" parameterType="com.hundsun.accountingsystem.Global.VO.TQsbParamPojo" >
+	  	select count(*)
+	  		from t_qsb
+	  		where ywlb in ('4105','4205') and extendf = '0' and rq between #{date} and #{date}
   	</select>
 
 </mapper>

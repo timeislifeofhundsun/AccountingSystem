@@ -96,6 +96,9 @@ public interface TQsbMapper{
 
 	int deleteAllTQsb(@Param("ywlb")int[] ywlb,@Param("extenda") String extenda ,@Param("extendc") String extendc,@Param("ztbh") int ztbh);
 	
+	/**
+     * 下面这些方法为基金业务专用，其他业务请勿轻易使用，否则后果自负
+     * */
     List<TQsb> selectByYwlbAndLimit(TQsbParamPojo params);
     
 	List<TQsb> selectByPageAndZtbh(TQsbParamPojo params);
@@ -105,4 +108,14 @@ public interface TQsbMapper{
 	List<TQsb> selectByPageAndDate(TQsbParamPojo params);
 	
 	int getCountsByDate(TQsbParamPojo params);
+	
+	List<TQsb> selectShxxByYwlbAndLimit(TQsbParamPojo params);
+	
+	List<TQsb> selectShxxByPageAndZtbh(TQsbParamPojo params);
+	
+	int getShxxCountsByZtbh(TQsbParamPojo params);
+	
+	List<TQsb> selectShxxByPageAndDate(TQsbParamPojo params);
+	
+	int getShxxCountsByDate(TQsbParamPojo params);
 }
