@@ -32,9 +32,9 @@
     <table id="TJzyshgList" lay-filter="TJzyshgList"></table>
     <script type="text/html" id="bs">
         {{#  if(d.bs == "B"){ }}
-        <span >融资</span>
+        <span>融资</span>
         {{#  } else if(d.bs == "S"){ }}
-        <span >融券</span>
+        <span>融券</span>
         {{#  }}}
     </script>
     <script type="text/html" id="lumpsum">
@@ -43,16 +43,16 @@
         {{#  }}}
     </script>
     <script type="text/html" id="sclb">
-        {{#  if(d.sclb == "1"){ }}
-        <span>上交所</span>
-        {{#  } else if(d.sclb == "2"){ }}
-        <span >深交所</span>
+        {{#  if(d.sclb == 1){ }}
+        <span>上海</span>
+        {{#  } else if(d.sclb == 2){ }}
+        <span>深圳</span>
         {{#  }}}
     </script>
     <!--操作-->
     <script type="text/html" id="TJzyshgListBar">
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-       <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
+        <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
         <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
     </script>
 </form>

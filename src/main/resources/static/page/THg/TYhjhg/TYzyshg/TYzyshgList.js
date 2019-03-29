@@ -136,7 +136,7 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
         var index = layui.layer.open({
             title: "查看回购信息",
             type: 2,
-            content: "TYzyshgDetail.html",
+            content: "TJzyshgDetail.html",
             success: function (layero, index) {
                 var iframe = window['layui-layer-iframe' + index];
                 iframe.getValue(data);

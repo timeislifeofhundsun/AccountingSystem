@@ -158,7 +158,7 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
         })
     };
 
-    table.on('tool(TYzyshgList)', function (obj) {
+    table.on('tool(TJzyshgList)', function (obj) {
         var layEvent = obj.event,
             data = obj.data;
         if (layEvent == 'edit') { //编辑
