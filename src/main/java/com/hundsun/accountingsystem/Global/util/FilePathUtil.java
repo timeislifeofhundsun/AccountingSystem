@@ -83,7 +83,6 @@ public class FilePathUtil {
 			}else {
 				res.put("SJSJG", null);
 			}
-			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
