@@ -8,6 +8,7 @@ import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.service.*;
 import com.hundsun.accountingsystem.TGp.service.XgQsbService;
+import com.hundsun.accountingsystem.THg.Service.HGQSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +44,9 @@ public class RzqsServiceImpl implements RzqsService {
 
 	@Autowired
 	private TQsbMapper qsbMapper;
+
+	@Autowired
+	private HGQSService hgqsService;
 
 	/**
 	* @Description: 日终清算
@@ -145,7 +149,10 @@ s	* @return boolean    返回类型
 			/**
 			 * 7.回购清算
 			 */
-
+			returnData =hgqsService.hgqs(ztbh,ywrq);
+			if(!returnData) {
+				throw new Exception("回购交易清算失败");
+			}
 			/**
 			 * 8.回购清算
 			 */

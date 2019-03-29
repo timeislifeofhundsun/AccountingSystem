@@ -51,7 +51,6 @@ public class HGQSServiceImpl implements HGQSService {
     //清除清算表里存在的数据
     int[] ywlb = {3101, 3102};
     int i = tQsbMapper.deleteAllTQsb(ywlb, DateFormatUtil.getStringByDate(ywrq), "303", ztbh);
-    System.out.println("删除了"+i+"条数据");
     //获取利率对象
     TLfjxb tLfjxb = tLfjxbMapper.selectByPrimaryKey(1);
     Double hglv = Double.valueOf(tLfjxb.getHglv());
@@ -149,6 +148,9 @@ public class HGQSServiceImpl implements HGQSService {
         CJJE = CJJE + tCjhbb.getCjje();
         CJSL = CJSL + tCjhbb.getCjsl();
       }
+      if (tCjhbbs.get(0).getJysc() == 0){
+        CJSL=CJSL*10;
+      }
       tQsb.setAmount(CJJE);
       tQsb.setCost(CJSL);
       //设置券面总额
@@ -181,11 +183,6 @@ public class HGQSServiceImpl implements HGQSService {
       tQsb.setExtende(tCjhbbList.get(0).getXwbh());
       tQsbList.add(tQsb);
     }
-    for (TQsb t:tQsbList
-        ) {
-      System.out.println(t);
-    }
-
     if (tQsbList.isEmpty()){
       return false;
     }else{

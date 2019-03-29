@@ -75,7 +75,7 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
             {field: 'yj', title: '佣金', align: 'center', templet: "#yj"},
             {field: 'extendd', title: '股东代码', align: 'center', width: 140},
             {field: 'extende', title: '席位代码', align: 'center', width: 140},
-            {field: 'sclb', title: '交易市场', align: 'center', width: 140},
+            {field: 'sclb', title: '交易市场', align: 'center', width: 140,templet: "#sclb"},
             {title: '操作', width: 170, templet: '#TJzyshgListBar', fixed: "right", align: "center"}
         ]],
         done: function () {
