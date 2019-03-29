@@ -7,6 +7,7 @@ import java.util.Map;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.service.*;
+import com.hundsun.accountingsystem.TGp.service.XgQsbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,9 @@ public class RzqsServiceImpl implements RzqsService {
 	
 	@Autowired
 	private GPQSService gpjy;
+
+	@Autowired
+	private XgQsbService xgqs;
 
 	@Autowired
 	private LfjxQsService lfjxQsService;
@@ -75,6 +79,7 @@ s	* @return boolean    返回类型
 		calendar.setTime(ywrq);
 		calendar.roll(Calendar.DAY_OF_YEAR, 1);
 		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("ywlb",5101));
 		assist.setRequires(Assist.andEq("rq",calendar.getTime()));
 		long count = qsbMapper.getTQsbRowCount(assist);
 		if(count>0){
@@ -123,6 +128,7 @@ s	* @return boolean    返回类型
 			/**
 			 *5.新股清算
 			 */
+			xgqs.xgqs(jsmx,zqbd,ztbh,ywrq);
 
 			/**
 			 * 6.股票交易清算

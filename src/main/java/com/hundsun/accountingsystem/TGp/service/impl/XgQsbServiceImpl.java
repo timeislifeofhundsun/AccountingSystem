@@ -55,7 +55,7 @@ public class XgQsbServiceImpl implements XgQsbService {
     private String insert_xg_qsk(String path) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         if(path == null || path.equals("")){//判空
-            return "地址错误";
+            return "今日无jsmx数据文件";
         }
 
         List<TQsb> list = null;//存放从dbf文件中取出的值
@@ -68,8 +68,8 @@ public class XgQsbServiceImpl implements XgQsbService {
         try {
             System.out.println(path);
             list = fileParsing.ReadXGDBf(path);
-            if (list == null){
-                return "错误文件";
+            if (list == null || list.size()==0){
+                return "无新股数据";
             }
             //清算库去重和持仓表恢复操作
             Assist assist = null;
@@ -203,6 +203,7 @@ public class XgQsbServiceImpl implements XgQsbService {
         //根据账套编号去持仓余额表查找证券代码
         Assist assist = new Assist();
         assist.setRequires(Assist.andEq("ztbh",ztbh));
+        assist.setRequires(Assist.andEq("extenda",13));
         List<TCcyeb> list = tCcyebMapper.selectTCcyeb(assist);
 
         if (list.size() == 0){
@@ -223,7 +224,7 @@ public class XgQsbServiceImpl implements XgQsbService {
 
             //持仓库恢复以及清算库去重
             TQsb tQsb_qsk = new TQsb();
-            tQsb_qsk.setYwlb(1304).setRq(date);
+            tQsb_qsk.setYwlb(1304).setRq(date).setZqcode(tCcyeb.getZqdm());
             TQsb tQsb_qc = tQsbMapper.selectTQsbByObj(tQsb_qsk);//根据业务类别和日期查询
             if (tQsb_qc != null){
                 double qc = tQsb_qc.getGyjzbd() * (-1);
@@ -268,8 +269,8 @@ public class XgQsbServiceImpl implements XgQsbService {
      * 3、把相应的数据加上业务代码放入清算库中
      **/
     private String insert_sclt_qsk(String path) throws ParseException {
-        if (path.equals("") || path.equals(null)){
-            return "地址错误";
+        if (path==null){
+            return "今日无ZQBD数据文件";
         }
         List<String> list = null;
         try {
@@ -278,7 +279,7 @@ public class XgQsbServiceImpl implements XgQsbService {
             e.printStackTrace();
         }
 
-        if (list.size() == 0){
+        if (list==null || list.size() == 0){
             return "没有查询到数据";
         }
 
@@ -292,8 +293,9 @@ public class XgQsbServiceImpl implements XgQsbService {
         TCcyeb tCcyeb = new TCcyeb();
         tCcyeb.setZqdm(list.get(2));
         tCcyeb.setZtbh(tGdxxb_sclt.getZtbh());
+        System.out.println("参数："+tCcyeb.toString());
         TCcyeb tCcyeb_sclt = tCcyebMapper.selectTCcyebByObj(tCcyeb);//后面存入清算库中需要
-
+        System.out.println(tCcyeb_sclt);
         if (tCcyeb_sclt.getExtenda().equals("13")){
             tCcyebMapper.update_ltlx(tCcyeb);
         } else {

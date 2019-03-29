@@ -270,11 +270,14 @@ public class FileParsing {
       }
       Object[] rowValues;
       while ((rowValues = reader.nextRecord()) != null) {
+        if (rowValues[10].toString().contains("00G")){
           list.add(rowValues[2].toString().trim());
           list.add(rowValues[3].toString().trim());
           list.add(rowValues[4].toString().trim());
           list.add(rowValues[11].toString().trim());
-
+        }else {
+          return null;
+        }
       }
 
     } catch (Exception e) {
