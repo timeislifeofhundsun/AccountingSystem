@@ -86,6 +86,7 @@ public class TCjhbbServiceImpl implements TCjhbbService {
 			tcjhbb.setZqdm(ghkList.get(i).getZqcode());	
 			tcjhbb.setJysc(ghkList.get(i).getSclb());
 			tcjhbb.setMmfx(ghkList.get(i).getBs());
+			tcjhbb.setExtenda(DateFormatUtil.getStringByDate(ghkList.get(i).getJstime()));
 			if(tcjhbb.getJysc()==1) {
 				tcjhbb.setCjsl(Math.abs((ghkList.get(i).getCjsl())));
 			}else {
