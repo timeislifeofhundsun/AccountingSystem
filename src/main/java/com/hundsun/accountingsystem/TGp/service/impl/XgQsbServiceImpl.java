@@ -122,7 +122,6 @@ public class XgQsbServiceImpl implements XgQsbService {
                 }
                 tQsbMapper.deleteTQsb(assist_zqjs);//新股缴款去重
 
-
                 //新股中签去重
                 int y = tQsbMapper.deleteTQsb(assist);
                 if (y == 1){
