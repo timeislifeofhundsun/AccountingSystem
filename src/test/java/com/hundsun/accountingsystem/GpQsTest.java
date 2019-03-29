@@ -19,7 +19,7 @@ import com.hundsun.accountingsystem.TGp.service.GPQSService;
 public class GpQsTest {
 	
 	@Autowired
-	GPQSService hg;
+	GPQSService gphg;
 	
 	@Autowired
 	GPQSService gpjy;
@@ -34,9 +34,9 @@ public class GpQsTest {
 	public void test() throws Exception {
 		String date = "2018-06-15";
 		Map<String, String> res = FilePathUtil.getFilePathByDate(date);
-		hg.setPath(res.get("JSMX"), res.get("ZQBD"), res.get("SJSJG"));
+		gphg.setPath(res.get("JSMX"), res.get("ZQBD"), res.get("SJSJG"));
 		
-		hg.hgqs(10004, DateFormatUtil.getDateByString(date));
+		gphg.hgqs(10004, DateFormatUtil.getDateByString(date));
 		
 		gpjy.gpqs(10004, DateFormatUtil.getDateByString(date));
 	}
