@@ -268,10 +268,26 @@ public class XgQsbServiceImpl implements XgQsbService {
      * 2、根据账套编号和证券代码去持仓表中更新数据
      * 3、把相应的数据加上业务代码放入清算库中
      **/
-    private String insert_sclt_qsk(String path) throws ParseException {
-        if (path==null){
+    private String insert_sclt_qsk(String path, Date date, int ztbh) throws ParseException {
+
+        //判断当天是否上市流通
+        Assist assist_dz = new Assist();
+        assist_dz.setRequires(Assist.andEq("ywlb",1305));
+        assist_dz.setRequires(Assist.andEq("ztbh",ztbh));
+        assist_dz.setRequires(Assist.andEq("rq",date));
+        List<TQsb> list_dz = tQsbMapper.selectTQsb(assist_dz);
+        if (list_dz.size() == 1){
+            TCcyeb tCcyeb_dz = new TCcyeb();
+            tCcyeb_dz.setZqdm(list_dz.get(0).getZqcode());
+            tCcyeb_dz.setZtbh(ztbh);
+            tCcyebMapper.update_ltlx(tCcyeb_dz);
+        }
+
+
+        if (path == null){
             return "今日无ZQBD数据文件";
         }
+
         List<String> list = null;
         try {
             list = FileParsing.ReadZQBDDbf(path);
@@ -297,7 +313,7 @@ public class XgQsbServiceImpl implements XgQsbService {
         TCcyeb tCcyeb_sclt = tCcyebMapper.selectTCcyebByObj(tCcyeb);//后面存入清算库中需要
         System.out.println(tCcyeb_sclt);
         if (tCcyeb_sclt.getExtenda().equals("13")){
-            tCcyebMapper.update_ltlx(tCcyeb);
+            //tCcyebMapper.update_ltlx(tCcyeb);八号那条不需要更新
         } else {
             return "已经上市流通，不需要再操作";
         }
@@ -332,7 +348,7 @@ public class XgQsbServiceImpl implements XgQsbService {
         }
       String n = insert_xg_qsk(path_xg_qsk);
      System.out.println(n);
-      String m = insert_sclt_qsk(path_sclt_qsk);
+      String m = insert_sclt_qsk(path_sclt_qsk, date, ztbh);
      System.out.println(m);
       insert_gzzz_qsk(ztbh, date);
       return "清算成功";
