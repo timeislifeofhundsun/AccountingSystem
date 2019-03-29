@@ -43,7 +43,7 @@ public class GpQsTest {
 
 	@Test
 	public void pztest() throws Exception {
-		pzService.insertGPPZ(10004, DateFormatUtil.getDateByString("2018-05-30"));
+		pzService.insertGPPZ(10004, DateFormatUtil.getDateByString("2018-06-04"));
 	}
 
 

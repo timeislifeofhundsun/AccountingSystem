@@ -270,7 +270,9 @@ public class FileParsing {
       }
       Object[] rowValues;
       while ((rowValues = reader.nextRecord()) != null) {
-        if (rowValues[10].toString().contains("00G") && rowValues[5].toString().trim().equals("PT")){
+        if (rowValues[10].toString().contains("00G") 
+        		&& rowValues[5].toString().trim().equals("PT")
+        		&& rowValues[5].toString().trim().equals("N")){
           list.add(rowValues[2].toString().trim());
           list.add(rowValues[3].toString().trim());
           list.add(rowValues[4].toString().trim());
