@@ -140,6 +140,30 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			tccyeb10.setExtenda("应付交易费用_基金");
 			tccyebList.add(tccyeb10);
 			
+			TCcyeb tccyeb11 = new TCcyeb();
+			tccyeb11.setKjkmdm("6001");
+			tccyeb11.setZtbh(maxZtbh+1);
+			tccyeb11.setZqcb(0.0);
+			tccyeb11.setFsrq(tztxxb.getCreatedate());
+			tccyeb11.setExtenda("投资收益_股票");
+			tccyebList.add(tccyeb11);
+			
+			TCcyeb tccyeb12 = new TCcyeb();
+			tccyeb12.setKjkmdm("6002");
+			tccyeb12.setZtbh(maxZtbh+1);
+			tccyeb12.setZqcb(0.0);
+			tccyeb12.setFsrq(tztxxb.getCreatedate());
+			tccyeb12.setExtenda("投资收益_回购");
+			tccyebList.add(tccyeb12);
+			
+			TCcyeb tccyeb13 = new TCcyeb();
+			tccyeb13.setKjkmdm("6003");
+			tccyeb13.setZtbh(maxZtbh+1);
+			tccyeb13.setZqcb(0.0);
+			tccyeb13.setFsrq(tztxxb.getCreatedate());
+			tccyeb13.setExtenda("投资收益_基金");
+			tccyebList.add(tccyeb13);
+			
 			tccyebMapper.insertTCcyebByBatch(tccyebList);
 			tztxxbMapper.insert(tztxxb);
 		}

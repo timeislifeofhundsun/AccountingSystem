@@ -62,6 +62,7 @@ public class TjjFhServiceImpl implements TjjFhService{
 			Assist assist = new Assist();
 			assist.setRequires(Assist.andEq("hqrq", date));
 			assist.setRequires(Assist.andEq("zqnm", 4));
+			assist.setRequires(Assist.andEq("cjsl", 2));
 			List<THqb> tHqbList = thqbMapper.selectTHqb(assist);
 			if(tHqbList!=null && tHqbList.size()>0) {
 				//遍历循环每一天持仓数据

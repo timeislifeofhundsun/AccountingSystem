@@ -8,6 +8,8 @@
  */
 package com.hundsun.accountingsystem;
 
+import com.hundsun.accountingsystem.Global.bean.TCcyeb;
+import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.THg.Service.HGQSService;
 import com.hundsun.accountingsystem.THg.Service.impl.HGQSServiceImpl;
@@ -33,12 +35,15 @@ import java.util.Date;
 public class THgTest {
   @Autowired
   HGQSService hgqsService;
+
+  @Autowired
+  TCcyebMapper tCcyebMapper;
   @Test
   public void test() throws ParseException {
-    DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+    /*DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
     Date ywrq = dateFormat1.parse("2018-5-31");
     boolean hgqs = hgqsService.hgqs(10004, ywrq);
-    System.out.println(hgqs);
+    System.out.println(hgqs);*/
     /*String day = "204051".substring(3,6);
     System.out.println(day);
     String[] days = day.split("");
@@ -54,7 +59,14 @@ public class THgTest {
     System.out.println(day);*/
     /*String s = hgqsService.CalcDate("2019-4-1", 7);
     System.out.println("s"+s);*/
-
+    TCcyeb Obj=new TCcyeb();
+    Obj.setKjkmdm("100201");
+    Obj.setZtbh(10006);
+    TCcyeb ccyeb = tCcyebMapper.selectTCcyebByObj(Obj);
+    System.out.println(ccyeb);
+    double money=6000-1-1;
+    ccyeb.setZqcb(ccyeb.getZqcb() + money);
+    int yebd = tCcyebMapper.updateTCcyebById(ccyeb);
   }
 
 

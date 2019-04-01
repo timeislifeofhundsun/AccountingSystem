@@ -213,8 +213,13 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
                         //刷新父页面
                         parent.location.reload();
                     }, 500);
-                }else{
-                    top.layer.msg("回购添加失败！");
+                }else if (obj==101) {
+                    top.layer.msg("银行存款不足！请减少融券成交金额");
+                }else if (obj==102) {
+                    top.layer.msg("数据插入失败！请联系管理员");
+                }
+                else if (obj==103) {
+                    top.layer.msg("金额扣款或增额失败!请联系管理员");
                 }
             }
         });

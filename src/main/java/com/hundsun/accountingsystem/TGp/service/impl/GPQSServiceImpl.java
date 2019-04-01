@@ -73,6 +73,7 @@ public class GPQSServiceImpl implements GPQSService {
 	 * 5.计算股票买入 
 	 * 6.计算股票卖出
 	 * 7.计算估值增值
+	 * 8.修改余额表
 	 */
 	@Override
 	public boolean gpqs(int ztbh, Date ywrq) throws Exception {
@@ -80,10 +81,14 @@ public class GPQSServiceImpl implements GPQSService {
 		/**
 		 * 1.重置股票数据
 		 */
+		//恢复余额
+		Map<String, Object> para = new HashMap<>();
+		para.put("ztbh", ztbh);
+		para.put("ywrq",DateFormatUtil.getStringByDate(ywrq));
+		tCcyebMapper.gpjyResetYe(para);
 		this.resetGpmr(ztbh, ywrq);
 		this.resetGpmc(ztbh, ywrq);
 		this.resetGpgz(ztbh, ywrq);
-
 		/**
 		 * 2.获取交易费率
 		 */
@@ -114,11 +119,6 @@ public class GPQSServiceImpl implements GPQSService {
 			zqdmMap.put(zqdm, tcjs);
 		}
 
-		// for(String zqdm:zqdmMap.keySet()) {
-		// List<TCjhbb> list = zqdmMap.get(zqdm);
-		// System.out.println(list.get(0).getZqdm()+" "+list.get(0).getMmfx());
-		// }
-
 		/**
 		 * 5.计算股票买入
 		 */
@@ -142,6 +142,10 @@ public class GPQSServiceImpl implements GPQSService {
 		if (!res) {
 			throw new Exception("股票清算-股票估增清算失败");
 		}
+		/**
+		 * 8.修改余额表
+		 */
+		tCcyebMapper.gpjyUpdateYe(para);
 
 		returnData = true;
 		return returnData;
@@ -213,11 +217,6 @@ public class GPQSServiceImpl implements GPQSService {
 				if (effect != 1) {
 					throw new Exception("股票买入-插入持仓表失败");
 				}
-				//修改余额
-//				para = new TCcyeb();
-//				para.setZtbh(ztbh);
-//				para.setKjkmdm()
-//				TCcyeb yeb = tCcyebMapper.selectTCcyebByObj()
 			} else {
 				//修改持仓
 				tCcyeb.setCysl(tCcyeb.getCysl() + tQsb.getQuantity());
