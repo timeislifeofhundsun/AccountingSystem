@@ -56,8 +56,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			tccyeb.setKjkmdm("100201");
 			tccyeb.setFsrq(tztxxb.getCreatedate());
 			tccyeb.setZqcb(tztxxb.getMoney());
-			tccyeb.setExtenda("银行存款_活期存款");			
-			
+			tccyeb.setExtenda("银行存款_活期存款");						
 			tccyebList.add(tccyeb);
 			
 			TCcyeb tccyeb1 = new TCcyeb();
@@ -66,9 +65,81 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			tccyeb1.setFsrq(tztxxb.getCreatedate());
 			tccyeb1.setCysl(tztxxb.getNumber());
 			tccyeb1.setZqcb(tztxxb.getMoney());
-			tccyeb1.setExtenda("实收基金_已实现");
-			
+			tccyeb1.setExtenda("实收基金_已实现");			
 			tccyebList.add(tccyeb1);
+			
+			TCcyeb tccyeb2 = new TCcyeb();
+			tccyeb2.setKjkmdm("6201");
+			tccyeb2.setZtbh(maxZtbh+1);
+			tccyeb2.setZqcb(0.0);
+			tccyeb2.setFsrq(tztxxb.getCreatedate());
+			tccyeb2.setExtenda("交易费用_股票");
+			tccyebList.add(tccyeb2);
+			
+			TCcyeb tccyeb3 = new TCcyeb();
+			tccyeb3.setKjkmdm("6202");
+			tccyeb3.setZtbh(maxZtbh+1);
+			tccyeb3.setZqcb(0.0);
+			tccyeb3.setFsrq(tztxxb.getCreatedate());
+			tccyeb3.setExtenda("交易费用_回购");
+			tccyebList.add(tccyeb3);
+
+			TCcyeb tccyeb4 = new TCcyeb();
+			tccyeb4.setKjkmdm("6203");
+			tccyeb4.setZtbh(maxZtbh+1);
+			tccyeb4.setZqcb(0.0);
+			tccyeb4.setFsrq(tztxxb.getCreatedate());
+			tccyeb4.setExtenda("交易费用_基金");
+			tccyebList.add(tccyeb4);
+			
+			TCcyeb tccyeb5 = new TCcyeb();
+			tccyeb5.setKjkmdm("1131");
+			tccyeb5.setZtbh(maxZtbh+1);
+			tccyeb5.setZqcb(0.0);
+			tccyeb5.setFsrq(tztxxb.getCreatedate());
+			tccyeb5.setExtenda("证券清算款_股票");
+			tccyebList.add(tccyeb5);
+			
+			TCcyeb tccyeb6 = new TCcyeb();
+			tccyeb6.setKjkmdm("1132");
+			tccyeb6.setZtbh(maxZtbh+1);
+			tccyeb6.setZqcb(0.0);
+			tccyeb6.setFsrq(tztxxb.getCreatedate());
+			tccyeb6.setExtenda("证券清算款_回购");
+			tccyebList.add(tccyeb6);
+			
+			TCcyeb tccyeb7 = new TCcyeb();
+			tccyeb7.setKjkmdm("1133");
+			tccyeb7.setZtbh(maxZtbh+1);
+			tccyeb7.setZqcb(0.0);
+			tccyeb7.setFsrq(tztxxb.getCreatedate());
+			tccyeb7.setExtenda("证券清算款_基金");
+			tccyebList.add(tccyeb7);
+			
+			TCcyeb tccyeb8 = new TCcyeb();
+			tccyeb8.setKjkmdm("2001");
+			tccyeb8.setZtbh(maxZtbh+1);
+			tccyeb8.setZqcb(0.0);
+			tccyeb8.setFsrq(tztxxb.getCreatedate());
+			tccyeb8.setExtenda("应付交易费用_股票");
+			tccyebList.add(tccyeb8);
+			
+			TCcyeb tccyeb9 = new TCcyeb();
+			tccyeb9.setKjkmdm("2002");
+			tccyeb9.setZtbh(maxZtbh+1);
+			tccyeb9.setZqcb(0.0);
+			tccyeb9.setFsrq(tztxxb.getCreatedate());
+			tccyeb9.setExtenda("应付交易费用_回购");
+			tccyebList.add(tccyeb9);
+			
+			TCcyeb tccyeb10 = new TCcyeb();
+			tccyeb10.setKjkmdm("2003");
+			tccyeb10.setZtbh(maxZtbh+1);
+			tccyeb10.setZqcb(0.0);
+			tccyeb10.setFsrq(tztxxb.getCreatedate());
+			tccyeb10.setExtenda("应付交易费用_基金");
+			tccyebList.add(tccyeb10);
+			
 			tccyebMapper.insertTCcyebByBatch(tccyebList);
 			tztxxbMapper.insert(tztxxb);
 		}
