@@ -167,6 +167,7 @@ public class XgQsbServiceImpl implements XgQsbService {
                 Date date_qsk = DateFormatUtil.getNextWorkDay(list.get(w).getRq());//中签交收是在缴款后一天
                 list.get(w).setRq(date_qsk);
                 list.get(w).setYwlb(1303);
+                list.get(w).setId(null);
                 tQsbMapper.insertTQsb(list.get(w));
                 if (tCcyeb_zqjs != null){
                     System.out.println(tCcyeb_zqjs.getFsrq());
