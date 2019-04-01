@@ -357,4 +357,9 @@
         <if test="assist.require!=null"><include refid="updateAssist" /></if>
     </update>
 
+	<select id="selectTccyebByTwoTable" parameterType="com.hundsun.accountingsystem.TJj.VO.TjjGzParamsVO" resultMap="result_TCcyeb_Map">
+        select t.* from t_ccyeb t,t_zqxx q 
+        	where t.zqnm=#{zqnm} and q.fxfs = #{fxfs} and t.zqdm = q.zqdm and fsrq between '2000-03-29' and #{date}
+    </select>
+    
 </mapper>

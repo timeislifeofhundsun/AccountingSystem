@@ -8,11 +8,13 @@
  */
 package com.hundsun.accountingsystem.THg.Service.impl;
 
+import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import com.hundsun.accountingsystem.Global.bean.TCjhbb;
 import com.hundsun.accountingsystem.Global.bean.TCjhbbExample;
 import com.hundsun.accountingsystem.Global.bean.TJyfl;
 import com.hundsun.accountingsystem.Global.bean.TLfjxb;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
+import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TCjhbbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
 import com.hundsun.accountingsystem.Global.mapper.TLfjxbMapper;
@@ -45,6 +47,8 @@ public class HGQSServiceImpl implements HGQSService {
   public TCjhbbMapper tCjhbbMapper;
   @Autowired
   public TJyflMapper tJyflMapper;
+  @Autowired
+  public TCcyebMapper tCcyebMapper;
 
   @Override
   public boolean hgqs(int ztbh, Date ywrq) throws ParseException {
@@ -186,12 +190,35 @@ public class HGQSServiceImpl implements HGQSService {
     if (tQsbList.isEmpty()){
       return false;
     }else{
-      int i1 = tQsbMapper.insertTQsbByBatch(tQsbList);
-      if (i1!=0){
+      //生成持仓余额数据
+      int count=0;
+      for (TQsb tqsb:tQsbList ) {
+        int i1 = tQsbMapper.insertTQsb(tqsb);
+        TCcyeb tCcyeb = new TCcyeb();
+        tCcyeb.setZqdm(tqsb.getZqcode());
+        tCcyeb.setZtbh(tqsb.getZtbh());
+        tCcyeb.setZqcb(tqsb.getAmount());
+        tCcyeb.setExtendc(String.valueOf(tqsb.getId()));
+        tCcyeb.setLjjx(tqsb.getCjsr());
+        tCcyeb.setFsrq(DateFormatUtil.getDateByString(tqsb.getExtenda()));
+        tCcyeb.setExtenda("31");
+        tCcyeb.setExtendb(tqsb.getExtendb());
+        int i2 = tCcyebMapper.insertTCcyeb(tCcyeb);
+        if (i1!=0&&i2!=0){
+          count++;
+        }
+      }
+      //新增持仓余额变动数据
+      if (count!=0){
         return true;
       }else{
         return false;
       }
+     /*if (i1!=0){
+       return true;
+     }else{
+       return false;
+     }*/
     }
   }
   //根据给定日期和天数计算到期时间
