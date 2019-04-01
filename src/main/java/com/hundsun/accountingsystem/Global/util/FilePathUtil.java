@@ -33,7 +33,7 @@ public class FilePathUtil {
 			String sjsmx = root+ywrq+"/SJSMX1"+temp+".dbf";
 			String jsmx = root+ywrq+"/JSMXjsmr1.dbf";
 			String zqbd = root+ywrq+"/ZQBDjsmr1.dbf";
-			temp = ywrq.replaceAll("-", "").substring(4, 8);
+			String sjsfx = root+ywrq+"/SJSFX"+temp+".dbf";
 			String sjsjg = root+ywrq+"/SJSJG"+temp+".dbf";
 			File ftemp = new File(cash);
 			if(ftemp.exists()) {
@@ -82,6 +82,13 @@ public class FilePathUtil {
 				res.put("SJSJG", sjsjg);
 			}else {
 				res.put("SJSJG", null);
+			}
+
+			ftemp = new File(sjsfx);
+			if(ftemp.exists()){
+				res.put("SJSFX",sjsfx);
+			}else{
+				res.put("SJSFX",null);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

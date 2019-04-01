@@ -75,6 +75,7 @@ s	* @return boolean    返回类型
 		String jsmx = files.get("JSMX");
 		String zqbd = files.get("ZQBD");
 		String sjsjg = files.get("SJSJG");
+		String sjsfx = files.get("SJSFX");
 
 		/**
 		 * 校验日期
@@ -137,6 +138,7 @@ s	* @return boolean    返回类型
 			 *5.新股清算
 			 */
 			xgqs.xgqs(jsmx,zqbd,ztbh,ywrq);
+			xgqs.xgqs(sjsfx,sjsjg,ztbh,ywrq);
 
 			/**
 			 * 6.股票交易清算

@@ -197,8 +197,10 @@ public class GPQSServiceImpl implements GPQSService {
 			TCcyeb para = new TCcyeb();
 			para.setZqdm(tQsb.getZqcode());
 			para.setExtenda("11");
+			para.setZtbh(ztbh);
 			TCcyeb tCcyeb = tCcyebMapper.selectTCcyebByObj(para);
 			if (tCcyeb == null) {
+				//新增持仓
 				tCcyeb = new TCcyeb();
 				tCcyeb.setCysl(tQsb.getQuantity());
 				tCcyeb.setExtenda("11");
@@ -209,15 +211,21 @@ public class GPQSServiceImpl implements GPQSService {
 				tCcyeb.setLjgz(0.00);
 				int effect = tCcyebMapper.insertNonEmptyTCcyeb(tCcyeb);
 				if (effect != 1) {
-					throw new Exception("股票买入-插入持仓余额表失败");
+					throw new Exception("股票买入-插入持仓表失败");
 				}
+				//修改余额
+//				para = new TCcyeb();
+//				para.setZtbh(ztbh);
+//				para.setKjkmdm()
+//				TCcyeb yeb = tCcyebMapper.selectTCcyebByObj()
 			} else {
+				//修改持仓
 				tCcyeb.setCysl(tCcyeb.getCysl() + tQsb.getQuantity());
 				tCcyeb.setZqcb(tCcyeb.getZqcb() + tQsb.getCost());
 				tCcyeb.setFsrq(ywrq);
 				int effect = tCcyebMapper.updateNonEmptyTCcyebById(tCcyeb);
 				if (effect != 1) {
-					throw new Exception("股票买入-修改持仓余额表失败");
+					throw new Exception("股票买入-修改持仓表失败");
 				}
 			}
 		}
