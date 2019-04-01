@@ -127,12 +127,12 @@
       {
 			"title": "基金估值",
 			"icon": "&#xe631;",
-			"href": "page/TJj/TJjgz/TShqrList.html",
+			"href": "page/TJj/TJjgz/TJjgzList.html",
 			"spread": false
 		},{
 			"title": "基金红利",
 			"icon": "&#xe631;",
-			"href": "page/TJj/TJjfh/TShqrList.html",
+			"href": "page/TJj/TJjfh/TJjfhList.html",
 			"spread": false
 		},
         {

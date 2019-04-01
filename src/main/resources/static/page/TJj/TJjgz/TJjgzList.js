@@ -20,10 +20,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     });
     
     
-    /*
-     * 初始化表格，根据业务类别从清算表里面查出数据，并展示到table里面
-     * 申购申请的业务类别有两种：非货币基金申购（4201），货币基金申购（4101）
-     * */
+    
     searchCcsj("");
     
     $('.select_btn').click(function(){
