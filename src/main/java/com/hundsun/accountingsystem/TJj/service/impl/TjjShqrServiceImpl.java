@@ -36,8 +36,10 @@ public class TjjShqrServiceImpl implements TjjShqrService {
 	THqbMapper thqbMapper;
 	
 	@Autowired
-	
 	TQsbMapper tqsbMapper;
+	
+	double ljgz;
+	
 	@Override
 	public List<TCcyeb> selectByPage(int page, int limit) {
 		Assist assist = new Assist();
@@ -100,29 +102,110 @@ public class TjjShqrServiceImpl implements TjjShqrService {
 		 * 3.同步更新余额表（计算证券清算款、计算交易费用、计算投资收益、应付交易费用）
 		 * */
 		
+		//同步更新持仓表
+		boolean flag2 = updateTccyeb(tccyebSh);
+		if(!flag2) {
+			throw new Exception("更新持仓表时出错");
+		}
+			
 		//插入到清算表中
 		boolean flag = insertIntoTqsb(tccyebSh);
 		if(!flag) {
 			throw new Exception("请检查该基金的当日行情信息以及赎回费率信息是否存在");
 		}
-		
-		//同步更新持仓余额表
-		boolean flag2 = updateTccyeb(tccyebSh);
-		if(!flag2) {
-			throw new Exception("更新持仓余额表时出错");
+		//同步更新到余额表中（计算证券清算款、计算交易费用、计算投资收益、应付交易费用）
+		boolean flag3 = updateYe(tccyebSh);
+		if(!flag3) {
+			throw new Exception("更新余额表时出错");
 		}
-		
-		//同步更新到余额表中
-		
 		
 	}
 	
+	//同步更新到余额表中（计算证券清算款、计算交易费用、计算投资收益、应付交易费用）
+	private boolean updateYe(TCcyebSh tccyebSh) {
+		TJyfl shfl = tjyfMapper.selectByPrimaryKey(4102);
+		//获取上一日收盘价(系统中是根据今天的日期去获取到收盘价的)
+		Assist assist = new Assist();
+		assist.setRequires(Assist.andEq("zqdm", tccyebSh.getZqdm()));
+		assist.setRequires(Assist.andEq("zqnm", 4));
+		assist.setRequires(Assist.andEq("hqrq", DateFormatUtil.getStringByDate(tccyebSh.getFsrq())));
+		List<THqb> tHqbList = thqbMapper.selectTHqb(assist);
+		double hq = 0.0;
+		if(tHqbList!=null && tHqbList.size()>0) {
+			hq = tHqbList.get(0).getJrsp();
+		}else {
+			return false;
+		}
+		double amount = (tccyebSh.getZqcb()/tccyebSh.getCysl())*tccyebSh.getShfe();	
+		double zqqsk = tccyebSh.getShfe()*hq;
+		double jyfy = zqqsk*shfl.getJsfl()+zqqsk*shfl.getZg();
+		double yfjyfy = zqqsk*shfl.getYj()-jyfy;		
+		double tzsy = (zqqsk + jyfy)-(amount + ljgz + yfjyfy);
+		
+		//更新证券清算款
+		Assist assist1 = new Assist();
+		assist1.setRequires(Assist.andEq("ztbh", tccyebSh.getZtbh()));
+		assist1.setRequires(Assist.andEq("kjkmdm", "1133"));
+		List<TCcyeb> zqList = tccyebMapper.selectTCcyeb(assist1);
+		if(zqList!=null && zqList.size()>0) {
+			TCcyeb tCcyeb = zqList.get(0);
+			double zqcb = tCcyeb.getZqcb()+zqqsk;
+			tCcyeb.setZqcb(zqcb);
+			tccyebMapper.updateTCcyebById(tCcyeb);
+		}else {
+			return false;
+		}
+		
+		//更新交易费用
+		Assist assist2 = new Assist();
+		assist2.setRequires(Assist.andEq("ztbh", tccyebSh.getZtbh()));
+		assist2.setRequires(Assist.andEq("kjkmdm", "6203"));
+		List<TCcyeb> jyList = tccyebMapper.selectTCcyeb(assist2);
+		if(jyList!=null && jyList.size()>0) {
+			TCcyeb tCcyeb = jyList.get(0);
+			double zqcb = tCcyeb.getZqcb()+jyfy;
+			tCcyeb.setZqcb(zqcb);
+			tccyebMapper.updateTCcyebById(tCcyeb);
+		}else {
+			return false;
+		}
+		
+		//更新应付交易费用
+		Assist assist3 = new Assist();
+		assist3.setRequires(Assist.andEq("ztbh", tccyebSh.getZtbh()));
+		assist3.setRequires(Assist.andEq("kjkmdm", "2003"));
+		List<TCcyeb> yfList = tccyebMapper.selectTCcyeb(assist3);
+		if(yfList!=null && yfList.size()>0) {
+			TCcyeb tCcyeb = yfList.get(0);
+			double zqcb = tCcyeb.getZqcb()+yfjyfy;
+			tCcyeb.setZqcb(zqcb);
+			tccyebMapper.updateTCcyebById(tCcyeb);
+		}else {
+			return false;
+		}
+		
+		//更新投资收益
+		Assist assist4 = new Assist();
+		assist4.setRequires(Assist.andEq("ztbh", tccyebSh.getZtbh()));
+		assist4.setRequires(Assist.andEq("kjkmdm", "6003"));
+		List<TCcyeb> tzList = tccyebMapper.selectTCcyeb(assist4);
+		if(tzList!=null && tzList.size()>0) {
+			TCcyeb tCcyeb = tzList.get(0);
+			double zqcb = tCcyeb.getZqcb()+tzsy;
+			tCcyeb.setZqcb(zqcb);
+			tccyebMapper.updateTCcyebById(tCcyeb);
+		}else {
+			return false;
+		}
+		return true;
+	}
+
 	private boolean updateTccyeb(TCcyebSh tccyebSh) {
 		//先从持仓表中查询出持仓数据
 		TCcyeb tccyeb = tccyebMapper.selectTCcyebById(tccyebSh.getId());
 		//更新持仓表中的：累计估增字段、证券成本字段、持有数量字段
 		//赎回的时候累计估增采用平均值算法来计算
-		double ljgz = (tccyeb.getLjgz()/tccyeb.getCysl())*tccyebSh.getShfe();
+		ljgz = (tccyeb.getLjgz()/tccyeb.getCysl())*tccyebSh.getShfe();
 		double zqcb = (tccyeb.getZqcb()/tccyeb.getCysl())*tccyebSh.getShfe();
 		int cysl = tccyeb.getCysl() - tccyebSh.getShfe();
 		tccyeb.setLjgz(tccyeb.getLjgz()-ljgz);
@@ -190,6 +273,7 @@ public class TjjShqrServiceImpl implements TjjShqrService {
 		tqsb.setYj(yfjyfy);
 		tqsb.setExtendc("402");
 		tqsb.setExtendf("0");
+		tqsb.setGyjzbd(ljgz);
 		try {
 			tqsbMapper.insertTQsb(tqsb);
 		}catch (Exception e) {

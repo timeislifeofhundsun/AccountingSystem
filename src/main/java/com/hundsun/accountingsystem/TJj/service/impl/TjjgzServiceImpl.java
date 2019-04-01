@@ -33,7 +33,7 @@ public class TjjgzServiceImpl implements TjjgzService {
 	public void countJjgz(String date) throws Exception {
 		/*
 		 * 点击基金估值按钮后，后台会接收到一个时间数据
-		 * 1.根据该时间去清算表中查询是否有当天的估值数据，如果有数据则提示“当天基金已经估值成功，请不要重复 估值”，程序结束
+		 * 1.根据该时间去清算表中查询是否有当天的估值数据，如果有数据则提示“当天基金已经估值成功，请不要重复估值”，程序结束
 		 * 2.如果从清算表中查询不到当天的估值数据，则进行如下操作：
 		 * 3.从持仓表中拿出到今天为止的所有非货币基金持仓数据
 		 * 4.遍历每一条持仓数据做如下操作：更新持仓的估值增值，并往清算表中插入一条估值数据
@@ -45,7 +45,6 @@ public class TjjgzServiceImpl implements TjjgzService {
 		}
 		//从持仓表中拿出到今天为止的所有非货币基金持仓数据
 		List<TCcyeb> ccList = selectTccyeb(date);
-		
 		//遍历每一条持仓数据做如下操作：更新持仓的估值增值，并往清算表中插入一条估值数据
 		boolean flag2 = updateCcyeb(ccList,date);
 		if(!flag2) {
@@ -59,6 +58,7 @@ public class TjjgzServiceImpl implements TjjgzService {
 			Assist assist = new Assist();
 			assist.setRequires(Assist.andEq("hqrq", date));
 			assist.setRequires(Assist.andEq("zqnm", 4));
+			assist.setRequires(Assist.andEq("cjsl", 1));
 			List<THqb> tHqbList = thqbMapper.selectTHqb(assist);
 			if(tHqbList!=null && tHqbList.size()>0) {
 				//遍历循环每一天持仓数据
@@ -74,7 +74,6 @@ public class TjjgzServiceImpl implements TjjgzService {
 							break;
 						}
 					}
-					
 					if(jrspj>0) {
 						double gz = (jrspj * tCcyeb.getCysl()) - tCcyeb.getZqcb() - tCcyeb.getLjgz();
 						tCcyeb.setLjgz(gz+tCcyeb.getLjgz());

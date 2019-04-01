@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.hundsun.accountingsystem.Global.VO.THqbVO;
 import com.hundsun.accountingsystem.Global.bean.THqb;
+import com.hundsun.accountingsystem.Global.bean.TZqxx;
 import com.hundsun.accountingsystem.Global.service.THqbService;
+import com.hundsun.accountingsystem.Global.service.TZqxxService;
 
 /**
  * 功能说明:
@@ -33,6 +35,9 @@ public class TjjHqxxController {
 	
 	@Autowired
 	THqbService thqbServiceImpl;
+	
+	@Autowired
+	TZqxxService tzqxxServiceImpl;
 	
 	@GetMapping("/THqbxx")
 	public String findJjhqList(int page,int limit) {
@@ -84,6 +89,17 @@ public class TjjHqxxController {
 	public String addHqxx(@RequestParam(value = "Hqxx",required = true) String data) {
 		THqb thqb = JSON.parseObject(data,THqb.class);
 		thqb.setZqnm(4);
+		
+		List<TZqxx> list = tzqxxServiceImpl.findByZqdm(thqb.getZqdm());
+		if(list!=null && list.size()==1) {
+			int flag = list.get(0).getFxfs();
+			if(flag==1) {
+				thqb.setCjsl(1);
+			}else if(flag==2){
+				thqb.setCjsl(2);
+			}
+		}
+		
 		try {
 			thqbServiceImpl.insertHqxx(thqb);
 		} catch (Exception e) {
