@@ -178,6 +178,7 @@ public class XgQsbServiceImpl implements XgQsbService {
                         //新股中签交收
                         list.get(w).setRq(DateFormatUtil.getNextWorkDay(date_qsk));
                         list.get(w).setYwlb(1306);
+                        list.get(w).setId(null);
                         tQsbMapper.insertTQsb(list.get(w));
                     }
                 }
@@ -372,6 +373,6 @@ public class XgQsbServiceImpl implements XgQsbService {
         insert_xg_qsk(path_xg_qsk,date);
         insert_sclt_qsk(path_sclt_qsk, date, ztbh);
         insert_gzzz_qsk(ztbh, date);
-        return "清算成功";
+         return "清算成功";
     }
 }

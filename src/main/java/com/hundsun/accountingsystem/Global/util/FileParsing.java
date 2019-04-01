@@ -415,7 +415,7 @@ public class FileParsing {
       }
       Object[] rowValues;
       while ((rowValues = reader.nextRecord()) != null) {
-        if (rowValues[1].toString().contains("B001999711")){
+        if (rowValues[1].toString().contains("B001999711") && rowValues[4].toString().contains("300515")){
           list.add(rowValues[1].toString().trim());//股东代码
           list.add(rowValues[6].toString().trim());//席位编号
           list.add(rowValues[4].toString().trim());//证券代码

@@ -64,6 +64,6 @@ public class AccountingSystemApplicationTests {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		//System.out.println(xgQsbService.insert_gzzz_qsk(10000,sdf.parse("20180606")));//估值增值测试
 		//System.out.println(xgQsbService.insert_sclt_qsk("F:\\HUNDSUN\\JYQS\\20180608\\ZQBDjsmr1.dbf"));//上市流通
-		System.out.println(xgQsbService.xgqs("F:\\HUNDSUN\\hsdatasource\\2018-05-31\\SJSFX0531.dbf",null,10004,sdf.parse("20180611")));
+		System.out.println(xgQsbService.xgqs("F:\\HUNDSUN\\hsdatasource\\2018-06-04\\SJSFX0604.dbf",null,10004,sdf.parse("20180531")));
 	}
 }
