@@ -220,7 +220,6 @@ public class XgQsbServiceImpl implements XgQsbService {
      * 4、计算公式：估值增值=收盘价*当前时刻总数量-当前时刻总成本-上一时刻估值增值
      **/
     private String insert_gzzz_qsk(int ztbh, Date date) {
-
         Double gzzz = 0.00;//估值增值变量
 
         //根据账套编号去持仓余额表查找证券代码
@@ -375,4 +374,107 @@ public class XgQsbServiceImpl implements XgQsbService {
         insert_gzzz_qsk(ztbh, date);
          return "清算成功";
     }
+
+    /**
+    * @Author yangjf25257
+    * @MethodName xg_wx
+     * @Param [tQsb]
+     * @Return int
+     * @Description 新股网下申购
+     **/
+    @Override
+    public String xg_wx(TQsb tQsb) {
+
+
+        //清算库去重和持仓库恢复
+        Assist assist_xgjk = new Assist();//新股缴款去重
+        assist_xgjk.setRequires(Assist.andEq("rq",tQsb.getRq()));
+        assist_xgjk.setRequires(Assist.andEq("zqcode",tQsb.getZqcode()));
+        assist_xgjk.setRequires(Assist.andEq("ywlb",1308));
+        tQsbMapper.deleteTQsb(assist_xgjk);
+        Assist assist_qskqc = new Assist();//新股中签去重
+        assist_qskqc.setRequires(Assist.andEq("rq",tQsb.getRq()));
+        assist_qskqc.setRequires(Assist.andEq("zqcode",tQsb.getZqcode()));
+        assist_qskqc.setRequires(Assist.andEq("ywlb",1309));
+        TQsb tQsb_hf = null;//用于持仓库恢复
+        if (tQsbMapper.selectTQsb(assist_qskqc).size() > 0){
+            tQsb_hf = tQsbMapper.selectTQsb(assist_qskqc).get(0);
+        }
+        int qsk_qc  = tQsbMapper.deleteTQsb(assist_qskqc);//中签去重
+
+        if (qsk_qc != 0){
+            TCcyeb tCcyeb_hf = new TCcyeb();
+            tCcyeb_hf.setCysl(- tQsb_hf.getQuantity());
+            tCcyeb_hf.setZqdm(tQsb_hf.getZqcode());
+            tCcyebMapper.update_ljgz(tCcyeb_hf);
+        }
+
+        //向清算库插入过程中，中签和缴款一同插入。
+        tQsb.setYwlb(1309);//业务类别为网下新股中签
+        tQsb.setAmount(tQsb.getQuantity() * Double.valueOf(tQsb.getExtendc()));
+        tQsb.setBs("B");
+        tQsb.setId(null);
+        tQsbMapper.insertTQsb(tQsb);//中签流水放入清算库
+        tQsb.setYwlb(1308);//业务类别为网下新股缴款
+        tQsb.setId(null);
+        int qckcr = tQsbMapper.insertTQsb(tQsb);//缴款流水放入清算库
+
+        //持仓库再次更新
+        if (qckcr > 0){
+            TCcyeb tCcyeb_gx = new TCcyeb();
+            tCcyeb_gx.setZqdm(tQsb.getZqcode());
+            tCcyeb_gx.setCysl(tQsb.getQuantity());
+            tCcyebMapper.update_cysl(tCcyeb_gx);
+        }
+
+        //向持仓表中插入数据
+        if (qsk_qc == 0){
+            System.out.println(qsk_qc);
+            TCcyeb tCcyeb_insert = new TCcyeb();
+            tCcyeb_insert.setZtbh(tQsb.getZtbh()).setZqdm(tQsb.getZqcode()).setCysl(tQsb.getQuantity())
+                    .setZqcb(tQsb.getAmount()).setFsrq(tQsb.getRq()).setExtenda("13");
+            tCcyebMapper.insertTCcyeb(tCcyeb_insert);
+        }
+
+        return "";
+    }
+
+    /**
+    * @Author yangjf25257
+    * @MethodName sclt_wx
+     * @Param [tQsb]
+     * @Return java.lang.String
+     * @Description 网下市场流通
+     **/
+    @Override
+    public String sclt_wx(TQsb tQsb) {
+
+        TCcyeb tCcyeb_hf = new TCcyeb();
+        tCcyeb_hf.setZtbh(tQsb.getZtbh());
+        tCcyeb_hf.setZqdm(tQsb.getZqcode());
+        TCcyeb tCcyeb_re = tCcyebMapper.selectTCcyebByObj(tCcyeb_hf);
+        if (tQsbMapper.selectTQsbByObj(tQsb) != null){
+            if (tCcyeb_re.getExtenda().contains("11")){
+                tCcyebMapper.update_ltlx_hf(tCcyeb_hf);
+            }
+        } else {
+            tCcyebMapper.update_ltlx(tCcyeb_hf);
+        }
+        //清算库去重
+        Assist assist = new Assist();
+        assist.setRequires(Assist.andEq("rq",tQsb.getRq()));
+        assist.setRequires(Assist.andEq("zqcode",tQsb.getZqcode()));
+        assist.setRequires(Assist.andEq("ywlb",1311));
+        assist.setRequires(Assist.andEq("ztbh",tQsb.getZtbh()));
+        tQsbMapper.deleteTQsb(assist);
+        //清算库添加
+        tQsb.setYwlb(1311);
+        tQsb.setAmount(tQsb.getQuantity() * Double.valueOf(tQsb.getExtendc())).setLumpsum(tCcyeb_re.getLjgz()).setBs("B");
+        tQsbMapper.insertTQsb(tQsb);
+        tCcyebMapper.update_ltlx(tCcyeb_hf);
+
+        return "上市流通成功";
+    }
+
+
 }

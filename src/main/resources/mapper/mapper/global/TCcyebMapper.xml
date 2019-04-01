@@ -36,6 +36,15 @@
         and    ztbh = #{ztbh}
     </update>
 
+    <!-- 恢复持仓库流通类型 -->
+    <update id="update_ltlx_hf" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
+        update t_ccyeb
+        set
+        extenda = 13
+        where  zqdm = #{zqdm}
+        and    ztbh = #{ztbh}
+    </update>
+
     <!-- 更新持仓库持有数量和extenda -->
     <update id="update_cysl" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
         update t_ccyeb

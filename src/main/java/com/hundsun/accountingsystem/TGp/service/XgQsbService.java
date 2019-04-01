@@ -1,5 +1,7 @@
 package com.hundsun.accountingsystem.TGp.service;
 
+import com.hundsun.accountingsystem.Global.bean.TQsb;
+
 import java.text.ParseException;
 import java.util.Date;
 
@@ -12,4 +14,6 @@ import java.util.Date;
  **/
 public interface XgQsbService {
     String  xgqs(String path_xg_qsk, String path_sclt_qsk, int ztbh, Date date) throws ParseException;
+    String xg_wx(TQsb tQsb);
+    String sclt_wx(TQsb tQsb);
 }

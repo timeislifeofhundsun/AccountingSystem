@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TCcyebMapper{
 
+	int update_ltlx_hf(TCcyeb tCcyeb);
+
 	/**
 	* @Author yangjf25257
 	* @MethodName update_cysl

@@ -56,7 +56,7 @@ public class TQsb {
 
     private String extendb;//新股情况代表交易日期
 
-    private String extendc;
+    private String extendc;//新股代表价格
 
     private String extendd;
 
