@@ -127,18 +127,38 @@ public class GPHGQSServiceImpl implements GPQSService {
 		assist.setRequires(Assist.andEq("extenda", DateFormatUtil.getStringByDate(ywrq)));
 		List<TQsb> needUpdateQsb = qsbMapper.selectTQsb(assist);
 		for (TQsb qsb : needUpdateQsb) {
-			//送股
-			if(qsb.getYwlb()==1203) {
-				TCcyeb para = new TCcyeb();
-				para.setZqdm(qsb.getZqcode());
-				TCcyeb ccye = tCcyebMapper.selectTCcyebByObj(para);
-				ccye.setCysl(ccye.getCysl()+qsb.getQuantity());
-				int effect = tCcyebMapper.updateNonEmptyTCcyebById(ccye);
-				if(effect!=1) {
-					log.error("送股更新持仓出错");
+			//未完成送股或者到账
+			if(qsb.getExtendb()==null) {
+				//送股
+				if(qsb.getYwlb()==1203) {
+					TCcyeb para = new TCcyeb();
+					para.setZqdm(qsb.getZqcode());
+					para.setZtbh(qsb.getZtbh());
+					TCcyeb ccye = tCcyebMapper.selectTCcyebByObj(para);
+					ccye.setCysl(ccye.getCysl()+qsb.getQuantity());
+					int effect = tCcyebMapper.updateNonEmptyTCcyebById(ccye);
+					if(effect!=1) {
+						log.error("送股更新持仓出错");
+					}
+				}else if(qsb.getYwlb()==1202) {
+					//到账
+					TCcyeb para = new TCcyeb();
+					para.setKjkmdm("100201");
+					para.setZtbh(qsb.getZtbh());
+					TCcyeb ccye = tCcyebMapper.selectTCcyebByObj(para);
+					if(ccye==null) {
+						throw new Exception("银行存款科目不存在");
+					}
+					ccye.setZqcb(ccye.getZqcb()+qsb.getAmount());
+					int effect = tCcyebMapper.updateNonEmptyTCcyebById(ccye);
+					if(effect!=1) {
+						log.error("红利到账更新余额表出错");
+					}
 				}
+				qsb.setExtendb("true");
+				qsbMapper.updateNonEmptyTQsbById(qsb);
 			}
-			//到账
+
 		}
 		res = true;
 		return res;
@@ -161,12 +181,15 @@ public class GPHGQSServiceImpl implements GPQSService {
 		assist.setRequires(Assist.andEq("ywlb", 1203));
 		List<TQsb> needDeleteQSbs = qsbMapper.selectTQsb(assist);
 		for (TQsb qsb : needDeleteQSbs) {
-			Date sgrq = DateFormatUtil.getDateByString(qsb.getExtenda());
-			if(sgrq.getTime()<ywrq.getTime()) {
+			if(qsb.getExtendb()!=null && qsb.getExtendb().equals("true")) {
+				System.out.println("--ajsfairugiuerghewioagioewager");
 				TCcyeb para = new TCcyeb();
 				para.setZqdm(qsb.getZqcode());
+				para.setZtbh(qsb.getZtbh());
 				TCcyeb ccye = tCcyebMapper.selectTCcyebByObj(para);
 				ccye.setCysl(ccye.getCysl()-qsb.getQuantity());
+				//恢复持仓
+				tCcyebMapper.updateNonEmptyTCcyebById(ccye);
 			}
 		}
 		/**
@@ -190,16 +213,21 @@ public class GPHGQSServiceImpl implements GPQSService {
 		assist.setRequires(Assist.andEq("ztbh", ztbh));
 		assist.setRequires(Assist.andEq("rq", DateFormatUtil.getStringByDate(ywrq)));
 		assist.setRequires(Assist.andEq("ywlb", 1202));
-//		List<TQsb> needDeleteQSbs = qsbMapper.selectTQsb(assist);
-//		for (TQsb qsb : needDeleteQSbs) {
-//			Date sgrq = DateFormatUtil.getDateByString(qsb.getExtenda());
-//			if(sgrq.getTime()>ywrq.getTime()) {
-//				TCcyeb para = new TCcyeb();
-//				para.setZqdm(qsb.getZqcode());
-//				TCcyeb ccye = tCcyebMapper.selectTCcyebByObj(para);
-//				ccye.setCysl(ccye.getCysl()-qsb.getQuantity());
-//			}
-//		}
+		List<TQsb> needDeleteQSbs = qsbMapper.selectTQsb(assist);
+		for (TQsb qsb : needDeleteQSbs) {
+			if(qsb.getExtendb()!=null && qsb.getExtendb().equals("true")) {
+				TCcyeb para = new TCcyeb();
+				para.setKjkmdm("100201");
+				para.setZtbh(qsb.getZtbh());
+				TCcyeb ccye = tCcyebMapper.selectTCcyebByObj(para);
+				if(ccye==null) {
+					throw new Exception("银行存款科目不存在");
+				}
+				ccye.setZqcb(ccye.getZqcb()+qsb.getAmount());
+				//恢复余额
+				tCcyebMapper.updateNonEmptyTCcyebById(ccye);
+			}
+		}
 		/**
 		 * 删除清算表
 		 */
