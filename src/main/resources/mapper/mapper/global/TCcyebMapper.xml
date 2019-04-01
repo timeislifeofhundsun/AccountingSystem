@@ -18,6 +18,14 @@
         <result column="ljjx" property="ljjx" />
     </resultMap>
 
+    <select id="gpjyUpdateYe" parameterType="java.util.Map" statementType="CALLABLE">
+        call gpjy_updateYe(#{ztbh},#{ywrq})
+    </select>
+
+    <select id="gpjyResetYe" parameterType="java.util.Map" statementType="CALLABLE">
+        call gpjy_resetYe(#{ztbh},#{ywrq})
+    </select>
+
     <!-- 更新持仓库累计估值 -->
     <update id="update_ljgz" parameterType="com.hundsun.accountingsystem.Global.bean.TCcyeb">
         update t_ccyeb

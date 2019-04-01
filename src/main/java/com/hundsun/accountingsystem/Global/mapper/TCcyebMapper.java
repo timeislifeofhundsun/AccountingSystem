@@ -3,6 +3,8 @@ import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import com.hundsun.accountingsystem.TJj.VO.TjjGzParamsVO;
 
 import java.util.List;
+import java.util.Map;
+
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -10,6 +12,23 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TCcyebMapper{
 
+	/**
+	 * 
+	* @Description: 股票交易恢余额
+	* @param  参数说明
+	* @return void    返回类型
+	* @author gaozhen
+	 */
+	void gpjyResetYe(Map<String, Object> para);
+	
+	/**
+	 * 
+	* @Description: 股票交易修改余额 
+	* @param  参数说明
+	* @author gaozhen
+	 */
+	void gpjyUpdateYe(Map<String, Object> para);
+	
 	/**
 	* @Author yangjf25257
 	* @MethodName update_cysl
