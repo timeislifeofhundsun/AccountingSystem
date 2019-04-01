@@ -61,8 +61,16 @@ public class TjjSgqrController {
 			return "更新持仓表时出错";
 		}
 		
-		//更新余额表（计算交易费用、计算证券 清算款、应付交易费用（佣金））
-		
+		//更新余额表（计算交易费用、计算证券清算款、应付交易费用（佣金））
+		TJyfl tjyfl = tjyflServiceImpl.selectByPrimaryKey(4101);
+		double jyfy = sgqr.getJsf()+sgqr.getZgf();
+		double yfjyfy = sgqr.getAmount()*tjyfl.getYj()-jyfy;
+		double zqqsk = sgqr.getAmount()+jyfy - yfjyfy;
+		try {
+			tjjsgqrServiceImpl.updateYe(jyfy,yfjyfy,zqqsk,sgqr.getZtbh());
+		} catch (Exception e) {
+			return e.getMessage();
+		}
 		
 		return String.valueOf(1);
 	}

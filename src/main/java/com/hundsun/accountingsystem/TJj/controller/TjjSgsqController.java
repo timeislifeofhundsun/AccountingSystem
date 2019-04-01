@@ -156,7 +156,7 @@ public class TjjSgsqController {
 		
 		TCcyeb tzqqsk = new TCcyeb();
 		tzqqsk.setKjkmdm("1133");
-		tzqqsk.setExtenda("证券清算款");
+		tzqqsk.setExtenda("证券清算款_基金");
 		tzqqsk.setZqcb(zqqsk);
 		tzqqsk.setZtbh(ztbh);
 		tzqqsk.setFsrq(rq);

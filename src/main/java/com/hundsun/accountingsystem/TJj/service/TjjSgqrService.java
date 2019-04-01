@@ -11,4 +11,7 @@ public interface TjjSgqrService {
 
 	void updateTccyeb(TCcyeb tccyeb);
 
+	void updateYe(double jyfy, double yfjyfy, double zqqsk,int ztbh)throws Exception;
+
+
 }
