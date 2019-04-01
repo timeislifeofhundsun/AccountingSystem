@@ -69,7 +69,11 @@ public class XgQsbServiceImpl implements XgQsbService {
 
         try {
             System.out.println(path);
-            list = fileParsing.ReadXGDBf(path);
+            if (path.contains("SJSFX")){
+                list = fileParsing.ReadSJSFX(path);
+            } else {
+                list = fileParsing.ReadXGDBf(path);
+            }
             if (list == null || list.size()==0){
                 return "无新股数据";
             }
@@ -120,7 +124,7 @@ public class XgQsbServiceImpl implements XgQsbService {
                     tCcyeb_zqjs = tCcyebMapper.selectTCcyeb(assist_ccye).get(0);//存放数据
                     System.out.println(tCcyeb_zqjs.toString());
                 }
-                tQsbMapper.deleteTQsb(assist_zqjs);//新股缴款去重
+                tQsbMapper.deleteTQsb(assist_zqjs);//新股中签交收去重
 
                 //新股中签去重
                 int y = tQsbMapper.deleteTQsb(assist);
@@ -306,7 +310,11 @@ public class XgQsbServiceImpl implements XgQsbService {
 
         List<String> list = null;
         try {
-            list = FileParsing.ReadZQBDDbf(path);
+            if (path.contains("SJSJG")){
+                list = FileParsing.ReadSJSJG(path);
+            } else {
+                list = FileParsing.ReadZQBDDbf(path);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -323,6 +331,8 @@ public class XgQsbServiceImpl implements XgQsbService {
         //2、根据账套编号和证券代码去持仓表中查询数据
         TCcyeb tCcyeb = new TCcyeb();
         tCcyeb.setZqdm(list.get(2));
+        System.out.println(tGdxxb.toString());
+        System.out.println("---------------------------------");
         tCcyeb.setZtbh(tGdxxb_sclt.getZtbh());
         TCcyeb tCcyeb_sclt = tCcyebMapper.selectTCcyebByObj(tCcyeb);//后面存入清算库中需要
         System.out.println(tCcyeb_sclt);
@@ -361,6 +371,6 @@ public class XgQsbServiceImpl implements XgQsbService {
         insert_xg_qsk(path_xg_qsk,date);
         insert_sclt_qsk(path_sclt_qsk, date, ztbh);
         insert_gzzz_qsk(ztbh, date);
-      return "清算成功";
+        return "清算成功";
     }
 }

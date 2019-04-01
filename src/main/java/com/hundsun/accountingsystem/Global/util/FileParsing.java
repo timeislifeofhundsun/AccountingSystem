@@ -238,7 +238,7 @@ public class FileParsing {
   * @MethodName ReadZQBDDbf
    * @Param [path]
    * @Return java.util.List<com.hundsun.accountingsystem.Global.bean.TGhk>
-   * @Description 读取ZQBD文件
+   * @Description 读取ZQBD文件,新股流通
    *
    * 1、判断是否为新股
    * 2、根据席位编号和股东代码去股东信息表中查账套编号
@@ -298,7 +298,7 @@ public class FileParsing {
   * @MethodName ReadSJSFX
    * @Param [path]
    * @Return java.util.List<com.hundsun.accountingsystem.Global.bean.TQsb>
-   * @Description 读取SJSF文件
+   * @Description 读取SJSF文件，深交所新股中签
    **/
   public List<TQsb> ReadSJSFX(String path)throws IOException {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -328,29 +328,46 @@ public class FileParsing {
       while ((rowValues = reader.nextRecord()) != null) {
 
         if (rowValues[4].toString().contains("FXA3")){//判断是否是中签认购
-          tQsb =  new TQsb();
-          //根据股东代码和席位编号获取账套编号
-          TGdxxb tGdxxb_s = new TGdxxb();
-          tGdxxb_s.setXwbh(rowValues[17].toString().trim());
-          tGdxxb_s.setGddm(rowValues[22].toString().trim());
-          System.out.println(tGdxxbMapper);
-          TGdxxb tGdxxb = tGdxxbMapper.selectByGddmAndXwbh(tGdxxb_s);
+                tQsb =  new TQsb();
+                //根据股东代码和席位编号获取账套编号
+                TGdxxb tGdxxb_s = new TGdxxb();
+                tGdxxb_s.setXwbh(rowValues[1].toString().trim());
+                tGdxxb_s.setGddm("B001999711");
+                TGdxxb tGdxxb = tGdxxbMapper.selectByGddmAndXwbh(tGdxxb_s);
 
-          if (tGdxxb == null){
-            return null;
-          }
-          //去掉负号
-          String temp = rowValues[36].toString().trim().substring(1);
-          String temp1 = rowValues[45].toString().trim().substring(1);
-//        //去掉小数点2
-          tQsb.setZtbh(tGdxxb.getZtbh()).setRq(sdf.parse(rowValues[12].toString())).setZqcode(rowValues[24].toString()).setYwlb(1302)
-                  .setBs(rowValues[29].toString().trim()).setQuantity(Integer.valueOf(rowValues[31].toString().trim())).setAmount(Double.valueOf(temp))
-                  .setYhs(Double.valueOf(rowValues[37].toString())).setJsf(Double.valueOf(rowValues[38].toString())).setGhf(Double.valueOf(rowValues[39].toString()))
-                  .setZgf(Double.valueOf(rowValues[40].toString())).setYj(Double.valueOf(rowValues[41].toString())).setCost(Double.valueOf(temp1))
-                  .setExtenda(rowValues[13].toString().trim()).setExtendb(rowValues[11].toString().trim());
-          list.add(tQsb);
-        } else {
-          return null;
+                if (tGdxxb == null){
+                  return null;
+                }
+                //去掉负号
+                int temp = Integer.valueOf(rowValues[7].toString().trim().substring(0,rowValues[7].toString().length() - 2));
+                Double temp1 = Double.valueOf(rowValues[8].toString().trim());
+                Double amount = temp1 * temp;
+                String extenda = sdf.format(DateFormatUtil.getNextWorkDay(DateFormatUtil.getNextWorkDay(sdf.parse(rowValues[10].toString()))));
+      //        //去掉小数点2
+                tQsb.setZtbh(tGdxxb.getZtbh()).setRq(sdf.parse(rowValues[10].toString())).setZqcode(rowValues[2].toString()).setYwlb(1302)
+                        .setBs("B").setQuantity(temp).setAmount(amount)
+                        .setExtenda(extenda);
+                list.add(tQsb);
+        } else if (rowValues[4].toString().trim().contains("FXA5")){
+                tQsb =  new TQsb();
+                //根据股东代码和席位编号获取账套编号
+                TGdxxb tGdxxb_s = new TGdxxb();
+                tGdxxb_s.setXwbh(rowValues[1].toString().trim());
+                tGdxxb_s.setGddm("B001999711");
+                TGdxxb tGdxxb = tGdxxbMapper.selectByGddmAndXwbh(tGdxxb_s);
+
+                if (tGdxxb == null){
+                  return null;
+                }
+                //去掉负号
+              int temp = Integer.valueOf(rowValues[7].toString().trim().substring(0,rowValues[7].toString().length() - 2));
+                Double temp1 = Double.valueOf(rowValues[8].toString().trim());
+                Double amount = temp1 * temp;
+      //        //去掉小数点2
+                tQsb.setZtbh(tGdxxb.getZtbh()).setRq(DateFormatUtil.getLastWorkDay(DateFormatUtil.getLastWorkDay(sdf.parse(rowValues[10].toString())))).setZqcode(rowValues[2].toString()).setYwlb(1302)
+                        .setBs("B").setQuantity(temp).setAmount(amount)
+                        .setExtenda(rowValues[10].toString().trim());
+                list.add(tQsb);
         }
 
       }
@@ -365,4 +382,60 @@ public class FileParsing {
     }
     return list;
   }
+
+  /**
+  * @Author yangjf25257
+  * @MethodName ReadSJSJG
+   * @Param [path]
+   * @Return java.util.List<java.lang.String>
+   * @Description 深交所新股流通
+   **/
+  public static List<String> ReadSJSJG(String path)throws IOException {
+    List<String> list = new ArrayList<String>();
+    String time = null;
+    InputStream fis = null;
+    int n = 0;
+
+    try {
+      fis = new FileInputStream(path);
+      DBFReader reader = new DBFReader(fis);
+      reader.setCharactersetName("GBK");
+      DBFHeader dbfHeader = reader.header;
+      for (DBFField dbfField:dbfHeader.fieldArray) {
+        byte[] fieldName = dbfField.fieldName;
+        for (int i =0;i < fieldName.length;i++){
+          if (fieldName[i]==0){
+            n=i;
+            break;
+          }
+        }
+        byte[] dest = new byte[n];
+        System.arraycopy(fieldName, 0, dest, 0, n);
+        String s = new String(dest);
+      }
+      Object[] rowValues;
+      while ((rowValues = reader.nextRecord()) != null) {
+        if (rowValues[1].toString().contains("B001999711")){
+          list.add(rowValues[1].toString().trim());//股东代码
+          list.add(rowValues[6].toString().trim());//席位编号
+          list.add(rowValues[4].toString().trim());//证券代码
+          list.add(rowValues[37].toString().trim());//时间
+        }else {
+          return null;
+        }
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        fis.close();
+      } catch (Exception e) {
+      }
+    }
+    return list;
+  }
+
 }
+
+
