@@ -116,7 +116,7 @@ public class TjjShqrServiceImpl implements TjjShqrService {
 		//同步更新到余额表中（计算证券清算款、计算交易费用、计算投资收益、应付交易费用）
 		boolean flag3 = updateYe(tccyebSh);
 		if(!flag3) {
-			throw new Exception("更新余额表时出错");
+			throw new Exception("更新余额表时出错,请检查当天的行情信息是否已经存在");
 		}
 		
 	}
