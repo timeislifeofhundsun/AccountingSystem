@@ -46,6 +46,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 		Assist assist = new Assist();
 		assist.setRequires(Assist.andEq("ztbh", ztbh));
 		assist.setRequires(Assist.andEq("rq", date));
+		assist.setRequires(Assist.andEq("extende", "1004"));
 		tpzbMapper.deleteTPzb(assist);
 		
 		//货币基金申购申请的凭证生成，ywlb=4101
@@ -121,6 +122,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getZqqsk());
 				tpzb2.setExtendf("4206");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);
 				
 				TPzb tpzb = new TPzb();
@@ -133,6 +135,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getZqqsk());
 				tpzb.setExtendf("4206");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);				
 			}
 			
@@ -184,6 +187,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getZqqsk());
 				tpzb2.setExtendf("4106");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);
 				
 				TPzb tpzb = new TPzb();
@@ -196,6 +200,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getZqqsk());
 				tpzb.setExtendf("4106");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);				
 			}
 			
@@ -252,6 +257,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getZqqsk());
 				tpzb.setExtendf("4205");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);
 				
 				TPzb tpzb2 = new TPzb();
@@ -264,6 +270,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getJsf()+tQsb.getZgf());
 				tpzb2.setExtendf("4205");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);
 				
 				TPzb tpzb3 = new TPzb();
@@ -276,6 +283,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb3.setJe(tQsb.getAmount());
 				tpzb3.setExtendf("4205");
 				tpzb3.setPzid(id);
+				tpzb3.setExtende("1004");
 				pzList.add(tpzb3);
 				
 				TPzb tpzb4 = new TPzb();
@@ -288,6 +296,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb4.setJe(tQsb.getGyjzbd());
 				tpzb4.setExtendf("4205");
 				tpzb4.setPzid(id);
+				tpzb4.setExtende("1004");
 				pzList.add(tpzb4);
 				
 				TPzb tpzb5 = new TPzb();
@@ -300,6 +309,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb5.setJe(tQsb.getYj());
 				tpzb5.setExtendf("4205");
 				tpzb5.setPzid(id);
+				tpzb5.setExtende("1004");
 				pzList.add(tpzb5);
 				
 				double tzsy=(tQsb.getZqqsk()+tQsb.getZgf()+tQsb.getJsf())-(
@@ -314,6 +324,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb6.setJe(tzsy);
 				tpzb6.setExtendf("4205");
 				tpzb6.setPzid(id);
+				tpzb6.setExtende("1004");
 				pzList.add(tpzb6);
 				
 			}
@@ -370,6 +381,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getZqqsk());
 				tpzb.setExtendf("4105");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);
 				
 				TPzb tpzb2 = new TPzb();
@@ -382,6 +394,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getJsf()+tQsb.getZgf());
 				tpzb2.setExtendf("4105");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);
 				
 				TPzb tpzb3 = new TPzb();
@@ -394,6 +407,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb3.setJe(tQsb.getAmount());
 				tpzb3.setExtendf("4105");
 				tpzb3.setPzid(id);
+				tpzb3.setExtende("1004");
 				pzList.add(tpzb3);
 				
 				TPzb tpzb4 = new TPzb();
@@ -406,6 +420,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb4.setJe(tQsb.getGyjzbd());
 				tpzb4.setExtendf("4105");
 				tpzb4.setPzid(id);
+				tpzb4.setExtende("1004");
 				pzList.add(tpzb4);
 				
 				TPzb tpzb5 = new TPzb();
@@ -418,6 +433,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb5.setJe(tQsb.getYj());
 				tpzb5.setExtendf("4105");
 				tpzb5.setPzid(id);
+				tpzb5.setExtende("1004");
 				pzList.add(tpzb5);
 				
 				double tzsy=(tQsb.getZqqsk()+tQsb.getZgf()+tQsb.getJsf())-(
@@ -432,6 +448,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb6.setJe(tzsy);
 				tpzb6.setExtendf("4105");
 				tpzb6.setPzid(id);
+				tpzb6.setExtende("1004");
 				pzList.add(tpzb6);
 				
 			}
@@ -485,6 +502,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getGyjzbd());
 				tpzb.setExtendf("4203");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);
 				
 				TPzb tpzb2 = new TPzb();
@@ -497,6 +515,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getGyjzbd());
 				tpzb2.setExtendf("4203");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);				
 			}
 			
@@ -548,6 +567,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getGyjzbd());
 				tpzb.setExtendf("4103");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);
 				
 				TPzb tpzb2 = new TPzb();
@@ -560,6 +580,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getGyjzbd());
 				tpzb2.setExtendf("4103");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);				
 			}
 			
@@ -613,6 +634,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getAmount());
 				tpzb.setExtendf("4202");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);
 				
 				TPzb tpzb2 = new TPzb();
@@ -625,6 +647,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getJsf()+tQsb.getZgf());
 				tpzb2.setExtendf("4202");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);
 				
 				TPzb tpzb3 = new TPzb();
@@ -637,6 +660,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb3.setJe(tQsb.getZqqsk());
 				tpzb3.setExtendf("4202");
 				tpzb3.setPzid(id);
+				tpzb3.setExtende("1004");
 				pzList.add(tpzb3);
 				
 				TPzb tpzb4 = new TPzb();
@@ -649,6 +673,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb4.setJe(tQsb.getYj());
 				tpzb4.setExtendf("4202");
 				tpzb4.setPzid(id);
+				tpzb4.setExtende("1004");
 				pzList.add(tpzb4);
 				
 			}
@@ -702,6 +727,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getAmount());
 				tpzb.setExtendf("4102");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);
 				
 				TPzb tpzb2 = new TPzb();
@@ -714,6 +740,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getJsf()+tQsb.getZgf());
 				tpzb2.setExtendf("4102");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);
 				
 				TPzb tpzb3 = new TPzb();
@@ -726,6 +753,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb3.setJe(tQsb.getZqqsk());
 				tpzb3.setExtendf("4102");
 				tpzb3.setPzid(id);
+				tpzb3.setExtende("1004");
 				pzList.add(tpzb3);
 				
 				TPzb tpzb4 = new TPzb();
@@ -738,6 +766,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb4.setJe(tQsb.getYj());
 				tpzb4.setExtendf("4102");
 				tpzb4.setPzid(id);
+				tpzb4.setExtende("1004");
 				pzList.add(tpzb4);
 				
 			}
@@ -792,6 +821,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getAmount());
 				tpzb.setExtendf("4201");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);
 				
 				TPzb tpzb2 = new TPzb();
@@ -804,6 +834,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getAmount());
 				tpzb2.setExtendf("4201");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);				
 			}
 			
@@ -855,6 +886,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb.setJe(tQsb.getAmount());
 				tpzb.setExtendf("4101");
 				tpzb.setPzid(id);
+				tpzb.setExtende("1004");
 				pzList.add(tpzb);
 				
 				TPzb tpzb2 = new TPzb();
@@ -867,6 +899,7 @@ public class TjjScpzServiceImpl implements TjjScpzService {
 				tpzb2.setJe(tQsb.getAmount());
 				tpzb2.setExtendf("4101");
 				tpzb2.setPzid(id);
+				tpzb2.setExtende("1004");
 				pzList.add(tpzb2);				
 			}
 			
