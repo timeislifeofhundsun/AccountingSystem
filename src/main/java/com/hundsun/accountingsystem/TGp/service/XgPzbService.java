@@ -1,8 +1,8 @@
 package com.hundsun.accountingsystem.TGp.service;
 
 import com.hundsun.accountingsystem.Global.bean.TPzb;
-import com.hundsun.accountingsystem.Global.bean.TQsb;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,6 +13,7 @@ import java.util.List;
  * @Description
  **/
 public interface XgPzbService {
-    List<TPzb> get_pz(TQsb tQsb);
+    boolean insert_pz(int ztbh, Date rq);
+    List<TPzb> get_pz(int ztbh, Date rq);
 
 }

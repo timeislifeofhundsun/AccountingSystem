@@ -78,11 +78,10 @@ public class AccountingSystemApplicationTests {
 	}
 
 	@Test
-	public void xg_wx() throws ParseException {
+	public void xg_wx() throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		TQsb tQsb = new TQsb();
-		tQsb.setZtbh(10004).setRq(sdf.parse("20180531"));
-		xgPzController.get_pz(tQsb);
+		xgPzController.insert_pz(10004,sdf.parse("20180531"));
+		xgPzController.get_pz(10004,sdf.parse("20180531"));
 	}
 
 }

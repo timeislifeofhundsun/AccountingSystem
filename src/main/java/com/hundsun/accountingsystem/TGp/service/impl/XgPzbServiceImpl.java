@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,19 +40,35 @@ public class XgPzbServiceImpl implements XgPzbService {
     /**
     * @Author yangjf25257
     * @MethodName get_pz
+     * @Param [ztbh, rq]
+     * @Return java.util.List<com.hundsun.accountingsystem.Global.bean.TPzb>
+     * @Description 获取所有凭证
+     **/
+    @Override
+    public List<TPzb> get_pz(int ztbh, Date rq) {
+        //查询条件
+        Assist assist = new Assist();
+        assist.setRequires(Assist.andEq("rq",rq));
+        assist.setRequires(Assist.andEq("ztbh",ztbh));
+        return tPzbMapper.selectTPzb(assist);
+    }
+
+    /**
+    * @Author yangjf25257
+    * @MethodName get_pz
      * @Param [tQsb]
      * @Return java.util.List<com.hundsun.accountingsystem.Global.bean.TPzb>
      * @Description 凭证Service层
      **/
     @Override
-    public List<TPzb> get_pz(TQsb tQsb) {
+    public boolean insert_pz(int ztbh, Date rq) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
         //查询条件
         Assist assist = new Assist();
-        assist.setRequires(Assist.andEq("rq",tQsb.getRq()));
-        assist.setRequires(Assist.andEq("ztbh",tQsb.getZtbh()));
+        assist.setRequires(Assist.andEq("rq",rq));
+        assist.setRequires(Assist.andEq("ztbh",ztbh));
 
         tPzbMapper.deleteTPzb(assist);//凭证库去重
         List<TQsb> tQsbs_list = tQsbMapper.selectTQsb(assist);//从清算库中获取数据
@@ -174,8 +191,9 @@ public class XgPzbServiceImpl implements XgPzbService {
             }
         }
 
-        return tPzbMapper.selectTPzb(assist);
+        return true;
     }
+
 
     //网下中签
     private int insert_pz_1309(TPzb tPzb){
