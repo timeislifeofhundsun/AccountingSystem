@@ -4,6 +4,7 @@ import com.hundsun.accountingsystem.Global.bean.TQsb;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Aurhor yangjf25257
@@ -16,4 +17,5 @@ public interface XgQsbService {
     String  xgqs(String path_xg_qsk, String path_sclt_qsk, int ztbh, Date date) throws ParseException;
     String xg_wx(TQsb tQsb);
     String sclt_wx(TQsb tQsb);
+    List<TQsb> get_yels(TQsb tQsb);
 }

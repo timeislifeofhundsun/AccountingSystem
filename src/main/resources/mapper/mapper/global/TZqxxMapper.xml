@@ -19,6 +19,11 @@
     <result column="fxfs" property="fxfs" jdbcType="INTEGER" />
     <result column="fxjg" property="fxjg" jdbcType="DOUBLE" />
   </resultMap>
+
+  <select id="selectByZqdm" parameterType="java.lang.String" resultType="com.hundsun.accountingsystem.Global.bean.TZqxx">
+      select * from t_zqxx where zqdm = #{zqdm,jdbcType=VARCHAR}
+  </select>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

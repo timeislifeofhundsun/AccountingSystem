@@ -10,6 +10,7 @@ import com.hundsun.accountingsystem.Global.mapper.TGhkMapper;
 import com.hundsun.accountingsystem.Global.mapper.TJyflMapper;
 import com.hundsun.accountingsystem.Global.service.TGhkService;
 import com.hundsun.accountingsystem.TGp.controller.TQskController;
+import com.hundsun.accountingsystem.TGp.controller.XGPzController;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
 import com.hundsun.accountingsystem.TGp.service.XgQsbService;
 import com.hundsun.accountingsystem.TGp.service.impl.XgQsbServiceImpl;
@@ -29,6 +30,9 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AccountingSystemApplicationTests {
+
+	@Autowired
+	XGPzController xgPzController;
 
 	@Autowired
 	TQskController tQskController;
@@ -77,12 +81,8 @@ public class AccountingSystemApplicationTests {
 	public void xg_wx() throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		TQsb tQsb = new TQsb();
-		tQsb.setZtbh(10004).setRq(sdf.parse("20180531")).setZqcode("600570").setExtendc("55").setQuantity(10000);
-		//tQskController.xg_wx(tQsb);
-		TQsb tQsb_sclt = new TQsb();
-		tQsb_sclt.setZtbh(10004).setRq(sdf.parse("20180607")).setZqcode("600570").setExtendc("55").setQuantity(10000);
-		tQskController.sclt_wx(tQsb_sclt);
-		//xgQsbService.xgqs(null,null,10004,sdf.parse("20180601"));
+		tQsb.setZtbh(10004).setRq(sdf.parse("20180531"));
+		xgPzController.get_pz(tQsb);
 	}
 
 }

@@ -369,9 +369,9 @@ public class XgQsbServiceImpl implements XgQsbService {
      **/
     @Override
     public String xgqs(String path_xg_qsk, String path_sclt_qsk, int ztbh, Date date) throws ParseException {
-        insert_xg_qsk(path_xg_qsk,date);
+       // insert_xg_qsk(path_xg_qsk,date);
         insert_sclt_qsk(path_sclt_qsk, date, ztbh);
-        insert_gzzz_qsk(ztbh, date);
+       // insert_gzzz_qsk(ztbh, date);
          return "清算成功";
     }
 
@@ -474,6 +474,22 @@ public class XgQsbServiceImpl implements XgQsbService {
         tCcyebMapper.update_ltlx(tCcyeb_hf);
 
         return "上市流通成功";
+    }
+
+    /**
+    * @Author yangjf25257
+    * @MethodName get_yels
+     * @Param [tQsb]
+     * @Return java.util.List<com.hundsun.accountingsystem.Global.bean.TQsb>
+     * @Description 获取业务流水Service层
+     **/
+    @Override
+    public List<TQsb> get_yels(TQsb tQsb) {
+        Assist assist = new Assist();
+        assist.setRequires(Assist.andEq("rq",tQsb.getRq()));
+        assist.setRequires(Assist.andEq("ywlb",tQsb.getYwlb()));
+        assist.setRequires(Assist.andEq("ztbh",tQsb.getZtbh()));
+        return tQsbMapper.selectTQsb(assist);
     }
 
 

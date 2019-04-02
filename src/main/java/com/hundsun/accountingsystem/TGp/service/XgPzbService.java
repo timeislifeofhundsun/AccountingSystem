@@ -1,5 +1,10 @@
 package com.hundsun.accountingsystem.TGp.service;
 
+import com.hundsun.accountingsystem.Global.bean.TPzb;
+import com.hundsun.accountingsystem.Global.bean.TQsb;
+
+import java.util.List;
+
 /**
  * @Aurhor yangjf25257
  * @ClassName XgPzbService
@@ -8,5 +13,6 @@ package com.hundsun.accountingsystem.TGp.service;
  * @Description
  **/
 public interface XgPzbService {
-    int get(int i);
+    List<TPzb> get_pz(TQsb tQsb);
+
 }

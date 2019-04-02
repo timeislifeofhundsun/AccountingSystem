@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TZqxxMapper {
+
+    TZqxx selectByZqdm(String zqdm);
+
     int countByExample(TZqxxExample example);
 
     int deleteByExample(TZqxxExample example);
