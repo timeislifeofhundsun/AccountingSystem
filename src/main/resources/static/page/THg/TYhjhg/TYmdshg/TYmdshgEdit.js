@@ -235,6 +235,16 @@ layui.use(['form', 'layer', 'laydate'], function () {
                         //刷新父页面
                         parent.location.reload();
                     }, 500);
+                } else if (obj == 101) {
+                    top.layer.msg("银行存款不足！");
+                } else if (obj == 102) {
+                    top.layer.msg("数据处理失败！");
+                } else if (obj == 103) {
+                    top.layer.msg("金额扣款或增额失败！");
+                } else if (obj == 104) {
+                    top.layer.msg("数据库没有数据！");
+                } else {
+                    top.layer.msg("操作失败，请稍后再试！");
                 }
             }
         });

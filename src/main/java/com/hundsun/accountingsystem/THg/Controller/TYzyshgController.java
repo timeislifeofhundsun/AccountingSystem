@@ -85,7 +85,7 @@ public class TYzyshgController {
       //设置业务类别
       tQsb.setYwlb(3103);
       //融资   银行存款增加金额
-      money = tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf();
+      money = tQsb.getAmount();//- tQsb.getJsf() - tQsb.getGhf()
       ccyeb.setZqcb(ccyeb.getZqcb() + money);
       yebd = tCcyebMapper.updateTCcyebById(ccyeb);
     } else {
@@ -95,20 +95,20 @@ public class TYzyshgController {
       if (ccyeb.getZqcb() < tQsb.getAmount()) {
         return "101";//101表示银行存款不足
       } else {
-        money = tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf();
+        money = tQsb.getAmount() ;//+ tQsb.getJsf() + tQsb.getGhf()
         ccyeb.setZqcb(ccyeb.getZqcb() - money);
         yebd = tCcyebMapper.updateTCcyebById(ccyeb);
       }
     }
-    //余额表变动
+    //其他科目变动
     //获取应收利息科目值
     TCcyeb Obj1 = new TCcyeb();
     Obj1.setKjkmdm("6142");
     Obj1.setZtbh(tQsb.getZtbh());
     TCcyeb tCcyeb1 = tCcyebMapper.selectTCcyebByObj(Obj1);
-    //获取证券清算款科目值
+    //获取回购清算款科目值
     TCcyeb Obj2 = new TCcyeb();
-    Obj2.setKjkmdm("1132");
+    Obj2.setKjkmdm("1232");
     Obj2.setZtbh(tQsb.getZtbh());
     TCcyeb tCcyeb2 = tCcyebMapper.selectTCcyebByObj(Obj2);
     //获取应付交易费用科目值
@@ -138,14 +138,14 @@ public class TYzyshgController {
       }
       tCcyebMapper.updateTCcyebById(tCcyeb1);
     }
-    //证券清算款 如果没有科目则插入科目      融资：证券清算款（减少） 融券：证券清算款（增加）
+    //回购清算款 如果没有科目则插入科目      融资：证券清算款（减少） 融券：证券清算款（增加）
     if (tCcyeb2 == null) {
       if (tQsb.getBs().equals("B")) {
         Obj2.setZqcb(-(tQsb.getAmount() - tQsb.getGhf() - tQsb.getJsf()));
       } else {
         Obj2.setZqcb(tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf());
       }
-      Obj2.setExtenda("证券清算款-回购");
+      Obj2.setExtenda("回购清算款");
       tCcyebMapper.insertTCcyeb(Obj2);
     } else {
       if (tQsb.getBs().equals("B")) {
@@ -195,7 +195,7 @@ public class TYzyshgController {
       tCcyeb.setExtendc(String.valueOf(tQsb.getId()));
       tCcyeb.setLjjx((tQsb.getYhs() - tQsb.getAmount()));
       tCcyeb.setFsrq(DateFormatUtil.getDateByString(tQsb.getExtenda()));
-      tCcyeb.setExtenda("31");
+      tCcyeb.setExtenda("3101");
       tCcyeb.setExtendb(tQsb.getExtendb());
       i1 = tCcyebMapper.insertTCcyeb(tCcyeb);
     }
@@ -236,10 +236,8 @@ public class TYzyshgController {
       if (ccyeb.getZqcb() < tQsbd.getAmount()) {
         return "101";//101表示银行存款不足
       } else {
-        money = tQsbd.getAmount() - tQsbd.getJsf() - tQsbd.getGhf();
-        System.out.println("money" + money);
-        money1 = tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf();
-        System.out.println("money1" + money1);
+        money = tQsbd.getAmount() ;//- tQsbd.getJsf() - tQsbd.getGhf()
+        money1 = tQsb.getAmount() ;//- tQsb.getJsf() - tQsb.getGhf()
         if (money > money1) {
           //修改后的融资金额小  则数据库 银行存款相应地减少差额即可
           ccyeb.setZqcb(ccyeb.getZqcb() - (money - money1));
@@ -251,8 +249,8 @@ public class TYzyshgController {
       }
     } else {
       //融券修改==修改减少的融券金额
-      money = tQsbd.getAmount() + tQsbd.getJsf() + tQsbd.getGhf();
-      money1 = tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf();
+      money = tQsbd.getAmount() ;//+ tQsbd.getJsf() + tQsbd.getGhf()
+      money1 = tQsb.getAmount() ;//+ tQsb.getJsf() + tQsb.getGhf()
       if (money > money1) {
         //修改后的融券金额小  则数据库 银行存款相应地增加差额即可
         ccyeb.setZqcb(ccyeb.getZqcb() + (money - money1));
@@ -271,9 +269,9 @@ public class TYzyshgController {
     Obj1.setKjkmdm("6142");
     Obj1.setZtbh(tQsb.getZtbh());
     TCcyeb tCcyeb1 = tCcyebMapper.selectTCcyebByObj(Obj1);
-    //获取证券清算款科目值
+    //获取回购清算款科目值
     TCcyeb Obj2 = new TCcyeb();
-    Obj2.setKjkmdm("1132");
+    Obj2.setKjkmdm("1232");
     Obj2.setZtbh(tQsb.getZtbh());
     TCcyeb tCcyeb2 = tCcyebMapper.selectTCcyebByObj(Obj2);
     //获取应付交易费用科目值
@@ -307,7 +305,7 @@ public class TYzyshgController {
       }
     }
     tCcyebMapper.updateTCcyebById(tCcyeb1);
-    //证券清算款      融资：修改值变小 应加上差值 融券：修改后值变小 应减少差值
+    //回购清算款      融资：修改值变小 应加上差值 融券：修改后值变小 应减少差值
     if (tQsb.getBs().equals("B")) {
       if (tQsbd.getBs().equals("B")) {
         before = tQsbd.getAmount() - tQsbd.getGhf() - tQsbd.getJsf();
@@ -404,13 +402,13 @@ public class TYzyshgController {
       if (ccyeb.getZqcb() < tQsb.getAmount()) {
         return "101";//101表示银行存款不足
       } else {
-        money = tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf();
+        money = tQsb.getAmount(); //- tQsb.getJsf() - tQsb.getGhf()
         ccyeb.setZqcb(ccyeb.getZqcb() - money);
         yebd = tCcyebMapper.updateTCcyebById(ccyeb);
       }
     } else {
       //融券添加金额
-      money = tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf();
+      money = tQsb.getAmount(); // + tQsb.getJsf() + tQsb.getGhf()
       ccyeb.setZqcb(ccyeb.getZqcb() + money);
       yebd = tCcyebMapper.updateTCcyebById(ccyeb);
     }
@@ -423,9 +421,9 @@ public class TYzyshgController {
     Obj1.setKjkmdm("6142");
     Obj1.setZtbh(tQsb.getZtbh());
     TCcyeb tCcyeb1 = tCcyebMapper.selectTCcyebByObj(Obj1);
-    //获取证券清算款科目值
+    //获取回购清算款科目值
     TCcyeb Obj2 = new TCcyeb();
-    Obj2.setKjkmdm("1132");
+    Obj2.setKjkmdm("1232");
     Obj2.setZtbh(tQsb.getZtbh());
     TCcyeb tCcyeb2 = tCcyebMapper.selectTCcyebByObj(Obj2);
     //获取应付交易费用科目值
@@ -445,7 +443,7 @@ public class TYzyshgController {
       tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (tQsb.getYhs() - tQsb.getAmount()));
     }
     tCcyebMapper.updateTCcyebById(tCcyeb1);
-    //证券清算款  融资：证券清算款（删除时应加上减少值） 融券：证券清算款（删除时应减掉增加值）
+    //回购清算款  融资：证券清算款（删除时应加上减少值） 融券：证券清算款（删除时应减掉增加值）
     if (tQsb.getBs().equals("B")) {
       tCcyeb2.setZqcb(tCcyeb2.getZqcb() + (tQsb.getAmount() - tQsb.getGhf() - tQsb.getJsf()));
     } else {

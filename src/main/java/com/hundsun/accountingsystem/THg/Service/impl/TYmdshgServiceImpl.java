@@ -20,6 +20,7 @@ import java.util.List;
  * 功能说明:
  *
  * @author wanggk25832
+ * 银行买断式回购服务实现
  */
 @Service
 public class TYmdshgServiceImpl implements TYmdshgService {

@@ -16,6 +16,7 @@ import java.util.Date;
  * 功能说明:
  *
  * @author wanggk25832
+ * 回购清算服务接口
  */
 public interface HGQSService {
   public boolean hgqs(int ztbh,Date ywrq ) throws ParseException;

@@ -20,8 +20,8 @@ import java.util.List;
  * 功能说明:
  *
  * @author wanggk25832
+ * 银行买断式回购传输对象
  */
-
 @Data
 @ToString
 @NoArgsConstructor

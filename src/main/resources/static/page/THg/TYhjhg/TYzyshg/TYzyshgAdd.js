@@ -22,65 +22,70 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
         layedit = layui.layedit,
         laydate = layui.laydate,
         $ = layui.jquery;
-        //计算到期日期
-        function Addtime(day) {
-            var Holiday = ["2019/4/5", "2019/5/1", "2019/5/2", "2019/5/3", "2019/6/7", "2019/9/13",
-                "2019/10/1", "2019/10/2", "2019/10/3", "2019/10/4", "2019/10/7"
-            ];
-            var Workday = ["2019/4/28", "2019/5/5", "2019/9/29", "2019/10/12"];
-            var nowTime = new Date().getTime(); //当天的时间戳
-            var t, ymd, i = 0;
-            while (i != day) {
-                i++;
-                dayTime = i * 24 * 60 * 60 * 1000;
-                t = new Date(nowTime + dayTime);
-                var week = t.getDay();
-                var ymd = t.toLocaleDateString();
-                if ((week == 6 || week == 0) && $.inArray(ymd, Workday) != 0) {
-                    day++;
-                }else if ($.inArray(ymd, Workday)==0) {
-                }else if ($.inArray(ymd, Holiday) == 0) {
-                    day++;
-                }else{
-                }
+
+    //计算到期日期
+    function Addtime(day) {
+        var Holiday = ["2018/6/18", "2018/9/24", "2018/10/1", "2018/10/2", "2018/10/3",
+            "2018/10/4", "2018/10/5", "2018/12/31", "2019/1/1", "2019/2/4",
+            "2019/2/5", "2019/2/6", "2019/2/7", "2019/2/8", "2019/4/5",
+            "2019/5/1", "2019/5/2", "2019/5/3", "2019/6/7", "2019/9/13",
+            "2019/10/1", "2019/10/2", "2019/10/3", "2019/10/4", "2019/10/7"];
+        var Workday = ["2018/9/29", "2018/9/30", "2018/12/29", "2019/2/2", "2019/2/3",
+            "2019/4/28", "2019/5/5", "2019/9/29", "2019/10/12"];
+        var nowTime = new Date().getTime(); //当天的时间戳
+        var t, ymd, i = 0;
+        while (i != day) {
+            i++;
+            dayTime = i * 24 * 60 * 60 * 1000;
+            t = new Date(nowTime + dayTime);
+            var week = t.getDay();
+            var ymd = t.toLocaleDateString();
+            if ((week == 6 || week == 0) && $.inArray(ymd, Workday) != 0) {
+                day++;
+            } else if ($.inArray(ymd, Workday) == 0) {
+            } else if ($.inArray(ymd, Holiday) == 0) {
+                day++;
+            } else {
             }
-            return ymd;
         }
-    form.on("select", function(data){
-        if (data.elem.id=="zqcode") {
-            var text = this.innerText.substr(1,this.innerText.length-1);
-            var days = text.replace(/\b(0+)/gi,"");
+        return ymd;
+    }
+
+    form.on("select", function (data) {
+        if (data.elem.id == "zqcode") {
+            var text = this.innerText.substr(1, this.innerText.length - 1);
+            var days = text.replace(/\b(0+)/gi, "");
             $("#quantity").val(days);
-            $('#quantity').attr("disabled",true);
+            $('#quantity').attr("disabled", true);
             var myDate = new Date();
             var date = myDate.toLocaleDateString();
-            var re=new RegExp("/","g");
-            var newdate=date.replace(re,"-");
-            var dqdate=Addtime(days);
-            var newdqdate=dqdate.replace(re,"-");
+            var re = new RegExp("/", "g");
+            var newdate = date.replace(re, "-");
+            var dqdate = Addtime(days);
+            var newdqdate = dqdate.replace(re, "-");
             laydate.render({
                 elem: '#extenda',
                 format: 'yyyy-MM-dd',
-                value:newdate
+                value: newdate
             });
             $('#extenda').prop('disabled', true);
             laydate.render({
                 elem: '#extendb',
                 format: 'yyyy-MM-dd',
-                value:newdqdate
+                value: newdqdate
             });
             $('#extendb').prop('disabled', true);
             $("#sclb").val(3);
             $('#sclb').prop('disabled', true);
             form.render('select');
-        }else if (data.elem.id=="ztbh"){
+        } else if (data.elem.id == "ztbh") {
             $.ajax({
                 url: "/getByZtbh",
                 type: "GET",
-                data: {ztbh:data.value},
+                data: {ztbh: data.value},
                 success: function (data) {
                     for (var i = 0; i < data.length; i++) {
-                            $("#extendd").append("<option value='" + data[i].gddm + "'>" + data[i].gddm + "</option>");
+                        $("#extendd").append("<option value='" + data[i].gddm + "'>" + data[i].gddm + "</option>");
                     }
                     form.render('select');
                 }
@@ -120,25 +125,25 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
         }
     });
     $("#amount").change(function () {
-        if ($("#quantity").val()==""){
+        if ($("#quantity").val() == "") {
             $("#amount").val("");
             layer.msg('请选择回购品种', {
                 time: 1000, //20s后自动关闭
             });
-            return ;
-        }else{
-            var hglv,jylv,jslv;
+            return;
+        } else {
+            var hglv, jylv, jslv;
             $.ajax({
                 url: "/TLfjxb",
                 type: "GET",
                 success: function (data) {
                     hglv = data.hglv;
-                    var lxcount = Number($("#amount").val())*Number($("#quantity").val())*Number(hglv);
-                    $("#yhs").val((Number(($("#amount").val())*1)+(Number(lxcount))*1));
+                    var lxcount = Number($("#amount").val()) * Number($("#quantity").val()) * Number(hglv);
+                    $("#yhs").val((Number(($("#amount").val()) * 1) + (Number(lxcount)) * 1));
                     jylv = data.jylv;
                     jslv = data.jslv;
-                    $("#jsf").val(Number(($("#amount").val()))*Number(jslv));
-                    $("#ghf").val(Number(($("#amount").val()))*Number(jylv));
+                    $("#jsf").val(Number(($("#amount").val())) * Number(jslv));
+                    $("#ghf").val(Number(($("#amount").val())) * Number(jylv));
                     $('#ghf').prop('disabled', true);
                     $('#jsf').prop('disabled', true);
                 }
@@ -213,13 +218,16 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
                         //刷新父页面
                         parent.location.reload();
                     }, 500);
-                }else if (obj==101) {
-                    top.layer.msg("银行存款不足！请减少融券成交金额");
-                }else if (obj==102) {
-                    top.layer.msg("数据插入失败！请联系管理员");
-                }
-                else if (obj==103) {
-                    top.layer.msg("金额扣款或增额失败!请联系管理员");
+                } else if (obj == 101) {
+                    top.layer.msg("银行存款不足！");
+                } else if (obj == 102) {
+                    top.layer.msg("数据处理失败！");
+                } else if (obj == 103) {
+                    top.layer.msg("金额扣款或增额失败！");
+                } else if (obj == 104) {
+                    top.layer.msg("数据库没有数据！");
+                } else {
+                    top.layer.msg("操作失败，请稍后再试！");
                 }
             }
         });

@@ -20,6 +20,7 @@ import java.util.List;
  * 功能说明:
  *
  * @author wanggk25832
+ * 交易所质押式回购传输对象
  */
 @Data
 @ToString

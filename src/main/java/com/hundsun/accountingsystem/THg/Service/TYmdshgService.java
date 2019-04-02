@@ -16,6 +16,7 @@ import java.util.List;
  * 功能说明:
  *
  * @author wanggk25832
+ * 银行买断式回购服务接口
  */
 public interface TYmdshgService {
   TQsb selectTQsbById(Integer id);

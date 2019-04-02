@@ -15,6 +15,7 @@ $(function () {
         xhr.setRequestHeader(header, token);
     });
 })
+
 //获取父页面的传值
 function getValue(data) {
     layui.use(['form', 'layer', 'laydate'], function () {
@@ -23,49 +24,49 @@ function getValue(data) {
             laydate = layui.laydate,
             $ = layui.jquery;
         $.when($.ajax({
-            url: "/getTZtxxList",
-            type: "GET",
-            success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    $("#ztbh").append("<option value='" + data[i].ztbh + "'>" + data[i].name + "</option>");
-                }
-
-                form.render('select');
-            }
-        }),
-        $.ajax({
-            url: "/TZqxxList",
-            type: "GET",
-            success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].zqlb == 3 && data[i].sclb == 3) {
-                        $("#zqcode").append("<option value='" + data[i].zqdm + "'>" + data[i].zqjg + "</option>");
+                url: "/getTZtxxList",
+                type: "GET",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        $("#ztbh").append("<option value='" + data[i].ztbh + "'>" + data[i].name + "</option>");
                     }
+
+                    form.render('select');
                 }
-                form.render('select');
-            }
-        }),
-        $.ajax({
-            url: "/getByZtbh",
-            type: "GET",
-            data: {ztbh: data.ztbh},
-            success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    $("#extendd").append("<option value='" + data[i].gddm + "'>" + data[i].gddm + "</option>");
+            }),
+            $.ajax({
+                url: "/TZqxxList",
+                type: "GET",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].zqlb == 3 && data[i].sclb == 3) {
+                            $("#zqcode").append("<option value='" + data[i].zqdm + "'>" + data[i].zqjg + "</option>");
+                        }
+                    }
+                    form.render('select');
                 }
-                form.render('select');
-            }
-        })).then(function (){
+            }),
+            $.ajax({
+                url: "/getByZtbh",
+                type: "GET",
+                data: {ztbh: data.ztbh},
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        $("#extendd").append("<option value='" + data[i].gddm + "'>" + data[i].gddm + "</option>");
+                    }
+                    form.render('select');
+                }
+            })).then(function () {
             laydate.render({
                 elem: '#extenda',
                 format: 'yyyy-MM-dd',
-                value:data.extenda
+                value: data.extenda
             });
             $('#extenda').prop('disabled', true);
             laydate.render({
                 elem: '#extendb',
                 format: 'yyyy-MM-dd',
-                value:data.extendb
+                value: data.extendb
             });
             $('#extendb').prop('disabled', true);
             $("#id").val(data.id);
@@ -96,6 +97,7 @@ function getValue(data) {
         })
     });
 }
+
 layui.use(['form', 'layer', 'laydate'], function () {
     var form = layui.form;
     var layer = parent.layer === undefined ? layui.layer : top.layer;
@@ -192,6 +194,16 @@ layui.use(['form', 'layer', 'laydate'], function () {
                         //刷新父页面
                         parent.location.reload();
                     }, 500);
+                } else if (obj == 101) {
+                    top.layer.msg("银行存款不足！");
+                } else if (obj == 102) {
+                    top.layer.msg("数据处理失败！");
+                } else if (obj == 103) {
+                    top.layer.msg("金额扣款或增额失败！");
+                } else if (obj == 104) {
+                    top.layer.msg("数据库没有数据！");
+                } else {
+                    top.layer.msg("操作失败，请稍后再试！");
                 }
             }
         });

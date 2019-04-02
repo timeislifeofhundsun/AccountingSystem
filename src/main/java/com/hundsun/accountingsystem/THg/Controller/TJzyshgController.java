@@ -51,7 +51,7 @@ public class TJzyshgController {
     System.out.println(jsonString);
     return jsonString;
   }
-
+  //废弃
   @DeleteMapping("/TJzyshg")
   public String deleteTYzyshg(@RequestParam(value = "id",required = true)String id){
     int i = tJzyshgService.deleteTQsbById(Integer.valueOf(id));

@@ -57,7 +57,7 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
         id: "TYzyshgList",
         cols: [[
             {type: 'checkbox', fixed: 'left'},
-            {field: 'id', title: 'ID', align: "center",hide:true},
+            {field: 'id', title: 'ID', align: "center", hide: true},
             {field: 'ztbh', title: '账套编号', align: "center"},
             {field: 'zqcode', title: '回购代码', align: 'center'},
             {field: 'bs', title: '回购方向', align: 'center', templet: "#bs"},
@@ -170,8 +170,16 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
                             var type = "reload";
                             active[type] ? active[type].call(this) : '';
                             layer.close(index);
-                        }else{
-                            top.layer.msg("删除失败！");
+                        } else if (obj == 101) {
+                            top.layer.msg("银行存款不足！");
+                        } else if (obj == 102) {
+                            top.layer.msg("数据处理失败！");
+                        } else if (obj == 103) {
+                            top.layer.msg("金额扣款或增额失败！");
+                        } else if (obj == 104) {
+                            top.layer.msg("数据库没有数据！");
+                        } else {
+                            top.layer.msg("操作失败，请稍后再试！");
                         }
                     },
                 });
@@ -185,10 +193,10 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
     var $ = layui.$, active = {
         reload: function () {
             var reloaddate;
-            if (document.getElementById("ckrq").value==""){
-                reloaddate=newdate;
-            }else{
-                reloaddate=document.getElementById("ckrq").value;
+            if (document.getElementById("ckrq").value == "") {
+                reloaddate = newdate;
+            } else {
+                reloaddate = document.getElementById("ckrq").value;
             }
             console.log(reloaddate);
             //执行重载

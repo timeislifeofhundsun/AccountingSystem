@@ -20,15 +20,15 @@ import java.util.List;
  * 功能说明:
  *
  * @author wanggk25832
+ * 银行质押式回购传输对象
  */
-
-  @Data
-  @ToString
-  @NoArgsConstructor
-  @AllArgsConstructor
-  public class TYzyshgVO {
-    private int code;
-    private String msg;
-    private int count;
-    private List<TQsb> data;
-  }
+@Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class TYzyshgVO {
+  private int code;
+  private String msg;
+  private int count;
+  private List<TQsb> data;
+}
