@@ -12,6 +12,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TCcyebMapper{
 
+	//银行存款更新与恢复
+	int update_yhck(Double zqcb);
+
+	//证券清算款更新与恢复
+	int update_zqqsk(Double zqcb);
+
 	int update_ltlx_hf(TCcyeb tCcyeb);
 
 	/**

@@ -18,4 +18,5 @@ public interface XgQsbService {
     String xg_wx(TQsb tQsb);
     String sclt_wx(TQsb tQsb);
     List<TQsb> get_yels(TQsb tQsb);
+
 }

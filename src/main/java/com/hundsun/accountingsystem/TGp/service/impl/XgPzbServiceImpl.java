@@ -53,6 +53,13 @@ public class XgPzbServiceImpl implements XgPzbService {
         return tPzbMapper.selectTPzb(assist);
     }
 
+    @Override
+    public List<TPzb> get_bb(int ztbh) {
+        Assist assist = new Assist();
+        assist.setRequires(Assist.andEq("ztbh",ztbh));
+        return tPzbMapper.selectTPzb(assist);
+    }
+
     /**
     * @Author yangjf25257
     * @MethodName get_pz
@@ -65,7 +72,7 @@ public class XgPzbServiceImpl implements XgPzbService {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
-        //查询条件
+        //条件
         Assist assist = new Assist();
         assist.setRequires(Assist.andEq("rq",rq));
         assist.setRequires(Assist.andEq("ztbh",ztbh));

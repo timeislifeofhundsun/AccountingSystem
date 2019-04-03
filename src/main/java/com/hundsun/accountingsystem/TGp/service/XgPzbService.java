@@ -15,5 +15,6 @@ import java.util.List;
 public interface XgPzbService {
     boolean insert_pz(int ztbh, Date rq);
     List<TPzb> get_pz(int ztbh, Date rq);
+    List<TPzb> get_bb(int ztbh);
 
 }

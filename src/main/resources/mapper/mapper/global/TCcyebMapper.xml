@@ -18,6 +18,22 @@
         <result column="ljjx" property="ljjx" />
     </resultMap>
 
+    <!--银行存款更新与恢复 -->
+    <update id="update_yhck" parameterType="java.lang.Double">
+        update t_ccyeb
+        set
+       zqcb = #{zqcb} + zqcb
+        where  kjkmdm = 100201
+    </update>
+
+    <!--证券清算款更新与恢复 -->
+    <update id="update_zqqsk" parameterType="java.lang.Double">
+        update t_ccyeb
+        set
+        zqcb = #{zqcb} + zqcb
+        where  kjkmdm = 1131
+    </update>
+
     <select id="gpjyUpdateYe" parameterType="java.util.Map" statementType="CALLABLE">
         call gpjy_updateYe(#{ztbh},#{ywrq})
     </select>

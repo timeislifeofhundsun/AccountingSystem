@@ -68,7 +68,6 @@ public class XgQsbServiceImpl implements XgQsbService {
         String j = "持仓库未增加记录 ";//j代表持仓库数据操作
 
         try {
-            System.out.println(path);
             if (path.contains("SJSFX")){
                 list = fileParsing.ReadSJSFX(path);
             } else {
@@ -99,6 +98,10 @@ public class XgQsbServiceImpl implements XgQsbService {
                     if (tCcyebMapper.selectTCcyeb(assist1).size() != 0){//持仓库判空操作
                         int n = tQsbMap.getQuantity();
                         tCcyeb_update.setCysl(-n);
+                        //银行存款恢复，因为证券清算款变化为0，所以此处没有恢复的必要
+                        //如果证券清算款需要恢复，应去清算款中查中检和缴款的数据
+                        //最终的变化是银行存款变成了证券成本
+                        tCcyebMapper.update_yhck(tQsbMap.getAmount());
                         tCcyebMapper.update_cysl(tCcyeb_update);
                         jj = "持仓库恢复  ";
                         System.out.println("持仓库恢复");
@@ -140,6 +143,7 @@ public class XgQsbServiceImpl implements XgQsbService {
         //把数据插入清算库中和持仓库中
         if (list != null) {
             int x = tQsbMapper.insertTQsbByBatch(list);//当x = 1的插入成功
+            tCcyebMapper.update_zqqsk(- list.get(0).getAmount()); //证券清算款减少，证券成本增加
             if (x > 0){
                 ii = "清算库数据插入 ";
                 System.out.println("清算库数据插入");
@@ -168,6 +172,9 @@ public class XgQsbServiceImpl implements XgQsbService {
                 list.get(w).setRq(date_qsk);
                 list.get(w).setYwlb(1303);
                 list.get(w).setId(null);
+                //缴款的时候，证券清算款增加，银行存款减少
+                tCcyebMapper.update_zqqsk(list.get(w).getAmount());
+                tCcyebMapper.update_yhck(- list.get(w).getAmount());
                 tQsbMapper.insertTQsb(list.get(w));
                 if (tCcyeb_zqjs != null){
                     System.out.println(tCcyeb_zqjs.getFsrq());
@@ -403,6 +410,10 @@ public class XgQsbServiceImpl implements XgQsbService {
         int qsk_qc  = tQsbMapper.deleteTQsb(assist_qskqc);//中签去重
 
         if (qsk_qc != 0){
+            //银行存款恢复，因为证券清算款变化为0，所以此处没有恢复的必要
+            //如果证券清算款需要恢复，应去清算款中查中检和缴款的数据
+            //最终的变化是银行存款变成了证券成本
+            tCcyebMapper.update_yhck(tQsb_hf.getAmount());//银行存款恢复
             TCcyeb tCcyeb_hf = new TCcyeb();
             tCcyeb_hf.setCysl(- tQsb_hf.getQuantity());
             tCcyeb_hf.setZqdm(tQsb_hf.getZqcode());
@@ -415,9 +426,12 @@ public class XgQsbServiceImpl implements XgQsbService {
         tQsb.setBs("B");
         tQsb.setId(null);
         tQsbMapper.insertTQsb(tQsb);//中签流水放入清算库
+        tCcyebMapper.update_zqqsk(-tQsb.getAmount());//中签的时候证券清算款减少
         tQsb.setYwlb(1308);//业务类别为网下新股缴款
         tQsb.setId(null);
         int qckcr = tQsbMapper.insertTQsb(tQsb);//缴款流水放入清算库
+        tCcyebMapper.update_zqqsk(tQsb.getAmount());//缴款的时候证券清算款增加
+        tCcyebMapper.update_yhck(-tQsb.getAmount());
 
         //持仓库再次更新
         if (qckcr > 0){
