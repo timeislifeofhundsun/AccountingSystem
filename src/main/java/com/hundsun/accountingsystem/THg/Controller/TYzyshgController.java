@@ -95,7 +95,7 @@ public class TYzyshgController {
       if (ccyeb.getZqcb() < tQsb.getAmount()) {
         return "101";//101表示银行存款不足
       } else {
-        money = tQsb.getAmount() ;//+ tQsb.getJsf() + tQsb.getGhf()
+        money = tQsb.getAmount();//+ tQsb.getJsf() + tQsb.getGhf()
         ccyeb.setZqcb(ccyeb.getZqcb() - money);
         yebd = tCcyebMapper.updateTCcyebById(ccyeb);
       }
@@ -124,17 +124,17 @@ public class TYzyshgController {
     //应收利息   如果没有科目则插入科目      融资：付利息（应收利息减少，如果为负值 则表示应付利息） 融券：收利息（应收利息增加，如果为正值 表示应收利息）
     if (tCcyeb1 == null) {
       if (tQsb.getBs().equals("B")) {
-        Obj1.setZqcb(-(tQsb.getYhs() - tQsb.getAmount()));
+        Obj1.setZqcb(-(tQsb.getYhs() - tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf()));
       } else {
-        Obj1.setZqcb(tQsb.getYhs() - tQsb.getAmount());
+        Obj1.setZqcb(tQsb.getYhs() - tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf());
       }
       Obj1.setExtenda("应收利息-回购");
       tCcyebMapper.insertTCcyeb(Obj1);
     } else {
       if (tQsb.getBs().equals("B")) {
-        tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (tQsb.getYhs() - tQsb.getAmount()));
+        tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (tQsb.getYhs() - tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf()));
       } else {
-        tCcyeb1.setZqcb(tCcyeb1.getZqcb() + (tQsb.getYhs() - tQsb.getAmount()));
+        tCcyeb1.setZqcb(tCcyeb1.getZqcb() + (tQsb.getYhs() - tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf()));
       }
       tCcyebMapper.updateTCcyebById(tCcyeb1);
     }
@@ -167,17 +167,17 @@ public class TYzyshgController {
     //利息收入   如果没有科目则插入科目      融资：付出利息（利息收入减少，如果为负值 则表示利息支出） 融券：收入利息（利息收入增加，如果为正值 表示利息收入）
     if (tCcyeb4 == null) {
       if (tQsb.getBs().equals("B")) {
-        Obj4.setZqcb(-(tQsb.getYhs() - tQsb.getAmount()));
+        Obj4.setZqcb(-(tQsb.getYhs() - tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf()));
       } else {
-        Obj4.setZqcb(tQsb.getYhs() - tQsb.getAmount());
+        Obj4.setZqcb(tQsb.getYhs() - tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf());
       }
       Obj4.setExtenda("利息收入-回购");
       tCcyebMapper.insertTCcyeb(Obj4);
     } else {
       if (tQsb.getBs().equals("B")) {
-        tCcyeb4.setZqcb(tCcyeb4.getZqcb() - (tQsb.getYhs() - tQsb.getAmount()));
+        tCcyeb4.setZqcb(tCcyeb4.getZqcb() - (tQsb.getYhs() - tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf()));
       } else {
-        tCcyeb4.setZqcb(tCcyeb4.getZqcb() + (tQsb.getYhs() - tQsb.getAmount()));
+        tCcyeb4.setZqcb(tCcyeb4.getZqcb() + (tQsb.getYhs() - tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf()));
       }
       tCcyebMapper.updateTCcyebById(tCcyeb4);
     }
@@ -236,8 +236,8 @@ public class TYzyshgController {
       if (ccyeb.getZqcb() < tQsbd.getAmount()) {
         return "101";//101表示银行存款不足
       } else {
-        money = tQsbd.getAmount() ;//- tQsbd.getJsf() - tQsbd.getGhf()
-        money1 = tQsb.getAmount() ;//- tQsb.getJsf() - tQsb.getGhf()
+        money = tQsbd.getAmount();//- tQsbd.getJsf() - tQsbd.getGhf()
+        money1 = tQsb.getAmount();//- tQsb.getJsf() - tQsb.getGhf()
         if (money > money1) {
           //修改后的融资金额小  则数据库 银行存款相应地减少差额即可
           ccyeb.setZqcb(ccyeb.getZqcb() - (money - money1));
@@ -249,8 +249,8 @@ public class TYzyshgController {
       }
     } else {
       //融券修改==修改减少的融券金额
-      money = tQsbd.getAmount() ;//+ tQsbd.getJsf() + tQsbd.getGhf()
-      money1 = tQsb.getAmount() ;//+ tQsb.getJsf() + tQsb.getGhf()
+      money = tQsbd.getAmount();//+ tQsbd.getJsf() + tQsbd.getGhf()
+      money1 = tQsb.getAmount();//+ tQsb.getJsf() + tQsb.getGhf()
       if (money > money1) {
         //修改后的融券金额小  则数据库 银行存款相应地增加差额即可
         ccyeb.setZqcb(ccyeb.getZqcb() + (money - money1));
@@ -288,16 +288,16 @@ public class TYzyshgController {
     Double before;
     Double after;
     if (tQsb.getBs().equals("B")) {
-      before = tQsbd.getYhs() - tQsbd.getAmount();
-      after = tQsb.getYhs() - tQsb.getAmount();
+      before = tQsbd.getYhs() - tQsbd.getAmount() + tQsb.getJsf() + tQsb.getGhf();
+      after = tQsb.getYhs() - tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf();
       if (before > after) {
         tCcyeb1.setZqcb(tCcyeb1.getZqcb() + (before - after));
       } else {
         tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (after - before));
       }
     } else {
-      before = tQsbd.getYhs() - tQsbd.getAmount();
-      after = tQsb.getYhs() - tQsb.getAmount();
+      before = tQsbd.getYhs() - tQsbd.getAmount() - tQsb.getJsf() - tQsb.getGhf();
+      after = tQsb.getYhs() - tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf();
       if (before > after) {
         tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (before - after));
       } else {
@@ -345,16 +345,16 @@ public class TYzyshgController {
 
     //利息收入      融资：付出利息（利息收入减少，如果为负值 则表示利息支出） 融券：收入利息（利息收入增加，如果为正值 表示利息收入）
     if (tQsb.getBs().equals("B")) {
-      before = tQsbd.getYhs() - tQsbd.getAmount();
-      after = tQsb.getYhs() - tQsb.getAmount();
+      before = tQsbd.getYhs() - tQsbd.getAmount() + tQsb.getJsf() + tQsb.getGhf();
+      after = tQsb.getYhs() - tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf();
       if (before > after) {
         tCcyeb4.setZqcb(tCcyeb4.getZqcb() + (before - after));
       } else {
         tCcyeb4.setZqcb(tCcyeb4.getZqcb() - (after - before));
       }
     } else {
-      before = tQsbd.getYhs() - tQsbd.getAmount();
-      after = tQsb.getYhs() - tQsb.getAmount();
+      before = tQsbd.getYhs() - tQsbd.getAmount() - tQsb.getJsf() - tQsb.getGhf();
+      after = tQsb.getYhs() - tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf();
       if (before > after) {
         tCcyeb4.setZqcb(tCcyeb4.getZqcb() - (before - after));
       } else {
@@ -438,9 +438,9 @@ public class TYzyshgController {
     TCcyeb tCcyeb4 = tCcyebMapper.selectTCcyebByObj(Obj4);
     //应收利息     融资：付利息 删除时应加上减少值 融券：收利息 删除时应减去增加值
     if (tQsb.getBs().equals("B")) {
-      tCcyeb1.setZqcb(tCcyeb1.getZqcb() + (tQsb.getYhs() - tQsb.getAmount()));
+      tCcyeb1.setZqcb(tCcyeb1.getZqcb() + (tQsb.getYhs() - tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf()));
     } else {
-      tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (tQsb.getYhs() - tQsb.getAmount()));
+      tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (tQsb.getYhs() - tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf()));
     }
     tCcyebMapper.updateTCcyebById(tCcyeb1);
     //回购清算款  融资：证券清算款（删除时应加上减少值） 融券：证券清算款（删除时应减掉增加值）
@@ -455,9 +455,9 @@ public class TYzyshgController {
     tCcyebMapper.updateTCcyebById(tCcyeb3);
     //利息收入       融资：付出利息（删除时应加上减少值） 融券：收入利息（删除时应减到增加值）
     if (tQsb.getBs().equals("B")) {
-      tCcyeb4.setZqcb(tCcyeb4.getZqcb() + (tQsb.getYhs() - tQsb.getAmount()));
+      tCcyeb4.setZqcb(tCcyeb4.getZqcb() + (tQsb.getYhs() - tQsb.getAmount() + tQsb.getJsf() + tQsb.getGhf()));
     } else {
-      tCcyeb4.setZqcb(tCcyeb4.getZqcb() - (tQsb.getYhs() - tQsb.getAmount()));
+      tCcyeb4.setZqcb(tCcyeb4.getZqcb() - (tQsb.getYhs() - tQsb.getAmount() - tQsb.getJsf() - tQsb.getGhf()));
     }
     tCcyebMapper.updateTCcyebById(tCcyeb4);
     int i = tYzyshgService.deleteTQsbById(Integer.valueOf(id));
