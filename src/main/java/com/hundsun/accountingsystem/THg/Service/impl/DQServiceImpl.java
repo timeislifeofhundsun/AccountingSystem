@@ -37,6 +37,7 @@ public class DQServiceImpl implements DQService {
   @Autowired
   public TCcyebMapper tCcyebMapper;
 
+  @Transactional
   @Override
   public void HG_dq(String today) {
     //获取清算库中银行质押式回购清算信息
@@ -124,6 +125,7 @@ public class DQServiceImpl implements DQService {
   }
 
   //对交易所回购到期处理
+  @Transactional
   public void JYZY_DQ(TQsb jyzy) {
     //对持仓的变动
     TCcyeb tCcyeb = new TCcyeb();

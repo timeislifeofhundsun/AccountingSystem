@@ -14,6 +14,7 @@ import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
+import com.hundsun.accountingsystem.THg.Quartz.QuartzTask;
 import com.hundsun.accountingsystem.THg.Service.DQService;
 import com.hundsun.accountingsystem.THg.Service.HGPZBService;
 import com.hundsun.accountingsystem.THg.Service.HGQSService;
@@ -54,59 +55,12 @@ public class THgTest {
 
   @Autowired
   DQService dqService;
+
+  @Autowired
+  QuartzTask quartzTask;
   @Test
   public void test() throws ParseException {
-    /*DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-    Date ywrq = dateFormat1.parse("2018-5-31");
-    boolean hgqs = hgqsService.hgqs(10004, ywrq);
-    System.out.println(hgqs);*/
-    /*String day = "204051".substring(3,6);
-    System.out.println(day);
-    String[] days = day.split("");
-    if (days[0].equals("0")){
-      if (days[1].equals("0")){
-        day = days[2];
-      }else{
-        day=days[1]+days[2];
-      }
-    }else{
-      day=days[0]+days[1]+days[2];
-    }
-    System.out.println(day);*/
-    /*String s = hgqsService.CalcDate("2019-4-1", 7);
-    System.out.println("s"+s);*/
-    /*TCcyeb Obj=new TCcyeb();
-    Obj.setKjkmdm("100201");
-    Obj.setZtbh(10006);
-    TCcyeb ccyeb = tCcyebMapper.selectTCcyebByObj(Obj);
-    System.out.println(ccyeb);
-    double money=6000-1-1;
-    ccyeb.setZqcb(ccyeb.getZqcb() + money);
-    int yebd = tCcyebMapper.updateTCcyebById(ccyeb);*/
- /*   Date ywrq =DateFormatUtil.getDateByString("2018-5-31");
-    System.out.println(ywrq.toString());
-    Assist assist = new Assist();
-    assist.setRequires(Assist.andEq("ztbh","10004"));
-    assist.setRequires(Assist.andEq("extenda","3103"));
-    assist.setRequires(Assist.andEq("fsrq",DateFormatUtil.getStringByDate(ywrq)));
-    int deleteTCcyeb = tCcyebMapper.deleteTCcyeb(assist);
-    System.out.println(deleteTCcyeb);*/
-    /*Date ywrq = DateFormatUtil.getDateByString("2018-5-31");
-    int[] ywlb = {3101, 3102};
-    List<TQsb> allTQsb = tQsbMapper.findAllTQsb(ywlb, DateFormatUtil.getStringByDate(ywrq), "303");
-    System.out.println("大小" + allTQsb.size());
-    for (TQsb t : allTQsb
-        ) {
-      System.out.println(t.toString());
-    }*/
-    /*String day = "2018-6-3";
-    hgpzbService.HG_pz(10004,DateFormatUtil.getDateByString(day));*/
-    /*String date = "2018-6-1";
-    Date today = DateFormatUtil.getDateByString(date);
-    String dd = DateFormatUtil.getStringByDate(today);
-    //hgpzbService.HG_pz(10004,DateFormatUtil.getDateByString(date));
-    //hgpzbService.deleteAll_pz(10004,DateFormatUtil.getDateByString(date));
-    dqService.HG_dq(dd);*/
+    quartzTask.DQ();
   }
 
 
