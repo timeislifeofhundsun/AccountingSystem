@@ -4,6 +4,7 @@ import com.hundsun.accountingsystem.Global.bean.TPzb;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.TGp.service.GPPZService;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
+import com.hundsun.accountingsystem.THg.Service.HGPZBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,9 @@ public class XGPzController {
     @Autowired
     GPPZService gppzService;
 
+    @Autowired
+    HGPZBService hgpzbService;
+
     /**
     * @Author yangjf25257
     * @MethodName get_pz
@@ -38,6 +42,8 @@ public class XGPzController {
     public String insert_pz(int ztbh, Date rq) throws Exception {
         gppzService.insertGPPZ(ztbh, rq);
         xgPzbService.insert_pz(ztbh, rq);
+        //回购业务生成凭证
+        hgpzbService.HG_pz(ztbh,rq);
         return "";
     }
 

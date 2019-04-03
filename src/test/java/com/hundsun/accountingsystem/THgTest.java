@@ -14,7 +14,9 @@ import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
+import com.hundsun.accountingsystem.THg.Service.HGPZBService;
 import com.hundsun.accountingsystem.THg.Service.HGQSService;
+import com.hundsun.accountingsystem.THg.Service.impl.HGPZServiceImpl;
 import com.hundsun.accountingsystem.THg.Service.impl.HGQSServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,6 +47,9 @@ public class THgTest {
 
   @Autowired
   TQsbMapper tQsbMapper;
+
+  @Autowired
+  HGPZBService hgpzbService;
   @Test
   public void test() throws ParseException {
     /*DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -82,14 +87,19 @@ public class THgTest {
     assist.setRequires(Assist.andEq("fsrq",DateFormatUtil.getStringByDate(ywrq)));
     int deleteTCcyeb = tCcyebMapper.deleteTCcyeb(assist);
     System.out.println(deleteTCcyeb);*/
-    Date ywrq =DateFormatUtil.getDateByString("2018-5-31");
+    /*Date ywrq = DateFormatUtil.getDateByString("2018-5-31");
     int[] ywlb = {3101, 3102};
     List<TQsb> allTQsb = tQsbMapper.findAllTQsb(ywlb, DateFormatUtil.getStringByDate(ywrq), "303");
-    System.out.println("大小"+allTQsb.size());
-    for (TQsb t: allTQsb
-         ) {
+    System.out.println("大小" + allTQsb.size());
+    for (TQsb t : allTQsb
+        ) {
       System.out.println(t.toString());
-    }
+    }*/
+    /*String day = "2018-6-3";
+    hgpzbService.HG_pz(10004,DateFormatUtil.getDateByString(day));*/
+    String date = "2018-6-1";
+    hgpzbService.HG_pz(10004,DateFormatUtil.getDateByString(date));
+    //hgpzbService.deleteAll_pz(10004,DateFormatUtil.getDateByString(date));
   }
 
 
