@@ -14,6 +14,7 @@ import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
+import com.hundsun.accountingsystem.THg.Service.DQService;
 import com.hundsun.accountingsystem.THg.Service.HGPZBService;
 import com.hundsun.accountingsystem.THg.Service.HGQSService;
 import com.hundsun.accountingsystem.THg.Service.impl.HGPZServiceImpl;
@@ -50,6 +51,9 @@ public class THgTest {
 
   @Autowired
   HGPZBService hgpzbService;
+
+  @Autowired
+  DQService dqService;
   @Test
   public void test() throws ParseException {
     /*DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -97,9 +101,12 @@ public class THgTest {
     }*/
     /*String day = "2018-6-3";
     hgpzbService.HG_pz(10004,DateFormatUtil.getDateByString(day));*/
-    String date = "2018-6-1";
-    hgpzbService.HG_pz(10004,DateFormatUtil.getDateByString(date));
+    /*String date = "2018-6-1";
+    Date today = DateFormatUtil.getDateByString(date);
+    String dd = DateFormatUtil.getStringByDate(today);
+    //hgpzbService.HG_pz(10004,DateFormatUtil.getDateByString(date));
     //hgpzbService.deleteAll_pz(10004,DateFormatUtil.getDateByString(date));
+    dqService.HG_dq(dd);*/
   }
 
 

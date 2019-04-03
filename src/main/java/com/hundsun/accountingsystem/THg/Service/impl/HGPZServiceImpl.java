@@ -254,21 +254,21 @@ public class HGPZServiceImpl implements HGPZBService {
     if (tQsb.getBs().equals("B")) {
       tPzb.setKmms("银行存款");
       tPzb.setBs("贷");
-      tPzb.setJe(tQsb.getYhs() - tQsb.getGhf() - tQsb.getJsf());
+      tPzb.setJe(tQsb.getYhs() );//- tQsb.getGhf() - tQsb.getJsf()
     } else {
       tPzb.setKmms("银行存款");
       tPzb.setBs("借");
-      tPzb.setJe(tQsb.getYhs() + tQsb.getGhf() + tQsb.getJsf());
+      tPzb.setJe(tQsb.getYhs() );//+ tQsb.getGhf() + tQsb.getJsf()
     }
     tPzbMapper.insertTPzb(tPzb);
     if (tQsb.getBs().equals("B")) {
       tPzb.setKmms("应付利息");
       tPzb.setBs("借");
-      tPzb.setJe((tQsb.getYhs() - tQsb.getAmount()));
+      tPzb.setJe((tQsb.getYhs() - tQsb.getAmount()+ tQsb.getGhf() + tQsb.getJsf()));
     } else {
       tPzb.setKmms("应收利息");
       tPzb.setBs("贷");
-      tPzb.setJe((tQsb.getYhs() - tQsb.getAmount()));
+      tPzb.setJe((tQsb.getYhs() - tQsb.getAmount()- tQsb.getGhf() - tQsb.getJsf()));
     }
     tPzbMapper.insertTPzb(tPzb);
   }
@@ -396,21 +396,21 @@ public class HGPZServiceImpl implements HGPZBService {
     if (tQsb.getBs().equals("B")) {
       tPzb.setKmms("应付利息");
       tPzb.setBs("借");
-      tPzb.setJe(tQsb.getCjsr());
+      tPzb.setJe(tQsb.getCjsr()+ tQsb.getGhf() + tQsb.getJsf() + tQsb.getYj());
     } else {
       tPzb.setKmms("应收利息");
       tPzb.setBs("贷");
-      tPzb.setJe(tQsb.getCjsr());
+      tPzb.setJe(tQsb.getCjsr() - tQsb.getGhf() - tQsb.getJsf() - tQsb.getYj());
     }
     tPzbMapper.insertTPzb(tPzb);
     if (tQsb.getBs().equals("B")) {
       tPzb.setKmms("证券清算款");
       tPzb.setBs("贷");
-      tPzb.setJe(tQsb.getAmount() - tQsb.getGhf() - tQsb.getJsf() - tQsb.getYj() + tQsb.getCjsr());
+      tPzb.setJe(tQsb.getAmount()  + tQsb.getCjsr());//- tQsb.getGhf() - tQsb.getJsf() - tQsb.getYj()
     } else {
-      tPzb.setKmms("银行存款");
+      tPzb.setKmms("证券清算款");
       tPzb.setBs("借");
-      tPzb.setJe(tQsb.getAmount() + tQsb.getGhf() + tQsb.getJsf() + tQsb.getYj() + tQsb.getCjsr());
+      tPzb.setJe(tQsb.getAmount() + tQsb.getCjsr());//+ tQsb.getGhf() + tQsb.getJsf() + tQsb.getYj()
     }
     tPzbMapper.insertTPzb(tPzb);
   }

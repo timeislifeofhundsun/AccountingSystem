@@ -95,9 +95,9 @@ public class HGQSServiceImpl implements HGQSService {
         if (tCcyeb1 != null && tCcyeb2 != null && tCcyeb3 != null && tCcyeb4 != null && tCcyeb5 != null) {
           //应收利息科目 融资：加上相应的差值 融券：减去相应的差值
           if (tqsb.getBs().equals("B")) {
-            tCcyeb1.setZqcb(tCcyeb1.getZqcb() + tqsb.getCjsr());
+            tCcyeb1.setZqcb(tCcyeb1.getZqcb() + (tqsb.getCjsr() + tqsb.getJsf() + tqsb.getGhf() + tqsb.getYj()));
           } else {
-            tCcyeb1.setZqcb(tCcyeb1.getZqcb() - tqsb.getCjsr());
+            tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (tqsb.getCjsr() - tqsb.getJsf() - tqsb.getGhf() - tqsb.getYj()));
           }
           tCcyebMapper.updateTCcyebById(tCcyeb1);
           //回购清算款  融资：回购清算款（删除时应加上减少值） 融券：回购清算款（删除时应减掉增加值）
@@ -114,9 +114,9 @@ public class HGQSServiceImpl implements HGQSService {
           tCcyebMapper.updateTCcyebById(tCcyeb3);
           //利息收入       融资：付出利息（删除时应加上减少值） 融券：收入利息（删除时应减到增加值）
           if (tqsb.getBs().equals("B")) {
-            tCcyeb4.setZqcb(tCcyeb4.getZqcb() + tqsb.getCjsr());
+            tCcyeb4.setZqcb(tCcyeb4.getZqcb() + (tqsb.getCjsr() + tqsb.getJsf() + tqsb.getGhf() + tqsb.getYj()));
           } else {
-            tCcyeb4.setZqcb(tCcyeb4.getZqcb() - tqsb.getCjsr());
+            tCcyeb4.setZqcb(tCcyeb4.getZqcb() - (tqsb.getCjsr() - tqsb.getJsf() - tqsb.getGhf() - tqsb.getYj()));
           }
           tCcyebMapper.updateTCcyebById(tCcyeb4);
           //证券清算款       融资：付出利息（删除时应加上减少值） 融券：收入利息（删除时应减到增加值）
@@ -330,17 +330,17 @@ public class HGQSServiceImpl implements HGQSService {
         //应收利息   如果没有科目则插入科目      融资：付利息（应收利息减少，如果为负值 则表示应付利息） 融券：收利息（应收利息增加，如果为正值 表示应收利息）
         if (tCcyeb1 == null) {
           if (tqsb.getBs().equals("B")) {
-            Obj1.setZqcb(-(tqsb.getCjsr()));
+            Obj1.setZqcb(-(tqsb.getCjsr() + tqsb.getJsf() + tqsb.getGhf() + tqsb.getYj()));
           } else {
-            Obj1.setZqcb(tqsb.getCjsr());
+            Obj1.setZqcb((tqsb.getCjsr() - tqsb.getJsf() - tqsb.getGhf() - tqsb.getYj()));
           }
           Obj1.setExtenda("应收利息-回购");
           tCcyebMapper.insertTCcyeb(Obj1);
         } else {
           if (tqsb.getBs().equals("B")) {
-            tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (tqsb.getCjsr()));
+            tCcyeb1.setZqcb(tCcyeb1.getZqcb() - (tqsb.getCjsr() + tqsb.getJsf() + tqsb.getGhf() + tqsb.getYj()));
           } else {
-            tCcyeb1.setZqcb(tCcyeb1.getZqcb() + (tqsb.getCjsr()));
+            tCcyeb1.setZqcb(tCcyeb1.getZqcb() + (tqsb.getCjsr() - tqsb.getJsf() - tqsb.getGhf() - tqsb.getYj()));
           }
           tCcyebMapper.updateTCcyebById(tCcyeb1);
         }
@@ -375,17 +375,17 @@ public class HGQSServiceImpl implements HGQSService {
         //利息收入   如果没有科目则插入科目      融资：付出利息（利息收入减少，如果为负值 则表示利息支出） 融券：收入利息（利息收入增加，如果为正值 表示利息收入）
         if (tCcyeb4 == null) {
           if (tqsb.getBs().equals("B")) {
-            Obj4.setZqcb(-(tqsb.getCjsr()));
+            Obj4.setZqcb(-(tqsb.getCjsr() + tqsb.getJsf() + tqsb.getGhf() + tqsb.getYj()));
           } else {
-            Obj4.setZqcb(tqsb.getCjsr());
+            Obj4.setZqcb((tqsb.getCjsr() - tqsb.getJsf() - tqsb.getGhf() - tqsb.getYj()));
           }
           Obj4.setExtenda("利息收入-回购");
           tCcyebMapper.insertTCcyeb(Obj4);
         } else {
           if (tqsb.getBs().equals("B")) {
-            tCcyeb4.setZqcb(tCcyeb4.getZqcb() - (tqsb.getCjsr()));
+            tCcyeb4.setZqcb(tCcyeb4.getZqcb() - (tqsb.getCjsr() + tqsb.getJsf() + tqsb.getGhf() + tqsb.getYj()));
           } else {
-            tCcyeb4.setZqcb(tCcyeb4.getZqcb() + (tqsb.getCjsr()));
+            tCcyeb4.setZqcb(tCcyeb4.getZqcb() + (tqsb.getCjsr() - tqsb.getJsf() - tqsb.getGhf() - tqsb.getYj()));
           }
           tCcyebMapper.updateTCcyebById(tCcyeb4);
         }
