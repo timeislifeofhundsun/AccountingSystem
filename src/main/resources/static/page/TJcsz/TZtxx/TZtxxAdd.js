@@ -43,11 +43,15 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         money : function(val){
             if(val == ''){
                 return "初始金额不能为空";
+            }else if(val.length>10){
+            	return "初始金额不能大于10位数";
             }
         },
         number : function(val){
             if(val == ''){
                 return "初始份额不能为空";
+            }else if(val.length>10){
+            	return "初始份额不能大于10位数";
             }
         }
     })
