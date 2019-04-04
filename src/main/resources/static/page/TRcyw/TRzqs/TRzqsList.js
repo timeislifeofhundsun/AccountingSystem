@@ -98,10 +98,10 @@ function getFileStatus() {
                         htmlStr = htmlStr + "<tr><td>" + obj.fileName + "</td>";
                         if (obj.filePath == null) {
                             htmlStr = htmlStr + "<td></td>"
-                                + "<td>×</td></tr>";
+                                + "<td style = "+"color:red"+"><h1>×</h1></td></tr>";
                         } else {
                             htmlStr = htmlStr + "<td>" + obj.filePath + "</td>"
-                                + "<td>√</td></tr>";
+                                + "<td style = "+"color:green"+"><h1>√</h1></td></tr>";
                         }
                     }
                     $('#fileStutasTable').html(htmlStr);
