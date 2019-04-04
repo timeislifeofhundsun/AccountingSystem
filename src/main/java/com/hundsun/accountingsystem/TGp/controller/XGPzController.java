@@ -5,6 +5,7 @@ import com.hundsun.accountingsystem.TGp.service.GPPZService;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
 import com.hundsun.accountingsystem.TJj.service.TjjScpzService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +39,7 @@ public class XGPzController {
      * @Return java.lang.String
      * @Description 获取凭证controller，根据账套编号和时间
      **/
+    @Transactional
     @PostMapping("/inerst_pz")
     public String insert_pz(int ztbh, Date rq) throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");

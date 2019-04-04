@@ -14,6 +14,17 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
 
+     /**
+         * 账套选择
+         */
+     $('.select_btn').click(function(){
+         var index = layui.layer.open({
+            title : "选择账套",
+            type : 2,
+             content : "../../../common/TZtxx.html",
+         })
+     })
+
     //费率设置列表渲染
     var tableIns = table.render({
         elem: '#TZqxxList',
@@ -38,14 +49,14 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         ]]
     });
 
-    $(".addTZqxx").click(function(){
-        addTZqxx();
+    $(".addPz").click(function(){
+        addPz();
     })
 
     //添加证券信息
-    function addTZqxx(edit){
+    function addPz(edit){
         var index = layui.layer.open({
-            title : "添加证券",
+            title : "添加凭证",
             type : 2,
             content : "TZqxxAdd.html",
             success : function(layero, index){
