@@ -17,6 +17,7 @@ import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FileParsing;
+import com.hundsun.accountingsystem.THg.Service.HGQSService;
 import com.hundsun.accountingsystem.THg.Service.TYzyshgService;
 import com.hundsun.accountingsystem.THg.VO.TYzyshgVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,8 @@ public class TYzyshgController {
   public TCcyebMapper tCcyebMapper;
   @Autowired
   public TQsbMapper tQsbMapper;
+  @Autowired
+  public HGQSService hgqsService;
 
   @GetMapping(value = "/TYzyshg")
   public String getAllTYzyshg(@RequestParam(value = "ckrq", required = true) String data,
@@ -69,6 +72,9 @@ public class TYzyshgController {
   @PostMapping("/TYzyshg")
   public String addTYzyshg(@RequestParam(value = "TYzyshg", required = true) String data) throws ParseException {
     TQsb tQsb = JSON.parseObject(data, TQsb.class);
+    if (!hgqsService.isWorkDay(tQsb.getExtenda())){
+      return "105";//表示非交易日
+    }
     //301表示银行质押式回购
     tQsb.setExtendc("301");
     //根据账套编号和会计科目获取本账套的银行存款
@@ -209,7 +215,7 @@ public class TYzyshgController {
 
   @Transactional
   @PutMapping("/TYzyshg")
-  public String updateTYzyshg(@RequestParam(value = "TYzyshg", required = true) String data) {
+  public String updateTYzyshg(@RequestParam(value = "TYzyshg", required = true) String data)  {
     TQsb tQsb = JSON.parseObject(data, TQsb.class);
     tQsb.setExtendc("301");
     if (tQsb.getBs().equals("B")) {

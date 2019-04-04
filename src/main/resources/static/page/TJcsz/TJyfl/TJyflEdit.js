@@ -15,37 +15,37 @@ layui.use(['form', 'layer'], function () {
     form .verify({
         jsfl: function (val) {
             if (val == '') {
-                return "交易费率不能为空";
-            } else if (val > 1) {
-                return "交易费率不能大于1";
+                return "经手费率不能为空";
+            } else if (val > 0.001) {
+                return "经手费率不能大于0.001";
             }
         },
         gh: function (val) {
             if (val == '') {
                 return "过户费率不能为空";
-            } else if (val > 1) {
-                return "过户费率不能大于1";
+            } else if (val > 0.001) {
+                return "过户费率不能大于0.001";
             }
         },
         yh: function (val) {
             if (val == '') {
                 return "印花费率不能为空";
-            } else if (val > 1) {
-                return "印花费率不能大于1";
+            } else if (val > 0.001) {
+                return "印花费率不能大于0.001";
             }
         },
         zg: function (val) {
             if (val == '') {
                 return "证管费率不能为空";
-            } else if (val > 1) {
-                return "证管费率不能大于1";
+            } else if (val > 0.001) {
+                return "证管费率不能大于0.001";
             }
         },
         yj: function (val) {
             if (val == '') {
                 return "佣金费率不能为空";
-            } else if (val > 1) {
-                return "佣金费率不能大于1";
+            } else if (val > 0.001) {
+                return "佣金费率不能大于0.001";
             }
         },
     });

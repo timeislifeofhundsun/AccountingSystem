@@ -14,6 +14,7 @@ import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
+import com.hundsun.accountingsystem.Global.util.MD5Util;
 import com.hundsun.accountingsystem.THg.Quartz.QuartzTask;
 import com.hundsun.accountingsystem.THg.Service.DQService;
 import com.hundsun.accountingsystem.THg.Service.HGPZBService;
@@ -60,8 +61,7 @@ public class THgTest {
   QuartzTask quartzTask;
   @Test
   public void test() throws ParseException {
-    quartzTask.DQ();
+    System.out.println(MD5Util.encode("123"));
   }
-
 
 }

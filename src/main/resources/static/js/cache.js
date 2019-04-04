@@ -11,29 +11,29 @@ layui.use(['form','jquery',"layer"],function() {
     }else{
         $("#userFace").attr("src","../../images/face.jpg");
     }
-
+    var authorities=$.cookie('authorities');
+    authorities = authorities.substring(1,authorities.length-1);
+    authorities = authorities.split(",");
+    if ($.inArray("ROLE_ADMIN",authorities)==0){
+        $("#usermana").prop("hidden",false);
+    }
     //公告层
     function showNotice(){
-        layer.open({
-            type: 1,
-            title: "系统公告",
-            area: '300px',
-            shade: 0.8,
-            id: 'LAY_layuipro',
-            btn: ['火速围观'],
-            moveType: 1,
-            content: '<div style="padding:15px 20px; text-align:justify; line-height: 22px; text-indent:2em;border-bottom:1px solid #e2e2e2;"><p class="layui-red">请使用模版前请务必仔细阅读首页右下角的《更新日志》，避免使用中遇到一些简单的问题造成困扰。</p></pclass></p><p>1.0发布以后发现很多朋友将代码上传到各种素材网站，当然这样帮我宣传我谢谢大家，但是有部分朋友上传到素材网站后将下载分值设置的相对较高，需要朋友们充钱才能下载。本人发现后通过和站长、网站管理员联系以后将分值调整为不需要充值才能下载或者直接免费下载。在此郑重提示各位：<span class="layui-red">本模版已进行作品版权证明，不管以何种形式获取的源码，请勿进行出售或者上传到任何素材网站，否则将追究相应的责任。</span></p></div>',
-            success: function(layero){
-                var btn = layero.find('.layui-layer-btn');
-                btn.css('text-align', 'center');
-                btn.on("click",function(){
-                    tipsShow();
-                });
-            },
-            cancel: function(index, layero){
-                tipsShow();
+        var index = layui.layer.open({
+            title : "用户管理",
+            skin: 'layui-layer-rim', //加上边框
+            area: ['1000px', '800px'], //宽高
+            type : 2,
+            content : "../page/TJcsz/TUser/TUser.html",
+            success : function(layero, index){
+
             }
         });
+        /*layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(index);
+        })*/
     }
     function tipsShow(){
         window.sessionStorage.setItem("showNotice","true");
@@ -54,6 +54,9 @@ layui.use(['form','jquery',"layer"],function() {
         $("#mopwd").val("")
         $("#newpwd1").val("")
         $("#newpwd2").val("")
+        $("#mopwd-aux").html("")
+        $("#newpwd1-aux").html("")
+        $("#newpwd2-aux").html("")
     }
     function showModifyLayer() {
         var index = layer.open({
@@ -62,7 +65,6 @@ layui.use(['form','jquery',"layer"],function() {
             title: "修改密码",
             area: ["460px", "400px"],
             content: $("#modifypwdlayer"),
-            //++enter
             success: function(layero, index){
                 $(document).on('keydown', function(e){
                     if(e.keyCode == 13){
@@ -80,28 +82,33 @@ layui.use(['form','jquery',"layer"],function() {
             },
             btn2: function (index) {
                 var newpwd1 = $("#newpwd1").val().trim();
-                $.ajax({
-                    url: "/updatepwd",
-                    data: {newpwd1:newpwd1},
-                    type: 'PUT',
-                    success:function (data) {
-                        console.log(data);
-                        if (data==1){
-                            clear();
-                            layer.close(index);
-                            layer.msg('修改成功', {
-                                time: 1000, //20s后自动关闭
-                            });
-                        }else{
-                            clear();
-                            layer.close(index);
-                            layer.msg('修改失败', {
-                                time: 1000, //20s后自动关闭
-                            });
+                if (newpwd1.length<3){
+                    layer.msg('修改失败！新密码长度必须大于3位', {
+                        time: 2000, //20s后自动关闭
+                    });
+                    clear();
+                } else{
+                    $.ajax({
+                        url: "/updatepwd",
+                        data: {newpwd1:newpwd1},
+                        type: 'PUT',
+                        success:function (data) {
+                            if (data==1){
+                                clear();
+                                layer.close(index);
+                                layer.msg('修改成功', {
+                                    time: 1000, //10s后自动关闭
+                                });
+                            }else{
+                                clear();
+                                layer.close(index);
+                                layer.msg('修改失败', {
+                                    time: 1000, //10s后自动关闭
+                                });
+                            }
                         }
-                    }
-                });
-                console.log(444);
+                    });
+                }
             }
         });
     }
@@ -148,6 +155,11 @@ layui.use(['form','jquery',"layer"],function() {
                     display: "block",
                     color: "#ff1010"
                 }).html("请输入新密码")
+            } else if (newpwd1.length < 3){
+                $("#newpwd1-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("密码长度必须大于3")
             } else if (newpwd1 == pwd) {
                 $("#newpwd2-aux").css({
                     display: "block",
@@ -181,6 +193,11 @@ layui.use(['form','jquery',"layer"],function() {
                     display: "block",
                     color: "#ff1010"
                 }).html("请输入新密码")
+            } else if (newpwd2.length < 3){
+                $("#newpwd2-aux").css({
+                    display: "block",
+                    color: "#ff1010"
+                }).html("密码长度必须大于3")
             } else if (newpwd1 != newpwd2) {
                 $("#newpwd2-aux").css({
                     display: "block",
@@ -282,7 +299,6 @@ layui.use(['form','jquery',"layer"],function() {
        /* window.sessionStorage.removeItem("menu");
         menu = [];
         window.sessionStorage.removeItem("curmenu");*/
-       console.log(111);
        $('#logoutForm').submit();
     })
 

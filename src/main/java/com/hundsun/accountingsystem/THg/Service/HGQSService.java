@@ -22,4 +22,6 @@ public interface HGQSService {
   public boolean hgqs(int ztbh,Date ywrq ) throws ParseException;
 
   public String CalcDate(String start, int day) throws ParseException;
+
+  public boolean isWorkDay(String rq) throws ParseException;
 }

@@ -438,14 +438,14 @@ public class HGQSServiceImpl implements HGQSService {
   @Override
   public String CalcDate(String start, int day) throws ParseException {
     String end = "";
-    String[] Holiday = {"2018/6/18", "2018/9/24", "2018/10/1", "2018/10/2", "2018/10/3",
-        "2018/10/4", "2018/10/5", "2018/12/31", "2019/1/1", "2019/2/4",
-        "2019/2/5", "2019/2/6", "2019/2/7", "2019/2/8", "2019/4/5",
-        "2019/5/1", "2019/5/2", "2019/5/3", "2019/6/7", "2019/9/13",
-        "2019/10/1", "2019/10/2", "2019/10/3", "2019/10/4", "2019/10/7"};
+    String[] Holiday = {"2018-06-18", "2018-09-24", "2018-10-01", "2018-10-02", "2018-10-03",
+        "2018-10-04", "2018-10-05", "2018-12-31", "2019-01-01", "2019-02-04",
+        "2019-02-05", "2019-02-06", "2019-02-07", "2019-02-08", "2019-04-05",
+        "2019-05-01", "2019-05-02", "2019-05-03", "2019-06-07", "2019-09-13",
+        "2019-10-01", "2019-10-02", "2019-10-03", "2019-10-04", "2019-10-07"};
     List<String> Holidays = Arrays.asList(Holiday);
-    String[] Workday = {"2018/9/29", "2018/9/30", "2018/12/29", "2019/2/2", "2019/2/3",
-        "2019/4/28", "2019/5/5", "2019/9/29", "2019/10/12"};
+    String[] Workday = {"2018-09-29", "2018-09-30", "2018-12-29", "2019-02-02", "2019-02-03",
+        "2019-04-28", "2019-05-05", "2019-09-29", "2019-10-12"};
     List<String> Workdays = Arrays.asList(Workday);
     Date dateByString = DateFormatUtil.getDateByString(start);
     Long nowTime = dateByString.getTime();
@@ -456,15 +456,42 @@ public class HGQSServiceImpl implements HGQSService {
       Date t = new Date(nowTime + dayTime);
       int week = t.getDay();
       String ymd = DateFormatUtil.getStringByDate(t);
+      System.out.println("ymd"+ymd);
       if ((week == 6 || week == 0) && !Workdays.contains(ymd)) {
+        System.out.println("周末");
         day++;
       } else if (Workdays.contains(ymd)) {
+        System.out.println("工作日");
       } else if (Holidays.contains(ymd)) {
+        System.out.println("假日");
         day++;
       } else {
       }
       end = ymd;
     }
     return end;
+  }
+  @Override
+  public boolean isWorkDay(String rq) throws ParseException {
+    String[] Holiday = {"2018-06-18", "2018-09-24", "2018-10-01", "2018-10-02", "2018-10-03",
+        "2018-10-04", "2018-10-05", "2018-12-31", "2019-01-01", "2019-02-04",
+        "2019-02-05", "2019-02-06", "2019-02-07", "2019-02-08", "2019-04-05",
+        "2019-05-01", "2019-05-02", "2019-05-03", "2019-06-07", "2019-09-13",
+        "2019-10-01", "2019-10-02", "2019-10-03", "2019-10-04", "2019-10-07"};
+    List<String> Holidays = Arrays.asList(Holiday);
+    String[] Workday = {"2018-09-29", "2018-09-30", "2018-12-29", "2019-02-02", "2019-02-03",
+        "2019-04-28", "2019-05-05", "2019-09-29", "2019-10-12"};
+    List<String> Workdays = Arrays.asList(Workday);
+    Date date = DateFormatUtil.getDateByString(rq);
+    String ymd = DateFormatUtil.getStringByDate(date);
+    int week = date.getDay();
+    if ((week == 6 || week == 0 )&& !Workdays.contains(ymd)) {
+      return false;
+    }else if(Holidays.contains(ymd)){
+      System.out.println(111);
+      return false;
+    }else{
+      return true;
+    }
   }
 }

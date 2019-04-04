@@ -5,6 +5,22 @@ $(function () {
     $(document).ajaxSend(function(e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
+    var authorities=$.cookie('authorities');
+    authorities = authorities.substring(1,authorities.length-1);
+    authorities = authorities.split(",");
+    if ($.inArray("ROLE_ADMIN",authorities)!=0){
+        $("#yhlv").prop("disabled",true);
+        $("#hglv").prop("disabled",true);
+        $("#jylv").prop("disabled",true);
+        $("#jslv").prop("disabled",true);
+        $("#xxplf").prop("disabled",true);
+        $("#xxplcs").prop("disabled",true);
+        $("#sjf").prop("disabled",true);
+        $("#sjcs").prop("disabled",true);
+        $("#SaveDiv").hide();
+    }
+
+
 })
 layui.use(['form','layer','laydate','table','laytpl'],function(){
     var form = layui.form,
@@ -26,6 +42,57 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             $("#sjf").val(data.sjf);
             $("#sjcs").val(data.sjcs);
         })
+    });
+    form .verify({
+        yhlv: function (val) {
+            if (val == '') {
+                return "银行费率不能为空";
+            } else if (val > 0.001) {
+                return "银行费率不能大于0.001";
+            }
+        },
+        hglv: function (val) {
+            if (val == '') {
+                return "回购费率不能为空";
+            } else if (val > 0.001) {
+                return "回购费率不能大于0.001";
+            }
+        },
+        jylv: function (val) {
+            if (val == '') {
+                return "交易费率不能为空";
+            } else if (val > 0.001) {
+                return "交易费率不能大于0.001";
+            }
+        },
+        jslv: function (val) {
+            if (val == '') {
+                return "结算费率不能为空";
+            } else if (val > 0.001) {
+                return "结算费率不能大于0.001";
+            }
+        },
+        xxplf:function (val) {
+            if (val == '') {
+                return "信息披露费不能为空";
+            }
+        },
+        xxplcs:function (val) {
+            if (val == '') {
+                return "信息披露次数不能为空";
+            }
+        },
+        sjf:function (val) {
+            if (val == '') {
+                return "审计费不能为空";
+            }
+        },
+        sjcs:function (val) {
+            if (val == '') {
+                return "审计次数不能为空";
+            }
+        },
+        
     });
     form.on("submit(SaveTLfjx)", function (data) {
         var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});

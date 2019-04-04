@@ -36,23 +36,6 @@
             <!-- 显示/隐藏菜单 -->
             <a href="javascript:;" class="seraph hideMenu icon-caidan"></a>
             <!-- 顶级菜单 -->
-            <ul class="layui-nav mobileTopLevelMenus" mobile>
-                <li class="layui-nav-item" data-menu="contentManagement">
-                    <a href="javascript:;"><i class="seraph icon-caidan"></i><cite>layuiCMS</cite></a>
-                    <dl class="layui-nav-child">
-                        <dd class="layui-this" data-menu="contentManagement"><a href="javascript:;"><i
-                                class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i><cite>内容管理</cite></a></dd>
-                        <dd data-menu="memberCenter"><a href="javascript:;"><i class="seraph icon-icon10"
-                                                                               data-icon="icon-icon10"></i><cite>用户中心</cite></a>
-                        </dd>
-                        <dd data-menu="systemeSttings"><a href="javascript:;"><i class="layui-icon"
-                                                                                 data-icon="&#xe620;">&#xe620;</i><cite>系统设置</cite></a>
-                        </dd>
-                        <dd data-menu="seraphApi"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe705;">&#xe705;</i><cite>使用文档</cite></a>
-                        </dd>
-                    </dl>
-                </li>
-            </ul>
             <ul class="layui-nav topLevelMenus" pc>
                 <li class="layui-nav-item layui-this" data-menu="jcsz">
                     <a href="javascript:;"><i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i><cite>基础设置</cite></a>
@@ -89,8 +72,8 @@
                         <dd><a href="#" id="mopwdbtn"><i class="seraph icon-xiugai"
                                                                                           data-icon="icon-xiugai"></i><cite>修改密码</cite></a>
                         </dd>
-                        <dd><a href="javascript:;" class="showNotice"><i
-                                class="layui-icon">&#xe645;</i><cite>系统公告</cite></a></dd>
+                        <dd id="usermana" hidden><a href="javascript:;" class="showNotice" ><i
+                                class="layui-icon">&#xe645;</i><cite>用户管理</cite></a></dd>
                         <dd pc><a href="javascript:;" class="functionSetting"><i class="layui-icon">&#xe620;</i><cite>功能设定</cite></a></dd>
                         <dd pc><a href="javascript:;" class="changeSkin"><i
                                 class="layui-icon">&#xe61b;</i><cite>更换皮肤</cite></a></dd>
@@ -145,6 +128,7 @@
         <div class="user-photo">
             <a class="img" title="我的头像"><img src="images/face.jpg" class="userAvatar"></a>
             <p><span class="userName" id="userName" sec:authentication="principal.username"></span>，您好！
+                <span class="authorities" id="authorities" sec:authentication="principal.authorities" hidden></span>
             </p>
         </div>
         <div class="navBar layui-side-scroll" id="navBar">
@@ -183,7 +167,7 @@
     </div>
     <!-- 底部 -->
     <div class="layui-footer footer">
-        <p><span>copyright @2019 瓜皮组</span></p>
+        <sec:authorize access="hasRole('ROLE_ADMIN')"><p><span>copyright @2019 瓜皮组</span></p></sec:authorize>
     </div>
 </div>
 
@@ -206,6 +190,8 @@
         });
         var userName = $('#userName').text();
         $.cookie('userName', userName);
+        var authorities=$("#authorities").html();
+        $.cookie('authorities', authorities);
     })
 </script>
 </body>

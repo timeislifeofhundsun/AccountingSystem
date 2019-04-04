@@ -53,6 +53,7 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
 
     form.on("select", function (data) {
         if (data.elem.id == "zqcode") {
+            console.log(1111);
             var text = this.innerText.substr(1, this.innerText.length - 1);
             var days = text.replace(/\b(0+)/gi, "");
             $("#quantity").val(days);
@@ -79,6 +80,7 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
             $('#sclb').prop('disabled', true);
             form.render('select');
         } else if (data.elem.id == "ztbh") {
+            console.log(222);
             $.ajax({
                 url: "/getByZtbh",
                 type: "GET",
@@ -252,6 +254,8 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
                     top.layer.msg("金额扣款或增额失败！");
                 } else if (obj == 104) {
                     top.layer.msg("数据库没有数据！");
+                } else if (obj == 105) {
+                    top.layer.msg("今天是非交易日,请在交易日操作");
                 } else {
                     top.layer.msg("操作失败，请稍后再试！");
                 }

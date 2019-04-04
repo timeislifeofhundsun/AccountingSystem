@@ -51,6 +51,16 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
         return ymd;
     }
 
+    var hglv, jylv, jslv;
+    $.ajax({
+        url: "/TLfjxb",
+        type: "GET",
+        success: function (data) {
+            hglv = data.hglv;
+            jylv = data.jylv;
+            jslv = data.jslv;
+        }
+    });
     form.on("select", function (data) {
         if (data.elem.id == "zqcode") {
             var text = this.innerText.substr(1, this.innerText.length - 1);
@@ -77,6 +87,10 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
             $('#extendb').prop('disabled', true);
             $("#sclb").val(3);
             $('#sclb').prop('disabled', true);
+            if ($("#yhs").val!=null){
+                var lxcount = Number($("#amount").val()) * Number($("#quantity").val()) * Number(hglv);
+                $("#yhs").val((Number(($("#amount").val()) * 1) + (Number(lxcount)) * 1));
+            }
             form.render('select');
         } else if (data.elem.id == "ztbh") {
             $.ajax({
@@ -132,22 +146,13 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
             });
             return;
         } else {
-            var hglv, jylv, jslv;
-            $.ajax({
-                url: "/TLfjxb",
-                type: "GET",
-                success: function (data) {
-                    hglv = data.hglv;
-                    var lxcount = Number($("#amount").val()) * Number($("#quantity").val()) * Number(hglv);
-                    $("#yhs").val((Number(($("#amount").val()) * 1) + (Number(lxcount)) * 1));
-                    jylv = data.jylv;
-                    jslv = data.jslv;
-                    $("#jsf").val(Number(($("#amount").val())) * Number(jslv));
-                    $("#ghf").val(Number(($("#amount").val())) * Number(jylv));
-                    $('#ghf').prop('disabled', true);
-                    $('#jsf').prop('disabled', true);
-                }
-            });
+            var lxcount = Number($("#amount").val()) * Number($("#quantity").val()) * Number(hglv);
+            $("#yhs").val((Number(($("#amount").val()) * 1) + (Number(lxcount)) * 1));
+            $("#jsf").val(Number(($("#amount").val())) * Number(jslv));
+            $("#ghf").val(Number(($("#amount").val())) * Number(jylv));
+            $('#ghf').prop('disabled', true);
+            $('#jsf').prop('disabled', true);
+
 
         }
     });
@@ -226,6 +231,8 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
                     top.layer.msg("金额扣款或增额失败！");
                 } else if (obj == 104) {
                     top.layer.msg("数据库没有数据！");
+                } else if (obj == 105) {
+                    top.layer.msg("今天是非交易日,请在交易日操作");
                 } else {
                     top.layer.msg("操作失败，请稍后再试！");
                 }

@@ -15,6 +15,7 @@ import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
+import com.hundsun.accountingsystem.THg.Service.HGQSService;
 import com.hundsun.accountingsystem.THg.Service.TYmdshgService;
 import com.hundsun.accountingsystem.THg.VO.TYmdshgVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,8 @@ public class TYmdshgController {
   public TCcyebMapper tCcyebMapper;
   @Autowired
   public TQsbMapper tQsbMapper;
+  @Autowired
+  public HGQSService hgqsService;
 
   @GetMapping("/TYmdshg")
   public String getAllTYmdshg(@RequestParam(value = "ckrq", required = true) String data,
@@ -64,7 +67,11 @@ public class TYmdshgController {
   @Transactional
   @PostMapping("/TYmdshg")
   public String addTYmdshg(@RequestParam(value = "TYmdshg", required = true) String data) throws ParseException {
+
     TQsb tQsb = JSON.parseObject(data, TQsb.class);
+    if (!hgqsService.isWorkDay(tQsb.getExtenda())){
+      return "105";//表示非交易日
+    }
     //302表示银行买断式回购
     tQsb.setExtendc("302");
     //根据账套编号和会计科目获取本账套的银行存款
