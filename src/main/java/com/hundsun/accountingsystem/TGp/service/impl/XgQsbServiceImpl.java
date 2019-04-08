@@ -376,9 +376,9 @@ public class XgQsbServiceImpl implements XgQsbService {
      **/
     @Override
     public String xgqs(String path_xg_qsk, String path_sclt_qsk, int ztbh, Date date) throws ParseException {
-       // insert_xg_qsk(path_xg_qsk,date);
+       insert_xg_qsk(path_xg_qsk,date);
         insert_sclt_qsk(path_sclt_qsk, date, ztbh);
-       // insert_gzzz_qsk(ztbh, date);
+        insert_gzzz_qsk(ztbh, date);
          return "清算成功";
     }
 

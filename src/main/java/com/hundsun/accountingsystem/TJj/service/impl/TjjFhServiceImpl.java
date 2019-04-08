@@ -10,9 +10,13 @@ import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import com.hundsun.accountingsystem.Global.bean.THqb;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
+import com.hundsun.accountingsystem.Global.bean.TZqxx;
+import com.hundsun.accountingsystem.Global.bean.TZqxxExample;
+import com.hundsun.accountingsystem.Global.bean.TZqxxExample.Criteria;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.THqbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
+import com.hundsun.accountingsystem.Global.mapper.TZqxxMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TJj.VO.TjjGzParamsVO;
 import com.hundsun.accountingsystem.TJj.service.TjjFhService;
@@ -28,6 +32,9 @@ public class TjjFhServiceImpl implements TjjFhService{
 	
 	@Autowired
 	THqbMapper thqbMapper;
+	
+	@Autowired
+	TZqxxMapper tzqxxMapper;
 	
 	@Override
 	public void countJjfh(String date) throws Exception {
@@ -63,8 +70,19 @@ public class TjjFhServiceImpl implements TjjFhService{
 			assist.setRequires(Assist.andEq("hqrq", date));
 			assist.setRequires(Assist.andEq("zqnm", 4));
 			assist.setRequires(Assist.andEq("cjsl", 2));
+			
+			TZqxxExample example = new TZqxxExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andZqlbEqualTo(4);
+			criteria.andFxfsEqualTo(2);
+			List<TZqxx> zqxxList = tzqxxMapper.selectByExample(example);
+			int length = 0;
+			if(zqxxList!=null && zqxxList.size()>0) {
+				length = zqxxList.size();
+			}
+			
 			List<THqb> tHqbList = thqbMapper.selectTHqb(assist);
-			if(tHqbList!=null && tHqbList.size()>0) {
+			if(tHqbList!=null && tHqbList.size()==length) {
 				//遍历循环每一天持仓数据
 				for(int i=0;i<ccList.size();i++) {
 					//获取持仓数据

@@ -1,13 +1,18 @@
 package com.hundsun.accountingsystem.TGp.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.hundsun.accountingsystem.Global.bean.TPzb;
+import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TGp.service.GPPZService;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
 import com.hundsun.accountingsystem.TJj.service.TjjScpzService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +25,7 @@ import java.util.List;
  * @Description
  **/
 @RestController
+@Slf4j
 public class XGPzController {
 
     @Autowired
@@ -36,15 +42,35 @@ public class XGPzController {
     * @MethodName get_pz
      * @Param [tQsb]
      * @Return java.lang.String
-     * @Description 获取凭证controller，根据账套编号和时间
+     * @Description 生成凭证controller，根据账套编号和时间
      **/
+    @Transactional
     @PostMapping("/inerst_pz")
-    public String insert_pz(int ztbh, Date rq) throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        tjjScpzService.scpz(ztbh,sdf.format(rq));
-        gppzService.insertGPPZ(ztbh, rq);
-        xgPzbService.insert_pz(ztbh, rq);
-        return "";
+    public JSONObject insert_pz(@RequestBody String reqstr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        log.info("请求原始数据:"+reqstr);
+        JSONObject response = new JSONObject();
+        response.put("res", false);
+        try {
+            JSONObject resquest = JSONObject.parseObject(reqstr);
+            Integer ztbh = resquest.getInteger("ztbh");
+            Date rq = sdf.parse(resquest.getString("rq"));
+            if (ztbh != null && rq != null){
+                tjjScpzService.scpz(ztbh,sdf.format(rq));
+                gppzService.insertGPPZ(ztbh, rq);
+                xgPzbService.insert_pz(ztbh, rq);
+            }
+        } catch (ParseException e) {
+            log.error(e.getMessage());
+            response.put("msg","参数不规范\n"+e.getMessage());
+        } catch(Exception e){
+            e.printStackTrace();
+            response.put("msg",e.getMessage());
+        }
+
+        response.put("res", true);
+
+        return response;
     }
 
     /**
@@ -54,10 +80,22 @@ public class XGPzController {
      * @Return java.lang.String
      * @Description 获取凭证
      **/
-    @PostMapping("/get_pz")
-    public String get_pz(int ztbh, Date rq){
-        List<TPzb> list = xgPzbService.get_pz(ztbh, rq);
-        return "";
+    @RequestMapping("/get_pz")
+    public String get_pz(@RequestParam Integer ztbh, @RequestParam String rq) throws ParseException {
+        log.info("获取凭证,业务日期:"+rq+",账套编号:"+ztbh);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        JSONObject response = new JSONObject();
+        try{
+            JSONArray jsonArray = xgPzbService.get_pz(ztbh, sdf.parse(rq));
+            response.put("code",0);
+            response.put("msg","");
+            response.put("count",jsonArray.size());
+            response.put("data",jsonArray);
+        }catch (Exception e){
+            response.put("code",1);
+            response.put("msg",e.getMessage());
+        }
+        return response.toJSONString();
     }
 
     /**
@@ -67,10 +105,21 @@ public class XGPzController {
      * @Return java.lang.String
      * @Description 获取报表
      **/
-    @PostMapping("/get_bb")
-    public String get_bb(int ztbh){
-      List<TPzb> bb_list = xgPzbService.get_bb(ztbh);
-        return "";
+    @RequestMapping("/get_bb")
+    public String get_bb(@RequestParam Integer ztbh){
+        log.info("获取报表，账套编号是：" + ztbh);
+        JSONObject response = new JSONObject();
+        try{
+            JSONArray jsonArray = xgPzbService.get_bb(ztbh);
+            response.put("code",0);
+            response.put("msg","");
+            response.put("count",jsonArray.size());
+            response.put("data",jsonArray);
+        }catch (Exception e){
+            response.put("code",1);
+            response.put("msg",e.getMessage());
+        }
+        return response.toJSONString();
     }
 
 }
