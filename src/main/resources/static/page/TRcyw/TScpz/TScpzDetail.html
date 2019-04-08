@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>查看银行质押式回购信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../../css/public.css" media="all"/>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        .layui-table-body {
+            overflow-x: hidden !important;
+        }
+        .Row
+        {
+            display: table;
+            width: 100%; /*Optional*/
+            table-layout: fixed; /*Optional*/
+            border-spacing: 10px; /*Optional*/
+        }
+        .Column
+        {
+            display: table-cell;
+
+        }
+        div{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<form class="layui-form layui-row layui-col-space10">
+    <div class="layui-row layui-col-space10">
+        <div style="text-align: center">
+            <h2 style="color: #01AAED;">记账凭证</h2>
+        </div>
+        <div class="Row">
+            <div class="Column">凭证编号: <span id="pzid"></span></div>
+            <div class="Column">会计年度: <span id="year"></span></div>
+            <div class="Column">会计月份: <span id="month"></span></div>
+        </div>
+    </div>
+    <!--数据表格-->
+    <div class="layui-row layui-col-space10">
+        <table class="layui-hide" id="pz" lay-filter="pz">
+        </table>
+    </div>
+    <div class="Row" >
+        <div class="Column">证券: <span id="zqcode"></span></div>
+        <div class="Column">账套: <span id="ztcode"></span></div>
+        <div class="Column" style="color: #01AAED;">成交金额: <span id="amount"></span></div>
+    </div>
+</form>
+</body>
+<script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="TScpzDetail.js"></script>
+<script>
+</script>
+</html>

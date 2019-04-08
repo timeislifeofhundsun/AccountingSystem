@@ -10,6 +10,14 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}" /></meta>
     <link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="../../../css/public.css" media="all" />
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+        .layui-table-body{
+            overflow-x: hidden !important;
+        }
+    </style>
 </head>
 <body>
 <form class="layui-form">
