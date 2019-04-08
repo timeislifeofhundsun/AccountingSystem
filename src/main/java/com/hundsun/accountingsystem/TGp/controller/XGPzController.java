@@ -6,6 +6,7 @@ import com.hundsun.accountingsystem.Global.bean.TPzb;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TGp.service.GPPZService;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
+import com.hundsun.accountingsystem.THg.Service.HGPZBService;
 import com.hundsun.accountingsystem.TJj.service.TjjScpzService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class XGPzController {
     @Autowired
     TjjScpzService tjjScpzService;
 
+    @Autowired
+    HGPZBService hgpzbService;
+
     /**
     * @Author yangjf25257
     * @MethodName get_pz
@@ -56,9 +60,11 @@ public class XGPzController {
             Integer ztbh = resquest.getInteger("ztbh");
             Date rq = sdf.parse(resquest.getString("rq"));
             if (ztbh != null && rq != null){
-                xgPzbService.insert_pz(ztbh, rq);
                 tjjScpzService.scpz(ztbh,sdf.format(rq));
                 gppzService.insertGPPZ(ztbh, rq);
+                xgPzbService.insert_pz(ztbh, rq);
+                hgpzbService.HG_pz(ztbh,rq);
+
             }
         } catch (ParseException e) {
         	e.printStackTrace();
