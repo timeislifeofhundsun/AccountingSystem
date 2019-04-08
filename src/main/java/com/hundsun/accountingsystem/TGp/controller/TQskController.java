@@ -1,9 +1,12 @@
 package com.hundsun.accountingsystem.TGp.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.TGp.service.XgQsbService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,6 +18,7 @@ import java.util.List;
  * @Version 1.0
  * @Description 新股网下申购Controller类
  **/
+@Slf4j
 @RestController
 public class TQskController {
 
@@ -26,12 +30,15 @@ public class TQskController {
     * @MethodName wx_insest_qsk
      * @Param [tQsb]
      * @Return java.lang.String
-     * @Description 网下申购Controller
+     * @Description 网下新股中签Controller
      **/
     @PostMapping("/xg_wx")
-    public String xg_wx(TQsb tQsb){
+    public String xg_wx(@RequestParam(value = "xgzq",required = true) String data){
+        TQsb tQsb = JSON.parseObject(data,TQsb.class);
+        log.info("网下的数据： " + tQsb.toString());
         if (tQsb != null){
             return xgQsbService.xg_wx(tQsb);
+
         } else {
             return "未传入参数";
         }
@@ -45,7 +52,9 @@ public class TQskController {
      * @Description 网下市场流通Controller
      **/
     @PostMapping("/sclt_wx")
-    public String sclt_wx(TQsb tQsb){
+    public String sclt_wx(@RequestParam(value = "xgzq",required = true) String data){
+        TQsb tQsb = JSON.parseObject(data,TQsb.class);
+        log.info("网下流通的数据： " + tQsb.toString());
         if (tQsb != null){
             return xgQsbService.sclt_wx(tQsb);
         } else {

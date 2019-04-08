@@ -8,6 +8,7 @@ import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FileParsing;
 import com.hundsun.accountingsystem.TGp.service.XgQsbService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ import java.util.List;
  * @Description 清算库ServiceImpl
  **/
 @Service
+@Slf4j
 public class XgQsbServiceImpl implements XgQsbService {
 
     @Autowired
@@ -392,7 +394,6 @@ public class XgQsbServiceImpl implements XgQsbService {
     @Override
     public String xg_wx(TQsb tQsb) {
 
-
         //清算库去重和持仓库恢复
         Assist assist_xgjk = new Assist();//新股缴款去重
         assist_xgjk.setRequires(Assist.andEq("rq",tQsb.getRq()));
@@ -417,7 +418,7 @@ public class XgQsbServiceImpl implements XgQsbService {
             TCcyeb tCcyeb_hf = new TCcyeb();
             tCcyeb_hf.setCysl(- tQsb_hf.getQuantity());
             tCcyeb_hf.setZqdm(tQsb_hf.getZqcode());
-            tCcyebMapper.update_ljgz(tCcyeb_hf);
+            tCcyebMapper.update_cysl(tCcyeb_hf);
         }
 
         //向清算库插入过程中，中签和缴款一同插入。
@@ -450,7 +451,7 @@ public class XgQsbServiceImpl implements XgQsbService {
             tCcyebMapper.insertTCcyeb(tCcyeb_insert);
         }
 
-        return "";
+        return "1";
     }
 
     /**
@@ -487,7 +488,7 @@ public class XgQsbServiceImpl implements XgQsbService {
         tQsbMapper.insertTQsb(tQsb);
         tCcyebMapper.update_ltlx(tCcyeb_hf);
 
-        return "上市流通成功";
+        return "1";
     }
 
     /**
