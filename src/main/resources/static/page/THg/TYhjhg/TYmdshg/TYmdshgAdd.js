@@ -53,7 +53,6 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
 
     form.on("select", function (data) {
         if (data.elem.id == "zqcode") {
-            console.log(1111);
             var text = this.innerText.substr(1, this.innerText.length - 1);
             var days = text.replace(/\b(0+)/gi, "");
             $("#quantity").val(days);
@@ -80,7 +79,6 @@ layui.use(['form', 'layer', 'layedit', 'laydate', 'upload'], function () {
             $('#sclb').prop('disabled', true);
             form.render('select');
         } else if (data.elem.id == "ztbh") {
-            console.log(222);
             $.ajax({
                 url: "/getByZtbh",
                 type: "GET",

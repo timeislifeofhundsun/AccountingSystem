@@ -71,21 +71,9 @@
           "spread": false,
           "children": [
             {
-              "title": "新股申购",
-              "icon": "&#xe61c;",
-              "href": "page/TGp/TGpxg/TXgsg/TXgsgList.html",
-              "spread": false
-            },
-            {
               "title": "新股中签",
               "icon": "&#xe609;",
               "href": "page/TGp/TGpxg/TXgzq/TXgzqList.html",
-              "spread": false
-            },
-            {
-              "title": "中签交收",
-              "icon": "&#xe609;",
-              "href": "page/TGp/TGpxg/TZqjs/TZqjsList.html",
               "spread": false
             },
             {
@@ -96,7 +84,6 @@
             }
           ]
         }
-
 	],
 	"jjyw": [
 		{

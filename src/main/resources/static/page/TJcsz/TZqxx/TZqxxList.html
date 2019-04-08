@@ -51,15 +51,15 @@
         {{#  }}}
     </script>
     <script type="text/html" id="fxfs">
-        {{#  if(d.fxfs == "1"){ }}
+        {{#  if(d.fxfs == "1" && d.zqlb != "4" ){ }}
         <span>到期还本付息</span>
-        {{#  } else if(d.fxfs == "2"){ }}
+        {{#  } else if(d.fxfs == "2"  && d.zqlb != "4" ){ }}
         <span>一年付息</span>
-        {{#  } else if(d.fxfs == "3"){ }}
+        {{#  } else if(d.fxfs == "3"  && d.zqlb != "4" ){ }}
         <span>半年付息</span>
-        {{#  } else if(d.fxfs == "4"){ }}
+        {{#  } else if(d.fxfs == "4"  && d.zqlb != "4" ){ }}
         <span>3个月付息</span>
-        {{#  } else if(d.fxfs == "5"){ }}
+        {{#  } else if(d.fxfs == "5"  && d.zqlb != "4" ){ }}
         <span>1个月付息</span>
         {{#  }}}
     </script>

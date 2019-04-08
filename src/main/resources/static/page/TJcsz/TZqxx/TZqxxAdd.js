@@ -26,7 +26,38 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         elem: '#qxr',
         format: 'yyyy-MM-dd'
     });
-    form.on("select(zqlb)",function (data) {
+    form.on("select",function (data) {
+        if (data.elem.id=="zqlb"){
+            if (data.value == "4"){
+                $("#fxrq").prop("disabled",true);
+                $("#dqrq").prop("disabled",true);
+                $("#hgts").prop("disabled",true);
+                $("#njxts").prop("disabled",true);
+                $("#nll").prop("disabled",true);
+                $("#qxr").prop("disabled",true);
+                $("#fxjg").prop("disabled",true);
+                $("#fxfs").empty();
+                $("#fxfs").append("<option value='1'>非货币基金</option>");
+                $("#fxfs").append("<option value='2'>货币基金</option>");
+                form.render('select');
+            }else{
+                $("#fxrq").prop("disabled",false);
+                $("#dqrq").prop("disabled",false);
+                $("#hgts").prop("disabled",false);
+                $("#njxts").prop("disabled",false);
+                $("#nll").prop("disabled",false);
+                $("#qxr").prop("disabled",false);
+                $("#fxjg").prop("disabled",false);
+                $("#fxfs").empty();
+                $("#fxfs").append("<option  value=''>请选择付息方式</option>");
+                $("#fxfs").append("<option value='1'>到期还本付息</option>");
+                $("#fxfs").append("<option value='2'>一年付息</option>");
+                $("#fxfs").append("<option value='3'>半年付息</option>");
+                $("#fxfs").append("<option value='4'>3个月付息</option>");
+                $("#fxfs").append("<option value='5'>1个月付息</option>");
+                form.render('select');
+            }
+        }
         console.log(data);
     });
     form.verify({
@@ -71,32 +102,38 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
             }
         },
         fxrq : function(val){
-            if(val == ''){
+            var value = $("#zqlb").val();
+            if(val == ''&&value!=4){
                 return "发行日期不能为空";
             }
         },
         dqrq : function(val){
-            if(val == ''){
+            var value = $("#zqlb").val();
+            if(val == ''&&value!=4){
                 return "到期日期不能为空";
             }
         },
         hgts : function(val){
-            if(val == ''){
+            var value = $("#zqlb").val();
+            if(val == ''&&value!=4){
                 return "回购天数不能为空";
             }
         },
         njxts : function(val){
-            if(val == ''){
+            var value = $("#zqlb").val();
+            if(val == ''&&value!=4){
                 return "年计息天数不能为空";
             }
         },
         nll : function(val){
-            if(val == ''){
+            var value = $("#zqlb").val();
+            if(val == ''&&value!=4){
                 return "年利率不能为空";
             }
         },
         qxr : function(val){
-            if(val == ''){
+            var value = $("#zqlb").val();
+            if(val == ''&&value!=4){
                 return "起息日不能为空";
             }
         },
@@ -106,7 +143,8 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
             }
         },
         fxjg : function(val){
-            if(val == ''){
+            var value = $("#zqlb").val();
+            if(val == ''&&value!=4){
                 return "发行价格不能为空";
             }
         }
