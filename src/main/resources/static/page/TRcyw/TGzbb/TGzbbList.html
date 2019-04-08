@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>报表管理</title>
+    <meta name="_csrf" th:content="${_csrf.token}" /></meta>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" /></meta>
+    <link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../../../css/public.css" media="all" />
 </head>
 <body>
-    估值报表
+    <div style="padding: 20px;">
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <a class="layui-btn select_btn" data-type="reload">账套</a>
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input name" id="name" name="name" placeholder="请选择账套" disabled="disabled"/>
+            </div>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input layui-hide ztbh" id="ztbh" name="ztbh"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn showBb">显示报表</a>
+        </div>
+    </div>
+    <!--数据-->
+    <div class="layui-row layui-col-space10">
+        <table class="layui-hide" id="data" lay-filter="data"></table>
+    </div>
+
+<script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="../../../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="./TGzbbList.js"></script>
 </body>
 </html>

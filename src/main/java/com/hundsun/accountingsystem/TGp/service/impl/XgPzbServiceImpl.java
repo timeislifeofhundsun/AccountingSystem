@@ -1,12 +1,17 @@
 package com.hundsun.accountingsystem.TGp.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.hundsun.accountingsystem.Global.bean.Assist;
+import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import com.hundsun.accountingsystem.Global.bean.TPzb;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
+import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TPzbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TZqxxMapper;
 import com.hundsun.accountingsystem.Global.service.TSequenceService;
+import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +34,9 @@ public class XgPzbServiceImpl implements XgPzbService {
     private TSequenceService tSequenceService;
 
     @Autowired
+    TCcyebMapper tCcyebMapper;
+
+    @Autowired
     TQsbMapper tQsbMapper;
 
     @Autowired
@@ -45,19 +53,44 @@ public class XgPzbServiceImpl implements XgPzbService {
      * @Description 获取所有凭证
      **/
     @Override
-    public List<TPzb> get_pz(int ztbh, Date rq) {
+    public JSONArray get_pz(int ztbh, Date rq) {
+        JSONArray returnData = new JSONArray();
         //查询条件
         Assist assist = new Assist();
         assist.setRequires(Assist.andEq("rq",rq));
         assist.setRequires(Assist.andEq("ztbh",ztbh));
-        return tPzbMapper.selectTPzb(assist);
+        List<TPzb> tPzbs = tPzbMapper.selectTPzb(assist);
+        for (TPzb tPzb : tPzbs){
+            JSONObject obj = new JSONObject();
+            obj.put("ztbh",tPzb.getZtbh());
+            obj.put("rq", DateFormatUtil.getStringByDate(tPzb.getRq()));
+            obj.put("kmmc",tPzb.getKmms());
+            obj.put("zy",tPzb.getZy());
+            obj.put("BS",tPzb.getBs());
+            obj.put("jfje",tPzb.getBs().equals("借") ? tPzb.getJe() : 0);
+            obj.put("dfje",tPzb.getBs().equals("贷") ? tPzb.getJe() : 0);
+            obj.put("pzid",tPzb.getPzid());
+            returnData.add(obj);
+        }
+        return returnData;
     }
 
     @Override
-    public List<TPzb> get_bb(int ztbh) {
+    public JSONArray get_bb(int ztbh) {
+        JSONArray returnData = new JSONArray();
         Assist assist = new Assist();
         assist.setRequires(Assist.andEq("ztbh",ztbh));
-        return tPzbMapper.selectTPzb(assist);
+        List<TCcyeb> tCcyebs = tCcyebMapper.selectTCcyeb(assist);
+        for (TCcyeb tCcyeb : tCcyebs){
+            JSONObject obj = new JSONObject();
+            obj.put("ztbh",tCcyeb.getZtbh());
+            obj.put("kmmc",tCcyeb.getExtenda());
+            obj.put("sl", tCcyeb.getCysl());
+            obj.put("zqcb",tCcyeb.getZqcb());
+            obj.put("ljgz",tCcyeb.getLjgz());
+            returnData.add(obj);
+        }
+        return returnData;
     }
 
     /**

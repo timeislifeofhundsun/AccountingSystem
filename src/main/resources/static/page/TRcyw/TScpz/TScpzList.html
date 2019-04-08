@@ -19,14 +19,19 @@
                 <a class="layui-btn select_btn" data-type="reload">账套</a>
             </div>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input name" id="name" placeholder="请选择账套" disabled="disabled"/>
+                <input type="text" class="layui-input name" id="name" name="name" placeholder="请选择账套" disabled="disabled"/>
             </div>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input layui-hide ztbh" id="ztbh" name="ztbh" />
+                <input type="text" class="layui-input layui-hide ztbh" id="ztbh" name="ztbh"/>
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn addPz">日期</a>
+            <div class="layui-input-inline">
+                <label class="layui-form-label">日期选择</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" id="rq">
+                </div>
+            </div>
         </div>
         <div class="layui-inline">
             <a class="layui-btn addPz">生成凭证</a>
@@ -36,45 +41,12 @@
         </div>
     </div>
     </div>
-    <table id="TZqxxList" lay-filter="TZqxxList"></table>
 
-    <script type="text/html" id="zqlb">
-        {{#  if(d.zqlb == "1"){ }}
-        <span >股票</span>
-        {{#  } else if(d.zqlb == "3"){ }}
-        <span >回购</span>
-        {{#  } else { }}
-        <span >基金</span>
-        {{#  }}}
-    </script>
-    <script type="text/html" id="sclb">
-        {{#  if(d.sclb == "1"){ }}
-        <span>上海</span>
-        {{#  } else if(d.sclb == "2"){ }}
-        <span>深圳</span>
-        {{#  } else { }}
-        <span>国内银行间</span>
-        {{#  }}}
-    </script>
-    <script type="text/html" id="fxfs">
-        {{#  if(d.fxfs == "1"){ }}
-        <span>到期还本付息</span>
-        {{#  } else if(d.fxfs == "2"){ }}
-        <span>一年付息</span>
-        {{#  } else if(d.fxfs == "3"){ }}
-        <span>半年付息</span>
-        {{#  } else if(d.fxfs == "4"){ }}
-        <span>3个月付息</span>
-        {{#  } else if(d.fxfs == "5"){ }}
-        <span>1个月付息</span>
-        {{#  }}}
-    </script>
-    <!--操作-->
-    <script type="text/html" id="TZqxxListBar">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</a>
-    </script>
+    <!--数据-->
+    <div class="layui-row layui-col-space10">
+        <table class="layui-hide" id="data" lay-filter="data"></table>
+    </div>
+
 </form>
 <script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="../../../js/jquery.cookie.js"></script>

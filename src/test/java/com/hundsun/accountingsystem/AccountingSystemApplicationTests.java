@@ -80,8 +80,8 @@ public class AccountingSystemApplicationTests {
 	@Test
 	public void xg_wx() throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		xgPzController.insert_pz(10004,sdf.parse("20180531"));
-		xgPzController.get_pz(10004,sdf.parse("20180531"));
+		//xgPzController.insert_pz(10004,sdf.parse("20180531"));
+		//xgPzController.get_pz(10004,sdf.parse("20180531"));
 	}
 
 }
