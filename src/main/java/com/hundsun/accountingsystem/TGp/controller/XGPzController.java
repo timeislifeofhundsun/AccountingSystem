@@ -56,13 +56,9 @@ public class XGPzController {
             Integer ztbh = resquest.getInteger("ztbh");
             Date rq = sdf.parse(resquest.getString("rq"));
             if (ztbh != null && rq != null){
-            	System.out.println("tjjScpzService.scpz");
-                tjjScpzService.scpz(ztbh,sdf.format(rq));
-                System.out.println("gppzService.insertGPPZ");
-                gppzService.insertGPPZ(ztbh, rq);
-                System.out.println("xgPzbService.insert_pz");
                 xgPzbService.insert_pz(ztbh, rq);
-                System.out.println("finish");
+                tjjScpzService.scpz(ztbh,sdf.format(rq));
+                gppzService.insertGPPZ(ztbh, rq);
             }
         } catch (ParseException e) {
         	e.printStackTrace();
