@@ -57,6 +57,21 @@ public class TXwxxbController {
 		return String.valueOf(1);
 	}
 	
+	@GetMapping("/findTXwxxByXwbh")
+	public  String findByXwbh(String xwbh) {
+		TXwxxb txwxxb = txwxxbServiceImpl.findXwById(xwbh);
+		List<TXwxxb> findList = new ArrayList<TXwxxb>();
+		findList.add(txwxxb);
+		TXwxxbVO layuiJson = new TXwxxbVO();
+		layuiJson.setCode(0);
+	    layuiJson.setCount(1);
+	    layuiJson.setMsg("");
+	    layuiJson.setData(findList);
+	    String jsonString = JSON.toJSONString(layuiJson);
+		return jsonString;
+	}
+	
+	
 	@GetMapping("/TXwxx")
 	public String findList(int page,int limit) {
 		int count = txwxxbServiceImpl.getCounts();

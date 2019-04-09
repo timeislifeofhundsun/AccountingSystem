@@ -42,6 +42,14 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
 
     //生成凭证
     $(".addPz").click(function () {
+    	var ztbh = $("#ztbh").val();
+    	if(ztbh==""){
+            layer.msg('请先选择账套', {
+                time: 1000, //2s后自动关闭
+            });
+    		return;
+    	}
+    	
         var rq = $("#rq").val();
         var ztbh = $("#ztbh").val();
         if (rq != "") {
@@ -76,6 +84,13 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
         /**
          * 表格
          */
+    	var ztbh = $("#ztbh").val();
+    	if(ztbh==""){
+            layer.msg('请先选择账套', {
+                time: 1000, //2s后自动关闭
+            });
+    		return;
+    	}  
         table.render({
             elem: '#data'
             , url: '/get_pz/?rq=' + $("#rq").val() + "&ztbh=" + $("#ztbh").val()

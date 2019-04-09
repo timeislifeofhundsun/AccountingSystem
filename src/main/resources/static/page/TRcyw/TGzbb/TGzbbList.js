@@ -37,6 +37,16 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
        /**
          * 表格
          */
+    	
+    	var ztbh = $("#ztbh").val();
+    	if(ztbh==""){
+            layer.msg('请先选择账套', {
+                time: 1000, //2s后自动关闭
+            });
+    		return;
+    	}
+    	
+    	
         table.render({
                     elem: '#data'
                     ,url:'/get_bb/?ztbh='+$("#ztbh").val()
@@ -46,11 +56,12 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                         {type: 'checkbox', fixed: 'left'}
                         ,{field:'ztbh', title:'账套',  align:"center"}
                         ,{field:'kmmc', title:'科目名称', align:"center"}
-                        ,{field:'sl', title:'数量', align:"center"}
-                        ,{field:'zqcb', title:'成本', align:"center"}
-                        ,{field:'ljgz', title:'估值增值', align:"center"}
+                        ,{field:'sl', title:'数量', align:"center",style:'color: red;'}
+                        ,{field:'zqcb', title:'成本', align:"center",style:'color: red;'}
+                        ,{field:'ljgz', title:'估值增值', align:"center",style:'color: red;'}
                     ]]
-                    ,page: true
+                    ,page: false
+                    
                 });
     })
 })

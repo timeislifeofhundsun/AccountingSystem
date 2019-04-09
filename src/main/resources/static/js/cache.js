@@ -22,7 +22,7 @@ layui.use(['form','jquery',"layer"],function() {
         var index = layui.layer.open({
             title : "用户管理",
             skin: 'layui-layer-rim', //加上边框
-            area: ['1000px', '800px'], //宽高
+            area: ['800px', '600px'], //宽高
             type : 2,
             content : "../page/TJcsz/TUser/TUser.html",
             success : function(layero, index){

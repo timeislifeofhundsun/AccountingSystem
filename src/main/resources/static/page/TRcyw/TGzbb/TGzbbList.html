@@ -10,18 +10,31 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}" /></meta>
     <link rel="stylesheet" href="../../../layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="../../../css/public.css" media="all" />
+    
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+        .layui-table-body{
+            overflow-x: hidden !important;
+            
+        }
+       
+    </style>
 </head>
+
 <body>
     <div style="padding: 20px;">
         <div class="layui-inline">
-            <div class="layui-input-inline">
-                <a class="layui-btn select_btn" data-type="reload">账套</a>
-            </div>
+            
             <div class="layui-input-inline">
                 <input type="text" class="layui-input name" id="name" name="name" placeholder="请选择账套" disabled="disabled"/>
             </div>
             <div class="layui-input-inline">
                 <input type="text" class="layui-input layui-hide ztbh" id="ztbh" name="ztbh"/>
+            </div>
+            <div class="layui-input-inline">
+                <a class="layui-btn select_btn" data-type="reload">账套</a>
             </div>
         </div>
         <div class="layui-inline">
@@ -30,7 +43,7 @@
     </div>
     <!--数据-->
     <div class="layui-row layui-col-space10">
-        <table class="layui-hide" id="data" lay-filter="data"></table>
+        <table class="layui-hide" id="data" lay-filter="data" style="background-color:yellow;"></table>
     </div>
 
 <script type="text/javascript" src="../../../js/jquery-1.11.1.js"></script>
