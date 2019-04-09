@@ -1,5 +1,8 @@
 package com.hundsun.accountingsystem.Global.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.hundsun.accountingsystem.Global.VO.TUserVO;
+import com.hundsun.accountingsystem.Global.bean.SysRole;
 import com.hundsun.accountingsystem.Global.bean.SysUser;
 import com.hundsun.accountingsystem.Global.mapper.UserMapper;
 import com.hundsun.accountingsystem.Global.service.UserService;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -69,6 +74,39 @@ public class UserController {
       return String.valueOf(i);
     }
 
+    @ResponseBody
+    @GetMapping("/TUser")
+    public String findAllUser() {
+    	List<SysUser> list = userService.selectList();
+    	int count = userService.getCounts();
+    	TUserVO layuiJson = new TUserVO();
+    	layuiJson.setCode(0);
+	    layuiJson.setCount(count);
+	    layuiJson.setMsg("");
+	    layuiJson.setData(list);
+	    String jsonString = JSON.toJSONString(layuiJson);
+		return jsonString;
+    }
+    
+    @ResponseBody
+    @PostMapping("/TUser")
+    public String addUser(String data) {
+    	SysUser sysUser = JSON.parseObject(data,SysUser.class);
+    	String password = MD5Util.encode(sysUser.getPassword());
+    	sysUser.setPassword(password);
+    	try {
+			userService.insertUser(sysUser);
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+    	return String.valueOf(1);
+    }
 
-
+    @ResponseBody
+    @PostMapping("/deleteUser")
+    public String deleteUser(int uid) {
+    	userService.deleteUser(uid);
+    	return String.valueOf(1);
+    }
+    
 }

@@ -25,5 +25,36 @@
 		update sys_user set password = #{password} where uid =#{uid}
 	</update>
 
+	<select id="selectList" resultMap="userMap">
+		select * from sys_user
+	</select>
+	
+	<delete id="deleteUser" parameterType="java.lang.Integer" >
+    	delete from sys_user
+    	where uid = #{uid,jdbcType=INTEGER}
+  	</delete>
+  	
+	<delete id="deleteSysRoleUser" parameterType="java.lang.Integer" >
+    	delete from sys_role_user
+    	where sys_user_id = #{uid,jdbcType=INTEGER}
+  	</delete>
 
+	<select id="getCounts" resultType="java.lang.Integer">
+		select count(*)
+	  		from sys_user
+	</select>
+
+	<insert id="insertUser" parameterType="com.hundsun.accountingsystem.Global.bean.SysUser" useGeneratedKeys="true"
+    	keyProperty="uid">
+    	insert into sys_user(username,password,email,compangy) values(
+    		#{username},#{password},'1','1'
+    	)
+  	</insert>
+
+	<insert id="insertSysRoleUser" parameterType="com.hundsun.accountingsystem.Global.bean.SysRoleUser" useGeneratedKeys="true"
+    	keyProperty="uid">
+    	insert into sys_role_user(sys_user_id,sys_role_id) values(
+    		#{userId},#{roleId}
+    	)
+  	</insert>
 </mapper>

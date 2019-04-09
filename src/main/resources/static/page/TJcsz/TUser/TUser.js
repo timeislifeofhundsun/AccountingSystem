@@ -18,32 +18,26 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     searchUser();
     
     $('.search_btn').click(function(){	
-    	
+    	addUser();
     });
        
-    //新增账套
-    function addTZtxx(){
+    //新增用户
+    function addUser(){
         var index = layui.layer.open({
-            title : "新建账套",
+            title : "添加用户",
+            area: ['400px', '300px'], //宽高
             type : 2,
-            content : "TZtxxAdd.html",
+            
+            content : "TUserAdd.html",
             success : function(layero, index){
                 var body = layui.layer.getChildFrame('body', index);
-                setTimeout(function(){
-                    layui.layer.tips('点击此处返回账套列表', '.layui-layer-setwin .layui-layer-close', {
-                        tips: 3
-                    });
-                },500)
+                
             }
         })
-        layui.layer.full(index);
-        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
-        $(window).on("resize",function(){
-            layui.layer.full(index);
-        })
+     
     }
     
-    //查询账套
+    //查询用户
     function searchUser(){
 		var index=layer.load(1);
 		var tableIns = table.render({
@@ -51,68 +45,38 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 	        url : "/TUser",
 	        method: 'GET',
 	        cellMinWidth : 95,
-	        page : false,
+	        page : true,
 	        height : "full-125",
 	        limit : 10,
 	        limits : [10,15,20,25],
 	        id : "newsListTable",
 	        cols : [[
 	            {type: "checkbox", fixed:"left", width:50},
-	            {field: 'ztbh', title: '账套编号',  align:"center",width:100},
-	            {field: 'name', title: '账套名称', align:'center'},
-	            {field: 'createdate', title: '创建时间', align:'center'},     
+	            {field: 'uid', title: '用户ID',  align:"center"},
+	            {field: 'username', title: '用户名',  align:"center"},
+	            {field: 'password', title: '密码', align:'center'},
+	            {field: 'email', title: '邮件', align:'center'},     
 	            {title: '操作', width:170, templet:'#TZtxxListBar',fixed:"right",align:"center"}
 	        ]]
 	    });
 		
 		layer.close(index);
     }
-    //点击编辑操作
-    function EditZtxx(edit){
-        var index = layui.layer.open({
-            title : "修改账套信息",
-            type : 2,
-            content : "TZtxxEdit.html",
-            success : function(layero, index){
-                var body = layui.layer.getChildFrame('body', index);
-                if(edit){
-                    body.find(".ztbh").val(edit.ztbh);
-                    body.find(".name").val(edit.name);
-                    body.find(".createdate").val(edit.createdate);
-                    body.find(".enddate").val(edit.enddate);
-                    body.find(".jjdm").val(edit.jjdm);
-                    body.find(".money").val(edit.money);
-                    body.find(".number").val(edit.number);
-                    form.render();
-                }
-                setTimeout(function(){
-                    layui.layer.tips('点击此处返回账套信息列表', '.layui-layer-setwin .layui-layer-close', {
-                        tips: 3
-                    });
-                },500)
-            }
-        })
-        layui.layer.full(index);
-        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
-        $(window).on("resize",function(){
-            layui.layer.full(index);
-        })
-    }
     
-  //删除操作
-    function deleteZtxx(data){
-    	var ztbh = data.ztbh;
+  //删除用户
+    function deleteUser(data){
+    	var uid = data.uid;
     	var index = top.layer.msg('数据提交中，请稍候', {icon: 16, time: false, shade: 0.8});
     	$.ajax({
-            url: "/deleteTZtxx",
-            data: {ztbh:ztbh},
+            url: "/deleteUser",
+            data: {uid:uid},
             type: 'POST',
             success:function (obj) {
                 if (obj==1) {
                     setTimeout(function () {
                         top.layer.close(index);
-                        top.layer.msg("账套删除成功！");
-                        searchZtxx("");
+                        top.layer.msg("用户删除成功！");
+                        searchUser("");
                     }, 500);
                 }else{
                 	setTimeout(function () {
@@ -134,11 +98,9 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     table.on('tool(TZtxxList)', function(obj){
         var layEvent = obj.event,
             data = obj.data;
-        if(layEvent === 'edit'){ //编辑
-            EditZtxx(data);
-        }else if(layEvent === 'del'){
+        if(layEvent === 'del'){
         	layer.confirm("确认删除该用户吗？",{icon: 3, title:'提示'}, function(index){
-        		deleteZtxx(data);
+        		deleteUser(data);
         	});
         }
     });
