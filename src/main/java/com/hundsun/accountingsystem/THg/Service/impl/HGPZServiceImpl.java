@@ -18,6 +18,7 @@ import com.hundsun.accountingsystem.Global.mapper.TZqxxMapper;
 import com.hundsun.accountingsystem.Global.service.TSequenceService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.THg.Service.HGPZBService;
+import com.hundsun.accountingsystem.THg.Service.HGQSService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +46,18 @@ public class HGPZServiceImpl implements HGPZBService {
   public TSequenceService tSequenceService;
   @Autowired
   public TPzbMapper tPzbMapper;
+  @Autowired
+  public HGQSService hgqsService;
 
   //回购业务生成凭证入口
   @Transactional
   @Override
   public void HG_pz(int ztbh, Date rq) throws ParseException {
     String today = DateFormatUtil.getStringByDate(rq);
+
+    if (!hgqsService.isWorkDay(today)){
+      return;
+    }
     //根据账套编号和日期删除已经生成得凭证
     deleteAll_pz(ztbh, rq);
     //获取清算库中银行质押式回购清算信息
