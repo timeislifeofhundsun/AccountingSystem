@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.hundsun.accountingsystem.Global.VO.TQsbVO;
 import com.hundsun.accountingsystem.Global.bean.TCcyeb;
+import com.hundsun.accountingsystem.Global.bean.THqb;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.bean.TZqxx;
+import com.hundsun.accountingsystem.Global.service.THqbService;
 import com.hundsun.accountingsystem.Global.service.TZqxxService;
+import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TJj.service.TjjSgsqService;
 
 @RestController
@@ -24,6 +27,9 @@ public class TjjSgsqController {
 	
 	@Autowired
 	TZqxxService tzqxxServiceImpl;
+	
+	@Autowired
+	THqbService thqbServiceImpl;
 	
 	private double yhck;
 	private double zqqsk;
@@ -91,7 +97,27 @@ public class TjjSgsqController {
 				
 		//转换成bean对象
 		TQsb tqsb = JSON.parseObject(data,TQsb.class);
-
+		
+		//根据申购日查询出行情信息
+		List<THqb> findByDate = thqbServiceImpl.findByDate(DateFormatUtil.getStringByDate(tqsb.getRq()));
+		double jrspj = 0;
+		if(findByDate!=null && findByDate.size()>=0) {
+			for(int i=0;i<findByDate.size();i++) {
+				THqb tHqb = findByDate.get(i);
+				if(tHqb.getZqdm().equals(tqsb.getZqcode())) {
+					jrspj = tHqb.getJrsp();
+					break;
+				}
+			}
+			if(jrspj<=0) {
+				return "当天的基金行情信息还未配置";
+			}
+		}else {
+			return "当天的基金行情信息还未配置";
+		}
+		//根据申购金额以及行情信息计算出申购份额
+		int sgsl = (int) (tqsb.getAmount() / jrspj);
+		tqsb.setQuantity(sgsl);
 		//查询持仓余额表
 		selectCcyebAmount(tqsb.getZtbh());
 		
