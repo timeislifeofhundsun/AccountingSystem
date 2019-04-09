@@ -447,7 +447,7 @@ public class XgQsbServiceImpl implements XgQsbService {
             System.out.println(qsk_qc);
             TCcyeb tCcyeb_insert = new TCcyeb();
             tCcyeb_insert.setZtbh(tQsb.getZtbh()).setZqdm(tQsb.getZqcode()).setCysl(tQsb.getQuantity())
-                    .setZqcb(tQsb.getAmount()).setFsrq(tQsb.getRq()).setExtenda("13");
+                    .setZqcb(tQsb.getAmount()).setFsrq(tQsb.getRq()).setExtenda("13").setLjgz(0.0);
             tCcyebMapper.insertTCcyeb(tCcyeb_insert);
         }
 
