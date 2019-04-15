@@ -31,12 +31,12 @@ layui.use(['form','element','layer','jquery'],function(){
     //上次登录时间【此处应该从接口获取，实际使用中请自行更换】
     $(".loginTime").html(newDate.split("日")[0]+"日</br>"+newDate.split("日")[1]);
     //icon动画
-    $(".panel a").hover(function(){
+    $(".panel1 a").hover(function(){
         $(this).find(".layui-anim").addClass("layui-anim-scaleSpring");
     },function(){
         $(this).find(".layui-anim").removeClass("layui-anim-scaleSpring");
     })
-    $(".panel a").click(function(){
+    $(".panel1 a").click(function(){
         parent.addTab($(this));
     })
     //系统基本参数
