@@ -110,7 +110,7 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
                 // 渲染行颜色
                 var curr = 0;
                 var index = 0;
-                var color = "#93FF93";
+                var color = "#D2E9FF";
                 $.each(res.data, function () {
                     var tr = $(".layui-table tbody").find("tr").eq(index);
                     if (curr == 0) {
@@ -120,10 +120,10 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
                         if (curr == this.pzid) {
                             tr.css("background", color);
                         } else {
-                            if (color == "#93FF93") {
+                            if (color == "#D2E9FF") {
                                 color = "white";
                             } else {
-                                color = "#93FF93";
+                                color = "#D2E9FF";
                             }
                             tr.css("background", color);
                             curr = this.pzid;
