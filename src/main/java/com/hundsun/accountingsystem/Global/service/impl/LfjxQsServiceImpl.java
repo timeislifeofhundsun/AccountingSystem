@@ -172,7 +172,7 @@ public class LfjxQsServiceImpl implements LfjxQsService {
 					, ztbh, "其他费用-信息披露费", qsb.getAmount()
 					,zhaiyao,ywrq);
 			dai = new TPzb(null, "51", null, null, null, null, null //id,extenda=11(类别),extend
-					, "借", pzid,null //kjkm
+					, "贷", pzid,null //kjkm
 					, ztbh, "待摊费用-待摊信息披露费",qsb.getAmount()
 					,zhaiyao,ywrq);
 		}else if(ywlb==5102){
@@ -183,7 +183,7 @@ public class LfjxQsServiceImpl implements LfjxQsService {
 					, ztbh, "其他费用-审计费用", qsb.getAmount()
 					,zhaiyao,ywrq);
 			dai = new TPzb(null, "51", null, null, null, null, null //id,extenda=11(类别),extend
-					, "借", pzid,null //kjkm
+					, "贷", pzid,null //kjkm
 					, ztbh, "预提费用-审计费用",qsb.getAmount()
 					,zhaiyao,ywrq);
 		}else{
