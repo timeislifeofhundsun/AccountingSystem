@@ -40,16 +40,16 @@ public class TjjgzServiceImpl implements TjjgzService {
 	public void countJjgz(String date) throws Exception {
 		/*
 		 * 点击基金估值按钮后，后台会接收到一个时间数据
-		 * 1.根据该时间去清算表中查询是否有当天的估值数据，如果有数据则提示“当天基金已经估值成功，请不要重复估值”，程序结束
+		 * 1.根据该时间去清算表中查询是否有当天的估值数据，如果有数据则查询出数据，并恢复持仓，恢复持仓后删除原有的清算数据
 		 * 2.如果从清算表中查询不到当天的估值数据，则进行如下操作：
 		 * 3.从持仓表中拿出到今天为止的所有非货币基金持仓数据
 		 * 4.遍历每一条持仓数据做如下操作：更新持仓的估值增值，并往清算表中插入一条估值数据
 		 * */
 		//根据ywlb=4203 和 rq = date 去清算表中查询数据，并判断是否有当天的估值数据
 		boolean flag = selectTqsb(date);
-		if(!flag) {
+		/*if(!flag) {
 			throw new Exception("当天基金已经估值成功，请不要重复 估值");
-		}
+		}*/
 		
 		//从持仓表中拿出到今天为止的所有非货币基金持仓数据
 		List<TCcyeb> ccList = selectTccyeb(date);
@@ -145,8 +145,22 @@ public class TjjgzServiceImpl implements TjjgzService {
 		assist.setRequires(Assist.andEq("ywlb", 4203));
 		assist.setRequires(Assist.andEq("rq", date));
 		
-		List<TQsb> list = tqsbMapper.selectTQsb(assist);
+		List<TQsb> list = tqsbMapper.selectTQsb(assist);		
 		if(list!=null && list.size()>0){
+			//遍历每一条清算数据，恢复持仓余额表
+			for(int i = 0;i<list.size();i++) {
+				TQsb tQsb = list.get(i);
+				Assist assist1 = new Assist();
+				assist1.setRequires(Assist.andEq("ztbh", tQsb.getZtbh()));
+				assist1.setRequires(Assist.andEq("zqdm", tQsb.getZqcode()));
+				List<TCcyeb> selectTCcyeb = tccyebMapper.selectTCcyeb(assist1);
+				if(selectTCcyeb != null && selectTCcyeb.size()>0) {
+					TCcyeb tCcyeb = selectTCcyeb.get(0);
+					tCcyeb.setLjgz(tCcyeb.getLjgz()-tQsb.getGyjzbd());
+					tccyebMapper.updateTCcyebById(tCcyeb);
+					tqsbMapper.deleteTQsbById(tQsb.getId());
+				}
+			}
 			return false;
 		}
 		
