@@ -3,6 +3,7 @@ package com.hundsun.accountingsystem.TGp.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hundsun.accountingsystem.Global.bean.TPzb;
+import com.hundsun.accountingsystem.Global.service.LfjxQsService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TGp.service.GPPZService;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
@@ -40,6 +41,9 @@ public class XGPzController {
 
     @Autowired
     HGPZBService hgpzbService;
+    
+    @Autowired
+    LfjxQsService lfjxQsService;    
 
     /**
     * @Author yangjf25257
@@ -64,6 +68,7 @@ public class XGPzController {
                 tjjScpzService.scpz(ztbh,sdf.format(rq));
                 gppzService.insertGPPZ(ztbh, rq);
                 hgpzbService.HG_pz(ztbh,rq);
+                lfjxQsService.lfjxPz(ztbh, rq);
             }
         } catch (ParseException e) {
         	e.printStackTrace();
