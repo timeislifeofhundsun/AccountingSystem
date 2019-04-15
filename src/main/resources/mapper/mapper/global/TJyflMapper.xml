@@ -18,6 +18,9 @@
   <select id="findAllTJyfl" resultType="com.hundsun.accountingsystem.Global.bean.TJyfl">
       select * from t_jyfl;
     </select>
+  <select id="searchTJyfl" parameterType="java.lang.String" resultType="com.hundsun.accountingsystem.Global.bean.TJyfl">
+      select * from t_jyfl where ywcode like CONCAT('%',#{keyword},'%') or ywname like CONCAT('%',#{keyword},'%')
+    </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

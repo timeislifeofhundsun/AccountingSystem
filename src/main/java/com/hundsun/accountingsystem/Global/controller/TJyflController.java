@@ -31,12 +31,19 @@ public class TJyflController {
   @Autowired
   public TJyflService tJyflService;
   @GetMapping("/TJyfl")
-  public String getAllTJyfl(@RequestParam(value ="indexpage" ) int indexpage,@RequestParam(value = "sizepage") int sizepage){
-    List<TJyfl> list = tJyflService.getTJyflPage(indexpage,sizepage);
-    List<TJyfl> allTJyfl = tJyflService.findAllTJyfl();
+  public String getAllTJyfl(@RequestParam(value ="page" ) int page,@RequestParam(value = "limit") int limit,@RequestParam(value = "keyword",required = false)String keyword){
+    List<TJyfl> list ;
+    List<TJyfl> alllist;
     TJyflVO layuiJson = new TJyflVO();
+    if (keyword==null){
+      list = tJyflService.getTJyflPage(page,limit);
+      alllist = tJyflService.findAllTJyfl();
+    }else{
+      list = tJyflService.searchTJyflPage(page,limit,keyword);
+      alllist = tJyflService.searchTJyfl(keyword);
+    }
     layuiJson.setCode(0);
-    layuiJson.setCount(allTJyfl.size());
+    layuiJson.setCount(alllist.size());
     layuiJson.setMsg("");
     layuiJson.setData(list);
     String jsonString = JSON.toJSONString(layuiJson);

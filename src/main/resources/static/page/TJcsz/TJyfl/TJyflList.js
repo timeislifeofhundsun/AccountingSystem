@@ -20,15 +20,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         url : '/TJyfl',
         method: 'GET',
         cellMinWidth : 95,
-        request: {
-            pageName: 'indexpage', //页码的参数名称，默认：page
-            limitName: 'sizepage' //每页数据量的参数名，默认：limit
-        },
         page : true,
         height : "full-125",
         limit : 10,
         limits : [10,15,20,25],
-        id : "newsListTable",
+        id : "TJyfltable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
             {field: 'ywcode', title: '业务代码',  align:"center"},
@@ -79,6 +75,25 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         if(layEvent === 'edit'){ //编辑
             EditTJyfl(data);
         }
+    });
+    var $ = layui.$, active = {
+        reload: function(){
+            var keyword = $('#keyword').val();
+            //执行重载
+            table.reload('TJyfltable', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                ,where: {
+                    keyword: keyword
+                }
+            });
+        }
+    };
+    //点击搜索TZqxx_Search
+    $("#search").click(function () {
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
     });
 
 })

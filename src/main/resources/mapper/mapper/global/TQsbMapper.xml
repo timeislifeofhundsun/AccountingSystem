@@ -171,6 +171,15 @@
             #{ywlb}
         </foreach>
     </select>
+    <select id="searchTQsb" resultType="com.hundsun.accountingsystem.Global.bean.TQsb">
+        select * from t_qsb where extenda=#{extenda} and extendc=#{extendc} and ywlb in
+        <foreach collection="ywlb" item="ywlb" index="index"
+                 open="(" close=")" separator=",">
+            #{ywlb}
+        </foreach>
+        and (ztbh like CONCAT('%',#{keyword},'%')
+        or zqcode like CONCAT('%',#{keyword},'%'))
+    </select>
     <delete id="deleteAllTQsb" >
         delete from t_qsb where ztbh=#{ztbh} and extenda=#{extenda} and extendc=#{extendc} and ywlb in
         <foreach collection="ywlb" item="ywlb" index="index"

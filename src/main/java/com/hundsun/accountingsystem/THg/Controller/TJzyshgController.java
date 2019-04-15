@@ -13,6 +13,7 @@ import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.THg.Service.TJzyshgService;
+import com.hundsun.accountingsystem.THg.Service.TQsbSearchService;
 import com.hundsun.accountingsystem.THg.VO.TJzyshgVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,16 +34,25 @@ public class TJzyshgController {
   public TJzyshgService tJzyshgService;
   @Autowired
   public TCcyebMapper tCcyebMapper;
+  @Autowired
+  public TQsbSearchService tQsbSearchService;
 
   @GetMapping(value = "/TJzyshg")
   public String getAllTYzyshg(@RequestParam(value = "ckrq",required = true)String data,
                               @RequestParam(value ="indexpage" ) int indexpage,
-                              @RequestParam(value = "sizepage") int sizepage) {
-    System.out.println(data);
+                              @RequestParam(value = "sizepage") int sizepage,
+                              @RequestParam(value = "keyword",required = false) String keyword) {
     int[] ywlb = {3101,3102};
-    List<TQsb> alltQsbs = tJzyshgService.findAllTQsb(ywlb,data,"303");
-    List<TQsb> tQsbs = tJzyshgService.selectTQsbbyPage(ywlb,data,"303", indexpage, sizepage);
+    List<TQsb> alltQsbs;
+    List<TQsb> tQsbs;
     TJzyshgVO layuiJson = new TJzyshgVO();
+    if (keyword==null){
+      alltQsbs= tJzyshgService.findAllTQsb(ywlb,data,"303");
+      tQsbs= tJzyshgService.selectTQsbbyPage(ywlb,data,"303", indexpage, sizepage);
+    }else{
+      alltQsbs =tQsbSearchService.search(ywlb,data,"303",keyword);
+      tQsbs= tQsbSearchService.searchPage(ywlb,data,"303",keyword, indexpage, sizepage);
+    }
     layuiJson.setCode(0);
     layuiJson.setCount(alltQsbs.size());
     layuiJson.setMsg("");

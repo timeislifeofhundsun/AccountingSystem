@@ -34,4 +34,8 @@ public interface TJyflService {
   int updateByPrimaryKey(TJyfl record);
   //查询全部交易费率
   List<TJyfl> findAllTJyfl();
+  //分页搜索
+  public List<TJyfl> searchTJyflPage(int curr, int pagesize,String keyword);
+  //搜索
+  public List<TJyfl> searchTJyfl(String keyword);
 }

@@ -34,4 +34,6 @@ public interface TZqxxMapper {
     int updateByPrimaryKey(TZqxx record);
 
     List<TZqxx> findAllTZqxx();
+
+    List<TZqxx> searchTZqxx(@Param("keyword")String keyword);
 }

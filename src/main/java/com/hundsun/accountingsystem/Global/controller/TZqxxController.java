@@ -38,10 +38,17 @@ public class TZqxxController {
   public TZqxxMapper tZqxxMapper;
 
   @GetMapping("/TZqxx")
-  public String getAllZqxx(@RequestParam(value ="indexpage" ) int indexpage,@RequestParam(value = "sizepage") int sizepage ){
-    List<TZqxx> list = tZqxxService.getTZqxxPage(indexpage,sizepage);
-    List<TZqxx> alllist = tZqxxService.findAllTZqxx();
+  public String getAllZqxx(@RequestParam(value ="page" ) int page,@RequestParam(value = "limit") int limit,@RequestParam(value = "keyword",required = false)String keyword ){
+    List<TZqxx> list ;
+    List<TZqxx> alllist;
     TZqxxVO layuiJson = new TZqxxVO();
+    if (keyword==null){
+      list = tZqxxService.getTZqxxPage(page,limit);
+      alllist = tZqxxService.findAllTZqxx();
+    }else{
+      list = tZqxxService.searchTZqxxPage(page,limit,keyword);
+      alllist = tZqxxService.searchTZqxx(keyword);
+    }
     layuiJson.setCode(0);
     layuiJson.setCount(alllist.size());
     layuiJson.setMsg("");

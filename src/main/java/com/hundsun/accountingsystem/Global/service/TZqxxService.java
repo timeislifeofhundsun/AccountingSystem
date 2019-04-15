@@ -19,4 +19,8 @@ public interface TZqxxService {
 	int deleteByPrimaryKey(Integer zqnm);
 	//通过证券类别获取证券信息
 	public List<TZqxx> selectByZqlb(int zqlb);
+	//分页搜索
+	public List<TZqxx> searchTZqxxPage(int curr, int pagesize,String keyword);
+    //搜索
+    public List<TZqxx> searchTZqxx(String keyword);
 }

@@ -94,6 +94,8 @@ public interface TQsbMapper{
 
     List<TQsb> findAllTQsb(@Param("ywlb")int[] ywlb,@Param("extenda") String extenda ,@Param("extendc") String extendc);
 
+	List<TQsb> searchTQsb(@Param("ywlb")int[] ywlb,@Param("extenda") String extenda ,@Param("extendc") String extendc,@Param("keyword")String keyword);
+
 	int deleteAllTQsb(@Param("ywlb")int[] ywlb,@Param("extenda") String extenda ,@Param("extendc") String extendc,@Param("ztbh") int ztbh);
 	
 	/**

@@ -80,4 +80,23 @@ public class TJyflServiceImpl implements TJyflService {
     List<TJyfl> allTJyfl = tJyflMapper.findAllTJyfl();
     return allTJyfl;
   }
+
+  @Override
+  public List<TJyfl> searchTJyflPage(int curr, int pagesize, String keyword) {
+    List<TJyfl> tJyfls = tJyflMapper.searchTJyfl(keyword);
+    int firstindex = (curr - 1) * pagesize;
+    int lastindex = curr * pagesize;
+    if (lastindex > tJyfls.size()) {
+      return tJyfls.subList(firstindex, tJyfls.size());
+    }
+    if (firstindex > tJyfls.size()) {
+      return null;
+    }
+    return tJyfls.subList(firstindex, lastindex);
+  }
+
+  @Override
+  public List<TJyfl> searchTJyfl(String keyword) {
+    return tJyflMapper.searchTJyfl(keyword);
+  }
 }

@@ -18,6 +18,7 @@ import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.Global.util.FileParsing;
 import com.hundsun.accountingsystem.THg.Service.HGQSService;
+import com.hundsun.accountingsystem.THg.Service.TQsbSearchService;
 import com.hundsun.accountingsystem.THg.Service.TYzyshgService;
 import com.hundsun.accountingsystem.THg.VO.TYzyshgVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +48,26 @@ public class TYzyshgController {
   public TQsbMapper tQsbMapper;
   @Autowired
   public HGQSService hgqsService;
-
+  @Autowired
+  public TQsbSearchService tQsbSearchService;
   @GetMapping(value = "/TYzyshg")
   public String getAllTYzyshg(@RequestParam(value = "ckrq", required = true) String data,
                               @RequestParam(value = "indexpage") int indexpage,
-                              @RequestParam(value = "sizepage") int sizepage) {
-    System.out.println(data);
+                              @RequestParam(value = "sizepage") int sizepage,
+                              @RequestParam(value = "keyword",required = false) String keyword) {
     //限定获取数据为银行回购
     int[] ywlb = {3103, 3104};
-    //301表示为银行质押式回购 302表示为银行买断式回购 303表示交易所质押式回购
-    List<TQsb> alltQsbs = tYzyshgService.findAllTQsb(ywlb, data, "301");
-    List<TQsb> tQsbs = tYzyshgService.selectTQsbbyPage(ywlb, data, "301", indexpage, sizepage);
+    List<TQsb> alltQsbs;
+    List<TQsb> tQsbs;
     TYzyshgVO layuiJson = new TYzyshgVO();
+    //301表示为银行质押式回购 302表示为银行买断式回购 303表示交易所质押式回购
+    if (keyword==null){
+      alltQsbs = tYzyshgService.findAllTQsb(ywlb, data, "301");
+      tQsbs = tYzyshgService.selectTQsbbyPage(ywlb, data, "301", indexpage, sizepage);
+    }else{
+      alltQsbs =tQsbSearchService.search(ywlb,data,"301",keyword);
+      tQsbs= tQsbSearchService.searchPage(ywlb,data,"301",keyword, indexpage, sizepage);
+    }
     layuiJson.setCode(0);
     layuiJson.setCount(alltQsbs.size());
     layuiJson.setMsg("");

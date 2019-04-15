@@ -192,6 +192,7 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
 
     var $ = layui.$, active = {
         reload: function () {
+            var keyword = $('#keyword').val();
             var reloaddate;
             if (document.getElementById("ckrq").value == "") {
                 reloaddate = newdate;
@@ -205,13 +206,18 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
                     curr: 1 //重新从第 1 页开始
                 }
                 , where: {
-                    ckrq: reloaddate
+                    ckrq: reloaddate,
+                    keyword:keyword
                 }
             });
         }
     };
 
     $('#ckrqbtn').on('click', function () {
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
+    });
+    $("#search").click(function () {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });

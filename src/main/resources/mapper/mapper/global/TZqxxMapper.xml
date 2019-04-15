@@ -24,6 +24,10 @@
       select * from t_zqxx where zqdm = #{zqdm,jdbcType=VARCHAR}
   </select>
 
+    <select id="searchTZqxx" parameterType="java.lang.String" resultType="com.hundsun.accountingsystem.Global.bean.TZqxx">
+      select * from t_zqxx where zqdm like CONCAT('%',#{keyword},'%') or zqjg like CONCAT('%',#{keyword},'%')
+    </select>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

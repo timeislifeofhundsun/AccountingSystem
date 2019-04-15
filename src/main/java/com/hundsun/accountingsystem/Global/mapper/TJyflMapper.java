@@ -2,6 +2,7 @@ package com.hundsun.accountingsystem.Global.mapper;
 
 import com.hundsun.accountingsystem.Global.bean.TJyfl;
 import com.hundsun.accountingsystem.Global.bean.TKjkmb;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface TJyflMapper {
     int updateByPrimaryKey(TJyfl record);
 
     List<TJyfl> findAllTJyfl();
+
+    List<TJyfl> searchTJyfl(@Param("keyword")String keyword);
 }
