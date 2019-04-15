@@ -39,6 +39,14 @@ layui.use(['form','element','layer','jquery'],function(){
     $(".panel1 a").click(function(){
         parent.addTab($(this));
     })
+    $(".panel a").hover(function(){
+        $(this).find(".layui-anim").addClass("layui-anim-scaleSpring");
+    },function(){
+        $(this).find(".layui-anim").removeClass("layui-anim-scaleSpring");
+    })
+    $(".panel a").click(function(){
+        parent.addTab($(this));
+    })
     //系统基本参数
     /*if(window.sessionStorage.getItem("systemParameter")){
         var systemParameter = JSON.parse(window.sessionStorage.getItem("systemParameter"));
