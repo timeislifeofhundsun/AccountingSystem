@@ -65,9 +65,15 @@ public class THqbServiceImpl implements THqbService {
 		 * 插入新的行情数据
 		 */
 		try {
-			List<THqb> tHqbs = this.getbeanByXML(SZFilePath, date);
-			List<THqb> temp = this.getBeanByTxt(SHFilePath, date);
-			tHqbs.addAll(temp);
+			List<THqb> tHqbs = new ArrayList<THqb>();
+			if(SZFilePath != null) {
+				tHqbs = this.getbeanByXML(SZFilePath, date);
+			}
+			
+			if(SHFilePath != null) {
+				List<THqb> temp = this.getBeanByTxt(SHFilePath, date);
+				tHqbs.addAll(temp);
+			}
 			tHqbMapper.insertTHqbByBatch(tHqbs);
 			res = true;
 		}catch (NullPointerException e) {
@@ -130,6 +136,12 @@ public class THqbServiceImpl implements THqbService {
 			tHqb.setZqdm(zqdm);
 			if(zqxxMap.get(zqdm)!=null && zqxxMap.get(zqdm).getSclb()==2) {
 				tHqb.setZqnm(zqxxMap.get(zqdm).getZqlb());
+				Integer fxfs = zqxxMap.get(zqdm).getFxfs();
+				if(fxfs==1) {
+					tHqb.setCjsl(1);
+				}else {
+					tHqb.setCjsl(2);
+				}
 				tHqbs.add(tHqb);
 			}
 		}
@@ -220,6 +232,8 @@ public class THqbServiceImpl implements THqbService {
 
 	@Override
 	public void updateHqxx(THqb thqb) {
+		THqb selectTHqbById = tHqbMapper.selectTHqbById(thqb.getId());
+		thqb.setCjsl(selectTHqbById.getCjsl());
 		tHqbMapper.updateTHqbById(thqb);
 		
 	}

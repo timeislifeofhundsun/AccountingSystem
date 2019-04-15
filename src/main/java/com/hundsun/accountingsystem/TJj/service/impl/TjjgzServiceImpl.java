@@ -50,6 +50,7 @@ public class TjjgzServiceImpl implements TjjgzService {
 		if(!flag) {
 			throw new Exception("当天基金已经估值成功，请不要重复 估值");
 		}
+		
 		//从持仓表中拿出到今天为止的所有非货币基金持仓数据
 		List<TCcyeb> ccList = selectTccyeb(date);
 		//遍历每一条持仓数据做如下操作：更新持仓的估值增值，并往清算表中插入一条估值数据

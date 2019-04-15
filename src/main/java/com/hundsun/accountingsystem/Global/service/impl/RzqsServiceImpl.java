@@ -9,6 +9,9 @@ import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.service.*;
 import com.hundsun.accountingsystem.TGp.service.XgQsbService;
 import com.hundsun.accountingsystem.THg.Service.HGQSService;
+import com.hundsun.accountingsystem.TJj.service.TjjFhService;
+import com.hundsun.accountingsystem.TJj.service.TjjgzService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +50,12 @@ public class RzqsServiceImpl implements RzqsService {
 
 	@Autowired
 	private HGQSService hgqsService;
+	
+	@Autowired
+	private TjjFhService tjjfhServiceImpl;
+	
+	@Autowired
+	private TjjgzService tjjgzServiceImpl;
 
 	/**
 	* @Description: 日终清算
@@ -110,7 +119,7 @@ s	* @return boolean    返回类型
             /**
              * 2.读取行情数据
              */
-			if(cash!=null && mkt!=null){
+			if(cash!=null || mkt!=null){
                 returnData = tHqbService.readHqDataByFile(mkt, cash, ywrq);
                 if(!returnData) {
                     throw new Exception("读取行情文件失败");
@@ -156,8 +165,13 @@ s	* @return boolean    返回类型
 				throw new Exception("回购交易清算失败");
 			}
 			/**
-			 * 8.回购清算
+			 * 8.基金清算
 			 */
+			
+			tjjfhServiceImpl.countJjfh(DateFormatUtil.getStringByDate(ywrq));
+
+			tjjgzServiceImpl.countJjgz(DateFormatUtil.getStringByDate(ywrq));
+			
 
 		}
 

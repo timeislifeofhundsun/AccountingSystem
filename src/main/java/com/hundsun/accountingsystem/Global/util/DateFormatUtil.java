@@ -47,7 +47,7 @@ public class DateFormatUtil {
 		now.setTime(date);
 		@SuppressWarnings("deprecation")
 		int today = now.getTime().getDay();// 取得今天的星期值
-		if (today != 6 && today != 7) {
+		if (today != 6 && today != 0) {
 			res = true;
 		}
 		return res;
