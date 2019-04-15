@@ -49,10 +49,11 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 		}
 		else
 		{
-			int maxZtbh = tztxxbMapper.getMaxZtbh();
+			tztxxbMapper.insert(tztxxb);
+			int ztbh = tztxxb.getZtbh();
 			List<TCcyeb> tccyebList = new ArrayList<TCcyeb>();
 			TCcyeb tccyeb = new TCcyeb();
-			tccyeb.setZtbh(maxZtbh+1);
+			tccyeb.setZtbh(ztbh);
 			tccyeb.setKjkmdm("100201");
 			tccyeb.setFsrq(tztxxb.getCreatedate());
 			tccyeb.setZqcb(tztxxb.getMoney());
@@ -60,7 +61,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			tccyebList.add(tccyeb);
 			
 			TCcyeb tccyeb1 = new TCcyeb();
-			tccyeb1.setZtbh(maxZtbh+1);
+			tccyeb1.setZtbh(ztbh);
 			tccyeb1.setKjkmdm("400101");
 			tccyeb1.setFsrq(tztxxb.getCreatedate());
 			tccyeb1.setCysl(tztxxb.getNumber());
@@ -70,7 +71,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb2 = new TCcyeb();
 			tccyeb2.setKjkmdm("6201");
-			tccyeb2.setZtbh(maxZtbh+1);
+			tccyeb2.setZtbh(ztbh);
 			tccyeb2.setZqcb(0.0);
 			tccyeb2.setFsrq(tztxxb.getCreatedate());
 			tccyeb2.setExtenda("交易费用_股票");
@@ -78,7 +79,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb3 = new TCcyeb();
 			tccyeb3.setKjkmdm("6202");
-			tccyeb3.setZtbh(maxZtbh+1);
+			tccyeb3.setZtbh(ztbh);
 			tccyeb3.setZqcb(0.0);
 			tccyeb3.setFsrq(tztxxb.getCreatedate());
 			tccyeb3.setExtenda("交易费用_回购");
@@ -86,7 +87,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 
 			TCcyeb tccyeb4 = new TCcyeb();
 			tccyeb4.setKjkmdm("6203");
-			tccyeb4.setZtbh(maxZtbh+1);
+			tccyeb4.setZtbh(ztbh);
 			tccyeb4.setZqcb(0.0);
 			tccyeb4.setFsrq(tztxxb.getCreatedate());
 			tccyeb4.setExtenda("交易费用_基金");
@@ -94,7 +95,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb5 = new TCcyeb();
 			tccyeb5.setKjkmdm("1131");
-			tccyeb5.setZtbh(maxZtbh+1);
+			tccyeb5.setZtbh(ztbh);
 			tccyeb5.setZqcb(0.0);
 			tccyeb5.setFsrq(tztxxb.getCreatedate());
 			tccyeb5.setExtenda("证券清算款_股票");
@@ -102,7 +103,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb6 = new TCcyeb();
 			tccyeb6.setKjkmdm("1132");
-			tccyeb6.setZtbh(maxZtbh+1);
+			tccyeb6.setZtbh(ztbh);
 			tccyeb6.setZqcb(0.0);
 			tccyeb6.setFsrq(tztxxb.getCreatedate());
 			tccyeb6.setExtenda("证券清算款_回购");
@@ -110,7 +111,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb7 = new TCcyeb();
 			tccyeb7.setKjkmdm("1133");
-			tccyeb7.setZtbh(maxZtbh+1);
+			tccyeb7.setZtbh(ztbh);
 			tccyeb7.setZqcb(0.0);
 			tccyeb7.setFsrq(tztxxb.getCreatedate());
 			tccyeb7.setExtenda("证券清算款_基金");
@@ -118,7 +119,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb8 = new TCcyeb();
 			tccyeb8.setKjkmdm("2001");
-			tccyeb8.setZtbh(maxZtbh+1);
+			tccyeb8.setZtbh(ztbh);
 			tccyeb8.setZqcb(0.0);
 			tccyeb8.setFsrq(tztxxb.getCreatedate());
 			tccyeb8.setExtenda("应付交易费用_股票");
@@ -126,7 +127,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb9 = new TCcyeb();
 			tccyeb9.setKjkmdm("2002");
-			tccyeb9.setZtbh(maxZtbh+1);
+			tccyeb9.setZtbh(ztbh);
 			tccyeb9.setZqcb(0.0);
 			tccyeb9.setFsrq(tztxxb.getCreatedate());
 			tccyeb9.setExtenda("应付交易费用_回购");
@@ -134,7 +135,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb10 = new TCcyeb();
 			tccyeb10.setKjkmdm("2003");
-			tccyeb10.setZtbh(maxZtbh+1);
+			tccyeb10.setZtbh(ztbh);
 			tccyeb10.setZqcb(0.0);
 			tccyeb10.setFsrq(tztxxb.getCreatedate());
 			tccyeb10.setExtenda("应付交易费用_基金");
@@ -142,7 +143,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb11 = new TCcyeb();
 			tccyeb11.setKjkmdm("6001");
-			tccyeb11.setZtbh(maxZtbh+1);
+			tccyeb11.setZtbh(ztbh);
 			tccyeb11.setZqcb(0.0);
 			tccyeb11.setFsrq(tztxxb.getCreatedate());
 			tccyeb11.setExtenda("投资收益_股票");
@@ -150,7 +151,7 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb12 = new TCcyeb();
 			tccyeb12.setKjkmdm("6002");
-			tccyeb12.setZtbh(maxZtbh+1);
+			tccyeb12.setZtbh(ztbh);
 			tccyeb12.setZqcb(0.0);
 			tccyeb12.setFsrq(tztxxb.getCreatedate());
 			tccyeb12.setExtenda("投资收益_回购");
@@ -158,14 +159,14 @@ public class TZtxxbServiceImpl implements TZtxxbService {
 			
 			TCcyeb tccyeb13 = new TCcyeb();
 			tccyeb13.setKjkmdm("6003");
-			tccyeb13.setZtbh(maxZtbh+1);
+			tccyeb13.setZtbh(ztbh);
 			tccyeb13.setZqcb(0.0);
 			tccyeb13.setFsrq(tztxxb.getCreatedate());
 			tccyeb13.setExtenda("投资收益_基金");
 			tccyebList.add(tccyeb13);
 			
 			tccyebMapper.insertTCcyebByBatch(tccyebList);
-			tztxxbMapper.insert(tztxxb);
+			
 		}
 		
 	}
