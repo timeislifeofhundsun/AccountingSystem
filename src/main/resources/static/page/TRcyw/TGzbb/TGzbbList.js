@@ -49,16 +49,30 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                     elem: '#data'
                     ,url:'/get_bb/?ztbh='+$("#ztbh").val()
                     ,title: '用户数据表'
+                    ,cellMinWidth: 60
                     ,cols: [[
-                        {type: 'checkbox', fixed: 'left'}
-                        ,{field:'kmmc', title:'科目名称'}
-                        ,{field:'sl', title:'数量',style:'color: red;'}
-                        ,{field:'zqcb', title:'成本',style:'color: red;'}
-                        ,{field:'ljgz', title:'估值增值',style:'color: red;'}
-                        ,{field:'ljjx', title:'累计计息', style:'color: red;'}
+                        {field:'kmmc', title:'科目名称', align:"left", width: "19%"}
+                        ,{field:'sl', title:'数量', align:"right",style:'color: red;', width: "16%"}
+                        ,{field:'zqcb', title:'成本', align:"right",style:'color: red;', width: "16%"}
+                        ,{field:'ljgz', title:'估值增值', align:"right",style:'color: red;', width: "16%"}
+                        ,{field:'ljjx', title:'累计计息', align:"right",style:'color: red;', width: "16%"}
+                        ,{field:'dwcb', title:'单位成本', align:"right",style:'color: red;', width: "16%"}
                     ]]
+                   , done: function (res, curr, count) {
+                         // 渲染行颜色
+                         var index = 0;
+                         $.each(res.data, function () {
+                             var curr = this.kmmc;
+                             console.log(this);
+                             var tr = $(".layui-table tbody").find("tr").eq(index);
+                             if (curr.indexOf("汇总") != -1) {
+                                 tr.css("font-weight", "bold");
+                             }
+                             index++;
+                         });
+                     }
                     ,page: false
-                    
+
                 });
     })
 })

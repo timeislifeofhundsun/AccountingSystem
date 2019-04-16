@@ -97,14 +97,14 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             , title: '用户数据表'
             , cellMinWidth: 95
             , cols: [[
-                {field: 'pzid', title: '凭证编号', align: "center"}
-                , {field: 'ztbh', title: '账套', align: "center"}
-                , {field: 'rq', title: '日期', align: "center"}
-                , {field: 'kmmc', title: '科目名称', align: "center"}
-                , {field: 'zy', title: '摘要', align: "center", width: "35%"}
-                , {field: 'BS', title: '借贷', align: "center"}
-                , {field: 'jfje', title: '借方金额', align: "center"}
-                , {field: 'dfje', title: '贷方金额', align: "center"}
+                {field: 'pzid', title: '凭证编号', align: "left", width: "10%"}
+                , {field: 'ztbh', title: '账套', align: "left", width: "10%"}
+                , {field: 'rq', title: '日期', align: "center", width: "10%"}
+                , {field: 'kmmc', title: '科目名称', align: "left", width: "10%"}
+                , {field: 'zy', title: '摘要', align: "left", width: "21%"}
+                , {field: 'BS', title: '借贷', align: "center", width: "9%"}
+                , {field: 'jfje', title: '借方金额', align: "right", width: "14%"}
+                , {field: 'dfje', title: '贷方金额', align: "right", width: "14%"}
             ]]
             , done: function (res, curr, count) {
                 // 渲染行颜色

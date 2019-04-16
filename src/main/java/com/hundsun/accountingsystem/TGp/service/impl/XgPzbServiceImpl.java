@@ -11,11 +11,11 @@ import com.hundsun.accountingsystem.Global.service.TSequenceService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -56,6 +56,7 @@ public class XgPzbServiceImpl implements XgPzbService {
      **/
     @Override
     public JSONArray get_pz(int ztbh, Date rq) {
+        DecimalFormat    df   = new DecimalFormat("######0.00"); //保留两位有效数字
         JSONArray returnData = new JSONArray();
         //查询条件
         Assist assist = new Assist();
@@ -78,8 +79,8 @@ public class XgPzbServiceImpl implements XgPzbService {
             obj.put("kmmc",tPzb.getKmms());
             obj.put("zy",tPzb.getZy());
             obj.put("BS",tPzb.getBs());
-            obj.put("jfje",tPzb.getBs().equals("借") ? tPzb.getJe() : 0);
-            obj.put("dfje",tPzb.getBs().equals("贷") ? tPzb.getJe() : 0);
+            obj.put("jfje",tPzb.getBs().equals("借") ? df.format(tPzb.getJe()) : df.format(0));
+            obj.put("dfje",tPzb.getBs().equals("贷") ? df.format(tPzb.getJe()) : df.format(0));
             obj.put("pzid",tPzb.getPzid());
             returnData.add(obj);
         }
@@ -95,6 +96,7 @@ public class XgPzbServiceImpl implements XgPzbService {
      **/
     @Override
     public JSONArray get_bb(int ztbh) {
+        DecimalFormat    df   = new DecimalFormat("######0.00"); //保留两位有效数字
         JSONArray returnData = new JSONArray();
         Assist assist = new Assist();
         assist.setRequires(Assist.andEq("ztbh",ztbh));
@@ -240,9 +242,13 @@ public class XgPzbServiceImpl implements XgPzbService {
                 }
             }
             obj.put("sl", tCcyeb.getCysl());
-            obj.put("zqcb",tCcyeb.getZqcb());
-            obj.put("ljgz",tCcyeb.getLjgz());
-            obj.put("ljjx",tCcyeb.getLjjx());
+            obj.put("zqcb",df.format(tCcyeb.getZqcb()));
+            obj.put("ljgz",tCcyeb.getLjgz() == null ? df.format(0) :df.format(tCcyeb.getLjgz()));
+            if (tCcyeb.getCysl() != null && tCcyeb.getCysl() > 0 && tCcyeb.getZqcb() > 0){
+                double dwcb = tCcyeb.getZqcb() / tCcyeb.getCysl();
+                obj.put("dwcb",df.format(dwcb));
+            }
+            obj.put("ljjx",tCcyeb.getLjjx() == null ? df.format(0) : df.format(tCcyeb.getLjjx()));
             returnData.add(obj);
         }
         return returnData;
