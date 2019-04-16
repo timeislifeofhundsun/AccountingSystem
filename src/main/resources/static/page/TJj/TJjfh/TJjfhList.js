@@ -72,15 +72,15 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 	        limits : [10,15,20,25],
 	        id : "newsListTable",
 	        cols : [[
-	            {type: "checkbox", fixed:"left", width:50},
+	        	{type: "checkbox", fixed:"left", width:50},
 	            {field: 'id',title: '编号', align: 'center',width:80},
-	            {field: 'ztbh', title: '账套编号',  align:"center"},
+	            {field: 'ztbhname', title: '账套编号',  align:"center",width:200},
 	            {field: 'fsrq', title: '发生日期', align:'center',width:150},
 	            {field: 'zqdm', title: '证券代码', align:'center'},
 	            {field: 'cysl', title: '持有数量', align:'center',width:150},
 	            {field: 'zqcb', title: '证券成本', align:'center',width:150},
-	            {field: 'extenda', title: '基金信息', align:'center',width:250},
-	            {field: 'ljgz', title: '累计估增（红利）', align:'center',width:250}
+	            {field: 'extenda', title: '基金信息', align:'center',width:200},
+	            {field: 'ljgz', title: '累计估增（红利）', align:'center',width:200}
 	           /* {title: '操作', width:170, templet:'#TShqrListBar',fixed:"right",align:"center"}*/
 	        ]],
 	        /*done: function () {

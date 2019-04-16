@@ -71,7 +71,8 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 	        cols : [[
 	            {type: "checkbox", fixed:"left", width:50},
 	            {field: 'id',title: '编号', align: 'center'},
-	            {field: 'ztbh', title: '账套编号',  align:"center"},
+	            {field: 'ztbh',title: '账套编号',  align:"center",width:100},
+	            {field: 'ztbhname', title: '账套名称',  align:"center",width:200},
 	            {field: 'rq', title: '赎回日期', align:'center',width:150},
 	            {field: 'zqcode', title: '证券代码', align:'center'},
 	            {field: 'ywlb', title: '业务类别',  align:'center'},

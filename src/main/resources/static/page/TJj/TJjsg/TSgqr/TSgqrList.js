@@ -71,16 +71,17 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 	        cols : [[
 	            {type: "checkbox", fixed:"left", width:50},
 	            {field: 'id',title: '编号', align: 'center'},
-	            {field: 'ztbh', title: '账套编号',  align:"center"},
+	            {field: 'ztbh',title: '账套编号',  align:"center",width:100},
+	            {field: 'ztbhname',title: '账套名称',  align:"center",width:200},
 	            {field: 'rq', title: '清算日期', align:'center',width:150},
 	            {field: 'zqcode', title: '证券代码', align:'center'},
 	            {field: 'ywlb', title: '业务类别',  align:'center'},
 	            {field: 'quantity', title: '成交数量', align:'center',width:150},
 	            {field: 'amount', title: '成交金额', align:'center',width:150},
-	            {field: 'jsf', title: '经手费', align:'center'},
+	            /*{field: 'jsf', title: '经手费', align:'center'},
 	            {field: 'ghf', title: '过户费', align:'center'},
 	            {field: 'zgf', title: '证管费', align:'center'},
-	            {field: 'yj', title: '佣金', align:'center'},
+	            {field: 'yj', title: '佣金', align:'center'},*/
 	            {title: '操作', width:170, templet:'#TSgsqListBar',fixed:"right",align:"center"}
 	        ]],
 	        /*done: function () {
