@@ -72,6 +72,9 @@
   <sql id="Base_Column_List" >
     ztbh, name, createDate, endDate, creater, jjdm, money, number
   </sql>
+  <select id="findAll" resultType="com.hundsun.accountingsystem.Global.bean.TZtxxb">
+      select * from t_ztxxb
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hundsun.accountingsystem.Global.bean.TZtxxbExample" >
     select
     <if test="distinct" >

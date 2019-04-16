@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TZtxxbMapper {
+
+    List<TZtxxb> findAll();
+
     int countByExample(TZtxxbExample example);
 
     int deleteByExample(TZtxxbExample example);

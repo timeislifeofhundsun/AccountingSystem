@@ -2,10 +2,7 @@ package com.hundsun.accountingsystem.TGp.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.hundsun.accountingsystem.Global.bean.Assist;
-import com.hundsun.accountingsystem.Global.bean.TCcyeb;
-import com.hundsun.accountingsystem.Global.bean.TPzb;
-import com.hundsun.accountingsystem.Global.bean.TQsb;
+import com.hundsun.accountingsystem.Global.bean.*;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TPzbMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
@@ -14,8 +11,11 @@ import com.hundsun.accountingsystem.Global.service.TSequenceService;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -44,6 +44,9 @@ public class XgPzbServiceImpl implements XgPzbService {
     @Autowired
     TZqxxMapper tZqxxMapper;
 
+    @Autowired
+    HttpServletRequest request;
+
     /**
     * @Author yangjf25257
     * @MethodName get_pz
@@ -61,7 +64,16 @@ public class XgPzbServiceImpl implements XgPzbService {
         List<TPzb> tPzbs = tPzbMapper.selectTPzb(assist);
         for (TPzb tPzb : tPzbs){
             JSONObject obj = new JSONObject();
-            obj.put("ztbh",tPzb.getZtbh());
+            HttpSession session = request.getSession();
+            List<TZtxxb> ztxxbs = (List<TZtxxb>) session.getAttribute("ztxxbs");
+            String ztxx = null;
+            for (TZtxxb tZtxxb : ztxxbs){
+                if (tPzb.getZtbh().equals(tZtxxb.getZtbh())){
+                    ztxx = tPzb.getZtbh() + "_" + tZtxxb.getName();
+                    obj.put("ztbh",ztxx);
+                    break;
+                }
+            }
             obj.put("rq", DateFormatUtil.getStringByDate(tPzb.getRq()));
             obj.put("kmmc",tPzb.getKmms());
             obj.put("zy",tPzb.getZy());
@@ -213,8 +225,20 @@ public class XgPzbServiceImpl implements XgPzbService {
 
         for (TCcyeb tCcyeb : tCcyeb_all){
             JSONObject obj = new JSONObject();
-            obj.put("ztbh",tCcyeb.getZtbh());
-            obj.put("kmmc",(tCcyeb.getZqdm() == null) ? tCcyeb.getExtenda() : tCcyeb.getZqdm());
+            if (tCcyeb.getZqdm() == null){
+                obj.put("kmmc",tCcyeb.getExtenda());
+            } else {
+                String kmmc = null;
+                HttpSession session = request.getSession();
+                List<TZqxx> zqxxes = (List<TZqxx>) session.getAttribute("zqxxes");
+                for (TZqxx tZqxx : zqxxes){
+                    if (tZqxx.getZqdm().equals(tCcyeb.getZqdm())){
+                        kmmc = tCcyeb.getZqdm() + "_" + tZqxx.getZqjg();
+                        obj.put("kmmc",kmmc);
+                        break;
+                    }
+                }
+            }
             obj.put("sl", tCcyeb.getCysl());
             obj.put("zqcb",tCcyeb.getZqcb());
             obj.put("ljgz",tCcyeb.getLjgz());

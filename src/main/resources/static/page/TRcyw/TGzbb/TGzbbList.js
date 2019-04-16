@@ -49,15 +49,13 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                     elem: '#data'
                     ,url:'/get_bb/?ztbh='+$("#ztbh").val()
                     ,title: '用户数据表'
-                    ,cellMinWidth: 60
                     ,cols: [[
                         {type: 'checkbox', fixed: 'left'}
-                        ,{field:'ztbh', title:'账套',  align:"center"}
-                        ,{field:'kmmc', title:'科目名称', align:"center"}
-                        ,{field:'sl', title:'数量', align:"center",style:'color: red;'}
-                        ,{field:'zqcb', title:'成本', align:"center",style:'color: red;'}
-                        ,{field:'ljgz', title:'估值增值', align:"center",style:'color: red;'}
-                        ,{field:'ljjx', title:'累计计息', align:"center",style:'color: red;'}
+                        ,{field:'kmmc', title:'科目名称'}
+                        ,{field:'sl', title:'数量',style:'color: red;'}
+                        ,{field:'zqcb', title:'成本',style:'color: red;'}
+                        ,{field:'ljgz', title:'估值增值',style:'color: red;'}
+                        ,{field:'ljjx', title:'累计计息', style:'color: red;'}
                     ]]
                     ,page: false
                     

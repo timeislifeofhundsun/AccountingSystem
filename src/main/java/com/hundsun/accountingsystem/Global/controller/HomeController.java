@@ -1,21 +1,39 @@
 package com.hundsun.accountingsystem.Global.controller;
 
+import com.hundsun.accountingsystem.Global.bean.TZqxx;
+import com.hundsun.accountingsystem.Global.bean.TZtxxb;
+import com.hundsun.accountingsystem.Global.mapper.TZqxxMapper;
+import com.hundsun.accountingsystem.Global.mapper.TZtxxbMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class HomeController {
 
-    //跳转到主页
+    @Autowired
+    TZqxxMapper tZqxxMapper;
+
+    @Autowired
+    TZtxxbMapper tZtxxbMapper;
+    /**
+    * @Author yangjf25257
+    * @MethodName index
+     * @Param []
+     * @Return java.lang.String
+     * @Description 跳转到主页,并且项目启动的时候拿出对于的账套信息跟证券信息
+     **/
     @RequestMapping("/")
-    public String index(){
+    public String index(HttpSession session){
+        List<TZqxx> zqxxes = tZqxxMapper.findAllTZqxx();
+        session.setAttribute("zqxxes",zqxxes);
+        List<TZtxxb> ztxxbs = tZtxxbMapper.findAll();
+        session.setAttribute("ztxxbs",ztxxbs);
         return "index";
     }
 
