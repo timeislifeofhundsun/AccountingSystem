@@ -104,3 +104,15 @@ layui.use(['form','element','layer','jquery'],function(){
 //    })
 
 })
+
+$("#gpyw").click(function(){
+	parent.window.document.getElementById("gpyw").click();
+})
+
+$("#hg").click(function(){
+	parent.window.document.getElementById("hg").click();
+})
+
+$("#jj").click(function(){
+	parent.window.document.getElementById("jj").click();
+})
