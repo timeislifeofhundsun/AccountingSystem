@@ -389,7 +389,7 @@ public class XgQsbServiceImpl implements XgQsbService {
     * @MethodName xg_wx
      * @Param [tQsb]
      * @Return int
-     * @Description 新股网下申购
+     * @Description 新股网下中签
      **/
     @Override
     public String xg_wx(TQsb tQsb) {

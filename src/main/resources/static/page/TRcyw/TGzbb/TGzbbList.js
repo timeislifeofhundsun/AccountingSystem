@@ -32,12 +32,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
              	},500)
      })
 
-    //显示凭证
+    //显示报表
     $(".showBb").click(function(){
        /**
          * 表格
          */
-    	
     	var ztbh = $("#ztbh").val();
     	if(ztbh==""){
             layer.msg('请先选择账套', {
@@ -45,8 +44,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             });
     		return;
     	}
-    	
-    	
+
         table.render({
                     elem: '#data'
                     ,url:'/get_bb/?ztbh='+$("#ztbh").val()
@@ -59,6 +57,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                         ,{field:'sl', title:'数量', align:"center",style:'color: red;'}
                         ,{field:'zqcb', title:'成本', align:"center",style:'color: red;'}
                         ,{field:'ljgz', title:'估值增值', align:"center",style:'color: red;'}
+                        ,{field:'ljjx', title:'累计计息', align:"center",style:'color: red;'}
                     ]]
                     ,page: false
                     

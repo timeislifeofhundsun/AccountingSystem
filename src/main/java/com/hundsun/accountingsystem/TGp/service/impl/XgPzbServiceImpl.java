@@ -17,8 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Aurhor yangjf25257
@@ -75,19 +74,151 @@ public class XgPzbServiceImpl implements XgPzbService {
         return returnData;
     }
 
+    /**
+    * @Author yangjf25257
+    * @MethodName get_bb
+     * @Param [ztbh]
+     * @Return com.alibaba.fastjson.JSONArray
+     * @Description 根据账套编号获取报表
+     **/
     @Override
     public JSONArray get_bb(int ztbh) {
         JSONArray returnData = new JSONArray();
         Assist assist = new Assist();
         assist.setRequires(Assist.andEq("ztbh",ztbh));
         List<TCcyeb> tCcyebs = tCcyebMapper.selectTCcyeb(assist);
+
+        //新建汇总,把相同类型的放在一个list中
+        List<TCcyeb> tCcyeb_yhck = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_yfjy = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_tzsy = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_gpmm = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_zqqs = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_jyfy = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_other = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_all = new ArrayList<TCcyeb>();//存放两个汇总的list
+
         for (TCcyeb tCcyeb : tCcyebs){
+            if (tCcyeb.getExtenda().contains("银行存款")){
+                tCcyeb_yhck.add(tCcyeb);
+                continue;
+            }
+            else if (tCcyeb.getExtenda().contains("应付交易费用")){
+                tCcyeb_yfjy.add(tCcyeb);
+                continue;
+            }
+            else if (tCcyeb.getExtenda().contains("投资收益")){
+                tCcyeb_tzsy.add(tCcyeb);
+                continue;
+            }
+            else if (tCcyeb.getExtenda().contains("11") || tCcyeb.getExtenda().contains("13")){
+                tCcyeb_gpmm.add(tCcyeb);
+                continue;
+            }
+            else if (tCcyeb.getExtenda().contains("证券清算款_")){
+                tCcyeb_zqqs.add(tCcyeb);
+                continue;
+            }  else if (tCcyeb.getExtenda().contains("交易费用_")){
+                tCcyeb_jyfy.add(tCcyeb);
+                continue;
+            }
+            else {
+                tCcyeb_other.add(tCcyeb);
+            }
+        }
+
+        //汇总，把上面新建汇总的list的值进行合并
+        List<TCcyeb> tCcyeb_yhck_all = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_yfjy_all = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_tzsy_all = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_gpmm_all = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_zqqs_all = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_jyfy_all = new ArrayList<TCcyeb>();
+        while (true){
+            if (tCcyeb_yhck.size() > 0){
+                double zqcb = 0.00;
+                for (TCcyeb tCcyeb : tCcyeb_yhck){
+                    zqcb += tCcyeb.getZqcb();
+                }
+                TCcyeb tCcyeb_temp = new TCcyeb();
+                tCcyeb_temp.setZtbh(tCcyeb_yhck.get(0).getZtbh()).setZqcb(zqcb).setExtenda("银行存款汇总");
+                tCcyeb_yhck_all.add(tCcyeb_temp);
+            }
+            if (tCcyeb_gpmm.size() > 0){
+                double ljgz = 0.00;
+                double zqcb = 0.00;
+                int cysl = 0;
+                for (TCcyeb tCcyeb : tCcyeb_gpmm){
+                    ljgz += tCcyeb.getLjgz();
+                    cysl += tCcyeb.getCysl();
+                    zqcb += tCcyeb.getZqcb();
+                }
+                TCcyeb tCcyeb_temp = new TCcyeb();
+                tCcyeb_temp.setLjgz(ljgz).setZtbh(tCcyeb_yhck.get(0).getZtbh()).setCysl(cysl).setZqcb(zqcb).setExtenda("股票买卖汇总");
+                tCcyeb_gpmm_all.add(tCcyeb_temp);
+            }
+            if (tCcyeb_tzsy.size() > 0){
+                double zqcb = 0.00;
+                for (TCcyeb tCcyeb : tCcyeb_tzsy){
+                    zqcb += tCcyeb.getZqcb();
+                }
+                TCcyeb tCcyeb_temp = new TCcyeb();
+                tCcyeb_temp.setZtbh(tCcyeb_yhck.get(0).getZtbh()).setZqcb(zqcb).setExtenda("资产收益汇总");
+                tCcyeb_tzsy_all.add(tCcyeb_temp);
+            }
+            if (tCcyeb_yfjy.size() > 0){
+                double zqcb = 0.00;
+                for (TCcyeb tCcyeb : tCcyeb_yfjy){
+                    zqcb += tCcyeb.getZqcb();
+                }
+                TCcyeb tCcyeb_temp = new TCcyeb();
+                tCcyeb_temp.setZtbh(tCcyeb_yhck.get(0).getZtbh()).setZqcb(zqcb).setExtenda("应付交易费用汇总");
+                tCcyeb_yfjy_all.add(tCcyeb_temp);
+            }
+            if (tCcyeb_zqqs.size() > 0){
+                double zqcb = 0.00;
+                for (TCcyeb tCcyeb : tCcyeb_zqqs){
+                    zqcb += tCcyeb.getZqcb();
+                }
+                TCcyeb tCcyeb_temp = new TCcyeb();
+                tCcyeb_temp.setZtbh(tCcyeb_yhck.get(0).getZtbh()).setZqcb(zqcb).setExtenda("证券清算款汇总");
+                tCcyeb_zqqs_all.add(tCcyeb_temp);
+            }
+            if (tCcyeb_jyfy.size() > 0){
+                double zqcb = 0.00;
+                for (TCcyeb tCcyeb : tCcyeb_jyfy){
+                    zqcb += tCcyeb.getZqcb();
+                }
+                TCcyeb tCcyeb_temp = new TCcyeb();
+                tCcyeb_temp.setZtbh(tCcyeb_yhck.get(0).getZtbh()).setZqcb(zqcb).setExtenda("交易费用汇总");
+                tCcyeb_jyfy_all.add(tCcyeb_temp);
+            }
+            break;
+        }
+
+        //总共的合并
+        tCcyeb_all.addAll(tCcyeb_yhck_all);
+        tCcyeb_all.addAll(tCcyeb_yhck);
+        tCcyeb_all.addAll(tCcyeb_yfjy_all);
+        tCcyeb_all.addAll(tCcyeb_yfjy);
+        tCcyeb_all.addAll(tCcyeb_tzsy_all);
+        tCcyeb_all.addAll(tCcyeb_tzsy);
+        tCcyeb_all.addAll(tCcyeb_gpmm_all);
+        tCcyeb_all.addAll(tCcyeb_gpmm);
+        tCcyeb_all.addAll(tCcyeb_zqqs_all);
+        tCcyeb_all.addAll(tCcyeb_zqqs);
+        tCcyeb_all.addAll(tCcyeb_jyfy_all);
+        tCcyeb_all.addAll(tCcyeb_jyfy);
+        tCcyeb_all.addAll(tCcyeb_other);
+
+        for (TCcyeb tCcyeb : tCcyeb_all){
             JSONObject obj = new JSONObject();
             obj.put("ztbh",tCcyeb.getZtbh());
-            obj.put("kmmc",tCcyeb.getExtenda());
+            obj.put("kmmc",(tCcyeb.getZqdm() == null) ? tCcyeb.getExtenda() : tCcyeb.getZqdm());
             obj.put("sl", tCcyeb.getCysl());
             obj.put("zqcb",tCcyeb.getZqcb());
             obj.put("ljgz",tCcyeb.getLjgz());
+            obj.put("ljjx",tCcyeb.getLjjx());
             returnData.add(obj);
         }
         return returnData;
@@ -98,7 +229,7 @@ public class XgPzbServiceImpl implements XgPzbService {
     * @MethodName get_pz
      * @Param [tQsb]
      * @Return java.util.List<com.hundsun.accountingsystem.Global.bean.TPzb>
-     * @Description 凭证Service层
+     * @Description 生成凭证Service层
      **/
     @Override
     public boolean insert_pz(int ztbh, Date rq) {

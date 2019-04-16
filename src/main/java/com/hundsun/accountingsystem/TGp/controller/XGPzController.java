@@ -2,9 +2,7 @@ package com.hundsun.accountingsystem.TGp.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.hundsun.accountingsystem.Global.bean.TPzb;
 import com.hundsun.accountingsystem.Global.service.LfjxQsService;
-import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.TGp.service.GPPZService;
 import com.hundsun.accountingsystem.TGp.service.XgPzbService;
 import com.hundsun.accountingsystem.THg.Service.HGPZBService;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Aurhor yangjf25257
