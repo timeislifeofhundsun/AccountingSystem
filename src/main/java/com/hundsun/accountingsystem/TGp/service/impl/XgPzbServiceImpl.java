@@ -56,7 +56,7 @@ public class XgPzbServiceImpl implements XgPzbService {
      **/
     @Override
     public JSONArray get_pz(int ztbh, Date rq) {
-        DecimalFormat    df   = new DecimalFormat("######0.00"); //保留两位有效数字
+        DecimalFormat df   = new DecimalFormat("######0.00"); //保留两位有效数字
         JSONArray returnData = new JSONArray();
         //查询条件
         Assist assist = new Assist();
@@ -79,8 +79,8 @@ public class XgPzbServiceImpl implements XgPzbService {
             obj.put("kmmc",tPzb.getKmms());
             obj.put("zy",tPzb.getZy());
             obj.put("BS",tPzb.getBs());
-            obj.put("jfje",tPzb.getBs().equals("借") ? df.format(tPzb.getJe()) : df.format(0));
-            obj.put("dfje",tPzb.getBs().equals("贷") ? df.format(tPzb.getJe()) : df.format(0));
+            obj.put("jfje",tPzb.getBs().equals("借") ? Double.valueOf(df.format(tPzb.getJe())) : df.format(0));
+            obj.put("dfje",tPzb.getBs().equals("贷") ? Double.valueOf(df.format(tPzb.getJe())) : df.format(0));
             obj.put("pzid",tPzb.getPzid());
             returnData.add(obj);
         }
