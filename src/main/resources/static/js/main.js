@@ -116,3 +116,16 @@ $("#hg").click(function(){
 $("#jj").click(function(){
 	parent.window.document.getElementById("jj").click();
 })
+
+$("#rzqs").click(function(){
+	console.log("----")
+	parent.window.document.getElementById("rc").click();
+})
+
+$("#scpz").click(function(){
+	parent.window.document.getElementById("rc").click();
+})
+
+$("#gzbb").click(function(){
+	parent.window.document.getElementById("rc").click();
+})
