@@ -58,8 +58,8 @@ layui.use(['form', 'layer', 'laydate', 'table'], function () {
         cols: [[
             {type: 'checkbox', fixed: 'left'},
             {field: 'id', title: 'ID', align: "center", hide: true},
-            {field: 'ztbh', title: '账套编号', align: "center"},
-            {field: 'zqcode', title: '回购代码', align: 'center'},
+            {field: 'ztbhname', title: '账套编号', align: "center",width:140},
+            {field: 'zqcodename', title: '回购代码', align: 'center',width:140},
             {field: 'bs', title: '回购方向', align: 'center', templet: "#bs"},
             {field: 'quantity', title: '回购天数', align: 'center', width: 140},
             {field: 'lumpsum', title: '结算机构', align: 'center', templet: "#lumpsum"},

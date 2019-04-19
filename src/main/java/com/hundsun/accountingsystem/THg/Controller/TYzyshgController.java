@@ -13,6 +13,8 @@ import com.hundsun.accountingsystem.Global.VO.TZqxxVO;
 import com.hundsun.accountingsystem.Global.bean.Assist;
 import com.hundsun.accountingsystem.Global.bean.TCcyeb;
 import com.hundsun.accountingsystem.Global.bean.TQsb;
+import com.hundsun.accountingsystem.Global.bean.TZqxx;
+import com.hundsun.accountingsystem.Global.bean.TZtxxb;
 import com.hundsun.accountingsystem.Global.mapper.TCcyebMapper;
 import com.hundsun.accountingsystem.Global.mapper.TQsbMapper;
 import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
@@ -20,7 +22,10 @@ import com.hundsun.accountingsystem.Global.util.FileParsing;
 import com.hundsun.accountingsystem.THg.Service.HGQSService;
 import com.hundsun.accountingsystem.THg.Service.TQsbSearchService;
 import com.hundsun.accountingsystem.THg.Service.TYzyshgService;
+import com.hundsun.accountingsystem.THg.Service.Union_HGService;
 import com.hundsun.accountingsystem.THg.VO.TYzyshgVO;
+import com.hundsun.accountingsystem.THg.VO.Union_HG;
+import com.hundsun.accountingsystem.THg.VO.Union_HGVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +35,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,6 +58,9 @@ public class TYzyshgController {
   public HGQSService hgqsService;
   @Autowired
   public TQsbSearchService tQsbSearchService;
+  @Autowired
+  public Union_HGService union_hgService;
+
   @GetMapping(value = "/TYzyshg")
   public String getAllTYzyshg(@RequestParam(value = "ckrq", required = true) String data,
                               @RequestParam(value = "indexpage") int indexpage,
@@ -59,7 +70,7 @@ public class TYzyshgController {
     int[] ywlb = {3103, 3104};
     List<TQsb> alltQsbs;
     List<TQsb> tQsbs;
-    TYzyshgVO layuiJson = new TYzyshgVO();
+    Union_HGVO layuiJson = new Union_HGVO();
     //301表示为银行质押式回购 302表示为银行买断式回购 303表示交易所质押式回购
     if (keyword==null){
       alltQsbs = tYzyshgService.findAllTQsb(ywlb, data, "301");
@@ -68,10 +79,11 @@ public class TYzyshgController {
       alltQsbs =tQsbSearchService.search(ywlb,data,"301",keyword);
       tQsbs= tQsbSearchService.searchPage(ywlb,data,"301",keyword, indexpage, sizepage);
     }
+    List<Union_HG> union_hgs = union_hgService.unionHg(tQsbs);
     layuiJson.setCode(0);
     layuiJson.setCount(alltQsbs.size());
     layuiJson.setMsg("");
-    layuiJson.setData(tQsbs);
+    layuiJson.setData(union_hgs);
     String jsonString = JSON.toJSONString(layuiJson);
     System.out.println(jsonString);
     return jsonString;

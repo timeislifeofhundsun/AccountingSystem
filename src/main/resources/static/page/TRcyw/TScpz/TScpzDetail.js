@@ -25,10 +25,10 @@ function getValue(data) {
         table.render({
             elem: '#pz'
             , cols: [[
-                 {field: 'zy', title: '摘要', align: "center",width:"50%"}
-                , {field: 'kmmc', title: '科目名称', align: "center"}
-                , {field: 'jfje', title: '借方金额', align: "center"}
-                , {field: 'dfje', title: '贷方金额', align: "center"}
+                 {field: 'zy', title: '摘要', align: "left",width:"50%"}
+                , {field: 'kmmc', title: '科目名称', align: "left"}
+                , {field: 'jfje', title: '借方金额', align: "right"}
+                , {field: 'dfje', title: '贷方金额', align: "right"}
             ]]
             , data:pzdata
             , page: false

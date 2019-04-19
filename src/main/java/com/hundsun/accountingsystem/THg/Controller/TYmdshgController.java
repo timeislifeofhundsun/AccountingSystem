@@ -18,7 +18,10 @@ import com.hundsun.accountingsystem.Global.util.DateFormatUtil;
 import com.hundsun.accountingsystem.THg.Service.HGQSService;
 import com.hundsun.accountingsystem.THg.Service.TQsbSearchService;
 import com.hundsun.accountingsystem.THg.Service.TYmdshgService;
+import com.hundsun.accountingsystem.THg.Service.Union_HGService;
 import com.hundsun.accountingsystem.THg.VO.TYmdshgVO;
+import com.hundsun.accountingsystem.THg.VO.Union_HG;
+import com.hundsun.accountingsystem.THg.VO.Union_HGVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,6 +51,8 @@ public class TYmdshgController {
   public HGQSService hgqsService;
   @Autowired
   public TQsbSearchService tQsbSearchService;
+  @Autowired
+  public Union_HGService union_hgService;
 
   @GetMapping("/TYmdshg")
   public String getAllTYmdshg(@RequestParam(value = "ckrq", required = true) String data,
@@ -57,7 +62,7 @@ public class TYmdshgController {
     int[] ywlb = {3103, 3104};
     List<TQsb> alltQsbs;
     List<TQsb> tQsbs;
-    TYmdshgVO layuiJson = new TYmdshgVO();
+    Union_HGVO layuiJson = new Union_HGVO();
     if (keyword==null){
       alltQsbs = tYmdshgService.findAllTQsb(ywlb, data, "302");
       tQsbs = tYmdshgService.selectTQsbbyPage(ywlb, data, "302", indexpage, sizepage);
@@ -65,10 +70,11 @@ public class TYmdshgController {
       alltQsbs =tQsbSearchService.search(ywlb,data,"302",keyword);
       tQsbs= tQsbSearchService.searchPage(ywlb,data,"302",keyword, indexpage, sizepage);
     }
+    List<Union_HG> union_hgs = union_hgService.unionHg(tQsbs);
     layuiJson.setCode(0);
     layuiJson.setCount(alltQsbs.size());
     layuiJson.setMsg("");
-    layuiJson.setData(tQsbs);
+    layuiJson.setData(union_hgs);
     String jsonString = JSON.toJSONString(layuiJson);
     System.out.println(jsonString);
     return jsonString;
