@@ -51,8 +51,7 @@
     	)
   	</insert>
 
-	<insert id="insertSysRoleUser" parameterType="com.hundsun.accountingsystem.Global.bean.SysRoleUser" useGeneratedKeys="true"
-    	keyProperty="uid">
+	<insert id="insertSysRoleUser" parameterType="com.hundsun.accountingsystem.Global.bean.SysRoleUser">
     	insert into sys_role_user(sys_user_id,sys_role_id) values(
     		#{userId},#{roleId}
     	)
