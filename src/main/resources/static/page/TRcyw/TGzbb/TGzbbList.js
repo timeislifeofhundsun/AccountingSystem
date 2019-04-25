@@ -1,4 +1,5 @@
 //获取cookie中的tokenlayui-form
+var arr;
 $(function () {
     var header = $.cookie('header');
     var token = $.cookie('token');
@@ -13,7 +14,8 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
         laydate = layui.laydate,
         laytpl = layui.laytpl,
         table = layui.table;
-
+    
+    
     /**
      * 账套选择
      */
@@ -63,9 +65,9 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
             , done: function (res, curr, count) {
                 // 渲染行颜色
                 var index = 0;
+                arr = res.data;
                 $.each(res.data, function () {
                     var curr = this.kmmc;
-                    console.log(this);
                     var tr = $(".layui-table tbody").find("tr").eq(index);
                     if (curr.indexOf("汇总") != -1) {
                         tr.css("font-weight", "bold");
@@ -77,4 +79,34 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
 
         });
     })
+})
+$("#outDate").click(function(){
+	var toData = [];
+	for(var i = 0 ; i < arr.length ; i++){
+		var temp = arr[i];
+		var kmmc = temp.kmmc;
+		var sl = temp.sl==undefined ? ' ':temp.sl;
+		var zqcb = temp.zqcb==undefined ? ' ':temp.zqcb;
+		var ljgz = temp.ljgz==undefined ? ' ':temp.ljgz;
+		var ljjx = temp.ljjx==undefined ? ' ':temp.ljjx;
+		var dwcb = temp.dwcb==undefined ? ' ':temp.dwcb;
+		var data = {
+			'kmmc':kmmc,
+			'sl':sl,
+			'zqcb':zqcb,
+			'ljgz':ljgz,
+			'ljjx':ljjx,
+			'dwcb':dwcb,
+		}
+		toData[i]=data
+	}
+	var option={
+	    fileName:'估值表',
+	    datas:[{
+	        sheetHeader:['会计科目','数量','证券成本','累计估增','累计计息','单位成本'],
+	        sheetData:toData
+	    }]
+	};
+	var toExcel=new ExportJsonExcel(option);
+	toExcel.saveExcel();
 })
