@@ -234,11 +234,25 @@ public class XgPzbServiceImpl implements XgPzbService {
                 HttpSession session = request.getSession();
                 List<TZqxx> zqxxes = (List<TZqxx>) session.getAttribute("zqxxes");
                 for (TZqxx tZqxx : zqxxes){
-                    if (tZqxx.getZqdm().equals(tCcyeb.getZqdm())){
-                        kmmc = tCcyeb.getZqdm() + "_" + tZqxx.getZqjg();
-                        obj.put("kmmc",kmmc);
-                        break;
-                    }
+                    /**
+                     * 000001股票单独判断
+                     */
+                	if(tCcyeb.getZqdm().equals("000001") && tCcyeb.getExtenda().equals("11")) {
+                		System.out.println(tCcyeb);
+                		if (tZqxx.getZqdm().equals("000001") && tZqxx.getZqlb()==1){
+                			 kmmc = tCcyeb.getZqdm() + "_" + tZqxx.getZqjg();
+                             obj.put("kmmc",kmmc);
+                             break;
+                		}else {
+                			continue;
+                		}
+                	}else {
+                        if (tZqxx.getZqdm().equals(tCcyeb.getZqdm())){
+                            kmmc = tCcyeb.getZqdm() + "_" + tZqxx.getZqjg();
+                            obj.put("kmmc",kmmc);
+                            break;
+                        }
+                	}
                 }
             }
             obj.put("sl", tCcyeb.getCysl());
