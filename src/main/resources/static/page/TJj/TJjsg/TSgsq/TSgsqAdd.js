@@ -48,6 +48,10 @@ layui.use(['form', 'layer','laydate'], function () {
         amount: function (val) {
             if (val == '') {
                 return "申购金额不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
+            }else if(val > 10000000000){
+            	return "申购金额过大！";
             }
         }        
     });

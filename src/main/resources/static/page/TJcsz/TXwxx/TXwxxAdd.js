@@ -20,6 +20,10 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
     	xwbh : function(val){
             if(val == ''){
                 return "席位编号不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
+            }else if(val.length>10){
+            	return "席位编号不能大于10位";
             }
         },
         xwName : function(val){
@@ -30,6 +34,10 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         qsbh : function(val){
             if(val == ''){
                 return "券商编号不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
+            }else if(val.length>10){
+            	return "券商编号不能大于10位";
             }
         },
         qsName : function(val){

@@ -38,11 +38,17 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         jjdm : function(val){
             if(val == ''){
                 return "基金代码不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
+            }else if(val.length>6){
+            	return "基金代码不能大于6位";
             }
         },
         money : function(val){
             if(val == ''){
                 return "初始金额不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
             }else if(val.length>10){
             	return "初始金额不能大于10位数";
             }
@@ -50,8 +56,10 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
         number : function(val){
             if(val == ''){
                 return "初始份额不能为空";
-            }else if(val.length>10){
-            	return "初始份额不能大于10位数";
+            }else if(isNaN(val)){
+            	return "请输入数字";
+            }else if(val.length>10 || val>2147483647){
+            	return "初始份额过大";
             }
         }
     })

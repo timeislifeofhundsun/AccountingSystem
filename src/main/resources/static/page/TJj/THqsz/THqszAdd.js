@@ -23,6 +23,10 @@ layui.use(['form', 'layer','laydate'], function () {
     	zrspj: function (val) {
             if (val == '') {
                 return "昨日收盘价不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
+            }else if(val > 1000000){
+            	return "行情数值过大！";
             }
         },
         zqdm: function (val) {
@@ -43,16 +47,28 @@ layui.use(['form', 'layer','laydate'], function () {
         jrkp: function (val) {
             if (val == '') {
                 return "今日开盘价不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
+            }else if(val > 1000000){
+            	return "行情数值过大！";
             }
         },
         jrsp: function (val) {
             if (val == '') {
                 return "今日收盘价不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
+            }else if(val > 1000000){
+            	return "行情数值过大！";
             }
         },
         cjje: function (val) {
             if (val == '') {
                 return "货币基金万份收益不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
+            }else if(val > 1000000){
+            	return "行情数值过大！";
             }
         }
     });

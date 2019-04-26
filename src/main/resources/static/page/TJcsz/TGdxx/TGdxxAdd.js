@@ -20,6 +20,8 @@ layui.use(['form','layer','layedit','laydate','upload'],function(){
     	gddm : function(val){
             if(val == ''){
                 return "股东代码不能为空";
+            }else if(val.length>10){
+            	return "股东代码不能大于10位";
             }
         },
         name : function(val){

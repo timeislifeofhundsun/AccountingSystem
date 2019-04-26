@@ -34,6 +34,8 @@ layui.use(['form', 'layer','laydate'], function () {
         shfe: function (val) {
             if (val == '') {
                 return "赎回份额不能为空";
+            }else if(isNaN(val)){
+            	return "请输入数字";
             }
             var num = val - tcysl;
             if(num>0){
