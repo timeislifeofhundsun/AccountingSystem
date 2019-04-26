@@ -41,7 +41,7 @@ layui.use(['form','table','laydate'],function(){
             ,title: '用户数据表'
             ,cols: [[
                 {field:'rq', title:'登记日期'}
-                ,{field:'extenda', title:'送股日期'}
+                ,{field:'extenda', title:'分红日期'}
                 ,{field:'zqmc', title:'证券名称'}
                 ,{field:'zqdm', title:'证券代码'}
                 ,{field:'cjje', title:'到账金额'}
