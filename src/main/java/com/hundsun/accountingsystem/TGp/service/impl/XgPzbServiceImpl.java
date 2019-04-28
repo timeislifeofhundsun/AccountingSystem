@@ -109,6 +109,8 @@ public class XgPzbServiceImpl implements XgPzbService {
         List<TCcyeb> tCcyeb_gpmm = new ArrayList<TCcyeb>();
         List<TCcyeb> tCcyeb_zqqs = new ArrayList<TCcyeb>();
         List<TCcyeb> tCcyeb_jyfy = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_jinj = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_huig = new ArrayList<TCcyeb>();
         List<TCcyeb> tCcyeb_other = new ArrayList<TCcyeb>();
         List<TCcyeb> tCcyeb_all = new ArrayList<TCcyeb>();//存放两个汇总的list
 
@@ -135,6 +137,11 @@ public class XgPzbServiceImpl implements XgPzbService {
             }  else if (tCcyeb.getExtenda().contains("交易费用_")){
                 tCcyeb_jyfy.add(tCcyeb);
                 continue;
+            } else if (tCcyeb.getZqnm() != null && tCcyeb.getZqnm().equals(4)) {
+                tCcyeb_jinj.add(tCcyeb);
+                continue;
+            } else if (tCcyeb.getExtenda() != null && tCcyeb.getExtenda().contains("3101") || tCcyeb.getExtenda().contains("3102") || tCcyeb.getExtenda().contains("3103")) {
+                tCcyeb_huig.add(tCcyeb);
             }
             else {
                 tCcyeb_other.add(tCcyeb);
@@ -148,6 +155,8 @@ public class XgPzbServiceImpl implements XgPzbService {
         List<TCcyeb> tCcyeb_gpmm_all = new ArrayList<TCcyeb>();
         List<TCcyeb> tCcyeb_zqqs_all = new ArrayList<TCcyeb>();
         List<TCcyeb> tCcyeb_jyfy_all = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_jinj_all = new ArrayList<TCcyeb>();
+        List<TCcyeb> tCcyeb_huig_all = new ArrayList<TCcyeb>();
         while (true){
             if (tCcyeb_yhck.size() > 0){
                 double zqcb = 0.00;
@@ -168,8 +177,34 @@ public class XgPzbServiceImpl implements XgPzbService {
                     zqcb += tCcyeb.getZqcb();
                 }
                 TCcyeb tCcyeb_temp = new TCcyeb();
-                tCcyeb_temp.setLjgz(ljgz).setZtbh(tCcyeb_yhck.get(0).getZtbh()).setCysl(cysl).setZqcb(zqcb).setExtenda("股票买卖汇总");
+                tCcyeb_temp.setLjgz(ljgz).setZtbh(tCcyeb_yhck.get(0).getZtbh()).setCysl(cysl).setZqcb(zqcb).setExtenda("股票交易汇总");
                 tCcyeb_gpmm_all.add(tCcyeb_temp);
+            }
+            if (tCcyeb_jinj.size() > 0) {
+                double ljgz = 0.00;
+                double zqcb = 0.00;
+                int cysl = 0;
+                for (TCcyeb tCcyeb : tCcyeb_gpmm){
+                    ljgz += tCcyeb.getLjgz();
+                    cysl += tCcyeb.getCysl();
+                    zqcb += tCcyeb.getZqcb();
+                }
+                TCcyeb tCcyeb_temp = new TCcyeb();
+                tCcyeb_temp.setLjgz(ljgz).setZtbh(tCcyeb_jinj.get(0).getZtbh()).setCysl(cysl).setZqcb(zqcb).setExtenda("基金交易汇总");
+                tCcyeb_jinj_all.add(tCcyeb_temp);
+            }
+            if (tCcyeb_huig.size() > 0) {
+                double ljgz = 0.00;
+                double zqcb = 0.00;
+                int cysl = 0;
+                for (TCcyeb tCcyeb : tCcyeb_gpmm){
+                    ljgz += tCcyeb.getLjgz();
+                    cysl += tCcyeb.getCysl();
+                    zqcb += tCcyeb.getZqcb();
+                }
+                TCcyeb tCcyeb_temp = new TCcyeb();
+                tCcyeb_temp.setLjgz(ljgz).setZtbh(tCcyeb_huig.get(0).getZtbh()).setCysl(cysl).setZqcb(zqcb).setExtenda("回购交易汇总");
+                tCcyeb_huig_all.add(tCcyeb_temp);
             }
             if (tCcyeb_tzsy.size() > 0){
                 double zqcb = 0.00;
@@ -219,6 +254,10 @@ public class XgPzbServiceImpl implements XgPzbService {
         tCcyeb_all.addAll(tCcyeb_tzsy);
         tCcyeb_all.addAll(tCcyeb_gpmm_all);
         tCcyeb_all.addAll(tCcyeb_gpmm);
+        tCcyeb_all.addAll(tCcyeb_jinj_all);
+        tCcyeb_all.addAll(tCcyeb_jinj);
+        tCcyeb_all.addAll(tCcyeb_huig_all);
+        tCcyeb_all.addAll(tCcyeb_huig);
         tCcyeb_all.addAll(tCcyeb_zqqs_all);
         tCcyeb_all.addAll(tCcyeb_zqqs);
         tCcyeb_all.addAll(tCcyeb_jyfy_all);

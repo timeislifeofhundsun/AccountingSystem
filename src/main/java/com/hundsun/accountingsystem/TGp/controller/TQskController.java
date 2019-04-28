@@ -23,7 +23,7 @@ import java.util.List;
 public class TQskController {
 
     @Autowired
-    XgQsbService xgQsbService;
+    private XgQsbService xgQsbService;
 
     /**
     * @Author yangjf25257

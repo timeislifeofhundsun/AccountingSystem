@@ -28,19 +28,19 @@ import java.util.Date;
 public class XGPzController {
 
     @Autowired
-    XgPzbService xgPzbService;
+    private XgPzbService xgPzbService;
 
     @Autowired
-    GPPZService gppzService;
+    private GPPZService gppzService;
 
     @Autowired
-    TjjScpzService tjjScpzService;
+    private TjjScpzService tjjScpzService;
 
     @Autowired
-    HGPZBService hgpzbService;
+    private HGPZBService hgpzbService;
     
     @Autowired
-    LfjxQsService lfjxQsService;    
+    private LfjxQsService lfjxQsService;
 
     /**
     * @Author yangjf25257

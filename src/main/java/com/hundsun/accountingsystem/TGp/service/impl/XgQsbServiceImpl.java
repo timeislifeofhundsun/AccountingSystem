@@ -30,19 +30,19 @@ import java.util.List;
 public class XgQsbServiceImpl implements XgQsbService {
 
     @Autowired
-    FileParsing  fileParsing;
+    private FileParsing  fileParsing;
 
     @Autowired
-    TQsbMapper tQsbMapper;
+    private TQsbMapper tQsbMapper;
 
     @Autowired
-    TCcyebMapper tCcyebMapper;
+    private TCcyebMapper tCcyebMapper;
 
     @Autowired
-    THqbMapper tHqbMapper;
+    private THqbMapper tHqbMapper;
 
     @Autowired
-    TGdxxbMapper tGdxxbMapper;
+    private TGdxxbMapper tGdxxbMapper;
 
     /**
      * @Author yangjf25257

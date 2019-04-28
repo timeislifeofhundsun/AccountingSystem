@@ -17,10 +17,10 @@ import java.util.Map;
 public class HomeController {
 
     @Autowired
-    TZqxxMapper tZqxxMapper;
+    private TZqxxMapper tZqxxMapper;
 
     @Autowired
-    TZtxxbMapper tZtxxbMapper;
+    private TZtxxbMapper tZtxxbMapper;
     /**
     * @Author yangjf25257
     * @MethodName index

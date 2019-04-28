@@ -31,10 +31,10 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
 
   @Autowired
-  UserService userService;
+  private UserService userService;
 
   @Autowired
-  UserMapper userMapper;
+  private UserMapper userMapper;
 
   /*//用户注册跳转
   @GetMapping("/user")
