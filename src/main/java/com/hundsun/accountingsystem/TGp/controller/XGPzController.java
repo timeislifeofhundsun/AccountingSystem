@@ -124,6 +124,7 @@ public class XGPzController {
             response.put("count",jsonArray.size());
             response.put("data",jsonArray);
         }catch (Exception e){
+        	e.printStackTrace();
             response.put("code",1);
             response.put("msg",e.getMessage());
         }

@@ -184,7 +184,7 @@ public class XgPzbServiceImpl implements XgPzbService {
                 double ljgz = 0.00;
                 double zqcb = 0.00;
                 int cysl = 0;
-                for (TCcyeb tCcyeb : tCcyeb_gpmm){
+                for (TCcyeb tCcyeb : tCcyeb_jinj){
                     ljgz += tCcyeb.getLjgz();
                     cysl += tCcyeb.getCysl();
                     zqcb += tCcyeb.getZqcb();
@@ -194,16 +194,14 @@ public class XgPzbServiceImpl implements XgPzbService {
                 tCcyeb_jinj_all.add(tCcyeb_temp);
             }
             if (tCcyeb_huig.size() > 0) {
-                double ljgz = 0.00;
+                double ljjx = 0.00;
                 double zqcb = 0.00;
-                int cysl = 0;
-                for (TCcyeb tCcyeb : tCcyeb_gpmm){
-                    ljgz += tCcyeb.getLjgz();
-                    cysl += tCcyeb.getCysl();
+                for (TCcyeb tCcyeb : tCcyeb_huig){
+                	ljjx += tCcyeb.getLjjx();
                     zqcb += tCcyeb.getZqcb();
                 }
                 TCcyeb tCcyeb_temp = new TCcyeb();
-                tCcyeb_temp.setLjgz(ljgz).setZtbh(tCcyeb_huig.get(0).getZtbh()).setCysl(cysl).setZqcb(zqcb).setExtenda("回购交易汇总");
+                tCcyeb_temp.setLjjx(ljjx).setZtbh(tCcyeb_huig.get(0).getZtbh()).setZqcb(zqcb).setExtenda("回购交易汇总");
                 tCcyeb_huig_all.add(tCcyeb_temp);
             }
             if (tCcyeb_tzsy.size() > 0){
@@ -277,7 +275,6 @@ public class XgPzbServiceImpl implements XgPzbService {
                      * 000001股票单独判断
                      */
                 	if(tCcyeb.getZqdm().equals("000001") && tCcyeb.getExtenda().equals("11")) {
-                		System.out.println(tCcyeb);
                 		if (tZqxx.getZqdm().equals("000001") && tZqxx.getZqlb()==1){
                 			 kmmc = tCcyeb.getZqdm() + "_" + tZqxx.getZqjg();
                              obj.put("kmmc",kmmc);
